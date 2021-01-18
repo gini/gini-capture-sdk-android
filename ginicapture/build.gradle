@@ -1,0 +1,173 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.hiya.jacoco-android'
+apply plugin: 'org.jetbrains.dokka'
+
+jacoco {
+    toolVersion = "0.8.3"
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        // Use the test runner with JUnit4 support
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        buildConfigField 'int', 'VERSION_CODE', "${rootProject.ext.versionCode}"
+        buildConfigField 'String', 'VERSION_NAME', "\"${rootProject.ext.versionName}\""
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled = true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Fix for DuplicateFileException when using Espresso (https://code.google.com/p/android/issues/detail?id=195331)
+    packagingOptions {
+        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+    }
+
+    // Fix for androidTest builds due to Play Services Vision and Espresso creating their own protobuf.meta files
+    packagingOptions {
+        pickFirst 'protobuf.meta'
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    sourceSets {
+        debug {
+            res.srcDirs += "$rootProject.projectDir/ginicapture/src/test/res"
+        }
+    }
+}
+
+dependencies {
+    api deps.slf4j
+    implementation deps.androidxCore
+    implementation deps.androidxAppCompat
+    implementation deps.androidxFragment
+    implementation deps.androidxViewPager
+    implementation deps.androidxRecyclerView
+    implementation deps.androidxLegacySupportV13
+    implementation deps.materialDesign
+    implementation deps.androidxCardView
+    implementation deps.androidxAnnotations
+    implementation deps.playServicesVision
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation deps.commonsImaging
+    implementation 'org.glassfish.jersey.bundles.repackaged:jersey-jsr166e:2.25.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: '${project.rootDir}/tools/doccheck-doclet', include: ['*.jar'])
+    implementation deps.androidxCardView
+
+    testImplementation deps.junit
+    testImplementation deps.truth
+    testImplementation deps.mockito
+    testImplementation deps.mockitoKotlin
+    testImplementation deps.robolectric
+    testImplementation deps.androidxTestCore
+    testImplementation deps.androidxTestJUnit
+    testImplementation deps.androidxTestRunner
+    testImplementation deps.androidxTestEspressoCore
+    testImplementation deps.androidxTestEspressoIntents
+
+    androidTestImplementation deps.androidxTestCore
+    androidTestImplementation deps.androidxTestJUnit
+    androidTestImplementation deps.androidxTestRunner
+    androidTestImplementation deps.truth
+    androidTestImplementation deps.androidxTestRules
+    androidTestImplementation deps.androidxTestEspressoCore
+    androidTestImplementation deps.androidxTestEspressoIntents
+    androidTestImplementation deps.androidxTestUiAutomator
+    androidTestImplementation deps.mockito
+    androidTestImplementation deps.mockitoAndroid
+    androidTestImplementation deps.androidxMultidex
+
+    androidTestUtil deps.androidxTestOrchestrator
+
+    dokkaHtmlPlugin 'org.jetbrains.dokka:kotlin-as-java-plugin:1.4.10'
+}
+
+apply from: rootProject.file('gradle/codequality.gradle')
+apply from: rootProject.file('gradle/maven.gradle')
+apply from: rootProject.file('gradle/javadoc_coverage.gradle')
+apply from: rootProject.file('gradle/multidex_for_tests.gradle')
+
+dokkaHtml {
+    outputDirectory.set(file("$buildDir/dokka"))
+    dokkaSourceSets {
+        named("main") {
+            noAndroidSdkLink.set(false)
+
+            includes.from(files("module.md", packageDocumentationPaths(android.sourceSets.main.java.srcDirs[0])))
+
+            perPackageOption {
+                prefix.set('com.ortiz')
+                suppress.set(true)
+            }
+            perPackageOption {
+                prefix.set('net.gini.android.vision.internal')
+                suppress.set(true)
+            }
+            perPackageOption {
+                prefix.set('net.gini.android.vision.util')
+                suppress.set(true)
+            }
+            perPackageOption {
+                prefix.set('net.gini.android.vision.review.multipage.previews')
+                suppress.set(true)
+            }
+            perPackageOption {
+                prefix.set('net.gini.android.vision.review.multipage.thumbnails')
+                suppress.set(true)
+            }
+        }
+    }
+}
+
+dokkaJavadoc {
+    outputDirectory.set(file("$buildDir/dokka-javadoc"))
+}
+
+static def packageDocumentationPaths(srcDir) {
+    def packageDocs = []
+    srcDir.eachFileRecurse {
+        if (it.name == 'package.md') {
+            packageDocs.add(it.getAbsolutePath())
+        }
+    }
+    return packageDocs
+}
+
+task sourcesJar(type: Jar, dependsOn: 'assembleRelease') {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
+task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
+    archiveClassifier.set('javadoc')
+    from dokkaJavadoc.outputDirectory
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}

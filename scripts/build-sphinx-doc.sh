@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 #
-# Builds ginivision's sphinx documentation.
+# Builds ginicapture's sphinx documentation.
 #
 # Must be executed from the project root.
 #
 set -e
 #set -x
 
-cd ginivision/src/doc
+cd ginicapture/src/doc
 virtualenv ./virtualenv
 source virtualenv/bin/activate
 pip install -r requirements.txt

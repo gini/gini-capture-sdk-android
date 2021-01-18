@@ -1,1 +1,1 @@
-include ':ginivision', ':screenapiexample', ':componentapiexample', ':ginivision-network', ':ginivision-accounting-network', ':exampleShared'
+include ':ginicapture', ':screenapiexample', ':componentapiexample', ':ginicapture-network', ':ginicapture-accounting-network', ':exampleShared'

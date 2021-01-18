@@ -85,21 +85,21 @@ dependencies {
     }
 
     // For testing the local version
-    implementation project(path: ':ginivision-network')
+    implementation project(path: ':ginicapture-network')
     // For testing a released version
-    //implementation 'net.gini:gini-vision-network-lib:2.5.0'
+    //implementation 'net.gini:gini-capture-network-lib:2.5.0'
 
     // For testing the local version
-    implementation project(path: ':ginivision-accounting-network')
+    implementation project(path: ':ginicapture-accounting-network')
     // For testing a released version
-    //implementation 'net.gini:gini-vision-network-lib:2.5.0'
+    //implementation 'net.gini:gini-capture-network-lib:2.5.0'
 
     testImplementation deps.junit
 
     // For testing the local version
-    implementation project(path: ':ginivision')
+    implementation project(path: ':ginicapture')
     // For testing a released version
-//    implementation 'net.gini:gini-vision-lib:2.0.0-alpha.1'
+//    implementation 'net.gini:gini-capture-sdk:2.0.0-alpha.1'
 }
 
 apply from: rootProject.file('gradle/codequality.gradle')

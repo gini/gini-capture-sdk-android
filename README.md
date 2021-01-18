@@ -13,7 +13,7 @@ document to the Gini API for analysis.
 Communication with the Gini API is not part of the Gini Vision Library in order to allow clients the
 freedom to use a networking implementation of their own choosing. The quickest way to add networking
 is to use the [Gini Vision Network
-Library](https://github.com/gini/gini-vision-lib-android/tree/master/ginivision-network). You may
+Library](https://github.com/gini/gini-capture-sdk-android/tree/master/ginicapturee-network). You may
 also use the [Gini API SDK](https://github.com/gini/gini-sdk-android) for Android or implement
 communication with the Gini API yourself.
 
@@ -46,7 +46,7 @@ users. We also removed the camera flash requirement for tablets since many table
 cameras don't have an LED flash (like the popular Samsung Galaxy Tab S2). 
 
 For more information please consult our guide for [supporting
-tablets](http://developer.gini.net/gini-vision-lib-android/html/updating-to-2-4-0.html#tablet-support).
+tablets](http://developer.gini.net/gini-capture-sdk-android/html/updating-to-2-4-0.html#tablet-support).
 
 > **Note:** Please see our minimum hardware recommendations for tablets below. We recommend
 > implementing corresponding hardware checks for the Gini Vision Library to deliver optimal results
@@ -59,9 +59,9 @@ Documentation
 
 Furhter documentation can be found in our 
 
-* [Integration Guide](http://developer.gini.net/gini-vision-lib-android/html/) and
-* [Gini Vision Javadoc](http://developer.gini.net/gini-vision-lib-android/javadoc/index.html)
-* [Network Library Javadoc](http://developer.gini.net/gini-vision-lib-android/javadoc/index.html)
+* [Integration Guide](http://developer.gini.net/gini-capture-sdk-android/html/) and
+* [Gini Vision Javadoc](http://developer.gini.net/gini-capture-sdk-android/javadoc/index.html)
+* [Network Library Javadoc](http://developer.gini.net/gini-capture-sdk-android/javadoc/index.html)
 
 Architecture
 ------------
@@ -148,7 +148,7 @@ app/build.gradle:
 
 ```
 dependencies {
-    implementation 'net.gini:gini-vision-lib:4.0.0'
+    implementation 'net.gini:gini-capture-sdk:4.0.0'
 }
 ```
 

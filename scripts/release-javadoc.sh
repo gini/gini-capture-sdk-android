@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Commits the javadoc to gini-vision-library-android's gh-pages branch.
+# Commits the javadoc to gini-capture-sdk-android's gh-pages branch.
 #
 # Must be executed from the project root.
 #
@@ -20,7 +20,7 @@ git_user=$1
 git_password=$2
 
 rm -rf gh-pages
-git clone -b gh-pages https://"$git_user":"$git_password"@github.com/gini/gini-vision-lib-android.git gh-pages
+git clone -b gh-pages https://"$git_user":"$git_password"@github.com/gini/gini-capture-sdk-android.git gh-pages
 
 rm -rf gh-pages/javadoc
 rm -rf gh-pages/network/javadoc
@@ -28,10 +28,10 @@ rm -rf gh-pages/accounting/network/javadoc
 mkdir -p gh-pages/javadoc
 mkdir -p gh-pages/network
 mkdir -p gh-pages/accounting/network
-cp -a ginivision/build/dokka/ gh-pages
-mv gh-pages/ginivision gh-pages/javadoc
-cp -a ginivision-network/build/docs/javadoc gh-pages/network/
-cp -a ginivision-accounting-network/build/docs/javadoc gh-pages/accounting/network/
+cp -a ginicapture/build/dokka/ gh-pages
+mv gh-pages/ginicapture gh-pages/javadoc
+cp -a ginicapture-network/build/docs/javadoc gh-pages/network/
+cp -a ginicapture-accounting-network/build/docs/javadoc gh-pages/accounting/network/
 cd gh-pages
 touch .nojekyll
 git add -u

@@ -37,9 +37,9 @@ pipeline {
             steps {
                 sh '''
                     ./gradlew clean \
-                    ginivision:assembleDebug ginivision:assembleRelease \
-                    ginivision-network:assembleDebug ginivision-network:assembleRelease \
-                    ginivision-accounting-network:assembleDebug ginivision-accounting-network:assembleRelease
+                    ginicapture:assembleDebug ginicapture:assembleRelease \
+                    ginicapture-network:assembleDebug ginicapture-network:assembleRelease \
+                    ginicapture-accounting-network:assembleDebug ginicapture-accounting-network:assembleRelease
                 '''
             }
         }
@@ -59,12 +59,12 @@ pipeline {
                 }
             }
             steps {
-                sh './gradlew ginivision:testDebugUnitTest -Dorg.gradle.java.home=$JAVA9'
+                sh './gradlew ginicapture:testDebugUnitTest -Dorg.gradle.java.home=$JAVA9'
             }
             post {
                 always {
-                    junit allowEmptyResults: true, testResults: 'ginivision/build/outputs/test-results/testDebugUnitTest/*.xml'
-                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginivision/build/reports/tests/testDebugUnitTest', reportFiles: 'index.html', reportName: 'Unit Test Results', reportTitles: ''])
+                    junit allowEmptyResults: true, testResults: 'ginicapture/build/outputs/test-results/testDebugUnitTest/*.xml'
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture/build/reports/tests/testDebugUnitTest', reportFiles: 'index.html', reportName: 'Unit Test Results', reportTitles: ''])
                 }
             }
         }
@@ -84,8 +84,8 @@ pipeline {
                 }
             }
             steps {
-                sh './gradlew ginivision:jacocoTestDebugUnitTestReport -Dorg.gradle.java.home=$JAVA9'
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginivision/build/jacoco/jacocoHtml', reportFiles: 'index.html', reportName: 'Code Coverage Report', reportTitles: ''])
+                sh './gradlew ginicapture:jacocoTestDebugUnitTestReport -Dorg.gradle.java.home=$JAVA9'
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture/build/jacoco/jacocoHtml', reportFiles: 'index.html', reportName: 'Code Coverage Report', reportTitles: ''])
             }
         }
         stage('Javadoc Coverage') {
@@ -105,9 +105,9 @@ pipeline {
             }
             steps {
                 sh './gradlew generateJavadocCoverage'
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginivision/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'GVL Javadoc Coverage Report', reportTitles: ''])
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginivision-network/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'GVL Network Javadoc Coverage Report', reportTitles: ''])
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginivision-accounting-network/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'GVL Accounting Network Javadoc Coverage Report', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'GVL Javadoc Coverage Report', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-network/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'GVL Network Javadoc Coverage Report', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-accounting-network/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'GVL Accounting Network Javadoc Coverage Report', reportTitles: ''])
             }
         }
         stage('Code Analysis') {
@@ -126,18 +126,18 @@ pipeline {
                 }
             }
             steps {
-                sh './gradlew ginivision:lint ginivision:checkstyle ginivision:pmd'
-                sh './gradlew ginivision-network:lint ginivision-network:checkstyle ginivision-network:pmd'
-                sh './gradlew ginivision-accounting-network:lint ginivision-accounting-network:checkstyle ginivision-accounting-network:pmd'
-                androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginivision/build/reports/lint-results.xml', unHealthy: ''
-                androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginivision-network/build/reports/lint-results.xml', unHealthy: ''
-                androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginivision-accounting-network/build/reports/lint-results.xml', unHealthy: ''
-                checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginivision/build/reports/checkstyle/checkstyle.xml', unHealthy: ''
-                checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginivision-network/build/reports/checkstyle/checkstyle.xml', unHealthy: ''
-                checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginivision-accounting-network/build/reports/checkstyle/checkstyle.xml', unHealthy: ''
-                pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginivision/build/reports/pmd/pmd.xml', unHealthy: ''
-                pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginivision-network/build/reports/pmd/pmd.xml', unHealthy: ''
-                pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginivision-accounting-network/build/reports/pmd/pmd.xml', unHealthy: ''
+                sh './gradlew ginicapture:lint ginicapture:checkstyle ginicapture:pmd'
+                sh './gradlew ginicapture-network:lint ginicapture-network:checkstyle ginicapture-network:pmd'
+                sh './gradlew ginicapture-accounting-network:lint ginicapture-accounting-network:checkstyle ginicapture-accounting-network:pmd'
+                androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginicapture/build/reports/lint-results.xml', unHealthy: ''
+                androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginicapture-network/build/reports/lint-results.xml', unHealthy: ''
+                androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginicapture-accounting-network/build/reports/lint-results.xml', unHealthy: ''
+                checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginicapture/build/reports/checkstyle/checkstyle.xml', unHealthy: ''
+                checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginicapture-network/build/reports/checkstyle/checkstyle.xml', unHealthy: ''
+                checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginicapture-accounting-network/build/reports/checkstyle/checkstyle.xml', unHealthy: ''
+                pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginicapture/build/reports/pmd/pmd.xml', unHealthy: ''
+                pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginicapture-network/build/reports/pmd/pmd.xml', unHealthy: ''
+                pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'ginicapture-accounting-network/build/reports/pmd/pmd.xml', unHealthy: ''
             }
         }
         stage('Build Documentation') {
@@ -159,7 +159,7 @@ pipeline {
                 withEnv(["PATH+=/usr/local/bin"]) {
                     sh 'scripts/build-sphinx-doc.sh'
                 }
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginivision/src/doc/build/html', reportFiles: 'index.html', reportName: 'Documentation', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture/src/doc/build/html', reportFiles: 'index.html', reportName: 'Documentation', reportTitles: ''])
             }
         }
         stage('Generate Javadoc') {
@@ -178,10 +178,10 @@ pipeline {
                 }
             }
             steps {
-                sh './gradlew ginivision:dokkaHtml ginivision-network:generateJavadoc ginivision-accounting-network:generateJavadoc'
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginivision/build/dokka/ginivision', reportFiles: 'index.html', reportName: 'GVL KDoc', reportTitles: ''])
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginivision-network/build/docs/javadoc', reportFiles: 'index.html', reportName: 'GVL Network Javadoc', reportTitles: ''])
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginivision-accounting-network/build/docs/javadoc', reportFiles: 'index.html', reportName: 'GVL Accounting Network Javadoc', reportTitles: ''])
+                sh './gradlew ginicapture:dokkaHtml ginicapture-network:generateJavadoc ginicapture-accounting-network:generateJavadoc'
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture/build/dokka/ginicapture', reportFiles: 'index.html', reportName: 'GVL KDoc', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-network/build/docs/javadoc', reportFiles: 'index.html', reportName: 'GVL Network Javadoc', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-accounting-network/build/docs/javadoc', reportFiles: 'index.html', reportName: 'GVL Accounting Network Javadoc', reportTitles: ''])
             }
         }
         stage('Archive Artifacts') {
@@ -200,9 +200,9 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd ginivision/build/jacoco && zip -r testCoverage.zip jacocoHtml && cd -'
-                sh 'cd ginivision/build/reports && zip -r javadocCoverage.zip javadoc-coverage && cd -'
-                archiveArtifacts 'ginivision/build/outputs/aar/*.aar,ginivision/build/jacoco/testCoverage.zip,ginivision/build/reports/javadocCoverage.zip'
+                sh 'cd ginicapture/build/jacoco && zip -r testCoverage.zip jacocoHtml && cd -'
+                sh 'cd ginicapture/build/reports && zip -r javadocCoverage.zip javadoc-coverage && cd -'
+                archiveArtifacts 'ginicapture/build/outputs/aar/*.aar,ginicapture/build/jacoco/testCoverage.zip,ginicapture/build/reports/javadocCoverage.zip'
             }
         }
         stage('Build Example Apps') {
@@ -256,9 +256,9 @@ pipeline {
             }
             steps {
                 sh '''
-                    ./gradlew ginivision:uploadArchives \
-                    ginivision-network:uploadArchives \
-                    ginivision-accounting-network:uploadArchives \
+                    ./gradlew ginicapture:uploadArchives \
+                    ginicapture-network:uploadArchives \
+                    ginicapture-accounting-network:uploadArchives \
                     -PmavenSnapshotsRepoUrl=https://repo.gini.net/nexus/content/repositories/snapshots \
                     -PrepoUser=$NEXUS_MAVEN_USR \
                     -PrepoPassword=$NEXUS_MAVEN_PSW
@@ -286,9 +286,9 @@ pipeline {
             }
             steps {
                 sh '''
-                    ./gradlew ginivision:uploadArchives \
-                    ginivision-network:uploadArchives \
-                    ginivision-accounting-network:uploadArchives \
+                    ./gradlew ginicapture:uploadArchives \
+                    ginicapture-network:uploadArchives \
+                    ginicapture-accounting-network:uploadArchives \
                     -PmavenRepoUrl=https://repo.gini.net/nexus/content/repositories/open \
                     -PrepoUser=$NEXUS_MAVEN_USR \
                     -PrepoPassword=$NEXUS_MAVEN_PSW
