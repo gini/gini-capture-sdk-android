@@ -1,9 +1,9 @@
 Component API Example App
 =========================
 
-This example app provides you with a sample usage of the Gini Vision Library's Component API.
+This example app provides you with a sample usage of the Gini Capture SDK's Component API.
 
-The Gini Vision Library supports both standard Activities and Fragments and Android Support Library ones. Activities without `AppCompat` in
+The Gini Capture SDK supports both standard Activities and Fragments and Android Support Library ones. Activities without `AppCompat` in
 their name use standard Activities and Fragments while the other ones use the Android Support Library.
 
 The Gini API SDK is used for analyzing documents and sending feedback.
@@ -11,7 +11,7 @@ The Gini API SDK is used for analyzing documents and sending feedback.
 Before analyzing documents with the Component API example app, you need to set your Gini API Client Id and Secret by creating a
 `local.properties` file in this folder containing a `clientId` and a `clientSecret` property.
 
-Please note, that large heap is enabled for the example app. Your application using the Gini Vision Library should also enable large heap to
+Please note, that large heap is enabled for the example app. Your application using the Gini Capture SDK should also enable large heap to
 make sure, that there is enough memory for image handling.
 
 Overview
@@ -200,7 +200,7 @@ Customization
 Customization options are detailed in each Screen API Activity's javadoc: `CameraActivity`, `HelpActivity`, `OnboardingActivity`,
 `ReviewActivity` and `AnalysisActivity`.
 
-To experiment with customizing the images used in the Gini Vision Library you can copy the contents of the folder
+To experiment with customizing the images used in the Gini Capture SDK you can copy the contents of the folder
 `screenapiexample/customized-drawables` to `componentapiexample/src/main/res`.
 
 Text customizations can be tried out by uncommenting and modifying the string resources in the

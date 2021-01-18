@@ -28,5 +28,5 @@ cd gh-pages
 touch .nojekyll
 git add -u
 git add .
-git diff --quiet --exit-code --cached || git commit -a -m 'Gini Vision Library Integration Guide'
+git diff --quiet --exit-code --cached || git commit -a -m 'Gini Capture SDK Integration Guide'
 git push

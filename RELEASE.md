@@ -1,12 +1,12 @@
 # Release Process
 
-This document describes the release process for a new version of the Gini Vision Library for Android.
+This document describes the release process for a new version of the Gini Capture SDK for Android.
 
 1. Add new features only in separate `feature` branches and merge them into `develop`
 2. Create a `release` branch from `develop`
   * Update the version in `gradle.properties`
-  * Update the version in the `README.md`, in the `ginivision-network/README.md` 
-    and in the `ginivision-accounting-network/README.md`
+  * Update the version in the `README.md`, in the `ginicapture-network/README.md` 
+    and in the `ginicapture-accounting-network/README.md`
 3. Push the `release` branch and wait for the Jenkins build to finish
 4. If everything is fine create a PR to merge the `release` branch into `master`
 5. After merging tag the version on `master` and push the tag

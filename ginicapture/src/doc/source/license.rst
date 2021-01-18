@@ -2,7 +2,7 @@
 License
 =======
 
-The Gini Vision Library and the Gini Vision Network Library are licensed under a Private License and
+The Gini Capture SDK and the Gini Capture Network Library are licensed under a Private License and
 also integrate several third party libraries. 
 
 .. IMPORTANT::
@@ -13,7 +13,7 @@ also integrate several third party libraries.
    Copyright (c) 2014-2018, Gini GmbH
    All rights reserved.
    
-   The Gini Vision Library is licensed through Gini GmbH ("Gini") and may not be
+   The Gini Capture SDK is licensed through Gini GmbH ("Gini") and may not be
    used, altered or copied in any way without explicit permission by Gini. The
    terms of usage are defined in a separate usage agreement between Gini and the
    licensee, where the licensee can gain access to a non-exclusive,

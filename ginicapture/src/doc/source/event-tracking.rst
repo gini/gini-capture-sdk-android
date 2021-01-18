@@ -2,7 +2,7 @@ Event Tracking
 ====
 
 In version `3.12.0 <https://github.com/gini/gini-capture-sdk-android/releases/tag/3.12.0>`_ we introduced the possibility to track various
-events which occur during the usage of the Gini Vision Library.
+events which occur during the usage of the Gini Capture SDK.
 
 To subscribe to the events you need to implement the ``EventTracker`` interface and pass it to the
 builder when creating a new ``GiniVision`` instance.

@@ -36,5 +36,5 @@ cd gh-pages
 touch .nojekyll
 git add -u
 git add .
-git diff --quiet --exit-code --cached || git commit -a -m 'Gini Vision Library, Gini Vision Network Library Javadoc and Gini Vision Accounting Network Library Javadoc'
+git diff --quiet --exit-code --cached || git commit -a -m 'Gini Capture SDK, Gini Capture Network Library Javadoc and Gini Capture Accounting Network Library Javadoc'
 git push

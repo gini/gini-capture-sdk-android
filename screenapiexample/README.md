@@ -1,22 +1,22 @@
 Screen API Example App
 =========================
 
-This example app provides you with a sample usage of the Gini Vision Library's Screen API.
+This example app provides you with a sample usage of the Gini Capture SDK's Screen API.
 
 The Gini API SDK is used for analyzing documents and sending feedback.
 
-The `ReviewActivity` and `AnalysisActivity` extend the activities with the same name from the Gini Vision Library.
+The `ReviewActivity` and `AnalysisActivity` extend the activities with the same name from the Gini Capture SDK.
 
 Before analyzing documents with the Component API example app, you need to set your Gini API Client Id and Secret in the
 `src/main/res/values/gini_api_credentials.xml`.
 
-Please note, that large heap is enabled for the example app. Your application using the Gini Vision Library should also enable large heap to
+Please note, that large heap is enabled for the example app. Your application using the Gini Capture SDK should also enable large heap to
 make sure, that there is enough memory for image handling.
 
 Overview
 ========
 
-The entry point of the app is the `MainActivity`. It starts the Gini Vision Library and handles the result.
+The entry point of the app is the `MainActivity`. It starts the Gini Capture SDK and handles the result.
 
 ### GVL 2.5.0 and older
 
@@ -34,7 +34,7 @@ ReviewActivity
 
 ### GVL 2.5.0 and older
 
-The `ReviewActivity` handles the events from the Review Screen. As it is a subclass of the Gini Vision Library's `ReviewActivity` you have
+The `ReviewActivity` handles the events from the Review Screen. As it is a subclass of the Gini Capture SDK's `ReviewActivity` you have
 to declare it in your `AndroidManifest.xml`. We recommend setting the title to `gv_title_review`, limit the orientation to portrait and use
 the `GiniVisionTheme`
 
@@ -71,7 +71,7 @@ AnalysisActivity
 
 ### GVL 2.5.0 and older
 
-The `AnalysisActivity` handles the Analysis Screen's events. As it is a subclass of the Gini Vision Library's `AnalysisActivity` you have to
+The `AnalysisActivity` handles the Analysis Screen's events. As it is a subclass of the Gini Capture SDK's `AnalysisActivity` you have to
 declare it in your `AndroidManifest.xml`. We recommend setting the title to `gv_title_analysis` and use the `GiniVisionTheme`.
 
 The analysis is started or resumed in `AnalysisActivity#onAnalyzeDocument()` (if an error message was given, this method is called only when
@@ -148,7 +148,7 @@ Customization
 Customization options are detailed in each Screen API Activity's javadoc: `CameraActivity`, `HelpActivity`, `OnboardingActivity`,
 `ReviewActivity` and `AnalysisActivity`.
 
-To experiment with customizing the images used in the Gini Vision Library you can copy the contents of the folder
+To experiment with customizing the images used in the Gini Capture SDK you can copy the contents of the folder
 `screenapiexample/customized-drawables` to `screenapiexample/src/main/res`.
 
 Text customizations can be tried out by uncommenting and modifying the string resources in the
