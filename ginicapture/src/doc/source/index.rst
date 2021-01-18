@@ -23,10 +23,5 @@ Table of contents
     Accounting Network Library Javadoc <http://developer.gini.net/gini-capture-sdk-android/accounting/network/javadoc/index.html>
     customization-guide
     event-tracking
-    updating-to-4-0-0
-    updating-to-3-0-0
-    updating-to-2-5-0
-    updating-to-2-4-0
     guide-for-open-with
-    changelog
     license
