@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.R;
 import net.gini.android.vision.analysis.AnalysisActivity;
 import net.gini.android.vision.camera.CameraActivity;
@@ -27,7 +27,7 @@ import static net.gini.android.vision.internal.util.ActivityHelper.forcePortrait
  * <h3>Screen API and Component API</h3>
  *
  * <p>
- *     On the Help Screen users can get information about how to best use the Gini Vision Library.
+ *     On the Help Screen users can get information about how to best use the Gini Capture SDK.
  * </p>
  * <p>
  *     This Activity can be used for both Screen and Component APIs.
@@ -36,7 +36,7 @@ import static net.gini.android.vision.internal.util.ActivityHelper.forcePortrait
  * <p>
  *     For the Component API you need to pass in the following extra:
  * <ul>
- *     <li>{@link HelpActivity#EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION} - Must contain a {@link GiniVisionFeatureConfiguration} instance</li>
+ *     <li>{@link HelpActivity#EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION} - Must contain a {@link GiniCaptureFeatureConfiguration} instance</li>
  * </ul>
  * </p>
  *
@@ -56,7 +56,7 @@ import static net.gini.android.vision.internal.util.ActivityHelper.forcePortrait
  *     </li>
  *     <li>
  *         <b>Help list item text style:</b> via overriding the style named {@code
- *         GiniVisionTheme.Help.Item.TextStyle}
+ *         GiniCaptureTheme.Help.Item.TextStyle}
  *     </li>
  *     <li>
  *         <b>Help list item labels:</b> via overriding the string resources found in the {@link HelpItem} enum
@@ -65,7 +65,7 @@ import static net.gini.android.vision.internal.util.ActivityHelper.forcePortrait
  * </p>
  *
  * <p>
- *     <b>Important:</b> All overriden styles must have their respective {@code Root.} prefixed style as their parent. Ex.: the parent of {@code GiniVisionTheme.Onboarding.Message.TextStyle} must be {@code Root.GiniVisionTheme.Onboarding.Message.TextStyle}.
+ *     <b>Important:</b> All overriden styles must have their respective {@code Root.} prefixed style as their parent. Ex.: the parent of {@code GiniCaptureTheme.Onboarding.Message.TextStyle} must be {@code Root.GiniCaptureTheme.Onboarding.Message.TextStyle}.
  * </p>
  *
  * <h3>Customizing the Action Bar</h3>
@@ -97,17 +97,17 @@ import static net.gini.android.vision.internal.util.ActivityHelper.forcePortrait
 public class HelpActivity extends AppCompatActivity {
 
     /**
-     * Optional extra which must contain a {@link GiniVisionFeatureConfiguration} instance.
+     * Optional extra which must contain a {@link GiniCaptureFeatureConfiguration} instance.
      *
-     * @Deprecated Configuration should be applied by creating a {@link GiniVision} instance using
-     * {@link GiniVision#newInstance()} and the returned {@link GiniVision.Builder}.
+     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
+     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
-    public static final String EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION =
-            "GV_EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION";
+    public static final String EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION =
+            "GV_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
 
     private static final Logger LOG = LoggerFactory.getLogger(HelpActivity.class);
     private static final int PHOTO_TIPS_REQUEST = 1;
-    private GiniVisionFeatureConfiguration mGiniVisionFeatureConfiguration;
+    private GiniCaptureFeatureConfiguration mGiniCaptureFeatureConfiguration;
     private RecyclerView mRecyclerView;
 
     @Override
@@ -135,7 +135,7 @@ public class HelpActivity extends AppCompatActivity {
     }
 
     private void setupHomeButton() {
-        if (GiniVision.hasInstance() && GiniVision.getInstance().areBackButtonsEnabled()) {
+        if (GiniCapture.hasInstance() && GiniCapture.getInstance().areBackButtonsEnabled()) {
             enableHomeAsUp(this);
         }
     }
@@ -143,11 +143,11 @@ public class HelpActivity extends AppCompatActivity {
     private void readExtras() {
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            mGiniVisionFeatureConfiguration = extras.getParcelable(
-                    EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION);
-            if (mGiniVisionFeatureConfiguration == null) {
-                LOG.warn("No GiniVisionFeatureConfiguration instance available. "
-                        + "Please make sure you have created and configured a GiniVision instance.");
+            mGiniCaptureFeatureConfiguration = extras.getParcelable(
+                    EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION);
+            if (mGiniCaptureFeatureConfiguration == null) {
+                LOG.warn("No GiniCaptureFeatureConfiguration instance available. "
+                        + "Please make sure you have created and configured a GiniCapture instance.");
             }
         }
     }
@@ -164,7 +164,7 @@ public class HelpActivity extends AppCompatActivity {
     private void setUpHelpItems() {
         mRecyclerView = findViewById(R.id.gv_help_items);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new HelpItemsAdapter(mGiniVisionFeatureConfiguration,
+        mRecyclerView.setAdapter(new HelpItemsAdapter(mGiniCaptureFeatureConfiguration,
                 new HelpItemsAdapter.HelpItemSelectedListener() {
                     @Override
                     public void onItemSelected(@NonNull final HelpItem helpItem) {
@@ -205,8 +205,8 @@ public class HelpActivity extends AppCompatActivity {
 
     private void launchSupportedFormats() {
         final Intent intent = new Intent(this, SupportedFormatsActivity.class);
-        intent.putExtra(SupportedFormatsActivity.EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION,
-                mGiniVisionFeatureConfiguration);
+        intent.putExtra(SupportedFormatsActivity.EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION,
+                mGiniCaptureFeatureConfiguration);
         startActivity(intent);
     }
 }

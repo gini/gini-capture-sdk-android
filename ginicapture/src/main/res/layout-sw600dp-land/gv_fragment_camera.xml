@@ -76,7 +76,7 @@
         tools:visibility="visible">
 
         <net.gini.android.vision.internal.ui.CustomFontTextView
-            style="@style/GiniVisionTheme.Camera.DocumentImportHint.TextStyle"
+            style="@style/GiniCaptureTheme.Camera.DocumentImportHint.TextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -125,7 +125,7 @@
             tools:ignore="ContentDescription" />
 
         <net.gini.android.vision.internal.ui.CustomFontTextView
-            style="@style/GiniVisionTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle"
+            style="@style/GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -139,7 +139,7 @@
 
         <net.gini.android.vision.internal.ui.CustomFontTextView
             android:id="@+id/gv_camera_qrcode_detected_popup_message_2"
-            style="@style/GiniVisionTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle"
+            style="@style/GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -194,7 +194,7 @@
             android:src="@drawable/gv_document_import_icon" />
 
         <net.gini.android.vision.internal.ui.CustomFontTextView
-            style="@style/GiniVisionTheme.Camera.DocumentImportSubtitle.TextStyle"
+            style="@style/GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

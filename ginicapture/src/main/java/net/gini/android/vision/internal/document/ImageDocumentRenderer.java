@@ -3,7 +3,7 @@ package net.gini.android.vision.internal.document;
 import android.content.Context;
 
 import net.gini.android.vision.AsyncCallback;
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.document.ImageDocument;
 import net.gini.android.vision.internal.cache.PhotoMemoryCache;
 import net.gini.android.vision.internal.camera.photo.Photo;
@@ -29,7 +29,7 @@ class ImageDocumentRenderer implements DocumentRenderer {
     @Override
     public void toBitmap(@NonNull final Context context, @NonNull final Size targetSize,
             @NonNull final Callback callback) {
-        if (GiniVision.hasInstance()) {
+        if (GiniCapture.hasInstance()) {
             getFromCache(context, callback);
         } else if (mPhoto == null) {
             createWithAsyncTask(callback);
@@ -65,7 +65,7 @@ class ImageDocumentRenderer implements DocumentRenderer {
     private void getFromCache(@NonNull final Context context,
             @NonNull final Callback callback) {
         final PhotoMemoryCache photoMemoryCache =
-                GiniVision.getInstance().internal().getPhotoMemoryCache();
+                GiniCapture.getInstance().internal().getPhotoMemoryCache();
         photoMemoryCache.get(context, mImageDocument, new AsyncCallback<Photo, Exception>() {
             @Override
             public void onSuccess(final Photo result) {

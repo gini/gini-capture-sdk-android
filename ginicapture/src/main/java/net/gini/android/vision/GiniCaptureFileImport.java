@@ -24,22 +24,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * This class contains methods for preparing launching the Gini Vision Library with a file received
+ * This class contains methods for preparing launching the Gini Capture SDK with a file received
  * from another app.
  */
-public final class GiniVisionFileImport {
+public final class GiniCaptureFileImport {
 
     @NonNull
-    private final GiniVision mGiniVision;
+    private final GiniCapture mGiniCapture;
 
     /**
      * Screen API
      *
      * <p> When your application receives a file from another application you can use this method to
-     * create an Intent for launching the Gini Vision Library.
+     * create an Intent for launching the Gini Capture SDK.
      *
      * <p> Start the Intent with {@link android.app.Activity#startActivityForResult(Intent, int)} to
-     * receive the {@link GiniVisionError} in case there was an error.
+     * receive the {@link GiniCaptureError} in case there was an error.
      *
      * @param intent                the Intent your app received
      * @param context               Android context
@@ -47,12 +47,12 @@ public final class GiniVisionFileImport {
      * @param analysisActivityClass the class of your application's {@link AnalysisActivity}
      *                              subclass
      *
-     * @return an Intent for launching the Gini Vision Library
+     * @return an Intent for launching the Gini Capture SDK
      *
      * @throws ImportedFileValidationException if the file didn't pass validation
      * @throws IllegalArgumentException        if the Intent's data is not valid or the mime type is
      *                                         not supported
-     * @Deprecated Use {@link GiniVision#createIntentForImportedFile(Intent, Context, Class, Class)}
+     * @Deprecated Use {@link GiniCapture#createIntentForImportedFile(Intent, Context, Class, Class)}
      * instead.
      */
     @Deprecated
@@ -72,16 +72,16 @@ public final class GiniVisionFileImport {
             @NonNull final Class<? extends ReviewActivity> reviewActivityClass,
             @NonNull final Class<? extends AnalysisActivity> analysisActivityClass,
             final Document document) {
-        final Intent giniVisionIntent;
+        final Intent giniCaptureIntent;
         if (document.isReviewable()) {
-            giniVisionIntent = createReviewActivityIntent(context, reviewActivityClass,
+            giniCaptureIntent = createReviewActivityIntent(context, reviewActivityClass,
                     analysisActivityClass, document);
         } else {
-            giniVisionIntent = new Intent(context, analysisActivityClass);
-            giniVisionIntent.putExtra(AnalysisActivity.EXTRA_IN_DOCUMENT, document);
-            giniVisionIntent.setExtrasClassLoader(GiniVisionFileImport.class.getClassLoader());
+            giniCaptureIntent = new Intent(context, analysisActivityClass);
+            giniCaptureIntent.putExtra(AnalysisActivity.EXTRA_IN_DOCUMENT, document);
+            giniCaptureIntent.setExtrasClassLoader(GiniCaptureFileImport.class.getClassLoader());
         }
-        return giniVisionIntent;
+        return giniCaptureIntent;
     }
 
     @NonNull
@@ -89,14 +89,14 @@ public final class GiniVisionFileImport {
             @Nullable final Class<? extends ReviewActivity> reviewActivityClass,
             @Nullable final Class<? extends AnalysisActivity> analysisActivityClass,
             final Document document) {
-        final Intent giniVisionIntent;
-        giniVisionIntent = new Intent(context, getReviewActivityClass(reviewActivityClass));
-        giniVisionIntent.putExtra(ReviewActivity.EXTRA_IN_DOCUMENT, document);
-        giniVisionIntent.setExtrasClassLoader(GiniVisionFileImport.class.getClassLoader());
-        ActivityHelper.setActivityExtra(giniVisionIntent,
+        final Intent giniCaptureIntent;
+        giniCaptureIntent = new Intent(context, getReviewActivityClass(reviewActivityClass));
+        giniCaptureIntent.putExtra(ReviewActivity.EXTRA_IN_DOCUMENT, document);
+        giniCaptureIntent.setExtrasClassLoader(GiniCaptureFileImport.class.getClassLoader());
+        ActivityHelper.setActivityExtra(giniCaptureIntent,
                 ReviewActivity.EXTRA_IN_ANALYSIS_ACTIVITY, context,
                 getAnalysisActivityClass(analysisActivityClass));
-        return giniVisionIntent;
+        return giniCaptureIntent;
     }
 
     @NonNull
@@ -115,7 +115,7 @@ public final class GiniVisionFileImport {
      * Component API
      *
      * <p> When your application receives a file from another application you can use this method to
-     * create a Document for launching one of the Gini Vision Library's Review Fragments or Analysis
+     * create a Document for launching one of the Gini Capture SDK's Review Fragments or Analysis
      * Fragments.
      *
      * <p> If the Document can be reviewed ({@link Document#isReviewable()}) launch one of the
@@ -129,11 +129,11 @@ public final class GiniVisionFileImport {
      * @param intent  the Intent your app received
      * @param context Android context
      *
-     * @return a Document for launching one of the Gini Vision Library's Review Fragments or
+     * @return a Document for launching one of the Gini Capture SDK's Review Fragments or
      * Analysis Fragments
      *
      * @throws ImportedFileValidationException if the file didn't pass validation
-     * @Deprecated Use {@link GiniVision#createDocumentForImportedFile(Intent, Context)} instead.
+     * @Deprecated Use {@link GiniCapture#createDocumentForImportedFile(Intent, Context)} instead.
      */
     @Deprecated
     @NonNull
@@ -157,8 +157,8 @@ public final class GiniVisionFileImport {
         }
     }
 
-    GiniVisionFileImport(@NonNull final GiniVision giniVision) {
-        mGiniVision = giniVision;
+    GiniCaptureFileImport(@NonNull final GiniCapture giniCapture) {
+        mGiniCapture = giniCapture;
     }
 
     CancellationToken createIntentForImportedFiles(@NonNull final Intent intent,
@@ -169,17 +169,17 @@ public final class GiniVisionFileImport {
                         new AsyncCallback<Document, ImportedFileValidationException>() {
                             @Override
                             public void onSuccess(final Document result) {
-                                final Intent giniVisionIntent;
+                                final Intent giniCaptureIntent;
                                 if (result.getType() == Document.Type.IMAGE_MULTI_PAGE) {
                                     // The new ImageMultiPageDocument was already added to the memory store
-                                    giniVisionIntent = MultiPageReviewActivity.createIntent(
+                                    giniCaptureIntent = MultiPageReviewActivity.createIntent(
                                             context);
                                 } else {
-                                    giniVisionIntent = createIntentForSingleDocument(context,
+                                    giniCaptureIntent = createIntentForSingleDocument(context,
                                             ReviewActivity.class, AnalysisActivity.class,
                                             result);
                                 }
-                                callback.onSuccess(giniVisionIntent);
+                                callback.onSuccess(giniCaptureIntent);
                             }
 
                             @Override
@@ -203,8 +203,8 @@ public final class GiniVisionFileImport {
     CancellationToken createDocumentForImportedFiles(@NonNull final Intent intent,
             @NonNull final Context context,
             @NonNull final AsyncCallback<Document, ImportedFileValidationException> callback) {
-        if (!GiniVision.hasInstance()) {
-            callback.onError(createNoGiniVisionFileValidationException());
+        if (!GiniCapture.hasInstance()) {
+            callback.onError(createNoGiniCaptureFileValidationException());
             return new NoOpCancellationToken();
         }
         final List<Uri> uris = IntentHelper.getUris(intent);
@@ -226,16 +226,16 @@ public final class GiniVisionFileImport {
         } else {
             final ImportImageFileUrisAsyncTask asyncTask = new ImportImageFileUrisAsyncTask(context,
                     intent,
-                    mGiniVision, Document.Source.newExternalSource(),
+                    mGiniCapture, Document.Source.newExternalSource(),
                     Document.ImportMethod.OPEN_WITH,
                     new AsyncCallback<ImageMultiPageDocument, ImportedFileValidationException>() {
                         @Override
                         public void onSuccess(final ImageMultiPageDocument result) {
-                            if (!GiniVision.hasInstance()) {
-                                callback.onError(createNoGiniVisionFileValidationException());
+                            if (!GiniCapture.hasInstance()) {
+                                callback.onError(createNoGiniCaptureFileValidationException());
                                 return;
                             }
-                            GiniVision.getInstance().internal()
+                            GiniCapture.getInstance().internal()
                                     .getImageMultiPageDocumentMemoryStore()
                                     .setMultiPageDocument(result);
                             callback.onSuccess(result);
@@ -261,9 +261,9 @@ public final class GiniVisionFileImport {
     }
 
     @NonNull
-    private static ImportedFileValidationException createNoGiniVisionFileValidationException() {
+    private static ImportedFileValidationException createNoGiniCaptureFileValidationException() {
         return new ImportedFileValidationException(
-                "Cannot import files. GiniVision instance not available. Create it with GiniVision.newInstance().");
+                "Cannot import files. GiniCapture instance not available. Create it with GiniCapture.newInstance().");
     }
 
 }

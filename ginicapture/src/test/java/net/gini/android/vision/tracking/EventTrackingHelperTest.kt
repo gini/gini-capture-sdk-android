@@ -2,8 +2,8 @@ package net.gini.android.vision.tracking
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.*
-import net.gini.android.vision.GiniVision
-import net.gini.android.vision.GiniVisionHelper
+import net.gini.android.vision.GiniCapture
+import net.gini.android.vision.GiniCaptureHelper
 import net.gini.android.vision.tracking.EventTrackingHelper.*
 import org.junit.After
 import org.junit.Test
@@ -20,14 +20,14 @@ class EventTrackingHelperTest {
 
     @After
     fun after() {
-        GiniVisionHelper.setGiniVisionInstance(null)
+        GiniCaptureHelper.setGiniCaptureInstance(null)
     }
 
     @Test
-    fun `track Onboarding Screen events when GiniVision instance is available`() {
+    fun `track Onboarding Screen events when GiniCapture instance is available`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         // When
         trackOnboardingScreenEvent(OnboardingScreenEvent.START, mapOf("detail" to "Event detail"))
@@ -37,13 +37,13 @@ class EventTrackingHelperTest {
     }
 
     @Test
-    fun `don't track Onboarding Screen events when GiniVision instance is not available`() {
+    fun `don't track Onboarding Screen events when GiniCapture instance is not available`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         // When
-        GiniVisionHelper.setGiniVisionInstance(null)
+        GiniCaptureHelper.setGiniCaptureInstance(null)
 
         trackOnboardingScreenEvent(OnboardingScreenEvent.START)
 
@@ -52,10 +52,10 @@ class EventTrackingHelperTest {
     }
 
     @Test
-    fun `track Camera Screen events when GiniVision instance is available`() {
+    fun `track Camera Screen events when GiniCapture instance is available`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         // When
         trackCameraScreenEvent(CameraScreenEvent.TAKE_PICTURE, mapOf("detail" to "Event detail"))
@@ -65,13 +65,13 @@ class EventTrackingHelperTest {
     }
 
     @Test
-    fun `don't track Camera Screen events when GiniVision instance is not available`() {
+    fun `don't track Camera Screen events when GiniCapture instance is not available`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         // When
-        GiniVisionHelper.setGiniVisionInstance(null)
+        GiniCaptureHelper.setGiniCaptureInstance(null)
 
         trackCameraScreenEvent(CameraScreenEvent.TAKE_PICTURE)
 
@@ -80,10 +80,10 @@ class EventTrackingHelperTest {
     }
 
     @Test
-    fun `track Review Screen events when GiniVision instance is available`() {
+    fun `track Review Screen events when GiniCapture instance is available`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         // When
         trackReviewScreenEvent(ReviewScreenEvent.NEXT, mapOf("detail" to "Event detail"))
@@ -93,13 +93,13 @@ class EventTrackingHelperTest {
     }
 
     @Test
-    fun `don't track Review Screen events when GiniVision instance is not available`() {
+    fun `don't track Review Screen events when GiniCapture instance is not available`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         // When
-        GiniVisionHelper.setGiniVisionInstance(null)
+        GiniCaptureHelper.setGiniCaptureInstance(null)
 
         trackReviewScreenEvent(ReviewScreenEvent.NEXT)
 
@@ -108,10 +108,10 @@ class EventTrackingHelperTest {
     }
 
     @Test
-    fun `track Analysis Screen events when GiniVision instance is available`() {
+    fun `track Analysis Screen events when GiniCapture instance is available`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         // When
         trackAnalysisScreenEvent(AnalysisScreenEvent.RETRY, mapOf("detail" to "Event detail"))
@@ -121,13 +121,13 @@ class EventTrackingHelperTest {
     }
 
     @Test
-    fun `don't track Analysis Screen events when GiniVision instance is not available`() {
+    fun `don't track Analysis Screen events when GiniCapture instance is not available`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         // When
-        GiniVisionHelper.setGiniVisionInstance(null)
+        GiniCaptureHelper.setGiniCaptureInstance(null)
 
         trackAnalysisScreenEvent(AnalysisScreenEvent.RETRY)
 

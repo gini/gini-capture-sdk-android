@@ -6,7 +6,7 @@ Contains the Activity and Fragments used for the Camera Screen.
 ## Screen API
 
 The [net.gini.android.vision.camera.CameraActivity] is the main entry point when using the Screen API. Start
-[net.gini.android.vision.camera.CameraActivity] and as a result, if something went wrong, a [net.gini.android.vision.GiniVisionError] is
+[net.gini.android.vision.camera.CameraActivity] and as a result, if something went wrong, a [net.gini.android.vision.GiniCaptureError] is
 returned.
 
 ## Component API

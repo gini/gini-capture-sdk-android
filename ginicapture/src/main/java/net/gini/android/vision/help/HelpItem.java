@@ -2,7 +2,7 @@ package net.gini.android.vision.help;
 
 import androidx.annotation.StringRes;
 
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.R;
 
 /**
@@ -25,7 +25,7 @@ public enum HelpItem {
      *     Shows a guide for importing files from other apps via "open with".
      * </p>
      * <p>
-     *     <b>Important:</b> This item is shown only if file import was enabled with the {@link GiniVisionFeatureConfiguration}.
+     *     <b>Important:</b> This item is shown only if file import was enabled with the {@link GiniCaptureFeatureConfiguration}.
      * </p>
      * <p>
      *     Item label customizable by overriding the string resource named {@code gv_help_item_file_import_guide_title}
@@ -34,7 +34,7 @@ public enum HelpItem {
     FILE_IMPORT_GUIDE(R.string.gv_help_item_file_import_guide_title),
     /**
      * <p>
-     *     Shows information about the document formats supported by the Gini Vision Library.
+     *     Shows information about the document formats supported by the Gini Capture SDK.
      * </p>
      * <p>
      *     Item label customizable by overriding the string resource named {@code gv_help_item_supported_formats_title}

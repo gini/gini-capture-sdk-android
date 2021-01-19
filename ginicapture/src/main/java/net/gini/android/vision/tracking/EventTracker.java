@@ -8,11 +8,11 @@ package net.gini.android.vision.tracking;
 
 import android.app.Activity;
 
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 
 /**
- * Implement this interface and pass it to the {@link GiniVision.Builder#setEventTracker(EventTracker)} to get informed about various events
- * occuring during the usage of the Gini Vision Library.
+ * Implement this interface and pass it to the {@link GiniCapture.Builder#setEventTracker(EventTracker)} to get informed about various events
+ * occuring during the usage of the Gini Capture SDK.
  *
  * <p> Check each event enum to find out which events are triggered on the different screens.
  *

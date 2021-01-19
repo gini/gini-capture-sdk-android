@@ -44,7 +44,7 @@ class Exif {
     static final String USER_COMMENT_MODEL = "Model";
     static final String USER_COMMENT_PLATFORM = "Platform";
     static final String USER_COMMENT_OS_VERSION = "OSVer";
-    static final String USER_COMMENT_GINI_VISION_VERSION = "GiniVisionVer";
+    static final String USER_COMMENT_GINI_CAPTURE_VERSION = "GiniVisionVer";
     static final String USER_COMMENT_CONTENT_ID = "ContentId";
     static final String USER_COMMENT_ROTATION_DELTA = "RotDeltaDeg";
     static final String USER_COMMENT_DEVICE_ORIENTATION = "DeviceOrientation";
@@ -445,7 +445,7 @@ class Exif {
             // OS Version
             map.put(USER_COMMENT_OS_VERSION, String.valueOf(Build.VERSION.RELEASE));
             // GiniVision Version
-            map.put(USER_COMMENT_GINI_VISION_VERSION, BuildConfig.VERSION_NAME.replace(" ", ""));
+            map.put(USER_COMMENT_GINI_CAPTURE_VERSION, BuildConfig.VERSION_NAME.replace(" ", ""));
             // Content ID
             map.put(USER_COMMENT_CONTENT_ID, mContentId);
             // Rotation Delta

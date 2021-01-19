@@ -64,14 +64,14 @@
         </activity>
         <activity android:name="net.gini.android.vision.screen.CameraScreenApiActivity"
             android:label="@string/gv_title_camera"
-            android:theme="@style/GiniVisionTheme"/>
+            android:theme="@style/GiniCaptureTheme"/>
         <activity
             android:name="net.gini.android.vision.screen.ReviewActivity"
             android:label="@string/gv_title_review"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.screen.AnalysisActivity"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.screen.ExtractionsActivity"
             android:label="@string/title_extractions" />

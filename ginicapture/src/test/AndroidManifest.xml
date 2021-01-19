@@ -10,10 +10,10 @@
 
         <activity
             android:name="net.gini.android.vision.analysis.AnalysisFragmentHostActivity"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.onboarding.OnboardingFragmentHostActivity"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
 
     </application>
 

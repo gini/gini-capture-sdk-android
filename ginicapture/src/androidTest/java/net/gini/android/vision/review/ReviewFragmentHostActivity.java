@@ -1,8 +1,8 @@
 package net.gini.android.vision.review;
 
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVisionError;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.GiniCaptureError;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 
 import java.util.Map;
 
@@ -46,13 +46,13 @@ public class ReviewFragmentHostActivity extends
     }
 
     @Override
-    public void onError(@NonNull final GiniVisionError error) {
+    public void onError(@NonNull final GiniCaptureError error) {
 
     }
 
     @Override
     public void onExtractionsAvailable(
-            @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
 
     }
 

@@ -1,13 +1,13 @@
 package net.gini.android.vision.accounting.network;
 
 import net.gini.android.DocumentTaskManager;
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.accounting.network.model.SpecificExtractionMapper;
 import net.gini.android.vision.internal.camera.api.UIExecutor;
 import net.gini.android.vision.network.Error;
-import net.gini.android.vision.network.GiniVisionNetworkApi;
-import net.gini.android.vision.network.GiniVisionNetworkCallback;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.GiniCaptureNetworkApi;
+import net.gini.android.vision.network.GiniCaptureNetworkCallback;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 
 import org.json.JSONException;
 import org.slf4j.Logger;
@@ -29,39 +29,39 @@ import bolts.Task;
  * Default implementation of network calls which can be performed manually from outside the Gini
  * Vision Library (e.g. for sending feedback).
  *
- * <p> To create an instance use the {@link GiniVisionAccountingNetworkApi.Builder} returned by the
+ * <p> To create an instance use the {@link GiniCaptureAccountingNetworkApi.Builder} returned by the
  * {@link #builder()} method.
  *
  * <p> In order to easily access this implementation pass an instance of it to {@link
- * GiniVision.Builder#setGiniVisionNetworkApi(GiniVisionNetworkApi)} when creating a {@link
- * GiniVision} instance. You can then get the instance in your app with {@link
- * GiniVision#getGiniVisionNetworkApi()}.
+ * GiniCapture.Builder#setGiniCaptureNetworkApi(GiniCaptureNetworkApi)} when creating a {@link
+ * GiniCapture} instance. You can then get the instance in your app with {@link
+ * GiniCapture#getGiniCaptureNetworkApi()}.
  */
-public class GiniVisionAccountingNetworkApi implements GiniVisionNetworkApi {
+public class GiniCaptureAccountingNetworkApi implements GiniCaptureNetworkApi {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GiniVisionAccountingNetworkApi.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GiniCaptureAccountingNetworkApi.class);
 
-    private final GiniVisionAccountingNetworkService mAccountingNetworkService;
+    private final GiniCaptureAccountingNetworkService mAccountingNetworkService;
     private final UIExecutor mUIExecutor = new UIExecutor();
 
     /**
-     * Creates a new {@link GiniVisionAccountingNetworkApi.Builder} to configure and create a new
+     * Creates a new {@link GiniCaptureAccountingNetworkApi.Builder} to configure and create a new
      * instance.
      *
-     * @return a new {@link GiniVisionAccountingNetworkApi.Builder}
+     * @return a new {@link GiniCaptureAccountingNetworkApi.Builder}
      */
     public static Builder builder() {
         return new Builder();
     }
 
-    GiniVisionAccountingNetworkApi(
-            @NonNull final GiniVisionAccountingNetworkService accountingNetworkService) {
+    GiniCaptureAccountingNetworkApi(
+            @NonNull final GiniCaptureAccountingNetworkService accountingNetworkService) {
         mAccountingNetworkService = accountingNetworkService;
     }
 
     @Override
-    public void sendFeedback(@NonNull final Map<String, GiniVisionSpecificExtraction> extractions,
-            @NonNull final GiniVisionNetworkCallback<Void, Error> callback) {
+    public void sendFeedback(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
+            @NonNull final GiniCaptureNetworkCallback<Void, Error> callback) {
         final DocumentTaskManager documentTaskManager = mAccountingNetworkService.getGiniApi()
                 .getDocumentTaskManager();
         final net.gini.android.models.Document document =
@@ -115,40 +115,40 @@ public class GiniVisionAccountingNetworkApi implements GiniVisionNetworkApi {
     }
 
     /**
-     * Builder for configuring a new instance of the {@link GiniVisionAccountingNetworkApi}.
+     * Builder for configuring a new instance of the {@link GiniCaptureAccountingNetworkApi}.
      */
     public static class Builder {
 
-        private GiniVisionAccountingNetworkService mAccountingNetworkService;
+        private GiniCaptureAccountingNetworkService mAccountingNetworkService;
 
         Builder() {
         }
 
         /**
-         * Set the same {@link GiniVisionAccountingNetworkService} instance you use for {@link
-         * GiniVision}.
+         * Set the same {@link GiniCaptureAccountingNetworkService} instance you use for {@link
+         * GiniCapture}.
          *
-         * @param networkService {@link GiniVisionAccountingNetworkService} instance
+         * @param networkService {@link GiniCaptureAccountingNetworkService} instance
          *
          * @return the {@link Builder} instance
          */
-        public Builder withGiniVisionAccountingNetworkService(
-                @NonNull final GiniVisionAccountingNetworkService networkService) {
+        public Builder withGiniCaptureAccountingNetworkService(
+                @NonNull final GiniCaptureAccountingNetworkService networkService) {
             mAccountingNetworkService = networkService;
             return this;
         }
 
         /**
-         * Create a new instance of the {@link GiniVisionAccountingNetworkApi}.
+         * Create a new instance of the {@link GiniCaptureAccountingNetworkApi}.
          *
-         * @return new {@link GiniVisionAccountingNetworkApi} instance
+         * @return new {@link GiniCaptureAccountingNetworkApi} instance
          */
-        public GiniVisionAccountingNetworkApi build() {
+        public GiniCaptureAccountingNetworkApi build() {
             if (mAccountingNetworkService == null) {
                 throw new IllegalStateException(
-                        "GiniVisionAccountingNetworkApi requires a GiniVisionAccountingNetworkService instance.");
+                        "GiniCaptureAccountingNetworkApi requires a GiniCaptureAccountingNetworkService instance.");
             }
-            return new GiniVisionAccountingNetworkApi(mAccountingNetworkService);
+            return new GiniCaptureAccountingNetworkApi(mAccountingNetworkService);
         }
     }
 }

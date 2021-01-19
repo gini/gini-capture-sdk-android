@@ -14,26 +14,26 @@ import androidx.annotation.Nullable;
  * Optionally there may be a box describing the position of the extraction value on the document. In
  * most instances, extractions without a bounding box are meta information (e.g. doctype).
  */
-public class GiniVisionExtraction implements Parcelable {
+public class GiniCaptureExtraction implements Parcelable {
 
-    public static final Creator<GiniVisionExtraction> CREATOR =
-            new Creator<GiniVisionExtraction>() {
+    public static final Creator<GiniCaptureExtraction> CREATOR =
+            new Creator<GiniCaptureExtraction>() {
 
                 @Override
-                public GiniVisionExtraction createFromParcel(final Parcel in) {
-                    return new GiniVisionExtraction(in);
+                public GiniCaptureExtraction createFromParcel(final Parcel in) {
+                    return new GiniCaptureExtraction(in);
                 }
 
                 @Override
-                public GiniVisionExtraction[] newArray(final int size) {
-                    return new GiniVisionExtraction[size];
+                public GiniCaptureExtraction[] newArray(final int size) {
+                    return new GiniCaptureExtraction[size];
                 }
 
             };
 
     private final String mEntity;
     private String mValue;
-    private GiniVisionBox mGiniVisionBox;
+    private GiniCaptureBox mGiniCaptureBox;
     private boolean mIsDirty;
 
     /**
@@ -49,18 +49,18 @@ public class GiniVisionExtraction implements Parcelable {
      *               document. Only available for some extractions. Changing this value marks the
      *               extraction as dirty
      */
-    public GiniVisionExtraction(@NonNull final String value, @NonNull final String entity,
-            @Nullable final GiniVisionBox box) {
+    public GiniCaptureExtraction(@NonNull final String value, @NonNull final String entity,
+                                 @Nullable final GiniCaptureBox box) {
         mValue = value;
         mEntity = entity;
-        mGiniVisionBox = box;
+        mGiniCaptureBox = box;
         mIsDirty = false;
     }
 
-    protected GiniVisionExtraction(final Parcel in) {
+    protected GiniCaptureExtraction(final Parcel in) {
         mEntity = in.readString();
         mValue = in.readString();
-        mGiniVisionBox = in.readParcelable(GiniVisionBox.class.getClassLoader());
+        mGiniCaptureBox = in.readParcelable(GiniCaptureBox.class.getClassLoader());
         mIsDirty = in.readInt() != 0;
     }
 
@@ -110,8 +110,8 @@ public class GiniVisionExtraction implements Parcelable {
      * @return bounding box containing the position of the extraction value on the document
      */
     @Nullable
-    public synchronized GiniVisionBox getBox() {
-        return mGiniVisionBox;
+    public synchronized GiniCaptureBox getBox() {
+        return mGiniCaptureBox;
     }
 
     /**
@@ -119,8 +119,8 @@ public class GiniVisionExtraction implements Parcelable {
      *
      * @param newBox new bounding box
      */
-    public synchronized void setBox(@Nullable final GiniVisionBox newBox) {
-        mGiniVisionBox = newBox;
+    public synchronized void setBox(@Nullable final GiniCaptureBox newBox) {
+        mGiniCaptureBox = newBox;
         mIsDirty = true;
     }
 
@@ -140,10 +140,10 @@ public class GiniVisionExtraction implements Parcelable {
 
     @Override
     public String toString() {
-        return "GiniVisionExtraction{"
+        return "GiniCaptureExtraction{"
                 + "mEntity='" + mEntity + '\''
                 + ", mValue='" + mValue + '\''
-                + ", mGiniVisionBox=" + mGiniVisionBox
+                + ", mGiniCaptureBox=" + mGiniCaptureBox
                 + ", mIsDirty=" + mIsDirty
                 + '}';
     }

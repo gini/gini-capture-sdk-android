@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 
-import net.gini.android.vision.GiniVisionBasePresenter;
-import net.gini.android.vision.GiniVisionBaseView;
+import net.gini.android.vision.GiniCaptureBasePresenter;
+import net.gini.android.vision.GiniCaptureBaseView;
 import net.gini.android.vision.internal.util.Size;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import jersey.repackaged.jsr166e.CompletableFuture;
  */
 interface AnalysisScreenContract {
 
-    abstract class View implements GiniVisionBaseView<Presenter>, AnalysisFragmentInterface {
+    abstract class View implements GiniCaptureBaseView<Presenter>, AnalysisFragmentInterface {
 
         private Presenter mPresenter;
 
@@ -69,7 +69,7 @@ interface AnalysisScreenContract {
         abstract void showHints(List<AnalysisHint> hints);
     }
 
-    abstract class Presenter extends GiniVisionBasePresenter<View> implements
+    abstract class Presenter extends GiniCaptureBasePresenter<View> implements
             AnalysisFragmentInterface {
 
         Presenter(@NonNull final Activity activity,

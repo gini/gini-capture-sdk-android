@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.internal.ui.FragmentImplCallback;
 import net.gini.android.vision.internal.util.AlertDialogHelperStandard;
 
@@ -22,16 +22,16 @@ import androidx.annotation.Nullable;
  * <h3>Component API</h3>
  *
  * <p>
- *     {@code CameraFragmentStandard} is the main entry point to the Gini Vision Library when using the Component API without the Android Support Library.
+ *     {@code CameraFragmentStandard} is the main entry point to the Gini Capture SDK when using the Component API without the Android Support Library.
  * </p>
  * <p>
  *     It shows a camera preview with tap-to-focus functionality, a trigger button and an optional flash on/off button. The camera preview also shows document corner guides to which the user should align the document.
  * </p>
  * <p>
- *     If instantiated with {@link CameraFragmentStandard#createInstance(GiniVisionFeatureConfiguration)} then a button for importing documents is shown next to the trigger button. A hint popup is displayed the first time the Gini Vision Library is used to inform the user about document importing.
+ *     If instantiated with {@link CameraFragmentStandard#createInstance(GiniCaptureFeatureConfiguration)} then a button for importing documents is shown next to the trigger button. A hint popup is displayed the first time the Gini Capture SDK is used to inform the user about document importing.
  * </p>
  * <p>
- *     For importing documents {@code READ_EXTERNAL_STORAGE} permission is required and if the permission is not granted the Gini Vision Library will prompt the user to grant the permission. See @{code Customizing the Camera Screen} on how to override the message and button titles for the rationale and on permission denial alerts.
+ *     For importing documents {@code READ_EXTERNAL_STORAGE} permission is required and if the permission is not granted the Gini Capture SDK will prompt the user to grant the permission. See @{code Customizing the Camera Screen} on how to override the message and button titles for the rationale and on permission denial alerts.
  * </p>
  * <p>
  *     Include the {@code CameraFragmentStandard} into your layout either directly with {@code <fragment>} in your Activity's layout or using the {@link android.app.FragmentManager} and one of the {@code createInstance()} methods.
@@ -64,14 +64,14 @@ public class CameraFragmentStandard extends Fragment implements CameraFragmentIn
      * <p>
      *     Factory method for creating a new instance of the Fragment with document import enabled for the specified file types.
      * </p>
-     * @param giniVisionFeatureConfiguration feature configuration
+     * @param giniCaptureFeatureConfiguration feature configuration
      * @return a new instance of the Fragment
      */
     public static CameraFragmentStandard createInstance(
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
         final CameraFragmentStandard fragment = new CameraFragmentStandard();
         fragment.setArguments(
-                CameraFragmentHelper.createArguments(giniVisionFeatureConfiguration));
+                CameraFragmentHelper.createArguments(giniCaptureFeatureConfiguration));
         return fragment;
     }
 

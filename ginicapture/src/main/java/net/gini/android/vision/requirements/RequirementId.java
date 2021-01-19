@@ -2,7 +2,7 @@ package net.gini.android.vision.requirements;
 
 /**
  * <p>
- *     Enumerates the checked requirements for the Gini Vision Library.
+ *     Enumerates the checked requirements for the Gini Capture SDK.
  * </p>
  */
 public enum RequirementId {

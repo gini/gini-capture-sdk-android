@@ -39,38 +39,38 @@ import androidx.appcompat.app.AppCompatActivity;
  *             gv_noresults_header}
  *         </li>
  *         <li>
- *             <b>Header text font:</b> via overriding the style named {@code GiniVisionTheme
+ *             <b>Header text font:</b> via overriding the style named {@code GiniCaptureTheme
  *             .NoResults.Header.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your {@code assets} folder
  *         </li>
  *         <li>
- *             <b>Header text style:</b> via overriding the style named {@code GiniVisionTheme.NoResults.Header.TextStyle} and setting an item named {@code android:textStyle} to {@code normal}, {@code bold} or {@code italic}
+ *             <b>Header text style:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Header.TextStyle} and setting an item named {@code android:textStyle} to {@code normal}, {@code bold} or {@code italic}
  *         </li>
  *         <li>
- *             <b>Header text size:</b> via overriding the style named {@code GiniVisionTheme.NoResults.Header.TextStyle} and setting an item named {@code android:textSize} to the desired {@code sp} size
+ *             <b>Header text size:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Header.TextStyle} and setting an item named {@code android:textSize} to the desired {@code sp} size
  *         </li>
  *         <li>
  *             <b>Headline text color:</b> via the color resource named {@code gv_noresults_headline}
  *         </li>
  *         <li>
- *             <b>Headline text font:</b> via overriding the style named {@code GiniVisionTheme.NoResults.Headline.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your {@code assets} folder
+ *             <b>Headline text font:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Headline.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your {@code assets} folder
  *         </li>
  *         <li>
- *             <b>Headline text style:</b> via overriding the style named {@code GiniVisionTheme.NoResults.Headline.TextStyle} and setting an item named {@code android:textStyle} to {@code normal}, {@code bold} or {@code italic}
+ *             <b>Headline text style:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Headline.TextStyle} and setting an item named {@code android:textStyle} to {@code normal}, {@code bold} or {@code italic}
  *         </li>
  *         <li>
- *             <b>Headline text size:</b> via overriding the style named {@code GiniVisionTheme.NoResults.Headline.TextStyle} and setting an item named {@code android:textSize} to the desired {@code sp} size
+ *             <b>Headline text size:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Headline.TextStyle} and setting an item named {@code android:textSize} to the desired {@code sp} size
  *         </li>
  *         <li>
  *             <b>Tip text color:</b> via the color resource named {@code gv_noresults_tip}
  *         </li>
  *         <li>
- *             <b>Tip text font:</b> via overriding the style named {@code GiniVisionTheme.NoResults.Tip.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your {@code assets} folder
+ *             <b>Tip text font:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Tip.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your {@code assets} folder
  *         </li>
  *         <li>
- *             <b>Tip text style:</b> via overriding the style named {@code GiniVisionTheme.NoResults.Tip.TextStyle} and setting an item named {@code android:textStyle} to {@code normal}, {@code bold} or {@code italic}
+ *             <b>Tip text style:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Tip.TextStyle} and setting an item named {@code android:textStyle} to {@code normal}, {@code bold} or {@code italic}
  *         </li>
  *         <li>
- *             <b>Tip text size:</b> via overriding the style named {@code GiniVisionTheme.NoResults.Tip.TextStyle} and setting an item named {@code android:textSize} to the desired {@code sp} size
+ *             <b>Tip text size:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Tip.TextStyle} and setting an item named {@code android:textSize} to the desired {@code sp} size
  *         </li>
  *         <li>
  *             <b>Tip image - Good lighting:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
@@ -103,7 +103,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * </p>
  *
  * <p>
- *     <b>Important:</b> All overriden styles must have their respective {@code Root.} prefixed style as their parent. Ex.: the parent of {@code GiniVisionTheme.Onboarding.Message.TextStyle} must be {@code Root.GiniVisionTheme.Onboarding.Message.TextStyle}.
+ *     <b>Important:</b> All overriden styles must have their respective {@code Root.} prefixed style as their parent. Ex.: the parent of {@code GiniCaptureTheme.Onboarding.Message.TextStyle} must be {@code Root.GiniCaptureTheme.Onboarding.Message.TextStyle}.
  * </p>
  *
  * <h3>Customizing the Action Bar</h3>

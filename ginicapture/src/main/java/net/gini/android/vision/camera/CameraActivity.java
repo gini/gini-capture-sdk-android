@@ -14,18 +14,18 @@ import android.view.MenuItem;
 
 import net.gini.android.vision.Document;
 import net.gini.android.vision.DocumentImportEnabledFileTypes;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionCoordinator;
-import net.gini.android.vision.GiniVisionError;
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureCoordinator;
+import net.gini.android.vision.GiniCaptureError;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.R;
 import net.gini.android.vision.analysis.AnalysisActivity;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.document.QRCodeDocument;
 import net.gini.android.vision.help.HelpActivity;
 import net.gini.android.vision.internal.util.ActivityHelper;
-import net.gini.android.vision.network.GiniVisionNetworkService;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.GiniCaptureNetworkService;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.onboarding.OnboardingActivity;
 import net.gini.android.vision.onboarding.OnboardingPage;
 import net.gini.android.vision.review.ReviewActivity;
@@ -43,7 +43,7 @@ import androidx.appcompat.app.AppCompatActivity;
 /**
  * <h3>Screen API</h3>
  *
- * <p> {@code CameraActivity} is the main entry point to the Gini Vision Library when using the
+ * <p> {@code CameraActivity} is the main entry point to the Gini Capture SDK when using the
  * Screen API.
  *
  * <p> It shows a camera preview with tap-to-focus functionality, a trigger button and an optional
@@ -53,20 +53,20 @@ import androidx.appcompat.app.AppCompatActivity;
  * <p> On tablets in landscape orientation the camera trigger button is shown on the right side of
  * the screen for easier access.
  *
- * <p> If you enabled document import with {@link GiniVision.Builder#setDocumentImportEnabledFileTypes(DocumentImportEnabledFileTypes)}
+ * <p> If you enabled document import with {@link GiniCapture.Builder#setDocumentImportEnabledFileTypes(DocumentImportEnabledFileTypes)}
  * then a button for importing documents is shown next to the trigger button. A hint popup is
- * displayed the first time the Gini Vision Library is used to inform the user about document
+ * displayed the first time the Gini Capture SDK is used to inform the user about document
  * importing.
  *
  * <p> For importing documents {@code READ_EXTERNAL_STORAGE} permission is required and if the
- * permission is not granted the Gini Vision Library will prompt the user to grant the permission.
+ * permission is not granted the Gini Capture SDK will prompt the user to grant the permission.
  * See {@code Customizing the Camera Screen} on how to override the message and button titles for
  * the rationale and on permission denial alerts.
  *
  * <p> Start the {@code CameraActivity} with {@link android.app.Activity#startActivityForResult(Intent,
- * int)} to receive the extractions or a {@link GiniVisionError} in case there was an error.
+ * int)} to receive the extractions or a {@link GiniCaptureError} in case there was an error.
  *
- * <p> These formerly mandatory extras have been deprecated. Still required if {@link GiniVision} is
+ * <p> These formerly mandatory extras have been deprecated. Still required if {@link GiniCapture} is
  * not used:
  *
  * <ul>
@@ -81,27 +81,27 @@ import androidx.appcompat.app.AppCompatActivity;
  *
  * </ul>
  *
- * <p> These optional extras have been deprecated. Should be set only if {@link GiniVision} is not
+ * <p> These optional extras have been deprecated. Should be set only if {@link GiniCapture} is not
  * used:
  *
  * <ul>
  *
  * <li>{@link CameraActivity#EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN} - the Onboarding Screen is shown
- * by default the first time the Gini Vision Library is started. You may disable it by setting this
+ * by default the first time the Gini Capture SDK is started. You may disable it by setting this
  * extra to {@code false} - we highly recommend keeping the default behavior
  *
  * <li>{@link CameraActivity#EXTRA_IN_SHOW_ONBOARDING} - if set to {@code true} the Onboarding
- * Screen is shown when the Gini Vision Library is started
+ * Screen is shown when the Gini Capture SDK is started
  *
  * <li>{@link CameraActivity#EXTRA_IN_ONBOARDING_PAGES} - custom pages for the Onboarding Screen as
  * an {@link ArrayList} containing {@link OnboardingPage} objects
  *
  * <li><b>Deprecated</b> {@link CameraActivity#EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY} - if set
- * to {@code true} the back button closes the Gini Vision Library from any of its activities with
+ * to {@code true} the back button closes the Gini Capture SDK from any of its activities with
  * result code {@link CameraActivity#RESULT_CANCELED}
  *
- * <li>{@link CameraActivity#EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION} - must contain a {@link
- * GiniVisionFeatureConfiguration} instance to apply the feature configuration
+ * <li>{@link CameraActivity#EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION} - must contain a {@link
+ * GiniCaptureFeatureConfiguration} instance to apply the feature configuration
  *
  * </ul>
  *
@@ -112,7 +112,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * <li>{@link CameraActivity#RESULT_OK} - image of a document was taken, reviewed and analyzed
  *
  * <li>{@link CameraActivity#RESULT_CANCELED} - image of document was not taken, user canceled the
- * Gini Vision Library
+ * Gini Capture SDK
  *
  * <li>{@link CameraActivity#RESULT_ERROR} - an error occured
  *
@@ -124,10 +124,10 @@ import androidx.appcompat.app.AppCompatActivity;
  *
  * <li>{@link CameraActivity#EXTRA_OUT_EXTRACTIONS} - set when result is {@link
  * CameraActivity#RESULT_OK}, contains a Bundle with the extraction labels as keys and {@link
- * GiniVisionSpecificExtraction} as values.
+ * GiniCaptureSpecificExtraction} as values.
  *
  * <li>{@link CameraActivity#EXTRA_OUT_ERROR} - set when result is {@link
- * CameraActivity#RESULT_ERROR}, contains a {@link GiniVisionError} object detailing what went
+ * CameraActivity#RESULT_ERROR}, contains a {@link GiniCaptureError} object detailing what went
  * wrong
  *
  * </ul>
@@ -162,10 +162,10 @@ import androidx.appcompat.app.AppCompatActivity;
  * gv_camera_document_import_subtitle}
  *
  * <li> <b>Document import button subtitle text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.DocumentImportSubtitle.TextStyle}
+ * GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle}
  *
  * <li> <b>Document import button subtitle font:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.DocumentImportSubtitle.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle} and setting an item named {@code
  * gvCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Document import hint background:</b> via the color resource named {@code
@@ -178,21 +178,21 @@ import androidx.appcompat.app.AppCompatActivity;
  * gv_document_import_hint_text}
  *
  * <li> <b>Document import hint text size:</b>  via overriding the style named {@code
- * GiniVisionTheme.Camera.DocumentImportHint.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.DocumentImportHint.TextStyle} and setting an item named {@code
  * android:textSize} with the desired {@code sp} size
  *
  * <li> <b>Document import hint text color:</b> via the color resource name {@code
  * gv_document_import_hint_text}
  *
  * <li> <b>Document import hint font:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.DocumentImportHint.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.DocumentImportHint.TextStyle} and setting an item named {@code
  * gvCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Images stack badge text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.ImageStackBadge.TextStyle}
+ * GiniCaptureTheme.Camera.ImageStackBadge.TextStyle}
  *
  * <li> <b>Images stack badge font:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.ImageStackBadge.TextStyle} and setting an item named {@code gvCustomFont}
+ * GiniCaptureTheme.Camera.ImageStackBadge.TextStyle} and setting an item named {@code gvCustomFont}
  * with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Images stack badge background colors:</b> via the color resources named {@code
@@ -205,10 +205,10 @@ import androidx.appcompat.app.AppCompatActivity;
  * gv_camera_image_stack_subtitle}
  *
  * <li> <b>Images stack subtitle text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.ImageStackSubtitle.TextStyle}
+ * GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle}
  *
  * <li> <b>Images stack subtitle font:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.ImageStackSubtitle.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle} and setting an item named {@code
  * gvCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Multi-page document page limit exceeded alert message:</b> via the string resource named {@code
@@ -230,16 +230,16 @@ import androidx.appcompat.app.AppCompatActivity;
  * gv_qrcode_detected_popup_message_1} and {@code gv_qrcode_detected_popup_message_2}
  *
  * <li> <b>QRCode detected popup text sizes:</b>  via overriding the styles named {@code
- * GiniVisionTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle} and {@code
- * GiniVisionTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle} and {@code
+ * GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle} and setting an item named {@code
  * android:textSize} with the desired {@code sp} size
  *
  * <li> <b>QRCode detected popup text colors:</b> via the color resource name {@code
  * gv_qrcode_detected_popup_message_1} and {@code gv_qrcode_detected_popup_message_2}
  *
  * <li> <b>QRCode detected popup fonts:</b>  via overriding the styles named {@code
- * GiniVisionTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle} and {@code
- * GiniVisionTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle} and {@code
+ * GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle} and setting an item named {@code
  * gvCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Read storage permission rationale text:</b> via the string resource named {@code
@@ -288,15 +288,15 @@ import androidx.appcompat.app.AppCompatActivity;
  * gv_camera_error_no_permission}
  *
  * <li> <b>No camera permission font:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.Error.NoPermission.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.Error.NoPermission.TextStyle} and setting an item named {@code
  * gvCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>No camera permission text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.Error.NoPermission.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.Error.NoPermission.TextStyle} and setting an item named {@code
  * android:textStyle} to {@code normal}, {@code bold} or {@code italic}
  *
  * <li> <b>No camera permission text size:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.Error.NoPermission.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.Error.NoPermission.TextStyle} and setting an item named {@code
  * android:textSize} to the desired {@code sp} size
  *
  * <li> <b>No camera permission button title:</b> via the string resource named {@code
@@ -306,22 +306,22 @@ import androidx.appcompat.app.AppCompatActivity;
  * gv_camera_error_no_permission_button_title} and {@code gv_camera_error_no_permission_button_title_pressed}
  *
  * <li> <b>No camera permission button font:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.Error.NoPermission.Button.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle} and setting an item named {@code
  * gvCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>No camera permission button text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.Error.NoPermission.Button.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle} and setting an item named {@code
  * android:textStyle} to {@code normal}, {@code bold} or {@code italic}
  *
  * <li> <b>No camera permission button text size:</b> via overriding the style named {@code
- * GiniVisionTheme.Camera.Error.NoPermission.Button.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle} and setting an item named {@code
  * android:textSize} to the desired {@code sp} size
  *
  * </ul>
  *
  * <p> <b>Important:</b> All overriden styles must have their respective {@code Root.} prefixed
- * style as their parent. Ex.: the parent of {@code GiniVisionTheme.Camera.Error.NoPermission.TextStyle}
- * must be {@code Root.GiniVisionTheme.Camera.Error.NoPermission.TextStyle}.
+ * style as their parent. Ex.: the parent of {@code GiniCaptureTheme.Camera.Error.NoPermission.TextStyle}
+ * must be {@code Root.GiniCaptureTheme.Camera.Error.NoPermission.TextStyle}.
  *
  * <h3>Customizing the Action Bar</h3>
  *
@@ -354,8 +354,8 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * subclass from your application. </p> <p> Use the {@link CameraActivity#setReviewActivityExtra(Intent,
      * Context, Class)} helper to set it. </p>
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document is analyzed
-     * internally by using the configured {@link GiniVisionNetworkService} implementation. The
+     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
+     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
      * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
      * of the {@link CameraActivity}'s result Intent.
      */
@@ -365,8 +365,8 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * subclass from your application. </p> <p> Use the {@link CameraActivity#setAnalysisActivityExtra(Intent,
      * Context, Class)} helper to set it. </p>
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document is analyzed
-     * internally by using the configured {@link GiniVisionNetworkService} implementation. The
+     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
+     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
      * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
      * of the {@link CameraActivity}'s result Intent.
      */
@@ -374,33 +374,33 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     /**
      * Optional extra which must contain an {@code ArrayList} with {@link OnboardingPage} objects.
      *
-     * @Deprecated Configuration should be applied by creating a {@link GiniVision} instance using
-     * {@link GiniVision#newInstance()} and the returned {@link GiniVision.Builder}.
+     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
+     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
     public static final String EXTRA_IN_ONBOARDING_PAGES = "GV_EXTRA_IN_ONBOARDING_PAGES";
     /**
      * <p> Optional extra which must contain a boolean and indicates whether the Onboarding Screen
-     * should be shown when the Gini Vision Library is started for the first time. </p> <p> Default
+     * should be shown when the Gini Capture SDK is started for the first time. </p> <p> Default
      * value is {@code true}. </p>
      *
-     * @Deprecated Configuration should be applied by creating a {@link GiniVision} instance using
-     * {@link GiniVision#newInstance()} and the returned {@link GiniVision.Builder}.
+     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
+     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
     public static final String EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN =
             "GV_EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN";
     /**
      * <p> Optional extra which must contain a boolean and indicates whether the Onboarding Screen
-     * should be shown when the Gini Vision Library is started. </p> <p> Default value is {@code
+     * should be shown when the Gini Capture SDK is started. </p> <p> Default value is {@code
      * false}. </p>
      *
-     * @Deprecated Configuration should be applied by creating a {@link GiniVision} instance using
-     * {@link GiniVision#newInstance()} and the returned {@link GiniVision.Builder}.
+     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
+     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
     public static final String EXTRA_IN_SHOW_ONBOARDING = "GV_EXTRA_IN_SHOW_ONBOARDING";
 
     /**
      * <p> Optional extra wich must contain a boolean and indicates whether the back button should
-     * close the Gini Vision Library. </p> <p> Default value is {@code false}. </p>
+     * close the Gini Capture SDK. </p> <p> Default value is {@code false}. </p>
      *
      * @Deprecated The option to close the library with the back button from any screen will be
      * removed in a future version.
@@ -409,23 +409,23 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
             "GV_EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY";
 
     /**
-     * Optional extra which must contain a {@link GiniVisionFeatureConfiguration} instance.
+     * Optional extra which must contain a {@link GiniCaptureFeatureConfiguration} instance.
      *
-     * @Deprecated Configuration should be applied by creating a {@link GiniVision} instance using
-     * {@link GiniVision#newInstance()} and the returned {@link GiniVision.Builder}.
+     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
+     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
-    public static final String EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION =
-            "GV_EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION";
+    public static final String EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION =
+            "GV_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
 
     /**
      * <p> Returned when the result code is {@link CameraActivity#RESULT_ERROR} and contains a
-     * {@link GiniVisionError} object detailing what went wrong. </p>
+     * {@link GiniCaptureError} object detailing what went wrong. </p>
      */
     public static final String EXTRA_OUT_ERROR = "GV_EXTRA_OUT_ERROR";
 
     /**
      * Returned when extractions are available. Contains a Bundle with the extraction labels as keys
-     * and {@link GiniVisionSpecificExtraction} as values.
+     * and {@link GiniCaptureSpecificExtraction} as values.
      */
     public static final String EXTRA_OUT_EXTRACTIONS = "GV_EXTRA_OUT_EXTRACTIONS";
 
@@ -450,9 +450,9 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     private boolean mShowOnboardingAtFirstRun = true;
     private boolean mOnboardingShown;
     private boolean mBackButtonShouldCloseLibrary;
-    private GiniVisionCoordinator mGiniVisionCoordinator;
+    private GiniCaptureCoordinator mGiniCaptureCoordinator;
     private Document mDocument;
-    private GiniVisionFeatureConfiguration mGiniVisionFeatureConfiguration;
+    private GiniCaptureFeatureConfiguration mGiniCaptureFeatureConfiguration;
 
     private CameraFragmentCompat mFragment;
 
@@ -466,8 +466,8 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * @param reviewActivityClass class of your {@link ReviewActivity} subclass
      * @param <T>                 type of your {@link ReviewActivity} subclass
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document is analyzed
-     * internally by using the configured {@link GiniVisionNetworkService} implementation. The
+     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
+     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
      * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
      * of the {@link CameraActivity}'s result Intent.
      */
@@ -489,8 +489,8 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * @param analysisActivityClass class of your {@link AnalysisActivity} subclass
      * @param <T>                   type of your {@link AnalysisActivity} subclass
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document is analyzed
-     * internally by using the configured {@link GiniVisionNetworkService} implementation. The
+     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
+     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
      * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
      * of the {@link CameraActivity}'s result Intent.
      */
@@ -507,7 +507,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gv_activity_camera);
         readExtras();
-        createGiniVisionCoordinator();
+        createGiniCaptureCoordinator();
         if (savedInstanceState == null) {
             initFragment();
         } else {
@@ -519,7 +519,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     }
 
     private void setupHomeButton() {
-        if (GiniVision.hasInstance() && GiniVision.getInstance().areBackButtonsEnabled()) {
+        if (GiniCapture.hasInstance() && GiniCapture.getInstance().areBackButtonsEnabled()) {
             enableHomeAsUp(this);
         }
     }
@@ -538,8 +538,8 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     }
 
     private void createFragment() {
-        if (mGiniVisionFeatureConfiguration != null) {
-            mFragment = createCameraFragmentCompat(mGiniVisionFeatureConfiguration);
+        if (mGiniCaptureFeatureConfiguration != null) {
+            mFragment = createCameraFragmentCompat(mGiniCaptureFeatureConfiguration);
         } else {
             mFragment = createCameraFragmentCompat();
         }
@@ -550,8 +550,8 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     }
 
     protected CameraFragmentCompat createCameraFragmentCompat(
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
-        return CameraFragmentCompat.createInstance(giniVisionFeatureConfiguration);
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
+        return CameraFragmentCompat.createInstance(giniCaptureFeatureConfiguration);
     }
 
     private void initFragment() {
@@ -586,7 +586,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     @Override
     protected void onStart() {
         super.onStart();
-        mGiniVisionCoordinator.onCameraStarted();
+        mGiniCaptureCoordinator.onCameraStarted();
         if (mOnboardingShown) {
             hideInterface();
         }
@@ -610,8 +610,8 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
                     true);
             mBackButtonShouldCloseLibrary = extras.getBoolean(
                     EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY, false);
-            mGiniVisionFeatureConfiguration =
-                    extras.getParcelable(EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION);
+            mGiniCaptureFeatureConfiguration =
+                    extras.getParcelable(EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION);
         }
         checkRequiredExtras();
     }
@@ -625,12 +625,12 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
         }
     }
 
-    private void createGiniVisionCoordinator() {
-        mGiniVisionCoordinator = GiniVisionCoordinator.createInstance(this);
-        mGiniVisionCoordinator
+    private void createGiniCaptureCoordinator() {
+        mGiniCaptureCoordinator = GiniCaptureCoordinator.createInstance(this);
+        mGiniCaptureCoordinator
                 .setShowOnboardingAtFirstRun(
                         shouldShowOnboardingAtFirstRun(mShowOnboardingAtFirstRun))
-                .setListener(new GiniVisionCoordinator.Listener() {
+                .setListener(new GiniCaptureCoordinator.Listener() {
                     @Override
                     public void onShowOnboarding() {
                         startOnboardingActivity();
@@ -674,8 +674,8 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
 
     private void startHelpActivity() {
         final Intent intent = new Intent(this, HelpActivity.class);
-        intent.putExtra(HelpActivity.EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION,
-                mGiniVisionFeatureConfiguration);
+        intent.putExtra(HelpActivity.EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION,
+                mGiniCaptureFeatureConfiguration);
         startActivity(intent);
         trackCameraScreenEvent(CameraScreenEvent.HELP);
     }
@@ -707,7 +707,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
 
     @Override
     public void onProceedToMultiPageReviewScreen(
-            @NonNull final GiniVisionMultiPageDocument multiPageDocument) {
+            @NonNull final GiniCaptureMultiPageDocument multiPageDocument) {
         if (multiPageDocument.getType() == Document.Type.IMAGE_MULTI_PAGE) {
             final Intent intent = MultiPageReviewActivity.createIntent(this);
             startActivityForResult(intent, MULTI_PAGE_REVIEW_REQUEST);
@@ -746,7 +746,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     }
 
     @Override
-    public void onError(@NonNull final GiniVisionError error) {
+    public void onError(@NonNull final GiniCaptureError error) {
         final Intent result = new Intent();
         result.putExtra(EXTRA_OUT_ERROR, error);
         setResult(RESULT_ERROR, result);
@@ -755,10 +755,10 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
 
     @Override
     public void onExtractionsAvailable(
-            @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
         final Intent result = new Intent();
         final Bundle extractionsBundle = new Bundle();
-        for (final Map.Entry<String, GiniVisionSpecificExtraction> extraction
+        for (final Map.Entry<String, GiniCaptureSpecificExtraction> extraction
                 : extractions.entrySet()) {
             extractionsBundle.putParcelable(extraction.getKey(), extraction.getValue());
         }

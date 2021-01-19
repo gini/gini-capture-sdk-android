@@ -2,8 +2,8 @@ package net.gini.android.vision.analysis;
 
 import android.view.View;
 
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.network.GiniVisionNetworkService;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.network.GiniCaptureNetworkService;
 
 import java.util.Map;
 
@@ -31,8 +31,8 @@ public interface AnalysisFragmentInterface {
      * without the required extractions.
      * </p>
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document
-     * is analyzed internally by using the configured {@link GiniVisionNetworkService}
+     * @Deprecated When a {@link GiniCapture} instance is available the document
+     * is analyzed internally by using the configured {@link GiniCaptureNetworkService}
      * implementation.
      */
     @Deprecated
@@ -43,8 +43,8 @@ public interface AnalysisFragmentInterface {
      * You should call this method after you've received the analysis results from the Gini API.
      * </p>
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document
-     * is analyzed internally by using the configured {@link GiniVisionNetworkService}
+     * @Deprecated When a {@link GiniCapture} instance is available the document
+     * is analyzed internally by using the configured {@link GiniCaptureNetworkService}
      * implementation. The extractions will be returned in {@link AnalysisFragmentListener#onExtractionsAvailable(Map)}.
      */
     @Deprecated
@@ -79,8 +79,8 @@ public interface AnalysisFragmentInterface {
      * You should call this method when you start the document analysis using the Gini API.
      * </p>
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document
-     * is analyzed internally by using the configured {@link GiniVisionNetworkService}
+     * @Deprecated When a {@link GiniCapture} instance is available the document
+     * is analyzed internally by using the configured {@link GiniCaptureNetworkService}
      * implementation. The extractions will be returned in {@link AnalysisFragmentListener#onExtractionsAvailable(Map)}.
      */
     @Deprecated
@@ -90,8 +90,8 @@ public interface AnalysisFragmentInterface {
      * <p>
      * You should call this method when the document analysis has finished.
      * </p>
-     * @Deprecated When a {@link GiniVision} instance is available the document
-     * is analyzed internally by using the configured {@link GiniVisionNetworkService}
+     * @Deprecated When a {@link GiniCapture} instance is available the document
+     * is analyzed internally by using the configured {@link GiniCaptureNetworkService}
      * implementation. The extractions will be returned in {@link AnalysisFragmentListener#onExtractionsAvailable(Map)}.
      */
     @Deprecated

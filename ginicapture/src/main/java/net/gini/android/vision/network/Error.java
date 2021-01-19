@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * Used by the {@link GiniVisionNetworkService} and {@link GiniVisionNetworkApi} to return error
+ * Used by the {@link GiniCaptureNetworkService} and {@link GiniCaptureNetworkApi} to return error
  * messages.
  */
 public class Error {

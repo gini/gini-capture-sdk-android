@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import net.gini.android.models.SpecificExtraction;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 
 import java.util.Map;
 import java.util.Set;
@@ -39,12 +39,12 @@ public final class ExampleUtil {
     }
 
     public static Bundle getExtractionsBundle(
-            @Nullable final Map<String, GiniVisionSpecificExtraction> extractions) {
+            @Nullable final Map<String, GiniCaptureSpecificExtraction> extractions) {
         if (extractions == null) {
             return null;
         }
         final Bundle extractionsBundle = new Bundle();
-        for (final Map.Entry<String, GiniVisionSpecificExtraction> entry : extractions.entrySet()) {
+        for (final Map.Entry<String, GiniCaptureSpecificExtraction> entry : extractions.entrySet()) {
             extractionsBundle.putParcelable(entry.getKey(), entry.getValue());
         }
         return extractionsBundle;

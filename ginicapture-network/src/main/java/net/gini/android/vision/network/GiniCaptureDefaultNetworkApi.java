@@ -1,9 +1,9 @@
 package net.gini.android.vision.network;
 
 import net.gini.android.DocumentTaskManager;
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.internal.camera.api.UIExecutor;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.network.model.SpecificExtractionMapper;
 
 import org.json.JSONException;
@@ -26,38 +26,38 @@ import bolts.Task;
  * Default implementation of network calls which can be performed manually from outside the Gini
  * Vision Library (e.g. for sending feedback).
  *
- * <p> To create an instance use the {@link GiniVisionDefaultNetworkApi.Builder} returned by the
+ * <p> To create an instance use the {@link GiniCaptureDefaultNetworkApi.Builder} returned by the
  * {@link #builder()} method.
  *
  * <p> In order to easily access this implementation pass an instance of it to {@link
- * GiniVision.Builder#setGiniVisionNetworkApi(GiniVisionNetworkApi)} when creating a {@link
- * GiniVision} instance. You can then get the instance in your app with {@link
- * GiniVision#getGiniVisionNetworkApi()}.
+ * GiniCapture.Builder#setGiniCaptureNetworkApi(GiniCaptureNetworkApi)} when creating a {@link
+ * GiniCapture} instance. You can then get the instance in your app with {@link
+ * GiniCapture#getGiniCaptureNetworkApi()}.
  */
-public class GiniVisionDefaultNetworkApi implements GiniVisionNetworkApi {
+public class GiniCaptureDefaultNetworkApi implements GiniCaptureNetworkApi {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GiniVisionDefaultNetworkApi.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GiniCaptureDefaultNetworkApi.class);
 
-    private final GiniVisionDefaultNetworkService mDefaultNetworkService;
+    private final GiniCaptureDefaultNetworkService mDefaultNetworkService;
     private final UIExecutor mUIExecutor = new UIExecutor();
 
     /**
-     * Creates a new {@link GiniVisionDefaultNetworkApi.Builder} to configure and create a new instance.
+     * Creates a new {@link GiniCaptureDefaultNetworkApi.Builder} to configure and create a new instance.
      *
-     * @return a new {@link GiniVisionDefaultNetworkApi.Builder}
+     * @return a new {@link GiniCaptureDefaultNetworkApi.Builder}
      */
     public static Builder builder() {
         return new Builder();
     }
 
-    GiniVisionDefaultNetworkApi(
-            @NonNull final GiniVisionDefaultNetworkService defaultNetworkService) {
+    GiniCaptureDefaultNetworkApi(
+            @NonNull final GiniCaptureDefaultNetworkService defaultNetworkService) {
         mDefaultNetworkService = defaultNetworkService;
     }
 
     @Override
-    public void sendFeedback(@NonNull final Map<String, GiniVisionSpecificExtraction> extractions,
-            @NonNull final GiniVisionNetworkCallback<Void, Error> callback) {
+    public void sendFeedback(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
+            @NonNull final GiniCaptureNetworkCallback<Void, Error> callback) {
         final DocumentTaskManager documentTaskManager = mDefaultNetworkService.getGiniApi()
                 .getDocumentTaskManager();
         final net.gini.android.models.Document document =
@@ -111,40 +111,40 @@ public class GiniVisionDefaultNetworkApi implements GiniVisionNetworkApi {
     }
 
     /**
-     * Builder for configuring a new instance of the {@link GiniVisionDefaultNetworkApi}.
+     * Builder for configuring a new instance of the {@link GiniCaptureDefaultNetworkApi}.
      */
     public static class Builder {
 
-        private GiniVisionDefaultNetworkService mDefaultNetworkService;
+        private GiniCaptureDefaultNetworkService mDefaultNetworkService;
 
         Builder() {
         }
 
         /**
-         * Set the same {@link GiniVisionDefaultNetworkService} instance you use for {@link
-         * GiniVision}.
+         * Set the same {@link GiniCaptureDefaultNetworkService} instance you use for {@link
+         * GiniCapture}.
          *
-         * @param networkService {@link GiniVisionDefaultNetworkService} instance
+         * @param networkService {@link GiniCaptureDefaultNetworkService} instance
          *
          * @return the {@link Builder} instance
          */
-        public Builder withGiniVisionDefaultNetworkService(
-                @NonNull final GiniVisionDefaultNetworkService networkService) {
+        public Builder withGiniCaptureDefaultNetworkService(
+                @NonNull final GiniCaptureDefaultNetworkService networkService) {
             mDefaultNetworkService = networkService;
             return this;
         }
 
         /**
-         * Create a new instance of the {@link GiniVisionDefaultNetworkApi}.
+         * Create a new instance of the {@link GiniCaptureDefaultNetworkApi}.
          *
-         * @return new {@link GiniVisionDefaultNetworkApi} instance
+         * @return new {@link GiniCaptureDefaultNetworkApi} instance
          */
-        public GiniVisionDefaultNetworkApi build() {
+        public GiniCaptureDefaultNetworkApi build() {
             if (mDefaultNetworkService == null) {
                 throw new IllegalStateException(
-                        "GiniVisionDefaultNetworkApi requires a GiniVisionDefaultNetworkService instance.");
+                        "GiniCaptureDefaultNetworkApi requires a GiniCaptureDefaultNetworkService instance.");
             }
-            return new GiniVisionDefaultNetworkApi(mDefaultNetworkService);
+            return new GiniCaptureDefaultNetworkApi(mDefaultNetworkService);
         }
     }
 }

@@ -20,24 +20,24 @@ import androidx.annotation.Nullable;
  * candidates</a> are other suggestions for this specific extraction (e.g. all amounts on the
  * document). Candidates are of the same entity as the found extraction.
  */
-public class GiniVisionSpecificExtraction extends GiniVisionExtraction {
+public class GiniCaptureSpecificExtraction extends GiniCaptureExtraction {
 
-    public static final Parcelable.Creator<GiniVisionSpecificExtraction> CREATOR =
-            new Parcelable.Creator<GiniVisionSpecificExtraction>() {
+    public static final Parcelable.Creator<GiniCaptureSpecificExtraction> CREATOR =
+            new Parcelable.Creator<GiniCaptureSpecificExtraction>() {
 
                 @Override
-                public GiniVisionSpecificExtraction createFromParcel(final Parcel in) {
-                    return new GiniVisionSpecificExtraction(in);
+                public GiniCaptureSpecificExtraction createFromParcel(final Parcel in) {
+                    return new GiniCaptureSpecificExtraction(in);
                 }
 
                 @Override
-                public GiniVisionSpecificExtraction[] newArray(final int size) {
-                    return new GiniVisionSpecificExtraction[size];
+                public GiniCaptureSpecificExtraction[] newArray(final int size) {
+                    return new GiniCaptureSpecificExtraction[size];
                 }
 
             };
     private final String mName;
-    private final List<GiniVisionExtraction> mCandidates;
+    private final List<GiniCaptureExtraction> mCandidates;
 
     /**
      * Value object for a specific extraction from the Gini API.
@@ -57,20 +57,20 @@ public class GiniVisionSpecificExtraction extends GiniVisionExtraction {
      * @param candidates A list containing other candidates for this specific extraction. Candidates
      *                   are of the same entity as the found extraction
      */
-    public GiniVisionSpecificExtraction(@NonNull final String name, @NonNull final String value,
-            @NonNull final String entity,
-            @Nullable final GiniVisionBox box,
-            @NonNull final List<GiniVisionExtraction> candidates) {
+    public GiniCaptureSpecificExtraction(@NonNull final String name, @NonNull final String value,
+                                         @NonNull final String entity,
+                                         @Nullable final GiniCaptureBox box,
+                                         @NonNull final List<GiniCaptureExtraction> candidates) {
         super(value, entity, box);
         mName = name;
         mCandidates = candidates;
     }
 
-    private GiniVisionSpecificExtraction(final Parcel in) {
+    private GiniCaptureSpecificExtraction(final Parcel in) {
         super(in);
         mName = in.readString();
-        final List<GiniVisionExtraction> candidates = new ArrayList<>();
-        in.readTypedList(candidates, GiniVisionExtraction.CREATOR);
+        final List<GiniCaptureExtraction> candidates = new ArrayList<>();
+        in.readTypedList(candidates, GiniCaptureExtraction.CREATOR);
         mCandidates = candidates;
     }
 
@@ -99,14 +99,14 @@ public class GiniVisionSpecificExtraction extends GiniVisionExtraction {
      * @return a list containing other candidates for this specific extraction
      */
     @NonNull
-    public List<GiniVisionExtraction> getCandidates() {
+    public List<GiniCaptureExtraction> getCandidates() {
         return mCandidates;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "GiniVisionSpecificExtraction{"
+        return "GiniCaptureSpecificExtraction{"
                 + "mName='" + mName + '\''
                 + ", mCandidates=" + mCandidates
                 + "} " + super.toString();

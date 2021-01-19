@@ -9,8 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.R;
 import net.gini.android.vision.analysis.AnalysisActivity;
 import net.gini.android.vision.camera.CameraActivity;
@@ -30,7 +30,7 @@ import androidx.core.content.ContextCompat;
  *     This Activity is launched by the {@link HelpActivity} for both Screen and Component APIs.
  * </p>
  * <p>
- *     <b>Important:</b> The File Import Screen is only shown only if file import was enabled with the {@link GiniVisionFeatureConfiguration}.
+ *     <b>Important:</b> The File Import Screen is only shown only if file import was enabled with the {@link GiniCaptureFeatureConfiguration}.
  * </p>
  * <p>
  *     The contents of this screen need to be customized to insert your App's name or label for the "open with" functionality into the texts and illustrations.
@@ -51,7 +51,7 @@ import androidx.core.content.ContextCompat;
  *             <b>Header text:</b> via overriding the string resource named {@code gv_file_import_header}
  *         </li>
  *         <li>
- *             <b>Header text style:</b> via overriding the style named {@code GiniVisionTheme.Help.FileImport.Header.TextStyle}
+ *             <b>Header text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.FileImport.Header.TextStyle}
  *         </li>
  *         <li>
  *             <b>Separator line color:</b> via the color resource named {@code gv_file_import_separator}
@@ -63,10 +63,10 @@ import androidx.core.content.ContextCompat;
  *             <b>Section numbers' text color:</b>  via the color resource named {@code gv_file_import_section_number}
  *         </li>
  *         <li>
- *             <b>Section title text style:</b> via overriding the style named {@code GiniVisionTheme.Help.FileImport.Section.Title.TextStyle}
+ *             <b>Section title text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle}
  *         </li>
  *         <li>
- *             <b>Section body text style:</b> via overriding the style named {@code GiniVisionTheme.Help.FileImport.Section.Body.TextStyle}
+ *             <b>Section body text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle}
  *         </li>
  *         <li>
  *             <b>Section 1 title:</b> via overriding the string resource named {@code gv_file_import_section_1_title}
@@ -76,7 +76,7 @@ import androidx.core.content.ContextCompat;
  *         </li>
  *         <li>
  *             <b>Section 1 illustration image:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
- *             named {@code gv_file_import_section_1_illustration.png}. For creating your custom illustration you may use <a href="https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_1.pdf" target="_blank">this template</a> from the <a href="https://github.com/gini/gini-vision-lib-assets" target="_blank">Gini Vision Library UI Assets</a> repository.
+ *             named {@code gv_file_import_section_1_illustration.png}. For creating your custom illustration you may use <a href="https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_1.pdf" target="_blank">this template</a> from the <a href="https://github.com/gini/gini-vision-lib-assets" target="_blank">Gini Capture SDK UI Assets</a> repository.
  *         </li>
  *         <li>
  *             <b>Section 2 title:</b> via overriding the string resource named {@code gv_file_import_section_2_title}
@@ -86,7 +86,7 @@ import androidx.core.content.ContextCompat;
  *         </li>
  *         <li>
  *             <b>Section 2 illustration image:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
- *             named {@code gv_file_import_section_2_illustration.png}. For creating your custom illustration you may use <a href="https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_2.pdf" target="_blank">this template</a> from the <a href="https://github.com/gini/gini-vision-lib-assets" target="_blank">Gini Vision Library UI Assets</a> repository.
+ *             named {@code gv_file_import_section_2_illustration.png}. For creating your custom illustration you may use <a href="https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_2.pdf" target="_blank">this template</a> from the <a href="https://github.com/gini/gini-vision-lib-assets" target="_blank">Gini Capture SDK UI Assets</a> repository.
  *         </li>
  *         <li>
  *             <b>Section 3 title:</b> via overriding the string resource named {@code gv_file_import_section_3_title}
@@ -102,7 +102,7 @@ import androidx.core.content.ContextCompat;
  * </p>
  *
  * <p>
- *     <b>Important:</b> All overriden styles must have their respective {@code Root.} prefixed style as their parent. Ex.: the parent of {@code GiniVisionTheme.Onboarding.Message.TextStyle} must be {@code Root.GiniVisionTheme.Onboarding.Message.TextStyle}.
+ *     <b>Important:</b> All overriden styles must have their respective {@code Root.} prefixed style as their parent. Ex.: the parent of {@code GiniCaptureTheme.Onboarding.Message.TextStyle} must be {@code Root.GiniCaptureTheme.Onboarding.Message.TextStyle}.
  * </p>
  *
  * <h3>Customizing the Action Bar</h3>
@@ -151,7 +151,7 @@ public class FileImportActivity extends AppCompatActivity {
     }
 
     private void setupHomeButton() {
-        if (GiniVision.hasInstance() && GiniVision.getInstance().areBackButtonsEnabled()) {
+        if (GiniCapture.hasInstance() && GiniCapture.getInstance().areBackButtonsEnabled()) {
             enableHomeAsUp(this);
         }
     }

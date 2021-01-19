@@ -1,12 +1,12 @@
 package net.gini.android.vision.review;
 
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.analysis.AnalysisActivity;
 import net.gini.android.vision.analysis.AnalysisFragmentCompat;
 import net.gini.android.vision.analysis.AnalysisFragmentListener;
 import net.gini.android.vision.analysis.AnalysisFragmentStandard;
-import net.gini.android.vision.network.GiniVisionNetworkService;
+import net.gini.android.vision.network.GiniCaptureNetworkService;
 
 import java.util.Map;
 
@@ -31,8 +31,8 @@ public interface ReviewFragmentInterface {
      * <p> If the document wasn't analyzed or the image was changed when the user tapped the Next
      * button, {@link ReviewFragmentListener#onProceedToAnalysisScreen(Document)} is called.
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document is analyzed
-     * internally by using the configured {@link GiniVisionNetworkService} implementation. The
+     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
+     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
      * extractions will be returned in the Analysis Screen in
      * {@link AnalysisFragmentListener#onExtractionsAvailable(Map, Map)}.
      */
@@ -43,8 +43,8 @@ public interface ReviewFragmentInterface {
      * You should call this method after you've received the analysis results from the Gini API
      * without the required extractions.
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document is analyzed
-     * internally by using the configured {@link GiniVisionNetworkService} implementation.
+     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
+     * internally by using the configured {@link GiniCaptureNetworkService} implementation.
      */
     @Deprecated
     void onNoExtractionsFound();

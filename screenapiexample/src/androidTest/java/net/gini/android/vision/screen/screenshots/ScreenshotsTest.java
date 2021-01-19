@@ -77,7 +77,7 @@ public class ScreenshotsTest {
 
         // Main Screen
         assertThat(mainScreen.isVisible()).named("Main Screen is displayed").isTrue();
-        mainScreen.startGiniVisionLibrary();
+        mainScreen.startGiniCapture();
 
         // Camera Screen
         assertThat(cameraScreen.isVisible()).named("Camera Screen is displayed").isTrue();

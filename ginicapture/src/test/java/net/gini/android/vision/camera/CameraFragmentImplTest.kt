@@ -8,7 +8,7 @@ import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import jersey.repackaged.jsr166e.CompletableFuture
-import net.gini.android.vision.GiniVision
+import net.gini.android.vision.GiniCapture
 import net.gini.android.vision.internal.camera.api.CameraInterface
 import net.gini.android.vision.tracking.CameraScreenEvent
 import net.gini.android.vision.tracking.Event
@@ -28,14 +28,14 @@ class CameraFragmentImplTest {
 
     @After
     fun after() {
-        GiniVision.cleanup(InstrumentationRegistry.getInstrumentation().targetContext)
+        GiniCapture.cleanup(InstrumentationRegistry.getInstrumentation().targetContext)
     }
 
     @Test
     fun `triggers Take Picture event`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         val fragmentImpl = object: CameraFragmentImpl(mock()) {
             override fun createCameraController(activity: Activity?): CameraInterface {

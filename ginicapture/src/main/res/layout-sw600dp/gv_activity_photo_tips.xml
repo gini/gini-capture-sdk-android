@@ -7,7 +7,7 @@
 
     <net.gini.android.vision.internal.ui.CustomFontTextView
         android:id="@+id/gv_photo_tips_headline"
-        style="@style/GiniVisionTheme.Help.PhotoTips.Header.TextStyle"
+        style="@style/GiniCaptureTheme.Help.PhotoTips.Header.TextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -40,7 +40,7 @@
                     android:src="@drawable/gv_photo_tip_lighting" />
 
                 <net.gini.android.vision.internal.ui.CustomFontTextView
-                    style="@style/GiniVisionTheme.Help.PhotoTips.Tip.TextStyle"
+                    style="@style/GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -68,7 +68,7 @@
                     android:src="@drawable/gv_photo_tip_flat" />
 
                 <net.gini.android.vision.internal.ui.CustomFontTextView
-                    style="@style/GiniVisionTheme.Help.PhotoTips.Tip.TextStyle"
+                    style="@style/GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -95,7 +95,7 @@
                     android:src="@drawable/gv_photo_tip_parallel" />
 
                 <net.gini.android.vision.internal.ui.CustomFontTextView
-                    style="@style/GiniVisionTheme.Help.PhotoTips.Tip.TextStyle"
+                    style="@style/GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -122,7 +122,7 @@
                     android:src="@drawable/gv_photo_tip_align" />
 
                 <net.gini.android.vision.internal.ui.CustomFontTextView
-                    style="@style/GiniVisionTheme.Help.PhotoTips.Tip.TextStyle"
+                    style="@style/GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"

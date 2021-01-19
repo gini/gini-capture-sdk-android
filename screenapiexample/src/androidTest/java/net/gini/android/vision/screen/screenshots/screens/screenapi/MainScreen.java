@@ -26,7 +26,7 @@ public class MainScreen implements Screen {
                 mUiDevice);
     }
 
-    public void startGiniVisionLibrary() throws UiObjectNotFoundException {
+    public void startGiniCapture() throws UiObjectNotFoundException {
         final UiObject scannerButton = mUiDevice.findObject(
                 new UiSelector().resourceId(START_SCANNER_BUTTON_RES_ID));
         scannerButton.clickAndWaitForNewWindow();

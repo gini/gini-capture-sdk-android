@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.gini.android.vision.DocumentImportEnabledFileTypes;
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.R;
 
 import java.util.ArrayList;
@@ -38,21 +38,21 @@ class SupportedFormatsAdapter extends
     private final List<Enum> mItems;
 
     SupportedFormatsAdapter(
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
-        mItems = setUpItems(giniVisionFeatureConfiguration);
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
+        mItems = setUpItems(giniCaptureFeatureConfiguration);
     }
 
     private List<Enum> setUpItems(
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
         final ArrayList<Enum> items = new ArrayList<>();
         items.add(SectionHeader.SUPPORTED_FORMATS);
         items.add(SupportedFormat.PRINTED_INVOICES);
-        if (isFileImportEnabled(giniVisionFeatureConfiguration)
-                || getDocumentImportEnabledFileTypes(giniVisionFeatureConfiguration)
+        if (isFileImportEnabled(giniCaptureFeatureConfiguration)
+                || getDocumentImportEnabledFileTypes(giniCaptureFeatureConfiguration)
                 == DocumentImportEnabledFileTypes.PDF_AND_IMAGES) {
             items.add(SupportedFormat.SINGLE_PAGE_AS_JPEG_PNG_GIF);
             items.add(SupportedFormat.PDF);
-        } else if (getDocumentImportEnabledFileTypes(giniVisionFeatureConfiguration)
+        } else if (getDocumentImportEnabledFileTypes(giniCaptureFeatureConfiguration)
                 == DocumentImportEnabledFileTypes.PDF) {
             items.add(SupportedFormat.PDF);
         }

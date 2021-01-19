@@ -32,12 +32,12 @@ Activities
 For most of the screens there are two Activities. The one without `AppCompat` in their name use standard Activities and Fragments while the other
 ones use the Android Support Library.
 
-GiniVisionCoordinator
+GiniCaptureCoordinator
 ---------------------
 
-The `GiniVisionCoordinator` is used to show the onboarding on the first run. After the camera was started
-`GiniVisionCoordinator#onCameraStarted()` is called and, if this is the first run, the `OnboardingFragment` is shown in
-`GiniVisionActivity#onShowOnboarding()`.
+The `GiniCaptureCoordinator` is used to show the onboarding on the first run. After the camera was started
+`GiniCaptureCoordinator#onCameraStarted()` is called and, if this is the first run, the `OnboardingFragment` is shown in
+`GiniCaptureActivity#onShowOnboarding()`.
 
 Camera Screen
 -------------
@@ -64,7 +64,7 @@ The Help Screen is shown by clicking the help menu item (question mark).
 
 ### GVL 3.0.0 and newer
 
-In addition to the above, if there is a `GiniVision` instance and multi-page is enabled, it starts the Multi-Page Review Screen when the
+In addition to the above, if there is a `GiniCapture` instance and multi-page is enabled, it starts the Multi-Page Review Screen when the
 `CameraFragmentListener#onProceedToMultiPageReviewScreen()` is called.
 
 Help Screen
@@ -94,16 +94,16 @@ The table below shows you when one of those methods is called:
 
 |Document was rotated|Analysis started|Analysis successful|Next button clicked|
 |---|---|---|---|
-|no|no|-|`GiniVisionActivity#onProceedToAnalysisScreen()`|
-|no|yes|no|`GiniVisionActivity#onProceedToAnalysisScreen()`|
-|no|yes|yes|`GiniVisionActivity#onDocumentReviewedAndAnalyzed()`|
-|yes|no|-|`GiniVisionActivity#onProceedToAnalysisScreen()`|
-|yes|yes|no|`GiniVisionActivity#onProceedToAnalysisScreen()`|
-|yes|yes|yes|`GiniVisionActivity#onProceedToAnalysisScreen()`|
+|no|no|-|`GiniCaptureActivity#onProceedToAnalysisScreen()`|
+|no|yes|no|`GiniCaptureActivity#onProceedToAnalysisScreen()`|
+|no|yes|yes|`GiniCaptureActivity#onDocumentReviewedAndAnalyzed()`|
+|yes|no|-|`GiniCaptureActivity#onProceedToAnalysisScreen()`|
+|yes|yes|no|`GiniCaptureActivity#onProceedToAnalysisScreen()`|
+|yes|yes|yes|`GiniCaptureActivity#onProceedToAnalysisScreen()`|
 
 ### GVL 3.0.0 and newer
 
-In GVL 3.0.0+ you should create a `GiniVision` instance before running the GVL. If you have done that, then analysis is executed internally
+In GVL 3.0.0+ you should create a `GiniCapture` instance before running the GVL. If you have done that, then analysis is executed internally
 by the networking service implementation you have configured. When the user clicks the next button then
 `ReviewFragmentListener#onProceedToAnalysisScreen()` is called.
 
@@ -112,7 +112,7 @@ Multi-Page Review Screen
 
 ### GVL 3.0.0 and newer
 
-This screen requires a `GiniVision` instance and is shown if you have enabled multi-page scanning. It shows the `MultiPageReviewFragment`
+This screen requires a `GiniCapture` instance and is shown if you have enabled multi-page scanning. It shows the `MultiPageReviewFragment`
 and goes to the Analysis Screen when `MultiPageReviewFragmentListener#onProceedToAnalysisScreen()` is called. If the user opted to go back
 to the Camera Screen to add more pages the `MultiPageReviewFragmentListener#onReturnToCameraScreen()` method is called.
 
@@ -133,7 +133,7 @@ stopped with `AnalysisFragmentInterface#startScanAnimation()` and `AnalysisFragm
 
 ### GVL 3.0.0 and newer
 
-In GVL 3.0.0+ you should create a `GiniVision` instance before running the GVL. If you have done that, then analysis is executed internally
+In GVL 3.0.0+ you should create a `GiniCapture` instance before running the GVL. If you have done that, then analysis is executed internally
 by the networking service implementation you have configured. When the `AnalysisFragment` receives the extractions the
 `AnalysisFragmentListener#onExtractionsAvailable()` is called and you may proceed with the extractions as desired.
 
@@ -141,7 +141,7 @@ If there were no extractions, then the `AnalysisFragment` calls the `AnalysisFra
 
 ### GVL 4.0.0 and newer
 
-If the return assistant was enabled when the `GiniVision` instance was created and the client id is configured to extract line items and all
+If the return assistant was enabled when the `GiniCapture` instance was created and the client id is configured to extract line items and all
 the required line item information was successfully extracted, then the `AnalysisFragment` calls the
 `AnalysisFragmentListener#onProceedToReturnAssistant()` with the extractions needed to show the digital invoice of the return assistant.
 

@@ -13,8 +13,8 @@ import android.content.res.Resources;
 
 import com.google.common.collect.Lists;
 
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionHelper;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureHelper;
 import net.gini.android.vision.R;
 import net.gini.android.vision.tracking.Event;
 import net.gini.android.vision.tracking.EventTracker;
@@ -53,7 +53,7 @@ public class OnboardingScreenPresenterTest {
 
     @After
     public void tearDown() {
-        GiniVisionHelper.setGiniVisionInstance(null);
+        GiniCaptureHelper.setGiniCaptureInstance(null);
     }
 
     @Test
@@ -259,7 +259,7 @@ public class OnboardingScreenPresenterTest {
 
         final EventTracker eventTracker = spy(EventTracker.class);
 
-        new GiniVision.Builder().setEventTracker(eventTracker).build();
+        new GiniCapture.Builder().setEventTracker(eventTracker).build();
 
         // When
         presenter.onScrolledToPage(DefaultPagesPhone.asArrayList().size() - 1);
@@ -275,7 +275,7 @@ public class OnboardingScreenPresenterTest {
         final OnboardingScreenPresenter presenter = createPresenter();
 
         final EventTracker eventTracker = spy(EventTracker.class);
-        new GiniVision.Builder().setEventTracker(eventTracker).build();
+        new GiniCapture.Builder().setEventTracker(eventTracker).build();
 
         when(mView.slideOutViews()).thenReturn(CompletableFuture.<Void>completedFuture(null));
 
@@ -293,7 +293,7 @@ public class OnboardingScreenPresenterTest {
         final OnboardingScreenPresenter presenter = createPresenter();
 
         final EventTracker eventTracker = spy(EventTracker.class);
-        new GiniVision.Builder().setEventTracker(eventTracker).build();
+        new GiniCapture.Builder().setEventTracker(eventTracker).build();
 
         // When
         presenter.start();

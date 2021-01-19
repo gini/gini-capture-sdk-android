@@ -1,8 +1,8 @@
 package net.gini.android.vision.internal.util;
 
 import net.gini.android.vision.DocumentImportEnabledFileTypes;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 
 import androidx.annotation.NonNull;
 
@@ -20,42 +20,42 @@ import androidx.annotation.NonNull;
 public final class FeatureConfiguration {
 
     public static DocumentImportEnabledFileTypes getDocumentImportEnabledFileTypes(
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
-        return GiniVision.hasInstance()
-                ? GiniVision.getInstance().getDocumentImportEnabledFileTypes()
-                : giniVisionFeatureConfiguration.getDocumentImportEnabledFileTypes();
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
+        return GiniCapture.hasInstance()
+                ? GiniCapture.getInstance().getDocumentImportEnabledFileTypes()
+                : giniCaptureFeatureConfiguration.getDocumentImportEnabledFileTypes();
     }
 
     public static boolean isFileImportEnabled(
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
-        return GiniVision.hasInstance()
-                ? GiniVision.getInstance().isFileImportEnabled()
-                : giniVisionFeatureConfiguration.isFileImportEnabled();
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
+        return GiniCapture.hasInstance()
+                ? GiniCapture.getInstance().isFileImportEnabled()
+                : giniCaptureFeatureConfiguration.isFileImportEnabled();
     }
 
     public static boolean isQRCodeScanningEnabled(
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
-        return GiniVision.hasInstance()
-                ? GiniVision.getInstance().isQRCodeScanningEnabled()
-                : giniVisionFeatureConfiguration.isQRCodeScanningEnabled();
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
+        return GiniCapture.hasInstance()
+                ? GiniCapture.getInstance().isQRCodeScanningEnabled()
+                : giniCaptureFeatureConfiguration.isQRCodeScanningEnabled();
     }
 
     public static boolean shouldShowOnboardingAtFirstRun(
             final boolean showOnboardingAtFirstRun) {
-        return GiniVision.hasInstance()
-                ? GiniVision.getInstance().shouldShowOnboardingAtFirstRun()
+        return GiniCapture.hasInstance()
+                ? GiniCapture.getInstance().shouldShowOnboardingAtFirstRun()
                 : showOnboardingAtFirstRun;
     }
 
     public static boolean shouldShowOnboarding(
             final boolean showOnboarding) {
-        return GiniVision.hasInstance()
-                ? GiniVision.getInstance().shouldShowOnboarding()
+        return GiniCapture.hasInstance()
+                ? GiniCapture.getInstance().shouldShowOnboarding()
                 : showOnboarding;
     }
 
     public static boolean isMultiPageEnabled() {
-        return GiniVision.hasInstance() && GiniVision.getInstance().isMultiPageEnabled();
+        return GiniCapture.hasInstance() && GiniCapture.getInstance().isMultiPageEnabled();
     }
 
     private FeatureConfiguration() {

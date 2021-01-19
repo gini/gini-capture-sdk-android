@@ -7,7 +7,7 @@ import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import net.gini.android.vision.Document
-import net.gini.android.vision.GiniVision
+import net.gini.android.vision.GiniCapture
 import net.gini.android.vision.document.ImageDocument
 import net.gini.android.vision.internal.camera.photo.Photo
 import net.gini.android.vision.tracking.Event
@@ -28,14 +28,14 @@ class ReviewFragmentImplTest {
 
     @After
     fun after() {
-        GiniVision.cleanup(InstrumentationRegistry.getInstrumentation().targetContext)
+        GiniCapture.cleanup(InstrumentationRegistry.getInstrumentation().targetContext)
     }
 
     @Test
     fun `triggers Next event`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         val document = mock<ImageDocument>()
         whenever(document.isReviewable).thenReturn(true)

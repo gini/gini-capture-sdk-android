@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
  * A document consisting of multiple image documents.
  */
 public class ImageMultiPageDocument extends
-        GiniVisionMultiPageDocument<ImageDocument, GiniVisionDocumentError> {
+        GiniCaptureMultiPageDocument<ImageDocument, GiniCaptureDocumentError> {
 
     public static final Creator<ImageMultiPageDocument> CREATOR =
             new Creator<ImageMultiPageDocument>() {

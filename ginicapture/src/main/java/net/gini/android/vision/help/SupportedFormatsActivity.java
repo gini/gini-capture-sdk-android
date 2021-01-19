@@ -6,8 +6,8 @@ import static net.gini.android.vision.internal.util.ActivityHelper.forcePortrait
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.R;
 import net.gini.android.vision.analysis.AnalysisActivity;
 import net.gini.android.vision.camera.CameraActivity;
@@ -22,13 +22,13 @@ import androidx.recyclerview.widget.RecyclerView;
  * <h3>Screen API and Component API</h3>
  *
  * <p>
- *     The Supported Formats Screen shows information about the document formats supported by the Gini Vision Library.
+ *     The Supported Formats Screen shows information about the document formats supported by the Gini Capture SDK.
  * </p>
  * <p>
  *     This Activity is launched by the {@link HelpActivity} for both Screen and Component APIs.
  * </p>
  * <p>
- *     The contents of this screen are modified according to the features you configured with the {@link GiniVisionFeatureConfiguration}.
+ *     The contents of this screen are modified according to the features you configured with the {@link GiniCaptureFeatureConfiguration}.
  * </p>
  *
  * <h3>Customizing the File Import Screen</h3>
@@ -43,10 +43,10 @@ import androidx.recyclerview.widget.RecyclerView;
  *             <b>Background color:</b> via the color resource named {@code gv_supported_formats_activity_background}.
  *         </li>
  *         <li>
- *             <b>Header text style:</b> via overriding the style named {@code GiniVisionTheme.Help.SupportedFormats.Item.Header.TextStyle}
+ *             <b>Header text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle}
  *         </li>
  *         <li>
- *             <b>Format info text style:</b> via overriding the style named {@code GiniVisionTheme.Help.SupportedFormats.Item.TextStyle}
+ *             <b>Format info text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle}
  *         </li>
  *         <li>
  *             <b>Format info list item background color:</b> via overriding the style named {@code gv_supported_formats_item_background}
@@ -67,7 +67,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * </p>
  *
  * <p>
- *     <b>Important:</b> All overriden styles must have their respective {@code Root.} prefixed style as their parent. Ex.: the parent of {@code GiniVisionTheme.Onboarding.Message.TextStyle} must be {@code Root.GiniVisionTheme.Onboarding.Message.TextStyle}.
+ *     <b>Important:</b> All overriden styles must have their respective {@code Root.} prefixed style as their parent. Ex.: the parent of {@code GiniCaptureTheme.Onboarding.Message.TextStyle} must be {@code Root.GiniCaptureTheme.Onboarding.Message.TextStyle}.
  * </p>
  *
  * <h3>Customizing the Action Bar</h3>
@@ -101,13 +101,13 @@ public class SupportedFormatsActivity extends AppCompatActivity {
     /**
      * @suppress
      *
-     * @Deprecated Configuration should be applied by creating a {@link GiniVision} instance using
-     * {@link GiniVision#newInstance()} and the returned {@link GiniVision.Builder}.
+     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
+     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
-    public static final String EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION =
-            "GV_EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION";
+    public static final String EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION =
+            "GV_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
 
-    private GiniVisionFeatureConfiguration mGiniVisionFeatureConfiguration;
+    private GiniCaptureFeatureConfiguration mGiniCaptureFeatureConfiguration;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -120,7 +120,7 @@ public class SupportedFormatsActivity extends AppCompatActivity {
     }
 
     private void setupHomeButton() {
-        if (GiniVision.hasInstance() && GiniVision.getInstance().areBackButtonsEnabled()) {
+        if (GiniCapture.hasInstance() && GiniCapture.getInstance().areBackButtonsEnabled()) {
             enableHomeAsUp(this);
         }
     }
@@ -128,11 +128,11 @@ public class SupportedFormatsActivity extends AppCompatActivity {
     private void readExtras() {
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            mGiniVisionFeatureConfiguration = extras.getParcelable(
-                    EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION);
-            if (mGiniVisionFeatureConfiguration == null) {
-                mGiniVisionFeatureConfiguration =
-                        GiniVisionFeatureConfiguration.buildNewConfiguration().build();
+            mGiniCaptureFeatureConfiguration = extras.getParcelable(
+                    EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION);
+            if (mGiniCaptureFeatureConfiguration == null) {
+                mGiniCaptureFeatureConfiguration =
+                        GiniCaptureFeatureConfiguration.buildNewConfiguration().build();
             }
         }
     }
@@ -140,7 +140,7 @@ public class SupportedFormatsActivity extends AppCompatActivity {
     private void setUpFormatsList() {
         final RecyclerView recyclerView = findViewById(R.id.gv_formats_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new SupportedFormatsAdapter(mGiniVisionFeatureConfiguration));
+        recyclerView.setAdapter(new SupportedFormatsAdapter(mGiniCaptureFeatureConfiguration));
     }
 
     @Override

@@ -11,36 +11,36 @@ import androidx.annotation.Nullable;
  */
 
 /**
- * Helper class to map the {@link Box} from the Gini API SDK to the Gini Vision Library's {@link
- * GiniVisionBox} and vice versa.
+ * Helper class to map the {@link Box} from the Gini API SDK to the Gini Capture SDK's {@link
+ * GiniCaptureBox} and vice versa.
  */
 public final class BoxMapper {
 
     /**
-     * Map a {@link Box} from the Gini API SDK to the Gini Vision Library's {@link GiniVisionBox}.
+     * Map a {@link Box} from the Gini API SDK to the Gini Capture SDK's {@link GiniCaptureBox}.
      *
      * @param source Gini API SDK {@link Box}
      *
-     * @return a Gini Vision Library {@link GiniVisionBox}
+     * @return a Gini Capture SDK {@link GiniCaptureBox}
      */
     @Nullable
-    public static GiniVisionBox map(@Nullable final Box source) {
+    public static GiniCaptureBox map(@Nullable final Box source) {
         if (source == null) {
             return null;
         }
-        return new GiniVisionBox(source.getPageNumber(), source.getLeft(), source.getTop(),
+        return new GiniCaptureBox(source.getPageNumber(), source.getLeft(), source.getTop(),
                 source.getWidth(), source.getHeight());
     }
 
     /**
-     * Map a {@link GiniVisionBox} from the Gini Vision Library to the Gini API SDK's {@link Box}.
+     * Map a {@link GiniCaptureBox} from the Gini Capture SDK to the Gini API SDK's {@link Box}.
      *
-     * @param source Gini Vision Library {@link GiniVisionBox}
+     * @param source Gini Capture SDK {@link GiniCaptureBox}
      *
      * @return Gini API SDK {@link Box}
      */
     @Nullable
-    public static Box map(@Nullable final GiniVisionBox source) {
+    public static Box map(@Nullable final GiniCaptureBox source) {
         if (source == null) {
             return null;
         }

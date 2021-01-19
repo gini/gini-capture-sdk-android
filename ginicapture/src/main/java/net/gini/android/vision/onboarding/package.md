@@ -5,7 +5,7 @@ Contains the Activity and Fragments used for the Onboarding Screen.
 ## Screen API
 
 The [net.gini.android.vision.onboarding.OnboardingActivity] is launched directly by the [net.gini.android.vision.camera.CameraActivity]. It
-can be configured by overriding Gini Vision Library app resources and/or by supplying the [net.gini.android.vision.camera.CameraActivity]
+can be configured by overriding Gini Capture SDK app resources and/or by supplying the [net.gini.android.vision.camera.CameraActivity]
 with an [java.util.ArrayList] of [net.gini.android.vision.onboarding.OnboardingPage] objects in the
 [net.gini.android.vision.camera.CameraActivity.EXTRA_IN_ONBOARDING_PAGES] extra.
 

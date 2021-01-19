@@ -4,15 +4,15 @@ import static net.gini.android.vision.internal.network.NetworkRequestsManager.is
 
 import android.app.Application;
 
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionDebug;
-import net.gini.android.vision.document.GiniVisionDocument;
-import net.gini.android.vision.document.GiniVisionDocumentError;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureDebug;
+import net.gini.android.vision.document.GiniCaptureDocument;
+import net.gini.android.vision.document.GiniCaptureDocumentError;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.internal.network.AnalysisNetworkRequestResult;
 import net.gini.android.vision.internal.network.NetworkRequestResult;
 import net.gini.android.vision.internal.network.NetworkRequestsManager;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,29 +42,29 @@ public class AnalysisInteractor {
     }
 
     public CompletableFuture<ResultHolder> analyzeMultiPageDocument(
-            final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
+            final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
                     multiPageDocument) {
-        if (GiniVision.hasInstance()) {
-            final NetworkRequestsManager networkRequestsManager = GiniVision.getInstance()
+        if (GiniCapture.hasInstance()) {
+            final NetworkRequestsManager networkRequestsManager = GiniCapture.getInstance()
                     .internal().getNetworkRequestsManager();
             if (networkRequestsManager != null) {
-                GiniVisionDebug.writeDocumentToFile(mApp, multiPageDocument, "_for_analysis");
+                GiniCaptureDebug.writeDocumentToFile(mApp, multiPageDocument, "_for_analysis");
                 for (final Object document : multiPageDocument.getDocuments()) {
-                    final GiniVisionDocument giniVisionDocument = (GiniVisionDocument) document;
-                    networkRequestsManager.upload(mApp, giniVisionDocument);
+                    final GiniCaptureDocument giniCaptureDocument = (GiniCaptureDocument) document;
+                    networkRequestsManager.upload(mApp, giniCaptureDocument);
                 }
                 return networkRequestsManager.analyze(multiPageDocument)
                         .handle(new CompletableFuture.BiFun<AnalysisNetworkRequestResult<
-                                GiniVisionMultiPageDocument>, Throwable, ResultHolder>() {
+                                GiniCaptureMultiPageDocument>, Throwable, ResultHolder>() {
                             @Override
                             public ResultHolder apply(
-                                    final AnalysisNetworkRequestResult<GiniVisionMultiPageDocument>
+                                    final AnalysisNetworkRequestResult<GiniCaptureMultiPageDocument>
                                             requestResult,
                                     final Throwable throwable) {
                                 if (throwable != null && !isCancellation(throwable)) {
                                     throw new RuntimeException(throwable); // NOPMD
                                 } else if (requestResult != null) {
-                                    final Map<String, GiniVisionSpecificExtraction> extractions =
+                                    final Map<String, GiniCaptureSpecificExtraction> extractions =
                                             requestResult.getAnalysisResult().getExtractions();
                                     if (extractions.isEmpty()) {
                                         return new ResultHolder(Result.SUCCESS_NO_EXTRACTIONS);
@@ -86,15 +86,15 @@ public class AnalysisInteractor {
     }
 
     public CompletableFuture<Void> deleteMultiPageDocument(
-            final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
+            final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
                     multiPageDocument) {
         return deleteDocument(multiPageDocument)
-                .handle(new CompletableFuture.BiFun<NetworkRequestResult<GiniVisionDocument>,
+                .handle(new CompletableFuture.BiFun<NetworkRequestResult<GiniCaptureDocument>,
                         Throwable, Void>() {
                     @Override
                     public Void apply(
-                            final NetworkRequestResult<GiniVisionDocument>
-                                    giniVisionDocumentNetworkRequestResult,
+                            final NetworkRequestResult<GiniCaptureDocument>
+                                    giniCaptureDocumentNetworkRequestResult,
                             final Throwable throwable) {
                         return null;
                     }
@@ -105,14 +105,14 @@ public class AnalysisInteractor {
                             public CompletableFuture<Void> apply(
                                     final Void result) {
                                 final NetworkRequestsManager networkRequestsManager =
-                                        GiniVision.getInstance()
+                                        GiniCapture.getInstance()
                                                 .internal().getNetworkRequestsManager();
                                 if (networkRequestsManager == null) {
                                     return CompletableFuture.completedFuture(null);
                                 }
                                 final List<CompletableFuture<NetworkRequestResult<
-                                        GiniVisionDocument>>> futures = new ArrayList<>();
-                                for (final GiniVisionDocument document
+                                        GiniCaptureDocument>>> futures = new ArrayList<>();
+                                for (final GiniCaptureDocument document
                                         : multiPageDocument.getDocuments()) {
                                     networkRequestsManager.cancel(document);
                                     futures.add(networkRequestsManager.delete(document));
@@ -123,10 +123,10 @@ public class AnalysisInteractor {
                         });
     }
 
-    public CompletableFuture<NetworkRequestResult<GiniVisionDocument>> deleteDocument(
-            final GiniVisionDocument document) {
-        if (GiniVision.hasInstance()) {
-            final NetworkRequestsManager networkRequestsManager = GiniVision.getInstance()
+    public CompletableFuture<NetworkRequestResult<GiniCaptureDocument>> deleteDocument(
+            final GiniCaptureDocument document) {
+        if (GiniCapture.hasInstance()) {
+            final NetworkRequestsManager networkRequestsManager = GiniCapture.getInstance()
                     .internal().getNetworkRequestsManager();
             if (networkRequestsManager != null) {
                 networkRequestsManager.cancel(document);
@@ -155,15 +155,15 @@ public class AnalysisInteractor {
     public static final class ResultHolder {
 
         private final Result mResult;
-        private final Map<String, GiniVisionSpecificExtraction> mExtractions;
+        private final Map<String, GiniCaptureSpecificExtraction> mExtractions;
 
         ResultHolder(@NonNull final Result result) {
-            this(result, Collections.<String, GiniVisionSpecificExtraction>emptyMap());
+            this(result, Collections.<String, GiniCaptureSpecificExtraction>emptyMap());
         }
 
         ResultHolder(
                 @NonNull final Result result,
-                @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+                @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
             mResult = result;
             mExtractions = extractions;
         }
@@ -174,7 +174,7 @@ public class AnalysisInteractor {
         }
 
         @NonNull
-        public Map<String, GiniVisionSpecificExtraction> getExtractions() {
+        public Map<String, GiniCaptureSpecificExtraction> getExtractions() {
             return mExtractions;
         }
     }

@@ -15,31 +15,31 @@ import androidx.annotation.NonNull;
  *
  * @suppress
  */
-public class GiniVisionDocumentError implements Parcelable {
+public class GiniCaptureDocumentError implements Parcelable {
 
-    public static final Creator<GiniVisionDocumentError> CREATOR =
-            new Creator<GiniVisionDocumentError>() {
+    public static final Creator<GiniCaptureDocumentError> CREATOR =
+            new Creator<GiniCaptureDocumentError>() {
                 @Override
-                public GiniVisionDocumentError createFromParcel(final Parcel in) {
-                    return new GiniVisionDocumentError(in);
+                public GiniCaptureDocumentError createFromParcel(final Parcel in) {
+                    return new GiniCaptureDocumentError(in);
                 }
 
                 @Override
-                public GiniVisionDocumentError[] newArray(final int size) {
-                    return new GiniVisionDocumentError[size];
+                public GiniCaptureDocumentError[] newArray(final int size) {
+                    return new GiniCaptureDocumentError[size];
                 }
             };
     private final String mMessage;
     private final ErrorCode mErrorCode;
 
 
-    public GiniVisionDocumentError(@NonNull final String message,
-            @NonNull final ErrorCode errorCode) {
+    public GiniCaptureDocumentError(@NonNull final String message,
+                                    @NonNull final ErrorCode errorCode) {
         mMessage = message;
         mErrorCode = errorCode;
     }
 
-    GiniVisionDocumentError(final Parcel in) {
+    GiniCaptureDocumentError(final Parcel in) {
         mMessage = in.readString();
         mErrorCode = (ErrorCode) in.readSerializable();
     }

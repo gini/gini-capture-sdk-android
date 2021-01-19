@@ -10,11 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.R;
 import net.gini.android.vision.analysis.AnalysisActivity;
 import net.gini.android.vision.camera.CameraActivity;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.onboarding.OnboardingActivity;
 import net.gini.android.vision.review.ReviewActivity;
 import net.gini.android.vision.tracking.ReviewScreenEvent;
@@ -44,7 +44,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * document. For subsequent images the user has to tap on the image stack in the Camera Screen to
  * launch it.
  *
- * <p> <b>Important:</b> A {@link GiniVision} instance is required to use the {@code
+ * <p> <b>Important:</b> A {@link GiniCapture} instance is required to use the {@code
  * MultiPageReviewActivity}
  *
  * <h3>Customizing the Multi-Page Review Screen</h3>
@@ -56,10 +56,10 @@ import androidx.appcompat.app.AppCompatActivity;
  * <ul>
  *
  * <li> <b>Page indicator text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Review.MultiPage.PageIndicator.TextStyle}
+ * GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle}
  *
  * <li> <b>Page indicator font:</b> via overriding the style named {@code
- * GiniVisionTheme.Review.MultiPage.PageIndicator.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle} and setting an item named {@code
  * gvCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li><b>Page indicator background color:</b> via the color resource named {@code
@@ -78,10 +78,10 @@ import androidx.appcompat.app.AppCompatActivity;
  * gv_multi_page_review_thumbnail_card_background}
  *
  * <li> <b>Thumbnail badge text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Review.MultiPage.ThumbnailBadge.TextStyle}
+ * GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle}
  *
  * <li> <b>Thumbnail badge font:</b> via overriding the style named {@code
- * GiniVisionTheme.Review.MultiPage.ThumbnailBadge.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle} and setting an item named {@code
  * gvCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li><b>Thumbnail badge background border color:</b> via the color resource named {@code
@@ -115,20 +115,20 @@ import androidx.appcompat.app.AppCompatActivity;
  * gv_multi_page_review_add_pages_subtitle}
  *
  * <li> <b>Add page icon subtitle text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Review.MultiPage.AddPagesSubtitle.TextStyle}
+ * GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle}
  *
  * <li> <b>Add page icon subtitle font:</b> via overriding the style named {@code
- * GiniVisionTheme.Review.MultiPage.AddPagesSubtitle.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle} and setting an item named {@code
  * gvCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Reorder pages tip text:</b> via the string resource named {@code
  * gv_multi_page_review_reorder_pages_tip}
  *
  * <li> <b>Reorder pages tip text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Review.MultiPage.ReorderPagesTip.TextStyle}
+ * GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle}
  *
  * <li> <b>Reorder pages tip font:</b> via overriding the style named {@code
- * GiniVisionTheme.Review.MultiPage.ReorderPagesTip.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle} and setting an item named {@code
  * gvCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li><b>Rotate icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
@@ -138,19 +138,19 @@ import androidx.appcompat.app.AppCompatActivity;
  * gv_delete_icon.png}
  *
  * <li> <b>Image error message text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Snackbar.Error.TextStyle} and setting an item named {@code android:textStyle} to
+ * GiniCaptureTheme.Snackbar.Error.TextStyle} and setting an item named {@code android:textStyle} to
  * {@code normal}, {@code bold} or {@code italic}
  *
  * <li> <b>Image error message font:</b> via overriding the style named {@code
- * GiniVisionTheme.Snackbar.Error.TextStyle} and setting an item named {@code gvCustomFont} with the
+ * GiniCaptureTheme.Snackbar.Error.TextStyle} and setting an item named {@code gvCustomFont} with the
  * path to the font file in your {@code assets} folder
  *
  * <li> <b>Image error message button text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Snackbar.Error.Button.TextStyle} and setting an item named {@code
+ * GiniCaptureTheme.Snackbar.Error.Button.TextStyle} and setting an item named {@code
  * android:textStyle} to {@code normal}, {@code bold} or {@code italic}
  *
  * <li> <b>Image error message button font:</b> via overriding the style named {@code
- * GiniVisionTheme.Snackbar.Error.Button.TextStyle} and setting an item named {@code gvCustomFont}
+ * GiniCaptureTheme.Snackbar.Error.Button.TextStyle} and setting an item named {@code gvCustomFont}
  * with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Image error message background color:</b> via the color resource named {@code
@@ -177,8 +177,8 @@ import androidx.appcompat.app.AppCompatActivity;
  * </ul>
  *
  * <p> <b>Important:</b> All overridden styles must have their respective {@code Root.} prefixed
- * style as their parent. Ex.: the parent of {@code GiniVisionTheme.Review.BottomPanel.TextStyle}
- * must be {@code Root.GiniVisionTheme.Review.BottomPanel.TextStyle}.
+ * style as their parent. Ex.: the parent of {@code GiniCaptureTheme.Review.BottomPanel.TextStyle}
+ * must be {@code Root.GiniCaptureTheme.Review.BottomPanel.TextStyle}.
  *
  * <h3>Customizing the Action Bar</h3>
  *
@@ -272,7 +272,7 @@ public class MultiPageReviewActivity extends AppCompatActivity implements
 
     @Override
     public void onProceedToAnalysisScreen(
-            @NonNull final GiniVisionMultiPageDocument multiPageDocument) {
+            @NonNull final GiniCaptureMultiPageDocument multiPageDocument) {
         final List documents = multiPageDocument.getDocuments();
         if (documents.isEmpty()) {
             return;

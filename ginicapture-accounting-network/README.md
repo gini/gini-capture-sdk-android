@@ -8,12 +8,12 @@ Implementation using the Gini Accounting API of the network related tasks requir
 Adding this library along with the Gini Capture SDK to your application is the quickest way to integrate document
 scanning with Gini's Accounting API.
 
-In order for the Gini Capture SDK to use this networking library, pass the instances to the `GiniVision.Builder`
-when creating a new `GiniVision`.
+In order for the Gini Capture SDK to use this networking library, pass the instances to the `GiniCapture.Builder`
+when creating a new `GiniCapture`.
 
 **Important:** You *must not* enable multi-page in the Gini Capture SDK when using it with this networking library.
 The multi-page feature is currently only supported by the [default networking
-library](https://github.com/gini/gini-capture-sdk-android/tree/master/ginivision-network).
+library](https://github.com/gini/gini-capture-sdk-android/tree/master/ginicapture-network).
 
 Example
 -------

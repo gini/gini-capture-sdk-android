@@ -15,12 +15,12 @@ import androidx.annotation.NonNull;
  *
  * @suppress
  */
-public abstract class GiniVisionBasePresenter<V extends GiniVisionBaseView> {
+public abstract class GiniCaptureBasePresenter<V extends GiniCaptureBaseView> {
 
     private final Activity mActivity;
     private final V mView;
 
-    protected GiniVisionBasePresenter(@NonNull final Activity activity, @NonNull final V view) {
+    protected GiniCaptureBasePresenter(@NonNull final Activity activity, @NonNull final V view) {
         mActivity = activity;
         mView = view;
     }

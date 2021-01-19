@@ -1,6 +1,6 @@
 package net.gini.android.vision.tracking;
 
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 
 import java.util.Collections;
 import java.util.Map;
@@ -26,8 +26,8 @@ public final class EventTrackingHelper {
      * @suppress
      */
     public static void trackOnboardingScreenEvent(@NonNull final OnboardingScreenEvent event, @NonNull final Map<String, Object> details) {
-        if (GiniVision.hasInstance()) {
-            GiniVision.getInstance().internal().getEventTracker().onOnboardingScreenEvent(new Event<>(event, details));
+        if (GiniCapture.hasInstance()) {
+            GiniCapture.getInstance().internal().getEventTracker().onOnboardingScreenEvent(new Event<>(event, details));
         }
     }
 
@@ -46,8 +46,8 @@ public final class EventTrackingHelper {
      * @suppress
      */
     public static void trackCameraScreenEvent(@NonNull final CameraScreenEvent event, @NonNull final Map<String, Object> details) {
-        if (GiniVision.hasInstance()) {
-            GiniVision.getInstance().internal().getEventTracker().onCameraScreenEvent(new Event<>(event, details));
+        if (GiniCapture.hasInstance()) {
+            GiniCapture.getInstance().internal().getEventTracker().onCameraScreenEvent(new Event<>(event, details));
         }
     }
 
@@ -66,8 +66,8 @@ public final class EventTrackingHelper {
      * @suppress
      */
     public static void trackReviewScreenEvent(@NonNull final ReviewScreenEvent event, @NonNull final Map<String, Object> details) {
-        if (GiniVision.hasInstance()) {
-            GiniVision.getInstance().internal().getEventTracker().onReviewScreenEvent(new Event<>(event, details));
+        if (GiniCapture.hasInstance()) {
+            GiniCapture.getInstance().internal().getEventTracker().onReviewScreenEvent(new Event<>(event, details));
         }
     }
 
@@ -86,8 +86,8 @@ public final class EventTrackingHelper {
      * @suppress
      */
     public static void trackAnalysisScreenEvent(@NonNull final AnalysisScreenEvent event, @NonNull final Map<String, Object> details) {
-        if (GiniVision.hasInstance()) {
-            GiniVision.getInstance().internal().getEventTracker().onAnalysisScreenEvent(new Event<>(event, details));
+        if (GiniCapture.hasInstance()) {
+            GiniCapture.getInstance().internal().getEventTracker().onAnalysisScreenEvent(new Event<>(event, details));
         }
     }
 

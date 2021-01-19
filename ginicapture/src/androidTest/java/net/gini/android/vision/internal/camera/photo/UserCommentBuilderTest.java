@@ -35,7 +35,7 @@ public class UserCommentBuilderTest {
         final List<String> keys = getListOfKeys(userComment);
         assertThat(keys).containsExactly(Exif.USER_COMMENT_MAKE, Exif.USER_COMMENT_MODEL,
                 Exif.USER_COMMENT_PLATFORM, Exif.USER_COMMENT_OS_VERSION,
-                Exif.USER_COMMENT_GINI_VISION_VERSION, Exif.USER_COMMENT_CONTENT_ID,
+                Exif.USER_COMMENT_GINI_CAPTURE_VERSION, Exif.USER_COMMENT_CONTENT_ID,
                 Exif.USER_COMMENT_ROTATION_DELTA, Exif.USER_COMMENT_DEVICE_ORIENTATION,
                 Exif.USER_COMMENT_DEVICE_TYPE, Exif.USER_COMMENT_SOURCE).inOrder();
     }
@@ -58,7 +58,7 @@ public class UserCommentBuilderTest {
         final List<String> keys = getListOfKeys(userComment);
         assertThat(keys).containsExactly(Exif.USER_COMMENT_MAKE, Exif.USER_COMMENT_MODEL,
                 Exif.USER_COMMENT_PLATFORM, Exif.USER_COMMENT_OS_VERSION,
-                Exif.USER_COMMENT_GINI_VISION_VERSION, Exif.USER_COMMENT_CONTENT_ID,
+                Exif.USER_COMMENT_GINI_CAPTURE_VERSION, Exif.USER_COMMENT_CONTENT_ID,
                 Exif.USER_COMMENT_ROTATION_DELTA, Exif.USER_COMMENT_DEVICE_ORIENTATION,
                 Exif.USER_COMMENT_DEVICE_TYPE, Exif.USER_COMMENT_SOURCE,
                 Exif.USER_COMMENT_IMPORT_METHOD).inOrder();

@@ -25,12 +25,12 @@ import android.view.View;
 
 import net.gini.android.vision.AsyncCallback;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionError;
-import net.gini.android.vision.GiniVisionHelper;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureError;
+import net.gini.android.vision.GiniCaptureHelper;
 import net.gini.android.vision.document.DocumentFactory;
-import net.gini.android.vision.document.GiniVisionDocument;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.document.GiniCaptureDocument;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.document.ImageDocument;
 import net.gini.android.vision.document.ImageDocumentFake;
 import net.gini.android.vision.document.PdfDocument;
@@ -40,7 +40,7 @@ import net.gini.android.vision.internal.document.ImageMultiPageDocumentMemorySto
 import net.gini.android.vision.internal.ui.ErrorSnackbar;
 import net.gini.android.vision.internal.util.FileImportHelper;
 import net.gini.android.vision.internal.util.Size;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.tracking.AnalysisScreenEvent;
 import net.gini.android.vision.tracking.Event;
 import net.gini.android.vision.tracking.EventTracker;
@@ -85,20 +85,20 @@ public class AnalysisScreenPresenterTest {
 
     @After
     public void tearDown() throws Exception {
-        GiniVisionHelper.setGiniVisionInstance(null);
+        GiniCaptureHelper.setGiniCaptureInstance(null);
     }
 
     @Test
     public void should_convertSinglePageDocument_intoMultiPage() throws Exception {
         // Given
-        final GiniVisionDocument document = DocumentFactory.newEmptyImageDocument(
+        final GiniCaptureDocument document = DocumentFactory.newEmptyImageDocument(
                 Document.Source.newCameraSource(), Document.ImportMethod.NONE);
 
         // When
         final AnalysisScreenPresenter presenter = createPresenter(document);
 
         // Then
-        final GiniVisionDocument documentInMultiPage =
+        final GiniCaptureDocument documentInMultiPage =
                 presenter.getMultiPageDocument().getDocuments().get(0);
         assertThat(documentInMultiPage).isEqualTo(document);
     }
@@ -171,7 +171,7 @@ public class AnalysisScreenPresenterTest {
     @Test
     public void should_tagDocuments_forParcelableMemoryCache() throws Exception {
         // Given
-        final GiniVisionDocument document = DocumentFactory.newEmptyImageDocument(
+        final GiniCaptureDocument document = DocumentFactory.newEmptyImageDocument(
                 Document.Source.newCameraSource(), Document.ImportMethod.NONE);
 
         // When
@@ -198,7 +198,7 @@ public class AnalysisScreenPresenterTest {
     }
 
     private AnalysisScreenPresenter createPresenterWithEmptyImageDocument() {
-        final GiniVisionDocument document = DocumentFactory.newEmptyImageDocument(
+        final GiniCaptureDocument document = DocumentFactory.newEmptyImageDocument(
                 Document.Source.newCameraSource(), Document.ImportMethod.NONE);
         document.setData(new byte[42]);
         return createPresenter(document);
@@ -337,7 +337,7 @@ public class AnalysisScreenPresenterTest {
     @Test
     public void should_loadDocumentData_whenStarted() throws Exception {
         // Given
-        final GiniVisionDocument document = spy(DocumentFactory.newEmptyImageDocument(
+        final GiniCaptureDocument document = spy(DocumentFactory.newEmptyImageDocument(
                 Document.Source.newCameraSource(), Document.ImportMethod.NONE));
         final AnalysisScreenPresenter presenter = createPresenter(document);
 
@@ -390,7 +390,7 @@ public class AnalysisScreenPresenterTest {
         presenter.start();
 
         // Then
-        verify(listener).onError(any(GiniVisionError.class));
+        verify(listener).onError(any(GiniCaptureError.class));
     }
 
     @Test
@@ -592,7 +592,7 @@ public class AnalysisScreenPresenterTest {
             @NonNull final CompletableFuture<AnalysisInteractor.ResultHolder> analysisFuture) {
         final AnalysisInteractor analysisInteractor = mock(AnalysisInteractor.class);
         //noinspection unchecked
-        when(analysisInteractor.analyzeMultiPageDocument(any(GiniVisionMultiPageDocument.class)))
+        when(analysisInteractor.analyzeMultiPageDocument(any(GiniCaptureMultiPageDocument.class)))
                 .thenReturn(analysisFuture);
         return createPresenter(document, analysisInteractor);
     }
@@ -648,7 +648,7 @@ public class AnalysisScreenPresenterTest {
         presenter.start();
 
         // Then
-        verify(listener).onProceedToNoExtractionsScreen(any(GiniVisionMultiPageDocument.class));
+        verify(listener).onProceedToNoExtractionsScreen(any(GiniCaptureMultiPageDocument.class));
     }
 
     @Test
@@ -659,8 +659,8 @@ public class AnalysisScreenPresenterTest {
 
         final ImageDocument imageDocument = new ImageDocumentFake();
 
-        final Map<String, GiniVisionSpecificExtraction> extractions = Collections.singletonMap(
-                "extraction", mock(GiniVisionSpecificExtraction.class));
+        final Map<String, GiniCaptureSpecificExtraction> extractions = Collections.singletonMap(
+                "extraction", mock(GiniCaptureSpecificExtraction.class));
         final CompletableFuture<AnalysisInteractor.ResultHolder> analysisFuture =
                 new CompletableFuture<>();
         analysisFuture.complete(new AnalysisInteractor.ResultHolder(
@@ -749,7 +749,7 @@ public class AnalysisScreenPresenterTest {
         final ArgumentCaptor<FileImportHelper.ShowAlertCallback> callbackCaptor =
                 ArgumentCaptor.forClass(FileImportHelper.ShowAlertCallback.class);
 
-        verify(presenter).showAlertIfOpenWithDocumentAndAppIsDefault(any(GiniVisionDocument.class),
+        verify(presenter).showAlertIfOpenWithDocumentAndAppIsDefault(any(GiniCaptureDocument.class),
                 callbackCaptor.capture());
 
         final String message = "Message";
@@ -784,7 +784,7 @@ public class AnalysisScreenPresenterTest {
 
         doReturn(CompletableFuture.completedFuture(null))
                 .when(presenter)
-                .showAlertIfOpenWithDocumentAndAppIsDefault(any(GiniVisionDocument.class),
+                .showAlertIfOpenWithDocumentAndAppIsDefault(any(GiniCaptureDocument.class),
                         any(FileImportHelper.ShowAlertCallback.class));
 
         // When
@@ -810,7 +810,7 @@ public class AnalysisScreenPresenterTest {
         future.completeExceptionally(new CancellationException());
         doReturn(future)
                 .when(presenter)
-                .showAlertIfOpenWithDocumentAndAppIsDefault(any(GiniVisionDocument.class),
+                .showAlertIfOpenWithDocumentAndAppIsDefault(any(GiniCaptureDocument.class),
                         any(FileImportHelper.ShowAlertCallback.class));
 
         final AnalysisFragmentListener listener = mock(AnalysisFragmentListener.class);
@@ -851,7 +851,7 @@ public class AnalysisScreenPresenterTest {
         presenter.stop();
 
         // Then
-        verify(analysisInteractor).deleteDocument(any(GiniVisionDocument.class));
+        verify(analysisInteractor).deleteDocument(any(GiniCaptureDocument.class));
     }
 
     @Test
@@ -868,7 +868,7 @@ public class AnalysisScreenPresenterTest {
 
         // Then
         //noinspection unchecked
-        verify(analysisInteractor).deleteMultiPageDocument(any(GiniVisionMultiPageDocument.class));
+        verify(analysisInteractor).deleteMultiPageDocument(any(GiniCaptureMultiPageDocument.class));
     }
 
     @Test
@@ -888,13 +888,13 @@ public class AnalysisScreenPresenterTest {
         final ImageMultiPageDocumentMemoryStore memoryStore = mock(
                 ImageMultiPageDocumentMemoryStore.class);
 
-        final GiniVision.Internal internal = mock(GiniVision.Internal.class);
+        final GiniCapture.Internal internal = mock(GiniCapture.Internal.class);
         when(internal.getImageMultiPageDocumentMemoryStore()).thenReturn(memoryStore);
 
-        final GiniVision giniVision = mock(GiniVision.class);
-        when(giniVision.internal()).thenReturn(internal);
+        final GiniCapture giniCapture = mock(GiniCapture.class);
+        when(giniCapture.internal()).thenReturn(internal);
 
-        GiniVisionHelper.setGiniVisionInstance(giniVision);
+        GiniCaptureHelper.setGiniCaptureInstance(giniCapture);
 
         // When
         presenter.start();
@@ -951,7 +951,7 @@ public class AnalysisScreenPresenterTest {
         presenter.start();
 
         // Then
-        verify(listener, never()).onError(any(GiniVisionError.class));
+        verify(listener, never()).onError(any(GiniCaptureError.class));
     }
 
     @Test
@@ -979,12 +979,12 @@ public class AnalysisScreenPresenterTest {
     public void should_triggerErrorEvent_forError_fromReviewScreen() throws Exception {
         // Given
         final EventTracker eventTracker = spy(EventTracker.class);
-        new GiniVision.Builder().setEventTracker(eventTracker).build();
+        new GiniCapture.Builder().setEventTracker(eventTracker).build();
 
         final ImageDocument imageDocument = new ImageDocumentFake();
 
         final Exception exception = new Exception("Something is not working");
-        GiniVision.getInstance().internal().setReviewScreenAnalysisError(exception);
+        GiniCapture.getInstance().internal().setReviewScreenAnalysisError(exception);
 
         final String errorMessage = "Something went wrong";
         final AnalysisScreenPresenter presenter = createPresenter(imageDocument, errorMessage);
@@ -1003,7 +1003,7 @@ public class AnalysisScreenPresenterTest {
     public void should_triggerErrorEvent_forAnalysisError() throws Exception {
         // Given
         final EventTracker eventTracker = spy(EventTracker.class);
-        new GiniVision.Builder().setEventTracker(eventTracker).build();
+        new GiniCapture.Builder().setEventTracker(eventTracker).build();
 
         final ImageDocument imageDocument = new ImageDocumentFake();
 
@@ -1029,7 +1029,7 @@ public class AnalysisScreenPresenterTest {
     public void should_triggerRetryEvent_forError_fromReviewScreen_whenRetry_wasClicked() throws Exception {
         // Given
         final EventTracker eventTracker = spy(EventTracker.class);
-        new GiniVision.Builder().setEventTracker(eventTracker).build();
+        new GiniCapture.Builder().setEventTracker(eventTracker).build();
 
         final ImageDocument imageDocument = new ImageDocumentFake();
 
@@ -1055,7 +1055,7 @@ public class AnalysisScreenPresenterTest {
         when(mActivity.getString(anyInt())).thenReturn("A String");
 
         final EventTracker eventTracker = spy(EventTracker.class);
-        new GiniVision.Builder().setEventTracker(eventTracker).build();
+        new GiniCapture.Builder().setEventTracker(eventTracker).build();
 
         final ImageDocument imageDocument = new ImageDocumentFake();
 

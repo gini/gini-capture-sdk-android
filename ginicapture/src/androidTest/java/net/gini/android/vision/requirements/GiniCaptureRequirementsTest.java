@@ -17,7 +17,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 @RunWith(AndroidJUnit4.class)
-public class GiniVisionRequirementsTest {
+public class GiniCaptureRequirementsTest {
 
     private static final String LOG_TAG = "RequirementsReport";
 
@@ -25,7 +25,7 @@ public class GiniVisionRequirementsTest {
     @Test
     public void should_fulfillRequirements() throws InterruptedException {
         grantCameraPermission();
-        final RequirementsReport report = GiniVisionRequirements.checkRequirements(
+        final RequirementsReport report = GiniCaptureRequirements.checkRequirements(
                 ApplicationProvider.getApplicationContext());
         assertWithMessage(unfulfilledRequirementsMessage(report))
                 .that(report.isFulfilled()).isTrue();

@@ -97,13 +97,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-  Via overriding the style named ``GiniVisionTheme.Onboarding.Message.TextStyle`` (with parent style
-  ``Root.GiniVisionTheme.Onboarding.Message.TextStyle``).
+  Via overriding the style named ``GiniCaptureTheme.Onboarding.Message.TextStyle`` (with parent style
+  ``Root.GiniCaptureTheme.Onboarding.Message.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Onboarding.Message.TextStyle`` (with parent style
-  ``Root.GiniVisionTheme.Onboarding.Message.TextStyle``) and setting an item named ``gvCustomFont``
+  Via overriding the style named ``GiniCaptureTheme.Onboarding.Message.TextStyle`` (with parent style
+  ``Root.GiniCaptureTheme.Onboarding.Message.TextStyle``) and setting an item named ``gvCustomFont``
   with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <onboarding>`
@@ -224,10 +224,10 @@ All Action Bar customizations except the title are global to all Activities.
 - **Custom Pages**
 
   You can change the number of displayed pages and their content (image and short text) by setting
-  an ``ArrayList`` containing ``OnboardingPage`` objects when building a ``GiniVision`` instance
+  an ``ArrayList`` containing ``OnboardingPage`` objects when building a ``GiniCapture`` instance
   with ``setCustomOnboardingPages()``. 
   
-  If you don't use ``GiniVision`` yet you can also provide the list using the extra
+  If you don't use ``GiniCapture`` yet you can also provide the list using the extra
   ``CameraActivity.EXTRA_IN_ONBOARDING_PAGES`` for the Screen API and
   ``OnboardingFragmentCompat.createInstance(ArrayList<OnboardingPage>)`` or
   ``OnboardingFragmentStandard.createInstance(ArrayList<OnboardingPage>)`` for the Component API.
@@ -417,13 +417,13 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.DocumentImportSubtitle.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.DocumentImportSubtitle.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.DocumentImportSubtitle.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.DocumentImportSubtitle.TextStyle``) and setting an
+    Via overriding the style named ``GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle``) and setting an
     item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <camera>`
@@ -449,13 +449,13 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.DocumentImportHint.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.DocumentImportHint.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Camera.DocumentImportHint.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.DocumentImportHint.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.DocumentImportHint.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.DocumentImportHint.TextStyle``) and setting an
+    Via overriding the style named ``GiniCaptureTheme.Camera.DocumentImportHint.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.DocumentImportHint.TextStyle``) and setting an
     item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <camera>`
@@ -469,13 +469,13 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.ImageStackBadge.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.ImageStackBadge.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Camera.ImageStackBadge.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.ImageStackBadge.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.ImageStackBadge.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.ImageStackBadge.TextStyle``) and setting an
+    Via overriding the style named ``GiniCaptureTheme.Camera.ImageStackBadge.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.ImageStackBadge.TextStyle``) and setting an
     item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
   - **Background Color**
@@ -495,13 +495,13 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.ImageStackSubtitle.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.ImageStackSubtitle.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.ImageStackSubtitle.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.ImageStackSubtitle.TextStyle``) and setting an item
+    Via overriding the style named ``GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle``) and setting an item
     named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <camera>`
@@ -525,18 +525,18 @@ All Action Bar customizations except the title are global to all Activities.
   - **Text Style**
 
     Via overriding the styles named
-    ``GiniVisionTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle`` (with parent style
-    ``Root.GiniVisionTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle``) and
-    ``GiniVisionTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle`` (with parent style
-    ``Root.GiniVisionTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle``).
+    ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle`` (with parent style
+    ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle``) and
+    ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle`` (with parent style
+    ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle``).
 
   - **Font**
 
     Via overriding the styles named
-    ``GiniVisionTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle`` (with parent style
-    ``Root.GiniVisionTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle``) and
-    ``GiniVisionTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle`` (with parent style
-    ``Root.GiniVisionTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle``). and setting an
+    ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle`` (with parent style
+    ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle``) and
+    ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle`` (with parent style
+    ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle``). and setting an
     item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <camera>`
@@ -601,13 +601,13 @@ All Action Bar customizations except the title are global to all Activities.
 
    - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.Error.NoPermission.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.Error.NoPermission.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Camera.Error.NoPermission.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.Error.NoPermission.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.Error.NoPermission.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.Error.NoPermission.TextStyle``) and setting an
+    Via overriding the style named ``GiniCaptureTheme.Camera.Error.NoPermission.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.Error.NoPermission.TextStyle``) and setting an
     item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 - **Button**
@@ -618,13 +618,13 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.Error.NoPermission.Button.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.Error.NoPermission.Button.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Camera.Error.NoPermission.Button.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Camera.Error.NoPermission.Button.TextStyle``) and setting an
+    Via overriding the style named ``GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle``) and setting an
     item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <camera>`
@@ -751,13 +751,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-  Via overriding the style named ``GiniVisionTheme.Review.BottomPanel.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Review.BottomPanel.TextStyle``).
+  Via overriding the style named ``GiniCaptureTheme.Review.BottomPanel.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Review.BottomPanel.TextStyle``).
 
   - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Review.BottomPanel.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Review.BottomPanel.TextStyle``) and setting an
+  Via overriding the style named ``GiniCaptureTheme.Review.BottomPanel.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Review.BottomPanel.TextStyle``) and setting an
   item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 - **Background Color**
@@ -842,13 +842,13 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Analysis.AnalysingMessage.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Analysis.AnalysingMessage.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Analysis.AnalysingMessage.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Analysis.AnalysingMessage.TextStyle``) and setting an
+    Via overriding the style named ``GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle``) and setting an
     item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <analysis>`
@@ -866,26 +866,26 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Analysis.PdfFilename.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Analysis.PdfFilename.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Analysis.PdfFilename.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Analysis.PdfFilename.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Analysis.PdfFilename.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Analysis.PdfFilename.TextStyle``) and setting an
+    Via overriding the style named ``GiniCaptureTheme.Analysis.PdfFilename.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Analysis.PdfFilename.TextStyle``) and setting an
     item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 - **Page Count**
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Analysis.PdfPageCount.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Analysis.PdfPageCount.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Analysis.PdfPageCount.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Analysis.PdfPageCount.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Analysis.PdfPageCount.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Analysis.PdfPageCount.TextStyle``) and setting an
+    Via overriding the style named ``GiniCaptureTheme.Analysis.PdfPageCount.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Analysis.PdfPageCount.TextStyle``) and setting an
     item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
   :ref:`Back to screenshots. <analysis>`
@@ -899,26 +899,26 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Snackbar.Error.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Snackbar.Error.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Snackbar.Error.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Snackbar.Error.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Snackbar.Error.TextStyle``) and setting an
+    Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Snackbar.Error.TextStyle``) and setting an
     item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 - **Button**
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Snackbar.Error.Button.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Snackbar.Error.Button.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.Button.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Snackbar.Error.Button.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Snackbar.Error.Button.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Snackbar.Error.Button.TextStyle``) and setting an
+    Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.Button.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Snackbar.Error.Button.TextStyle``) and setting an
     item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
   - **Retry Button Text**
@@ -1023,13 +1023,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-  Via overriding the style named ``GiniVisionTheme.Review.MultiPage.PageIndicator.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Review.MultiPage.PageIndicator.TextStyle``).
+  Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Review.MultiPage.PageIndicator.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Review.MultiPage.PageIndicator.TextStyle``) and setting an
+  Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle``) and setting an
   item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 - **Background Color**
@@ -1082,13 +1082,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-  Via overriding the style named ``GiniVisionTheme.Review.MultiPage.ThumbnailBadge.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Review.MultiPage.ThumbnailBadge.TextStyle``).
+  Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Review.MultiPage.ThumbnailBadge.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Review.MultiPage.ThumbnailBadge.TextStyle``) and setting an
+  Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle``) and setting an
   item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 - **Background Border Color**
@@ -1177,13 +1177,13 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Text Style**
 
-  Via overriding the style named ``GiniVisionTheme.Review.MultiPage.AddPagesSubtitle.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Review.MultiPage.AddPagesSubtitle.TextStyle``).
+  Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Review.MultiPage.AddPagesSubtitle.TextStyle``
-    (with parent style ``Root.GiniVisionTheme.Review.MultiPage.AddPagesSubtitle.TextStyle``) and
+    Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle``
+    (with parent style ``Root.GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle``) and
     setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
   :ref:`Back to screenshots. <multi-page-review>`
@@ -1199,13 +1199,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-  Via overriding the style named ``GiniVisionTheme.Review.MultiPage.ReorderPagesTip.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Review.MultiPage.ReorderPagesTip.TextStyle``).
+  Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Review.MultiPage.ReorderPagesTip.TextStyle``
-  (with parent style ``Root.GiniVisionTheme.Review.MultiPage.ReorderPagesTip.TextStyle``) and
+  Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle``
+  (with parent style ``Root.GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle``) and
   setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <multi-page-review>`
@@ -1238,26 +1238,26 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Snackbar.Error.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Snackbar.Error.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Snackbar.Error.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Snackbar.Error.TextStyle``
-    (with parent style ``Root.GiniVisionTheme.Snackbar.Error.TextStyle``) and
+    Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.TextStyle``
+    (with parent style ``Root.GiniCaptureTheme.Snackbar.Error.TextStyle``) and
     setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 - **Button**
 
   - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Snackbar.Error.Button.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Snackbar.Error.Button.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.Button.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Snackbar.Error.Button.TextStyle``).
 
   - **Font**
 
-    Via overriding the style named ``GiniVisionTheme.Snackbar.Error.Button.TextStyle``
-    (with parent style ``Root.GiniVisionTheme.Snackbar.Error.Button.TextStyle``) and
+    Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.Button.TextStyle``
+    (with parent style ``Root.GiniCaptureTheme.Snackbar.Error.Button.TextStyle``) and
     setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
   - **Retry Text (Analysis)**
@@ -1360,13 +1360,13 @@ All Action Bar customizations except the title are global to all Activities.
   
 - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Help.Item.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Help.Item.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Help.Item.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Help.Item.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Help.Item.TextStyle``
-  (with parent style ``Root.GiniVisionTheme.Help.Item.TextStyle``) and
+  Via overriding the style named ``GiniCaptureTheme.Help.Item.TextStyle``
+  (with parent style ``Root.GiniCaptureTheme.Help.Item.TextStyle``) and
   setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <help-screen>`
@@ -1446,13 +1446,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Help.PhotoTips.Header.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Help.PhotoTips.Header.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Help.PhotoTips.Header.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Help.PhotoTips.Header.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Help.PhotoTips.Header.TextStyle``
-  (with parent style ``Root.GiniVisionTheme.Help.PhotoTips.Header.TextStyle``) and
+  Via overriding the style named ``GiniCaptureTheme.Help.PhotoTips.Header.TextStyle``
+  (with parent style ``Root.GiniCaptureTheme.Help.PhotoTips.Header.TextStyle``) and
   setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <photo-tips>`
@@ -1464,13 +1464,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-    Via overriding the style named ``GiniVisionTheme.Help.PhotoTips.Tip.TextStyle`` (with
-    parent style ``Root.GiniVisionTheme.Help.PhotoTips.Tip.TextStyle``).
+    Via overriding the style named ``GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Help.PhotoTips.Tip.TextStyle``
-  (with parent style ``Root.GiniVisionTheme.Help.PhotoTips.Tip.TextStyle``) and
+  Via overriding the style named ``GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle``
+  (with parent style ``Root.GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle``) and
   setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <photo-tips>`
@@ -1611,13 +1611,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-  Via overriding the style named ``GiniVisionTheme.Help.SupportedFormats.Item.Header.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Help.SupportedFormats.Item.Header.TextStyle``).
+  Via overriding the style named ``GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Help.SupportedFormats.Item.Header.TextStyle``
-  (with parent style ``Root.GiniVisionTheme.Help.SupportedFormats.Item.Header.TextStyle``) and
+  Via overriding the style named ``GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle``
+  (with parent style ``Root.GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle``) and
   setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <supported-formats>`
@@ -1629,13 +1629,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-  Via overriding the style named ``GiniVisionTheme.Help.SupportedFormats.Item.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Help.SupportedFormats.Item.TextStyle``).
+  Via overriding the style named ``GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Help.SupportedFormats.Item.TextStyle``
-  (with parent style ``Root.GiniVisionTheme.Help.SupportedFormats.Item.TextStyle``) and
+  Via overriding the style named ``GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle``
+  (with parent style ``Root.GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle``) and
   setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 - **Background Color**
@@ -1748,13 +1748,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-  Via overriding the style named ``GiniVisionTheme.Help.FileImport.Header.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Help.FileImport.Header.TextStyle``).
+  Via overriding the style named ``GiniCaptureTheme.Help.FileImport.Header.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Help.FileImport.Header.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Help.FileImport.Header.TextStyle``
-  (with parent style ``Root.GiniVisionTheme.Help.FileImport.Header.TextStyle``) and
+  Via overriding the style named ``GiniCaptureTheme.Help.FileImport.Header.TextStyle``
+  (with parent style ``Root.GiniCaptureTheme.Help.FileImport.Header.TextStyle``) and
   setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <file-import>`
@@ -1797,13 +1797,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-  Via overriding the style named ``GiniVisionTheme.Help.FileImport.Section.Title.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Help.FileImport.Section.Title.TextStyle``).
+  Via overriding the style named ``GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Help.FileImport.Section.Title.TextStyle``
-  (with parent style ``Root.GiniVisionTheme.Help.FileImport.Section.Title.TextStyle``) and
+  Via overriding the style named ``GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle``
+  (with parent style ``Root.GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle``) and
   setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <file-import>`
@@ -1815,13 +1815,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text Style**
 
-  Via overriding the style named ``GiniVisionTheme.Help.FileImport.Section.Body.TextStyle`` (with
-  parent style ``Root.GiniVisionTheme.Help.FileImport.Section.Body.TextStyle``).
+  Via overriding the style named ``GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle`` (with
+  parent style ``Root.GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle``).
 
 - **Font**
 
-  Via overriding the style named ``GiniVisionTheme.Help.FileImport.Section.Body.TextStyle``
-  (with parent style ``Root.GiniVisionTheme.Help.FileImport.Section.Body.TextStyle``) and
+  Via overriding the style named ``GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle``
+  (with parent style ``Root.GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle``) and
   setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <file-import>`

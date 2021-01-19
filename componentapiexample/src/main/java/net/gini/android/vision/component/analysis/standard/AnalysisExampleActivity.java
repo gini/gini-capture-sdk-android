@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.analysis.AnalysisFragmentListener;
 import net.gini.android.vision.analysis.AnalysisFragmentStandard;
 import net.gini.android.vision.component.ExtractionsActivity;
 import net.gini.android.vision.component.R;
 import net.gini.android.vision.component.noresults.standard.NoResultsExampleActivity;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 
 import java.util.Map;
 
@@ -42,12 +42,12 @@ public class AnalysisExampleActivity extends Activity implements
     }
 
     @Override
-    public void onError(@NonNull final GiniVisionError error) {
+    public void onError(@NonNull final GiniCaptureError error) {
         mAnalysisScreenHandler.onError(error);
     }
 
     @Override
-    public void onExtractionsAvailable(@NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+    public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
         mAnalysisScreenHandler.onExtractionsAvailable(extractions);
     }
 

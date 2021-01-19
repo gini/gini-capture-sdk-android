@@ -1,6 +1,6 @@
 package net.gini.android.vision.onboarding;
 
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCaptureError;
 
 import androidx.annotation.NonNull;
 
@@ -24,5 +24,5 @@ public interface OnboardingFragmentListener {
      * </p>
      * @param error details about what went wrong
      */
-    void onError(@NonNull GiniVisionError error);
+    void onError(@NonNull GiniCaptureError error);
 }

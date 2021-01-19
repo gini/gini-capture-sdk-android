@@ -2,7 +2,7 @@ package net.gini.android.vision.camera;
 
 import static org.mockito.Mockito.spy;
 
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.internal.ui.FragmentImplCallback;
 
 import androidx.annotation.NonNull;
@@ -21,9 +21,9 @@ public class CameraFragmentHelperFake extends CameraFragmentHelper {
     @Override
     protected CameraFragmentImpl createCameraFragment(
             @NonNull final FragmentImplCallback fragment,
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
         return mCameraFragmentImplFake = spy(new CameraFragmentImplFake(fragment,
-                giniVisionFeatureConfiguration));
+                giniCaptureFeatureConfiguration));
     }
 
     @NonNull

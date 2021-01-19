@@ -26,7 +26,7 @@ list of extras view the `CameraActivity`'s javadoc.
 
 ### GVL 3.0.0 and newer
 
-Since GVL 3.0.0 there is no need to subclass the activities. You only need to configure and create a `GiniVision` instance and start the 
+Since GVL 3.0.0 there is no need to subclass the activities. You only need to configure and create a `GiniCapture` instance and start the 
 `CameraActivity` for result.
 
 ReviewActivity
@@ -36,7 +36,7 @@ ReviewActivity
 
 The `ReviewActivity` handles the events from the Review Screen. As it is a subclass of the Gini Capture SDK's `ReviewActivity` you have
 to declare it in your `AndroidManifest.xml`. We recommend setting the title to `gv_title_review`, limit the orientation to portrait and use
-the `GiniVisionTheme`
+the `GiniCaptureTheme`
 
 It starts analyzing the taken picture in `ReviewActivity#onShouldAnalyzeDocument()` while the user reviews the picture. If the picture was
 rotated it cancels the analysis in `ReviewActivity#onDocumentWasRotated()`. If the analysis fails it calls
@@ -63,7 +63,7 @@ The `ReviewActivity` finishes itself after data was added to the result.
 
 ### GVL 3.0.0 and newer
 
-There is no need for subclassing the GVL's `ReviewActivity`. You only need to configure and create a `GiniVision` instance before launching
+There is no need for subclassing the GVL's `ReviewActivity`. You only need to configure and create a `GiniCapture` instance before launching
 the `CameraActivity` for result.
 
 AnalysisActivity
@@ -72,7 +72,7 @@ AnalysisActivity
 ### GVL 2.5.0 and older
 
 The `AnalysisActivity` handles the Analysis Screen's events. As it is a subclass of the Gini Capture SDK's `AnalysisActivity` you have to
-declare it in your `AndroidManifest.xml`. We recommend setting the title to `gv_title_analysis` and use the `GiniVisionTheme`.
+declare it in your `AndroidManifest.xml`. We recommend setting the title to `gv_title_analysis` and use the `GiniCaptureTheme`.
 
 The analysis is started or resumed in `AnalysisActivity#onAnalyzeDocument()` (if an error message was given, this method is called only when
 the user clicks the retry button). Notifying the base class about successful completion of the analysis is done similarly as in the
@@ -88,7 +88,7 @@ with `AnalysisActivity#startScanAnimation()` and `AnalysisActivity#stopScanAnima
 
 ### GVL 3.0.0 and newer
 
-There is no need for subclassing the GVL's `AnalysisActivity`. You only need to configure and create a `GiniVision` instance before
+There is no need for subclassing the GVL's `AnalysisActivity`. You only need to configure and create a `GiniCapture` instance before
 launching the `CameraActivity` for result.
 
 ExtractionsActivity
@@ -103,7 +103,7 @@ Feedback should be sent only for the user visible fields. Other fields should be
 
 ### GVL 4.0.0 and newer
 
-In addition, if the return assistant was enabled when the `GiniVision` instance was created and your client id is configured to extract line
+In addition, if the return assistant was enabled when the `GiniCapture` instance was created and your client id is configured to extract line
 items and all the required line item information was successfully extracted, then it will show the line items updated according to the
 changes the user did in the return assistant. The amount to pay field is also updated to contain the total price of the selected line items.
 
@@ -127,7 +127,7 @@ old one to be cancelled (even, if analysis was completed).
 
 ### GVL 3.0.0 and newer
 
-Is not used, because when configuring and creating a `GiniVision` instance we use the default networking plugin which takes care of
+Is not used, because when configuring and creating a `GiniCapture` instance we use the default networking plugin which takes care of
 communicating with the Gini API.
 
 Gini API SDK
@@ -139,7 +139,7 @@ The Gini API SDK is created in and accessed using the `ScreenApiApp`. The `Singl
 
 ### GVL 3.0.0 and newer
 
-The Gini API SDK is not used directly. The default networking plugin, which was used when configuring and creating a `GiniVision` instance,
+The Gini API SDK is not used directly. The default networking plugin, which was used when configuring and creating a `GiniCapture` instance,
 takes care of communicating with the Gini API.
 
 Customization

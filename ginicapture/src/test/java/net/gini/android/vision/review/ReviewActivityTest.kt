@@ -10,7 +10,7 @@ import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import net.gini.android.vision.Document
-import net.gini.android.vision.GiniVision
+import net.gini.android.vision.GiniCapture
 import net.gini.android.vision.document.ImageDocument
 import net.gini.android.vision.tracking.Event
 import net.gini.android.vision.tracking.EventTracker
@@ -30,14 +30,14 @@ class ReviewActivityTest {
 
     @After
     fun after() {
-        GiniVision.cleanup(getInstrumentation().targetContext)
+        GiniCapture.cleanup(getInstrumentation().targetContext)
     }
 
     @Test
     fun `triggers Back event when back was pressed`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         ActivityScenario.launch<ReviewActivity>(Intent(getInstrumentation().targetContext, ReviewActivity::class.java).apply {
             putExtra(ReviewActivity.EXTRA_IN_DOCUMENT, mock<ImageDocument>().apply {

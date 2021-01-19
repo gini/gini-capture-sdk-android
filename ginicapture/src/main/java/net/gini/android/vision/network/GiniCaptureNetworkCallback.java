@@ -7,13 +7,13 @@ package net.gini.android.vision.network;
  */
 
 /**
- * Used by the {@link GiniVisionNetworkService} and {@link GiniVisionNetworkApi} to return the
+ * Used by the {@link GiniCaptureNetworkService} and {@link GiniCaptureNetworkApi} to return the
  * outcome of network calls.
  *
  * @param <R> result type
  * @param <E> error type
  */
-public interface GiniVisionNetworkCallback<R, E> {
+public interface GiniCaptureNetworkCallback<R, E> {
 
     /**
      * Called when the network call failed.

@@ -19,22 +19,22 @@ import android.widget.Toast;
 import net.gini.android.models.SpecificExtraction;
 import net.gini.android.vision.AsyncCallback;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionCoordinator;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureCoordinator;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.ImportedFileValidationException;
 import net.gini.android.vision.camera.CameraFragmentInterface;
 import net.gini.android.vision.camera.CameraFragmentListener;
 import net.gini.android.vision.component.ExtractionsActivity;
 import net.gini.android.vision.component.R;
 import net.gini.android.vision.component.review.multipage.MultiPageReviewExampleActivity;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.document.QRCodeDocument;
 import net.gini.android.vision.example.shared.BaseExampleApp;
 import net.gini.android.vision.example.shared.DocumentAnalyzer;
 import net.gini.android.vision.example.shared.SingleDocumentAnalyzer;
 import net.gini.android.vision.help.HelpActivity;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.onboarding.OnboardingFragmentListener;
 import net.gini.android.vision.util.CancellationToken;
 import net.gini.android.vision.util.IntentHelper;
@@ -68,7 +68,7 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
     private static final int ANALYSIS_REQUEST = 3;
     private final Activity mActivity;
     private CameraFragmentInterface mCameraFragmentInterface;
-    private GiniVisionCoordinator mGiniVisionCoordinator;
+    private GiniCaptureCoordinator mGiniCaptureCoordinator;
     private Menu mMenu;
     private SingleDocumentAnalyzer mSingleDocumentAnalyzer;
     private CancellationToken mFileImportCancellationToken;
@@ -147,8 +147,8 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
     @Override
     public void onCheckImportedDocument(@NonNull final Document document,
             @NonNull final DocumentCheckResultCallback callback) {
-        // We can apply custom checks here to an imported document and notify the Gini Vision
-        // Library about the result
+        // We can apply custom checks here to an imported document and notify the Gini Capture SDK
+        // about the result
 
         // As an example we allow only documents smaller than 5MB
         if (DO_CUSTOM_DOCUMENT_CHECK) {
@@ -183,9 +183,9 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
     }
 
     @Override
-    public void onError(@NonNull final GiniVisionError error) {
-        LOG.error("Gini Vision Lib error: {} - {}", error.getErrorCode(), error.getMessage());
-        Toast.makeText(mActivity, mActivity.getString(R.string.gini_vision_error,
+    public void onError(@NonNull final GiniCaptureError error) {
+        LOG.error("Gini Capture SDK error: {} - {}", error.getErrorCode(), error.getMessage());
+        Toast.makeText(mActivity, mActivity.getString(R.string.gini_capture_error,
                 error.getErrorCode(), error.getMessage()), Toast.LENGTH_LONG).show();
     }
 
@@ -238,7 +238,7 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         setTitlesForCamera();
 
         configureLogging();
-        setupGiniVisionCoordinator(mActivity);
+        setupGiniCaptureCoordinator(mActivity);
 
         // Deprecated: configuration applied in MainActivity#initGiniVision()
         // Configure the features you would like to use
@@ -253,7 +253,7 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         if (savedInstanceState == null) {
             final Intent intent = mActivity.getIntent();
             if (isIntentActionViewOrSend(intent)) {
-                startGiniVisionLibraryForImportedFile(intent);
+                startGiniCaptureLibraryForImportedFile(intent);
             } else {
                 showCamera();
             }
@@ -272,7 +272,7 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                mGiniVisionCoordinator.onCameraStarted();
+                mGiniCaptureCoordinator.onCameraStarted();
             }
         });
     }
@@ -302,9 +302,9 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         root.addAppender(logcatAppender);
     }
 
-    private void setupGiniVisionCoordinator(final Activity activity) {
-        mGiniVisionCoordinator = GiniVisionCoordinator.createInstance(activity);
-        mGiniVisionCoordinator.setListener(new GiniVisionCoordinator.Listener() {
+    private void setupGiniCaptureCoordinator(final Activity activity) {
+        mGiniCaptureCoordinator = GiniCaptureCoordinator.createInstance(activity);
+        mGiniCaptureCoordinator.setListener(new GiniCaptureCoordinator.Listener() {
             @Override
             public void onShowOnboarding() {
                 showOnboarding();
@@ -326,10 +326,10 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
 
     protected abstract void setTitlesForOnboarding();
 
-    private void startGiniVisionLibraryForImportedFile(@NonNull final Intent importedFileIntent) {
+    private void startGiniCaptureLibraryForImportedFile(@NonNull final Intent importedFileIntent) {
         getSingleDocumentAnalyzer().cancelAnalysis();
-        if (GiniVision.hasInstance() && GiniVision.getInstance().isMultiPageEnabled()) {
-            mFileImportCancellationToken = GiniVision.getInstance().createDocumentForImportedFiles(
+        if (GiniCapture.hasInstance() && GiniCapture.getInstance().isMultiPageEnabled()) {
+            mFileImportCancellationToken = GiniCapture.getInstance().createDocumentForImportedFiles(
                     importedFileIntent, mActivity,
                     new AsyncCallback<Document, ImportedFileValidationException>() {
                         @Override
@@ -355,7 +355,7 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
                     });
         } else {
             try {
-                final Document document = GiniVision.createDocumentForImportedFile(
+                final Document document = GiniCapture.createDocumentForImportedFile(
                         importedFileIntent,
                         mActivity);
                 if (document.isReviewable()) {
@@ -401,7 +401,7 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
 
     public void onNewIntent(final Intent intent) {
         if (isIntentActionViewOrSend(intent)) {
-            startGiniVisionLibraryForImportedFile(intent);
+            startGiniCaptureLibraryForImportedFile(intent);
         }
     }
 
@@ -424,7 +424,7 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
 
     @Override
     public void onExtractionsAvailable(
-            @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
         final Intent intent = new Intent(mActivity, ExtractionsActivity.class);
         intent.putExtra(ExtractionsActivity.EXTRA_IN_EXTRACTIONS,
                 getExtractionsBundle(extractions));
@@ -435,7 +435,7 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
 
     @Override
     public void onProceedToMultiPageReviewScreen(
-            @NonNull final GiniVisionMultiPageDocument multiPageDocument) {
+            @NonNull final GiniCaptureMultiPageDocument multiPageDocument) {
         // Only compat version available (which uses the support library)
         launchMultiPageReviewScreen();
     }

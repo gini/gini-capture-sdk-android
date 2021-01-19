@@ -79,9 +79,9 @@ The Gini Capture SDK consists of four main screens:
 
 The Screen API provides a main Activity with which to start the Gini Capture SDK. In previous
 versions two abstract Activities which had to be overriden to react to events coming from the Gini
-Vision Library. This has been changed and now only the implementations of the
-`GiniVisionNetworkService` and `GiniVisionNetworkApi` have to be provided with the help of the
-`GiniVision` class.
+Capture SDK. This has been changed and now only the implementations of the
+`GiniCaptureNetworkService` and `GiniCaptureNetworkApi` have to be provided with the help of the
+`GiniCapture` class.
 
 In order to support the widest variety of Android versions while keeping the look and feel
 consistent, we use the Android Support Library and provide only Activities subclassing the
@@ -108,7 +108,7 @@ analyze photos of documents.
 We also provide a separate standalone [example
 app](https://github.com/gini/gini-vision-lib-android-example). This is more like a real world app
 and serves as an additional help for you to discover how the Gini Capture SDK (and the Gini
-Vision Network Library) should be used.
+Capture Network Library) should be used.
 
 Requirements
 ------------

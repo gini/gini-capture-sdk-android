@@ -23,11 +23,11 @@ import com.ortiz.touch.TouchImageView;
 
 import net.gini.android.vision.AsyncCallback;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.R;
 import net.gini.android.vision.document.DocumentFactory;
-import net.gini.android.vision.document.GiniVisionDocument;
+import net.gini.android.vision.document.GiniCaptureDocument;
 import net.gini.android.vision.document.ImageDocument;
 import net.gini.android.vision.internal.cache.PhotoMemoryCache;
 import net.gini.android.vision.internal.camera.photo.ParcelableMemoryCache;
@@ -38,7 +38,7 @@ import net.gini.android.vision.internal.network.NetworkRequestResult;
 import net.gini.android.vision.internal.network.NetworkRequestsManager;
 import net.gini.android.vision.internal.ui.FragmentImplCallback;
 import net.gini.android.vision.internal.util.FileImportHelper;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.tracking.ReviewScreenEvent;
 
 import org.slf4j.Logger;
@@ -82,12 +82,12 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
         }
 
         @Override
-        public void onError(@NonNull final GiniVisionError error) {
+        public void onError(@NonNull final GiniCaptureError error) {
         }
 
         @Override
         public void onExtractionsAvailable(
-                @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+                @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
 
         }
 
@@ -231,7 +231,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                         return;
                     }
                     hideActivityIndicatorAndEnableButtons();
-                    mListener.onError(new GiniVisionError(GiniVisionError.ErrorCode.REVIEW,
+                    mListener.onError(new GiniCaptureError(GiniCaptureError.ErrorCode.REVIEW,
                             "An error occurred while loading the document."));
                 }
 
@@ -252,19 +252,19 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
         if (activity == null) {
             return;
         }
-        final GiniVisionDocument document = DocumentFactory.newImageDocumentFromPhotoAndDocument(
+        final GiniCaptureDocument document = DocumentFactory.newImageDocumentFromPhotoAndDocument(
                 mPhoto,
                 mDocument);
-        if (GiniVision.hasInstance()) {
-            final NetworkRequestsManager networkRequestsManager = GiniVision.getInstance()
+        if (GiniCapture.hasInstance()) {
+            final NetworkRequestsManager networkRequestsManager = GiniCapture.getInstance()
                     .internal().getNetworkRequestsManager();
             if (networkRequestsManager != null) {
                 networkRequestsManager.upload(activity, document)
                         .handle(new CompletableFuture.BiFun<NetworkRequestResult<
-                                GiniVisionDocument>, Throwable, Void>() {
+                                GiniCaptureDocument>, Throwable, Void>() {
                             @Override
                             public Void apply(
-                                    final NetworkRequestResult<GiniVisionDocument> requestResult,
+                                    final NetworkRequestResult<GiniCaptureDocument> requestResult,
                                     final Throwable throwable) {
                                 if (throwable != null && !isCancellation(throwable)) {
                                     handleAnalysisError(throwable);
@@ -287,8 +287,8 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
         if (activity == null) {
             return;
         }
-        if (GiniVision.hasInstance()) {
-            GiniVision.getInstance().internal().setReviewScreenAnalysisError(throwable);
+        if (GiniCapture.hasInstance()) {
+            GiniCapture.getInstance().internal().setReviewScreenAnalysisError(throwable);
         }
         mDocumentAnalysisErrorMessage = activity.getString(R.string.gv_document_analysis_error);
     }
@@ -298,10 +298,10 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
         if (activity == null) {
             return;
         }
-        if (GiniVision.hasInstance()) {
+        if (GiniCapture.hasInstance()) {
             LOG.debug("Loading Photo from memory cache");
             final PhotoMemoryCache photoMemoryCache =
-                    GiniVision.getInstance().internal().getPhotoMemoryCache();
+                    GiniCapture.getInstance().internal().getPhotoMemoryCache();
             photoMemoryCache.get(activity, mDocument, new AsyncCallback<Photo, Exception>() {
                 @Override
                 public void onSuccess(final Photo result) {
@@ -368,7 +368,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                         return;
                     }
                     mListener.onError(
-                            new GiniVisionError(GiniVisionError.ErrorCode.REVIEW,
+                            new GiniCaptureError(GiniCaptureError.ErrorCode.REVIEW,
                                     "An error occurred while compressing the jpeg."));
                 }
             });
@@ -391,7 +391,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
         if (mNextClicked || mStopped) {
             return;
         }
-        mListener.onError(new GiniVisionError(GiniVisionError.ErrorCode.REVIEW,
+        mListener.onError(new GiniCaptureError(GiniCaptureError.ErrorCode.REVIEW,
                 "An error occurred while instantiating a Photo from the ImageDocument."));
     }
 
@@ -561,8 +561,8 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
         final int oldRotation = mCurrentRotation;
         mCurrentRotation += 90;
         rotateImageView(mCurrentRotation, true);
-        if (GiniVision.hasInstance()
-                && GiniVision.getInstance().internal().getNetworkRequestsManager() != null) {
+        if (GiniCapture.hasInstance()
+                && GiniCapture.getInstance().internal().getNetworkRequestsManager() != null) {
             LOG.debug("Only the preview was rotated");
             mDocument.setRotationForDisplay(mCurrentRotation);
             mDocument.updateRotationDeltaBy(90);
@@ -579,7 +579,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                 }
                 mDocument.setRotationForDisplay(mCurrentRotation);
                 mDocument.updateRotationDeltaBy(90);
-                final GiniVisionDocument document =
+                final GiniCaptureDocument document =
                         DocumentFactory.newImageDocumentFromPhotoAndDocument(
                                 photo, mDocument);
                 mListener.onDocumentWasRotated(
@@ -593,7 +593,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                     return;
                 }
                 LOG.error("Failed to rotate the jpeg");
-                mListener.onError(new GiniVisionError(GiniVisionError.ErrorCode.REVIEW,
+                mListener.onError(new GiniCaptureError(GiniCaptureError.ErrorCode.REVIEW,
                         "An error occurred while applying rotation to the jpeg."));
             }
         });
@@ -604,8 +604,8 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
         if (activity == null) {
             return;
         }
-        if (GiniVision.hasInstance()) {
-            final NetworkRequestsManager networkRequestsManager = GiniVision.getInstance()
+        if (GiniCapture.hasInstance()) {
+            final NetworkRequestsManager networkRequestsManager = GiniCapture.getInstance()
                     .internal().getNetworkRequestsManager();
             if (networkRequestsManager != null) {
                 networkRequestsManager.cancel(mDocument);
@@ -647,7 +647,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                         return;
                     }
                     LOG.error("Failed to rotate the jpeg");
-                    mListener.onError(new GiniVisionError(GiniVisionError.ErrorCode.REVIEW,
+                    mListener.onError(new GiniCaptureError(GiniCaptureError.ErrorCode.REVIEW,
                             "An error occurred while applying rotation to the jpeg."));
                 }
             });
@@ -659,12 +659,12 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
         if (activity == null) {
             return;
         }
-        final GiniVisionDocument document = DocumentFactory.newImageDocumentFromPhotoAndDocument(
+        final GiniCaptureDocument document = DocumentFactory.newImageDocumentFromPhotoAndDocument(
                 mPhoto,
                 mDocument);
-        if (GiniVision.hasInstance()) {
+        if (GiniCapture.hasInstance()) {
             final NetworkRequestsManager networkRequestsManager =
-                    GiniVision.getInstance().internal().getNetworkRequestsManager();
+                    GiniCapture.getInstance().internal().getNetworkRequestsManager();
             if (networkRequestsManager != null) {
                 mListener.onProceedToAnalysisScreen(document, mDocumentAnalysisErrorMessage);
             } else {
@@ -677,10 +677,10 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
 
     private void proceedToAnalysisScreen() {
         LOG.info("Proceed to Analysis Screen");
-        final GiniVisionDocument document = DocumentFactory.newImageDocumentFromPhotoAndDocument(
+        final GiniCaptureDocument document = DocumentFactory.newImageDocumentFromPhotoAndDocument(
                 mPhoto,
                 mDocument);
-        if (GiniVision.hasInstance()) {
+        if (GiniCapture.hasInstance()) {
             mListener.onProceedToAnalysisScreen(document, mDocumentAnalysisErrorMessage);
         } else {
             mListener.onProceedToAnalysisScreen(document);

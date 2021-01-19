@@ -7,10 +7,10 @@ import androidx.annotation.Nullable;
  *
  * Copyright (c) 2019 Gini GmbH.
  */
-public class GiniVisionHelper {
+public class GiniCaptureHelper {
 
-    public static void setGiniVisionInstance(@Nullable final GiniVision giniVision) {
-        GiniVision.setInstance(giniVision);
+    public static void setGiniCaptureInstance(@Nullable final GiniCapture giniCapture) {
+        GiniCapture.setInstance(giniCapture);
     }
 
 }

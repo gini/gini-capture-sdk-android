@@ -5,14 +5,14 @@ import android.os.Parcelable;
 
 /**
  * <p>
- *     Provides details about the error which caused the Gini Vision Library to fail.
+ *     Provides details about the error which caused the Gini Capture SDK to fail.
  * </p>
  */
-public class GiniVisionError implements Parcelable {
+public class GiniCaptureError implements Parcelable {
 
     /**
      * <p>
-     *     Definition of Gini Vision Library error codes.
+     *     Definition of Gini Capture SDK error codes.
      * </p>
      */
     public enum ErrorCode {
@@ -78,7 +78,7 @@ public class GiniVisionError implements Parcelable {
      *
      * @suppress
      */
-    public GiniVisionError(final ErrorCode code, final String message) {
+    public GiniCaptureError(final ErrorCode code, final String message) {
         mErrorCode = code;
         mMessage = message;
     }
@@ -132,19 +132,19 @@ public class GiniVisionError implements Parcelable {
      *
      * @suppress
      */
-    public static final Creator<GiniVisionError> CREATOR = new Creator<GiniVisionError>() {
+    public static final Creator<GiniCaptureError> CREATOR = new Creator<GiniCaptureError>() {
         @Override
-        public GiniVisionError createFromParcel(final Parcel in) {
-            return new GiniVisionError(in);
+        public GiniCaptureError createFromParcel(final Parcel in) {
+            return new GiniCaptureError(in);
         }
 
         @Override
-        public GiniVisionError[] newArray(final int size) {
-            return new GiniVisionError[size];
+        public GiniCaptureError[] newArray(final int size) {
+            return new GiniCaptureError[size];
         }
     };
 
-    private GiniVisionError(final Parcel in) {
+    private GiniCaptureError(final Parcel in) {
         mErrorCode = ErrorCode.values()[in.readInt()];
         mMessage = in.readString();
     }

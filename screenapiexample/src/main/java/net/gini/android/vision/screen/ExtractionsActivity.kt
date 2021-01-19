@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.gini.android.GiniApiType
 import net.gini.android.models.SpecificExtraction
-import net.gini.android.vision.GiniVision
-import net.gini.android.vision.accounting.network.GiniVisionAccountingNetworkService
+import net.gini.android.vision.GiniCapture
+import net.gini.android.vision.accounting.network.GiniCaptureAccountingNetworkService
 import net.gini.android.vision.example.shared.BaseExampleApp
 import net.gini.android.vision.network.Error
-import net.gini.android.vision.network.GiniVisionNetworkCallback
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction
+import net.gini.android.vision.network.GiniCaptureNetworkCallback
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction
 import net.gini.android.vision.screen.databinding.ActivityExtractionsBinding
 import org.json.JSONException
 import org.slf4j.LoggerFactory
@@ -34,7 +34,7 @@ import java.util.*
 class ExtractionsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityExtractionsBinding
 
-    private var mExtractions: MutableMap<String, GiniVisionSpecificExtraction> = HashMap()
+    private var mExtractions: MutableMap<String, GiniCaptureSpecificExtraction> = HashMap()
     private val mLegacyExtractions: MutableMap<String, SpecificExtraction> = HashMap()
     private var mExtractionsAdapter: ExtractionsAdapter<Any>? = null
 
@@ -64,8 +64,8 @@ class ExtractionsActivity : AppCompatActivity() {
     private val analyzedCameraPicture: ByteArray?
         get() {
             val app = application as BaseExampleApp
-            val networkService = app.getGiniVisionNetworkService("ScreenApi", GiniApiType.ACCOUNTING)
-            return if (networkService is GiniVisionAccountingNetworkService) {
+            val networkService = app.getGiniCaptureNetworkService("ScreenApi", GiniApiType.ACCOUNTING)
+            return if (networkService is GiniCaptureAccountingNetworkService) {
                 networkService.analyzedCameraPictureAsJpeg
             } else null
         }
@@ -186,7 +186,7 @@ class ExtractionsActivity : AppCompatActivity() {
             amount.value = "10.00:EUR"
             Toast.makeText(this, "Amount changed to 10.00:EUR", Toast.LENGTH_SHORT).show()
         } else { // Amount was missing, let's add it
-            val extraction = GiniVisionSpecificExtraction(
+            val extraction = GiniCaptureSpecificExtraction(
                     "amountToPay", "10.00:EUR",
                     "amount", null, emptyList())
             mExtractions["amountToPay"] = extraction
@@ -195,13 +195,13 @@ class ExtractionsActivity : AppCompatActivity() {
         }
         mExtractionsAdapter?.notifyDataSetChanged()
         showProgressIndicator(binding)
-        val giniVisionNetworkApi = GiniVision.getInstance().giniVisionNetworkApi
-        if (giniVisionNetworkApi == null) {
-            Toast.makeText(this, "Feedback not sent: missing GiniVisionNetworkApi implementation.",
+        val giniCaptureNetworkApi = GiniCapture.getInstance().giniCaptureNetworkApi
+        if (giniCaptureNetworkApi == null) {
+            Toast.makeText(this, "Feedback not sent: missing GiniCaptureNetworkApi implementation.",
                     Toast.LENGTH_SHORT).show()
             return
         }
-        giniVisionNetworkApi.sendFeedback(mExtractions, object : GiniVisionNetworkCallback<Void, Error> {
+        giniCaptureNetworkApi.sendFeedback(mExtractions, object : GiniCaptureNetworkCallback<Void, Error> {
             override fun failure(error: Error) {
                 hideProgressIndicator(binding)
                 Toast.makeText(this@ExtractionsActivity,
@@ -307,8 +307,8 @@ class ExtractionsActivity : AppCompatActivity() {
         }
     }
 
-    private class ExtractionsAdapterImpl(override var extractions: List<GiniVisionSpecificExtraction>)
-        : ExtractionsAdapter<GiniVisionSpecificExtraction>() {
+    private class ExtractionsAdapterImpl(override var extractions: List<GiniCaptureSpecificExtraction>)
+        : ExtractionsAdapter<GiniCaptureSpecificExtraction>() {
 
         override fun onCreateViewHolder(parent: ViewGroup,
                                         viewType: Int): ExtractionsViewHolder {

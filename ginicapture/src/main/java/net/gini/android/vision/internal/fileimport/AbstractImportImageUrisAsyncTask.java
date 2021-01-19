@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 
 import net.gini.android.vision.AsyncCallback;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.ImportedFileValidationException;
 import net.gini.android.vision.document.DocumentFactory;
 import net.gini.android.vision.document.ImageDocument;
@@ -49,20 +49,20 @@ public abstract class AbstractImportImageUrisAsyncTask extends
     private final Context mContext;
     private final Intent mIntent;
     private final AsyncCallback<ImageMultiPageDocument, ImportedFileValidationException> mCallback;
-    private final GiniVision mGiniVision;
+    private final GiniCapture mGiniCapture;
     private final Document.Source mSource;
     private final Document.ImportMethod mImportMethod;
 
     protected AbstractImportImageUrisAsyncTask(@NonNull final Context context,
             @NonNull final Intent intent,
-            @NonNull final GiniVision giniVision,
+            @NonNull final GiniCapture giniCapture,
             @NonNull final Document.Source source,
             @NonNull final Document.ImportMethod importMethod,
             @NonNull final AsyncCallback<ImageMultiPageDocument, ImportedFileValidationException>
                     callback) {
         mContext = context;
         mIntent = intent;
-        mGiniVision = giniVision;
+        mGiniCapture = giniCapture;
         mSource = source;
         mImportMethod = importMethod;
         mCallback = callback;
@@ -171,7 +171,7 @@ public abstract class AbstractImportImageUrisAsyncTask extends
         }
         // Save to local storage
         LOG.debug("Save compressed Photo to local storage created from uri {}", uri);
-        final Uri localUri = mGiniVision.internal().getImageDiskStore()
+        final Uri localUri = mGiniCapture.internal().getImageDiskStore()
                 .save(mContext, photo.getData());
         if (localUri == null) {
             LOG.error("Failed to copy to app storage uri {}", uri);

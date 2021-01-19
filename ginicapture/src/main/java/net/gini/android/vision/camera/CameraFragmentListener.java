@@ -1,12 +1,12 @@
 package net.gini.android.vision.camera;
 
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionError;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureError;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.document.QRCodeDocument;
-import net.gini.android.vision.network.GiniVisionNetworkService;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.GiniCaptureNetworkService;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 
 import java.util.Map;
 
@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 public interface CameraFragmentListener {
     /**
      * <p>
-     * Called when the user has taken an image with the camera or has imported a document that passed the Gini Vision Library's validation and any custom checks that were implemented.
+     * Called when the user has taken an image with the camera or has imported a document that passed the Gini Capture SDK's validation and any custom checks that were implemented.
      * </p>
      *
      * @param document the image taken by the camera or the validated imported document
@@ -28,13 +28,13 @@ public interface CameraFragmentListener {
     void onDocumentAvailable(@NonNull Document document);
 
     void onProceedToMultiPageReviewScreen(
-            @NonNull final GiniVisionMultiPageDocument multiPageDocument);
+            @NonNull final GiniCaptureMultiPageDocument multiPageDocument);
 
     /**
      * <p>
      *     Called when the user clicked the QR Code detected popup.
      *     You should upload the {@link QRCodeDocument}'s data to the Gini API to get the extractions,
-     *     close the Gini Vision Library and continue to your app's transfer form.
+     *     close the Gini Capture SDK and continue to your app's transfer form.
      * </p>
      * <p>
      *      See {@link QRCodeDocument} for supported formats.
@@ -42,8 +42,8 @@ public interface CameraFragmentListener {
      *
      * @param qrCodeDocument contains payment data from a QR Code
      *
-     * @Deprecated When a {@link GiniVision} instance is available the QRCode
-     * is analyzed internally by using the configured {@link GiniVisionNetworkService}
+     * @Deprecated When a {@link GiniCapture} instance is available the QRCode
+     * is analyzed internally by using the configured {@link GiniCaptureNetworkService}
      * implementation. The extractions will be returned in {@link CameraFragmentListener#onExtractionsAvailable(Map)}.
      */
     @Deprecated
@@ -54,13 +54,13 @@ public interface CameraFragmentListener {
      *     This method is invoked for imported documents to allow custom validations.
      * </p>
      * <p>
-     *     Invoke one of the {@link DocumentCheckResultCallback} methods on the main thread to inform the Gini Vision Library about the result.
+     *     Invoke one of the {@link DocumentCheckResultCallback} methods on the main thread to inform the Gini Capture SDK about the result.
      * </p>
      * <p>
-     *     <b>Note:</b> The Gini Vision Library will wait until one of the {@link DocumentCheckResultCallback} methods are invoked.
+     *     <b>Note:</b> The Gini Capture SDK will wait until one of the {@link DocumentCheckResultCallback} methods are invoked.
      * </p>
      * @param document a {@link Document} created from the file the user picked
-     * @param callback use this callback to inform the Gini Vision Library about the result of the custom checks
+     * @param callback use this callback to inform the Gini Capture SDK about the result of the custom checks
      */
     void onCheckImportedDocument(@NonNull Document document,
             @NonNull DocumentCheckResultCallback callback);
@@ -71,7 +71,7 @@ public interface CameraFragmentListener {
      * </p>
      * @param error details about what went wrong
      */
-    void onError(@NonNull GiniVisionError error);
+    void onError(@NonNull GiniCaptureError error);
 
     /**
      * Called after a QRCode was successfully analyzed.
@@ -79,11 +79,11 @@ public interface CameraFragmentListener {
      * @param extractions a map of the extractions with the extraction labels as keys
      */
     void onExtractionsAvailable(
-            @NonNull final Map<String, GiniVisionSpecificExtraction> extractions);
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions);
 
     /**
      * <p>
-     *     Callback to inform the Gini Vision Library about the outcome of the custom imported document checks.
+     *     Callback to inform the Gini Capture SDK about the outcome of the custom imported document checks.
      * </p>
      */
     interface DocumentCheckResultCallback {

@@ -16,9 +16,9 @@ import android.widget.Toast;
 
 import net.gini.android.models.SpecificExtraction;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVisionCoordinator;
-import net.gini.android.vision.GiniVisionDebug;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCaptureCoordinator;
+import net.gini.android.vision.GiniCaptureDebug;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.analysis.AnalysisFragmentInterface;
 import net.gini.android.vision.analysis.AnalysisFragmentListener;
 import net.gini.android.vision.component.ExtractionsActivity;
@@ -26,7 +26,7 @@ import net.gini.android.vision.component.R;
 import net.gini.android.vision.example.shared.BaseExampleApp;
 import net.gini.android.vision.example.shared.DocumentAnalyzer;
 import net.gini.android.vision.example.shared.SingleDocumentAnalyzer;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +64,7 @@ public abstract class BaseAnalysisScreenHandler implements AnalysisFragmentListe
     @Override
     public void onAnalyzeDocument(@NonNull final Document document) {
         LOG.debug("Analyze document {}", document);
-        GiniVisionDebug.writeDocumentToFile(mActivity, document, "_for_analysis");
+        GiniCaptureDebug.writeDocumentToFile(mActivity, document, "_for_analysis");
 
         mAnalysisFragmentInterface.startScanAnimation();
         // We can start analyzing the document by sending it to the Gini API
@@ -104,14 +104,14 @@ public abstract class BaseAnalysisScreenHandler implements AnalysisFragmentListe
                         // analysis has completed successfully
                         mAnalysisFragmentInterface.onDocumentAnalyzed();
                         mAnalysisFragmentInterface.stopScanAnimation();
-                        // If we have no Pay 5 extractions we query the Gini Vision Library
-                        // whether we should show the the Gini Vision No Results Screen
+                        // If we have no Pay 5 extractions we query the Gini Capture SDK
+                        // whether we should show the Gini Capture No Results Screen
                         if (hasNoPay5Extractions(extractions.keySet())
-                                && GiniVisionCoordinator.shouldShowGiniVisionNoResultsScreen(
+                                && GiniCaptureCoordinator.shouldShowGiniCaptureNoResultsScreen(
                                         document)) {
                             // Show a special screen, if no Pay5 extractions were found to give the user some
                             // hints and tips
-                            // for using the Gini Vision Library
+                            // for using the Gini Capture SDK
                             showNoResultsScreen(document);
                         } else {
                             showExtractions(getSingleDocumentAnalyzer().getGiniApiDocument(),
@@ -150,8 +150,8 @@ public abstract class BaseAnalysisScreenHandler implements AnalysisFragmentListe
     protected abstract Intent getNoResultsActivityIntent(final Document document);
 
     @Override
-    public void onError(@NonNull final GiniVisionError error) {
-        mAnalysisFragmentInterface.showError(mActivity.getString(R.string.gini_vision_error,
+    public void onError(@NonNull final GiniCaptureError error) {
+        mAnalysisFragmentInterface.showError(mActivity.getString(R.string.gini_capture_error,
                 error.getErrorCode(), error.getMessage()), Toast.LENGTH_LONG);
     }
 
@@ -197,7 +197,7 @@ public abstract class BaseAnalysisScreenHandler implements AnalysisFragmentListe
     protected abstract void setUpActionBar();
 
     @Override
-    public void onExtractionsAvailable(@NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+    public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
         showExtractions(null, getExtractionsBundle(extractions));
     }
 

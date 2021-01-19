@@ -9,7 +9,7 @@ import android.content.DialogInterface;
 
 import net.gini.android.vision.Document;
 import net.gini.android.vision.R;
-import net.gini.android.vision.document.GiniVisionDocument;
+import net.gini.android.vision.document.GiniCaptureDocument;
 
 import java.util.concurrent.CancellationException;
 
@@ -32,7 +32,7 @@ public final class FileImportHelper {
 
     public static CompletableFuture<Void> showAlertIfOpenWithDocumentAndAppIsDefault(
             @NonNull final Activity activity,
-            @NonNull final GiniVisionDocument document,
+            @NonNull final GiniCaptureDocument document,
             @NonNull final ShowAlertCallback showAlertCallback) {
         final CompletableFuture<Void> alertCompletion = new CompletableFuture<>();
         if (document.getImportMethod() == Document.ImportMethod.OPEN_WITH

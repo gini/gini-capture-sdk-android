@@ -14,15 +14,15 @@ import android.widget.Toast;
 
 import net.gini.android.models.SpecificExtraction;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVisionCoordinator;
-import net.gini.android.vision.GiniVisionDebug;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCaptureCoordinator;
+import net.gini.android.vision.GiniCaptureDebug;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.component.ExtractionsActivity;
 import net.gini.android.vision.component.R;
 import net.gini.android.vision.example.shared.BaseExampleApp;
 import net.gini.android.vision.example.shared.DocumentAnalyzer;
 import net.gini.android.vision.example.shared.SingleDocumentAnalyzer;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.review.ReviewFragmentInterface;
 import net.gini.android.vision.review.ReviewFragmentListener;
 
@@ -64,11 +64,11 @@ public abstract class BaseReviewScreenHandler implements ReviewFragmentListener 
     @Override
     public void onShouldAnalyzeDocument(@NonNull final Document document) {
         LOG.debug("Should analyze document in the Review Screen {}", document);
-        GiniVisionDebug.writeDocumentToFile(mActivity, document, "_for_review");
+        GiniCaptureDebug.writeDocumentToFile(mActivity, document, "_for_review");
 
         // We should start analyzing the document by sending it to the Gini API.
         // If the user did not modify the image we can get the analysis results earlier.
-        // The Gini Vision Library will not request you to proceed to the Analysis Screen, if the
+        // The Gini Capture SDK will not request you to proceed to the Analysis Screen, if the
         // results were
         // received in the Review Screen.
         // If the user modified the image or the analysis didn't complete or it failed the Gini
@@ -136,13 +136,13 @@ public abstract class BaseReviewScreenHandler implements ReviewFragmentListener 
         // the Analysis Screen,
         // we can show the extractions
         if (mExtractions != null) {
-            // If we have no Pay 5 extractions we query the Gini Vision Library
-            // whether we should show the the Gini Vision No Results Screen
+            // If we have no Pay 5 extractions we query the Gini Capture SDK
+            // whether we should show the Gini Capture No Results Screen
             if (hasNoPay5Extractions(mExtractions.keySet())
-                    && GiniVisionCoordinator.shouldShowGiniVisionNoResultsScreen(document)) {
+                    && GiniCaptureCoordinator.shouldShowGiniCaptureNoResultsScreen(document)) {
                 // Show a special screen, if no Pay5 extractions were found to give the user some
                 // hints and tips
-                // for using the Gini Vision Library
+                // for using the Gini Capture Library
                 showNoResultsScreen(document);
             } else {
                 showExtractions(getSingleDocumentAnalyzer().getGiniApiDocument(),
@@ -179,8 +179,8 @@ public abstract class BaseReviewScreenHandler implements ReviewFragmentListener 
     }
 
     @Override
-    public void onError(@NonNull final GiniVisionError error) {
-        Toast.makeText(mActivity, mActivity.getString(R.string.gini_vision_error,
+    public void onError(@NonNull final GiniCaptureError error) {
+        Toast.makeText(mActivity, mActivity.getString(R.string.gini_capture_error,
                 error.getErrorCode(), error.getMessage()), Toast.LENGTH_LONG).show();
     }
 
@@ -232,7 +232,7 @@ public abstract class BaseReviewScreenHandler implements ReviewFragmentListener 
 
     @Override
     public void onExtractionsAvailable(
-            @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
         showExtractions(null, getExtractionsBundle(extractions));
     }
 

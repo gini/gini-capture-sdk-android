@@ -14,23 +14,23 @@ import androidx.annotation.NonNull;
  */
 
 /**
- * Helper class to map the {@link Extraction} from the Gini API SDK to the Gini Vision Library's
- * {@link GiniVisionExtraction} and vice versa.
+ * Helper class to map the {@link Extraction} from the Gini API SDK to the Gini Capture SDK's
+ * {@link GiniCaptureExtraction} and vice versa.
  */
 public final class ExtractionMapper {
 
     /**
-     * Map a list of {@link Extraction}s from the Gini API SDK to a list of Gini Vision Library
-     * {@link GiniVisionExtraction}s.
+     * Map a list of {@link Extraction}s from the Gini API SDK to a list of Gini Capture SDK
+     * {@link GiniCaptureExtraction}s.
      *
      * @param sourceList list of Gini API SDK {@link Extraction}s
      *
-     * @return list of Gini Vision Library {@link GiniVisionExtraction}s
+     * @return list of Gini Capture SDK {@link GiniCaptureExtraction}s
      */
     @NonNull
-    public static List<GiniVisionExtraction> mapListToGVL(
+    public static List<GiniCaptureExtraction> mapListToGiniCapture(
             @NonNull final List<Extraction> sourceList) {
-        final List<GiniVisionExtraction> targetList = new ArrayList<>(sourceList.size());
+        final List<GiniCaptureExtraction> targetList = new ArrayList<>(sourceList.size());
         for (final net.gini.android.models.Extraction source : sourceList) {
             targetList.add(map(source));
         }
@@ -38,51 +38,51 @@ public final class ExtractionMapper {
     }
 
     /**
-     * Map an {@link Extraction} from the Gini API SDK to the Gini Vision Library's {@link
-     * GiniVisionExtraction}.
+     * Map an {@link Extraction} from the Gini API SDK to the Gini Capture SDK's {@link
+     * GiniCaptureExtraction}.
      *
      * @param source Gini API SDK {@link Extraction}
      *
-     * @return a Gini Vision Library {@link GiniVisionExtraction}
+     * @return a Gini Capture SDK {@link GiniCaptureExtraction}
      */
     @NonNull
-    public static GiniVisionExtraction map(
+    public static GiniCaptureExtraction map(
             @NonNull final net.gini.android.models.Extraction source) {
-        final GiniVisionExtraction giniVisionExtraction = new GiniVisionExtraction(
+        final GiniCaptureExtraction giniCaptureExtraction = new GiniCaptureExtraction(
                 source.getValue(), source.getEntity(),
                 BoxMapper.map(source.getBox()));
-        giniVisionExtraction.setIsDirty(source.isDirty());
-        return giniVisionExtraction;
+        giniCaptureExtraction.setIsDirty(source.isDirty());
+        return giniCaptureExtraction;
     }
 
     /**
-     * Map a list of {@link GiniVisionExtraction}s from the Gini Vision Library to a list of Gini
+     * Map a list of {@link GiniCaptureExtraction}s from the Gini Capture SDK to a list of Gini
      * API SDK {@link Extraction}s.
      *
-     * @param sourceList list of Gini Vision Library {@link GiniVisionExtraction}s
+     * @param sourceList list of Gini Capture SDK {@link GiniCaptureExtraction}s
      *
      * @return list of Gini API SDK {@link Extraction}s
      */
     @NonNull
     public static List<Extraction> mapListToApiSdk(
-            @NonNull final List<GiniVisionExtraction> sourceList) {
+            @NonNull final List<GiniCaptureExtraction> sourceList) {
         final List<Extraction> targetList = new ArrayList<>(sourceList.size());
-        for (final GiniVisionExtraction source : sourceList) {
+        for (final GiniCaptureExtraction source : sourceList) {
             targetList.add(map(source));
         }
         return targetList;
     }
 
     /**
-     * Map a {@link GiniVisionExtraction} from the Gini Vision Library to the Gini API SDK's {@link
+     * Map a {@link GiniCaptureExtraction} from the Gini Capture SDK to the Gini API SDK's {@link
      * Extraction}.
      *
-     * @param source Gini Vision Library {@link GiniVisionExtraction}
+     * @param source Gini Capture SDK {@link GiniCaptureExtraction}
      *
      * @return Gini API SDK {@link Extraction}
      */
     @NonNull
-    public static Extraction map(@NonNull final GiniVisionExtraction source) {
+    public static Extraction map(@NonNull final GiniCaptureExtraction source) {
         final Extraction extraction = new Extraction(source.getValue(), source.getEntity(),
                 BoxMapper.map(source.getBox()));
         extraction.setIsDirty(source.isDirty());

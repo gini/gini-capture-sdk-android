@@ -2,8 +2,8 @@ package net.gini.android.vision.onboarding;
 
 import android.app.Activity;
 
-import net.gini.android.vision.GiniVisionBasePresenter;
-import net.gini.android.vision.GiniVisionBaseView;
+import net.gini.android.vision.GiniCaptureBasePresenter;
+import net.gini.android.vision.GiniCaptureBaseView;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import jersey.repackaged.jsr166e.CompletableFuture;
  */
 interface OnboardingScreenContract {
 
-    abstract class View implements GiniVisionBaseView<Presenter>, OnboardingFragmentInterface {
+    abstract class View implements GiniCaptureBaseView<Presenter>, OnboardingFragmentInterface {
 
         private Presenter mPresenter;
 
@@ -40,7 +40,7 @@ interface OnboardingScreenContract {
         abstract CompletableFuture<Void> slideOutViews();
     }
 
-    abstract class Presenter extends GiniVisionBasePresenter<View> implements
+    abstract class Presenter extends GiniCaptureBasePresenter<View> implements
             OnboardingFragmentInterface {
 
         Presenter(

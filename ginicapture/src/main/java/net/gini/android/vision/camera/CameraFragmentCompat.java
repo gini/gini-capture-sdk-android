@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.internal.ui.FragmentImplCallback;
 import net.gini.android.vision.internal.util.AlertDialogHelperCompat;
 
@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
  * <h3>Component API</h3>
  *
  * <p>
- * {@code CameraFragmentCompat} is the main entry point to the Gini Vision Library when using the
+ * {@code CameraFragmentCompat} is the main entry point to the Gini Capture SDK when using the
  * Component API with the Android Support Library.
  * </p>
  * <p>
@@ -30,14 +30,14 @@ import androidx.fragment.app.Fragment;
  * should align the document.
  * </p>
  * <p>
- * If instantiated with {@link CameraFragmentCompat#createInstance(GiniVisionFeatureConfiguration)}
+ * If instantiated with {@link CameraFragmentCompat#createInstance(GiniCaptureFeatureConfiguration)}
  * then a button for importing documents is shown next to the trigger button. A hint popup is
- * displayed the first time the Gini Vision Library is used to inform the user about document
+ * displayed the first time the Gini Capture SDK is used to inform the user about document
  * importing.
  * </p>
  * <p>
  * For importing documents {@code READ_EXTERNAL_STORAGE} permission is required and if the
- * permission is not granted the Gini Vision Library will prompt the user to grant the permission.
+ * permission is not granted the Gini Capture SDK will prompt the user to grant the permission.
  * See @{code Customizing the Camera Screen} on how to override the message and button titles for
  * the rationale and on permission denial alerts.
  * </p>
@@ -83,15 +83,15 @@ public class CameraFragmentCompat extends Fragment implements CameraFragmentInte
      * the specified file types.
      * </p>
      *
-     * @param giniVisionFeatureConfiguration feature configuration
+     * @param giniCaptureFeatureConfiguration feature configuration
      *
      * @return a new instance of the Fragment
      */
     public static CameraFragmentCompat createInstance(
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
         final CameraFragmentCompat fragment = new CameraFragmentCompat();
         fragment.setArguments(
-                CameraFragmentHelper.createArguments(giniVisionFeatureConfiguration));
+                CameraFragmentHelper.createArguments(giniCaptureFeatureConfiguration));
         return fragment;
     }
 

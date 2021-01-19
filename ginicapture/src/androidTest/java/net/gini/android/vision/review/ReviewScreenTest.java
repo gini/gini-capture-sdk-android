@@ -23,11 +23,11 @@ import android.content.Intent;
 import android.view.Surface;
 
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.R;
 import net.gini.android.vision.analysis.AnalysisActivityTestSpy;
 import net.gini.android.vision.document.ImageDocument;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.test.CurrentActivityTestRule;
 
 import org.junit.After;
@@ -715,13 +715,13 @@ public class ReviewScreenTest {
             }
 
             @Override
-            public void onError(@NonNull final GiniVisionError error) {
+            public void onError(@NonNull final GiniCaptureError error) {
 
             }
 
             @Override
             public void onExtractionsAvailable(
-                    @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+                    @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
 
             }
 

@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.component.ExtractionsActivity;
 import net.gini.android.vision.component.R;
 import net.gini.android.vision.component.analysis.standard.AnalysisExampleActivity;
 import net.gini.android.vision.component.noresults.standard.NoResultsExampleActivity;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.review.ReviewFragmentListener;
 import net.gini.android.vision.review.ReviewFragmentStandard;
 
@@ -74,13 +74,13 @@ public class ReviewExampleActivity extends Activity implements
     }
 
     @Override
-    public void onError(@NonNull final GiniVisionError error) {
+    public void onError(@NonNull final GiniCaptureError error) {
         mReviewScreenHandler.onError(error);
     }
 
     @Override
     public void onExtractionsAvailable(
-            @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
         mReviewScreenHandler.onExtractionsAvailable(extractions);
     }
 

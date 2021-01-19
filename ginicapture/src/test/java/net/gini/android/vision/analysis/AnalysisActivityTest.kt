@@ -10,7 +10,7 @@ import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import net.gini.android.vision.Document
-import net.gini.android.vision.GiniVision
+import net.gini.android.vision.GiniCapture
 import net.gini.android.vision.document.ImageDocument
 import net.gini.android.vision.tracking.AnalysisScreenEvent
 import net.gini.android.vision.tracking.Event
@@ -31,15 +31,15 @@ class AnalysisActivityTest {
 
     @After
     fun after() {
-        GiniVision.cleanup(getInstrumentation().targetContext)
+        GiniCapture.cleanup(getInstrumentation().targetContext)
     }
 
     @Test
     fun `triggers Cancel event when back was pressed`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
-        GiniVision.getInstance().internal().imageMultiPageDocumentMemoryStore.setMultiPageDocument(mock())
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.getInstance().internal().imageMultiPageDocumentMemoryStore.setMultiPageDocument(mock())
 
         ActivityScenario.launch<AnalysisActivity>(Intent(getInstrumentation().targetContext, AnalysisActivity::class.java).apply {
             putExtra(AnalysisActivity.EXTRA_IN_DOCUMENT, mock<ImageDocument>().apply {

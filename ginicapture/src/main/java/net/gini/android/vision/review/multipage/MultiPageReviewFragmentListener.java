@@ -5,13 +5,13 @@ import android.content.Intent;
 
 import net.gini.android.vision.AsyncCallback;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.analysis.AnalysisActivity;
 import net.gini.android.vision.analysis.AnalysisFragmentCompat;
 import net.gini.android.vision.analysis.AnalysisFragmentStandard;
 import net.gini.android.vision.camera.CameraFragmentCompat;
 import net.gini.android.vision.camera.CameraFragmentStandard;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 
 import androidx.annotation.NonNull;
 
@@ -40,7 +40,7 @@ public interface MultiPageReviewFragmentListener {
      *
      * @param document contains the reviewed image (can be the original one or a modified image)
      */
-    void onProceedToAnalysisScreen(@NonNull GiniVisionMultiPageDocument document);
+    void onProceedToAnalysisScreen(@NonNull GiniCaptureMultiPageDocument document);
 
     /**
      * Called when the user wants to add a picture of another page. Also called when the user has
@@ -50,7 +50,7 @@ public interface MultiPageReviewFragmentListener {
      * <p> If you host the {@link MultiPageReviewFragment} in its own Activity, then you should
      * simply finish the Activity.
      *
-     * <p> If you use one Activity to host all the GVL fragments, then you should display the
+     * <p> If you use one Activity to host all the Gini Capture fragments, then you should display the
      * {@link CameraFragmentCompat} (or the {@link CameraFragmentStandard}) again.
      */
     void onReturnToCameraScreen();
@@ -58,10 +58,10 @@ public interface MultiPageReviewFragmentListener {
     /**
      * Called when the user deleted all the pages of a document received from another app.
      * This means the {@link MultiPageReviewFragment} was launched after a document had been created
-     * using {@link GiniVision#createDocumentForImportedFiles(Intent, Context, AsyncCallback)}.
+     * using {@link GiniCapture#createDocumentForImportedFiles(Intent, Context, AsyncCallback)}.
      *
-     * <p> At this point you should finish GVL by closing the {@link MultiPageReviewFragment} and
-     * cleaning up using {@link GiniVision#cleanup(Context)}.
+     * <p> At this point you should finish Gini Capture by closing the {@link MultiPageReviewFragment} and
+     * cleaning up using {@link GiniCapture#cleanup(Context)}.
      */
     void onImportedDocumentReviewCancelled();
 }

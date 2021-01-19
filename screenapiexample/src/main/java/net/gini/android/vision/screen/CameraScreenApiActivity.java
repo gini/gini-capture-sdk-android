@@ -34,7 +34,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 /**
- * Implements callbacks for the Gini Vision Library's {@link CameraActivity}. For example to perform
+ * Implements callbacks for the Gini Capture SDK's {@link CameraActivity}. For example to perform
  * checks on imported documents or handle results from QR Codes.
  */
 public class CameraScreenApiActivity extends CameraActivity {

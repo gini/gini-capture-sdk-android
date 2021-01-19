@@ -1,6 +1,6 @@
 package net.gini.android.vision.review.multipage.previews;
 
-import net.gini.android.vision.document.GiniVisionDocumentError;
+import net.gini.android.vision.document.GiniCaptureDocumentError;
 import net.gini.android.vision.document.ImageDocument;
 import net.gini.android.vision.document.ImageMultiPageDocument;
 
@@ -49,7 +49,7 @@ public class PreviewsAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(final int position) {
         final ImageDocument document =
                 mMultiPageDocument.getDocuments().get(position);
-        final GiniVisionDocumentError documentError =
+        final GiniCaptureDocumentError documentError =
                 mMultiPageDocument.getErrorForDocument(document);
         String errorMessage = null;
         PreviewFragment.ErrorButtonAction errorButtonAction = null;

@@ -16,7 +16,7 @@ import jersey.repackaged.jsr166e.CompletableFuture;
  * Internal use only.
  *
  * <p>
- *     An interface which defines an API for the camera used with the Gini Vision Library.
+ *     An interface which defines an API for the camera used with the Gini Capture SDK.
  * </p>
  * <p>
  *     We use this interface with the deprecated Camera API and the new Camera2 API to publish a common API for the required

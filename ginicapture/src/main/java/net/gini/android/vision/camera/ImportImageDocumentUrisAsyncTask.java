@@ -5,11 +5,11 @@ import android.content.Intent;
 
 import net.gini.android.vision.AsyncCallback;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.ImportedFileValidationException;
 import net.gini.android.vision.R;
 import net.gini.android.vision.document.DocumentFactory;
-import net.gini.android.vision.document.GiniVisionDocumentError;
+import net.gini.android.vision.document.GiniCaptureDocumentError;
 import net.gini.android.vision.document.ImageDocument;
 import net.gini.android.vision.document.ImageMultiPageDocument;
 import net.gini.android.vision.internal.fileimport.AbstractImportImageUrisAsyncTask;
@@ -27,12 +27,12 @@ class ImportImageDocumentUrisAsyncTask extends AbstractImportImageUrisAsyncTask 
     private ImportedFileValidationException mException;
 
     ImportImageDocumentUrisAsyncTask(@NonNull final Context context,
-            @NonNull final Intent intent, @NonNull final GiniVision giniVision,
+            @NonNull final Intent intent, @NonNull final GiniCapture giniCapture,
             @NonNull final Document.Source source,
             @NonNull final Document.ImportMethod importMethod,
             @NonNull final AsyncCallback<ImageMultiPageDocument, ImportedFileValidationException>
                     callback) {
-        super(context, intent, giniVision, source, importMethod, callback);
+        super(context, intent, giniCapture, source, importMethod, callback);
     }
 
     @Override
@@ -71,8 +71,8 @@ class ImportImageDocumentUrisAsyncTask extends AbstractImportImageUrisAsyncTask 
         final ImageDocument document = DocumentFactory.newEmptyImageDocument(getSource(),
                 getImportMethod());
         multiPageDocument.addDocument(document);
-        final GiniVisionDocumentError documentError = new GiniVisionDocumentError(string,
-                GiniVisionDocumentError.ErrorCode.FILE_VALIDATION_FAILED);
+        final GiniCaptureDocumentError documentError = new GiniCaptureDocumentError(string,
+                GiniCaptureDocumentError.ErrorCode.FILE_VALIDATION_FAILED);
         multiPageDocument.setErrorForDocument(document, documentError);
     }
 }

@@ -11,30 +11,30 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <p>
- *     The {@code GiniVisionCoordinator} facilitates the default behavior for the Gini Vision Library.
+ *     The {@link GiniCaptureCoordinator} facilitates the default behavior for the Gini Capture Library.
  * </p>
  * <p>
  *     You can ignore this class when using the Screen API.
  * </p>
  * <p>
- *     If you use the Component API we recommend relying on this class to provide the default behavior of the Gini Vision Library. This can be achieved by calling the required methods at pre-defined points in your code and by implementing the {@link GiniVisionCoordinator.Listener}.
+ *     If you use the Component API we recommend relying on this class to provide the default behavior of the Gini Capture Library. This can be achieved by calling the required methods at pre-defined points in your code and by implementing the {@link GiniCaptureCoordinator.Listener}.
  * </p>
  */
-public class GiniVisionCoordinator {
+public class GiniCaptureCoordinator {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GiniVisionCoordinator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GiniCaptureCoordinator.class);
 
-    public static boolean shouldShowGiniVisionNoResultsScreen(final Document document) {
+    public static boolean shouldShowGiniCaptureNoResultsScreen(final Document document) {
         return document.getType() == Document.Type.IMAGE
                 || document.getType() == Document.Type.IMAGE_MULTI_PAGE;
     }
 
     /**
      * <p>
-     *     Interface for the {@link GiniVisionCoordinator} to dispatch events.
+     *     Interface for the {@link GiniCaptureCoordinator} to dispatch events.
      * </p>
      * <p>
-     *     If you use the {@link GiniVisionCoordinator} you should implement this interface in your Activity to facilitate the default behavior of the Gini Vision Library.
+     *     If you use the {@link GiniCaptureCoordinator} you should implement this interface in your Activity to facilitate the default behavior of the Gini Capture SDK.
      * </p>
      */
     public interface Listener {
@@ -61,27 +61,27 @@ public class GiniVisionCoordinator {
 
     /**
      * <p>
-     *     Factory method to create and configure a {@link GiniVisionCoordinator} instance.
+     *     Factory method to create and configure a {@link GiniCaptureCoordinator} instance.
      * </p>
      * @param context a {@link Context} used by the new instance to provide the default behavior
-     * @return a new instance of {@link GiniVisionCoordinator}
+     * @return a new instance of {@link GiniCaptureCoordinator}
      */
-    public static GiniVisionCoordinator createInstance(final Context context) {
-        return new GiniVisionCoordinator(new OncePerInstallEventStore(context));
+    public static GiniCaptureCoordinator createInstance(final Context context) {
+        return new GiniCaptureCoordinator(new OncePerInstallEventStore(context));
     }
 
-    GiniVisionCoordinator(final OncePerInstallEventStore oncePerInstallEventStore) {
+    GiniCaptureCoordinator(final OncePerInstallEventStore oncePerInstallEventStore) {
         mOncePerInstallEventStore = oncePerInstallEventStore;
     }
 
     /**
      * <p>
-     *     Listener for handling events from the {@link GiniVisionCoordinator} to provide the default behavior.
+     *     Listener for handling events from the {@link GiniCaptureCoordinator} to provide the default behavior.
      * </p>
-     * @param listener your implementation of the {@link GiniVisionCoordinator.Listener}
-     * @return the {@link GiniVisionCoordinator} instance for a fluid api
+     * @param listener your implementation of the {@link GiniCaptureCoordinator.Listener}
+     * @return the {@link GiniCaptureCoordinator} instance for a fluid api
      */
-    public GiniVisionCoordinator setListener(final Listener listener) {
+    public GiniCaptureCoordinator setListener(final Listener listener) {
         mListener = listener;
         return this;
     }
@@ -94,9 +94,9 @@ public class GiniVisionCoordinator {
      *     Default value is {@code true}.
      * </p>
      * @param showOnboardingAtFirstRun if {@code true} the Onboarding Screen is shown the first time the Camera Screen is started
-     * @return the {@link GiniVisionCoordinator} instance for a fluid api
+     * @return the {@link GiniCaptureCoordinator} instance for a fluid api
      */
-    public GiniVisionCoordinator setShowOnboardingAtFirstRun(
+    public GiniCaptureCoordinator setShowOnboardingAtFirstRun(
             final boolean showOnboardingAtFirstRun) {
         mShowOnboardingAtFirstRun = showOnboardingAtFirstRun;
         return this;

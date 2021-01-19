@@ -7,30 +7,30 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * Using this class the features of the Gini Vision Library can be configured.
+ * Using this class the features of the Gini Capture SDK can be configured.
  * <p>
- * Use the builder by invoking {@link GiniVisionFeatureConfiguration#buildNewConfiguration()} to
+ * Use the builder by invoking {@link GiniCaptureFeatureConfiguration#buildNewConfiguration()} to
  * configure and create a new instance.
  *
- * @Deprecated Use {@link GiniVision#newInstance()} and the returned {@link GiniVision.Builder} instead.
+ * @Deprecated Use {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder} instead.
  */
-public class GiniVisionFeatureConfiguration implements Parcelable {
+public class GiniCaptureFeatureConfiguration implements Parcelable {
 
     /**
      * Internal use only.
      *
      * @suppress
      */
-    public static final Creator<GiniVisionFeatureConfiguration> CREATOR =
-            new Creator<GiniVisionFeatureConfiguration>() {
+    public static final Creator<GiniCaptureFeatureConfiguration> CREATOR =
+            new Creator<GiniCaptureFeatureConfiguration>() {
                 @Override
-                public GiniVisionFeatureConfiguration createFromParcel(final Parcel in) {
-                    return new GiniVisionFeatureConfiguration(in);
+                public GiniCaptureFeatureConfiguration createFromParcel(final Parcel in) {
+                    return new GiniCaptureFeatureConfiguration(in);
                 }
 
                 @Override
-                public GiniVisionFeatureConfiguration[] newArray(final int size) {
-                    return new GiniVisionFeatureConfiguration[size];
+                public GiniCaptureFeatureConfiguration[] newArray(final int size) {
+                    return new GiniCaptureFeatureConfiguration[size];
                 }
             };
 
@@ -38,13 +38,13 @@ public class GiniVisionFeatureConfiguration implements Parcelable {
     private final boolean mFileImportEnabled;
     private final boolean mQRCodeScanningEnabled;
 
-    protected GiniVisionFeatureConfiguration(final Parcel in) {
+    protected GiniCaptureFeatureConfiguration(final Parcel in) {
         mDocumentImportEnabledFileTypes = (DocumentImportEnabledFileTypes) in.readSerializable();
         mFileImportEnabled = in.readByte() != 0;
         mQRCodeScanningEnabled = in.readByte() != 0;
     }
 
-    protected GiniVisionFeatureConfiguration(final Builder builder) {
+    protected GiniCaptureFeatureConfiguration(final Builder builder) {
         mDocumentImportEnabledFileTypes = builder.getDocumentImportEnabledFileTypes();
         mFileImportEnabled = builder.isFileImportEnabled();
         mQRCodeScanningEnabled = builder.isQRCodeScanningEnabled();
@@ -140,12 +140,12 @@ public class GiniVisionFeatureConfiguration implements Parcelable {
 
         /**
          * <p>
-         *     Create a new {@link GiniVisionFeatureConfiguration} instance.
+         *     Create a new {@link GiniCaptureFeatureConfiguration} instance.
          * </p>
-         * @return a new {@link GiniVisionFeatureConfiguration} instance
+         * @return a new {@link GiniCaptureFeatureConfiguration} instance
          */
-        public GiniVisionFeatureConfiguration build() {
-            return new GiniVisionFeatureConfiguration(this);
+        public GiniCaptureFeatureConfiguration build() {
+            return new GiniCaptureFeatureConfiguration(this);
         }
 
         @Nullable

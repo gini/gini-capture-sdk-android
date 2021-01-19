@@ -38,34 +38,34 @@
         >
 
         <Button
-            android:id="@+id/button_start_gini_vision_standard"
+            android:id="@+id/button_start_gini_capture_standard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:text="@string/start_gini_vision_lib_standard"
+            android:text="@string/start_gini_capture_sdk_standard"
             android:textColor="@color/colorPrimary"
             android:layout_marginBottom="8dp" />
 
         <Button
-            android:id="@+id/button_start_gini_vision_compat"
+            android:id="@+id/button_start_gini_capture_compat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:text="@string/start_gini_vision_lib_compat"
+            android:text="@string/start_gini_capture_sdk_compat"
             android:textColor="@color/colorPrimary"
             android:layout_marginBottom="16dp" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/text_gini_vision_version"
+        android:id="@+id/text_gini_capture_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/layout_buttons"
         android:layout_below="@+id/layout_buttons"
-        tools:text="Gini Vision Library v2.0.0-stub1" />
+        tools:text="Gini Capture SDK v2.0.0-stub1" />
 
     <TextView
         android:id="@+id/text_app_version"

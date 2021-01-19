@@ -8,7 +8,7 @@
 
     <net.gini.android.vision.internal.ui.CustomFontTextView
         android:id="@+id/gv_text_error"
-        style="@style/GiniVisionTheme.Snackbar.Error.TextStyle"
+        style="@style/GiniCaptureTheme.Snackbar.Error.TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -23,7 +23,7 @@
 
     <net.gini.android.vision.internal.ui.CustomFontButton
         android:id="@+id/gv_button_error"
-        style="@style/GiniVisionTheme.Snackbar.Error.Button.TextStyle"
+        style="@style/GiniCaptureTheme.Snackbar.Error.Button.TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

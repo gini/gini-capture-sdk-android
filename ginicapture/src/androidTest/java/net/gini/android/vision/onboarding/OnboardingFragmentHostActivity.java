@@ -1,6 +1,6 @@
 package net.gini.android.vision.onboarding;
 
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCaptureError;
 
 import androidx.annotation.NonNull;
 
@@ -25,7 +25,7 @@ public class OnboardingFragmentHostActivity extends
     }
 
     @Override
-    public void onError(@NonNull final GiniVisionError error) {
+    public void onError(@NonNull final GiniCaptureError error) {
 
     }
 }

@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcel;
 
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.internal.camera.photo.Photo;
 import net.gini.android.vision.internal.util.MimeType;
 import net.gini.android.vision.util.IntentHelper;
@@ -25,7 +25,7 @@ import androidx.annotation.VisibleForTesting;
 /**
  * A document containing an image.
  */
-public class ImageDocument extends GiniVisionDocument {
+public class ImageDocument extends GiniCaptureDocument {
 
     /**
      * Supported image formats.
@@ -74,7 +74,7 @@ public class ImageDocument extends GiniVisionDocument {
 
     @NonNull
     static ImageDocument fromPhotoAndDocument(@NonNull final Photo photo,
-            @NonNull final GiniVisionDocument document) {
+            @NonNull final GiniCaptureDocument document) {
         return new ImageDocument(photo, document);
     }
 
@@ -97,7 +97,7 @@ public class ImageDocument extends GiniVisionDocument {
         }
         final Uri imageUri;
         if (isMultiPageEnabled()) {
-            imageUri = GiniVision.getInstance().internal().getImageDiskStore()
+            imageUri = GiniCapture.getInstance().internal().getImageDiskStore()
                     .save(context, uri);
             if (imageUri == null) {
                 throw new IllegalArgumentException("Failed to copy to app storage");
@@ -117,9 +117,9 @@ public class ImageDocument extends GiniVisionDocument {
             @NonNull final String deviceOrientation,
             @NonNull final String deviceType,
             @NonNull final ImportMethod importMethod) {
-        if (!GiniVision.hasInstance()) {
+        if (!GiniCapture.hasInstance()) {
             throw new IllegalStateException(
-                    "Cannot create ImageDocument from Uri. GiniVision instance not available. Create it with GiniVision.newInstance().");
+                    "Cannot create ImageDocument from Uri. GiniCapture instance not available. Create it with GiniCapture.newInstance().");
         }
         final String mimeType = UriHelper.getMimeType(uri, context);
         if (mimeType == null || !hasMimeTypeWithPrefix(uri, context,
@@ -158,7 +158,7 @@ public class ImageDocument extends GiniVisionDocument {
     }
 
     private ImageDocument(@NonNull final Photo photo,
-            @NonNull final GiniVisionDocument document) {
+            @NonNull final GiniCaptureDocument document) {
         this(photo, document.getId(), document.getIntent(), document.getUri());
     }
 

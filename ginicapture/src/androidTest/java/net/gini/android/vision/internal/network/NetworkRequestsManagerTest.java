@@ -2,7 +2,7 @@ package net.gini.android.vision.internal.network;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static net.gini.android.vision.internal.network.GiniVisionNetworkServiceStub.DEFAULT_DOCUMENT_ID;
+import static net.gini.android.vision.internal.network.GiniCaptureNetworkServiceStub.DEFAULT_DOCUMENT_ID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -13,16 +13,16 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 
 import net.gini.android.vision.Document;
-import net.gini.android.vision.document.GiniVisionDocument;
-import net.gini.android.vision.document.GiniVisionDocumentHelper;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.document.GiniCaptureDocument;
+import net.gini.android.vision.document.GiniCaptureDocumentHelper;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.document.ImageDocument;
 import net.gini.android.vision.document.ImageMultiPageDocument;
 import net.gini.android.vision.internal.cache.DocumentDataMemoryCache;
 import net.gini.android.vision.network.AnalysisResult;
 import net.gini.android.vision.network.Error;
-import net.gini.android.vision.network.GiniVisionNetworkCallback;
-import net.gini.android.vision.network.GiniVisionNetworkService;
+import net.gini.android.vision.network.GiniCaptureNetworkCallback;
+import net.gini.android.vision.network.GiniCaptureNetworkService;
 import net.gini.android.vision.network.Result;
 import net.gini.android.vision.util.CancellationToken;
 
@@ -52,13 +52,13 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 public class NetworkRequestsManagerTest {
 
     private Context mContext;
-    private GiniVisionNetworkService mGiniVisionNetworkService;
+    private GiniCaptureNetworkService mGiniCaptureNetworkService;
     private DocumentDataMemoryCache mDocumentDataMemoryCache;
 
     @Before
     public void setup() {
         mContext = ApplicationProvider.getApplicationContext();
-        mGiniVisionNetworkService = spy(new GiniVisionNetworkServiceStub());
+        mGiniCaptureNetworkService = spy(new GiniCaptureNetworkServiceStub());
         mDocumentDataMemoryCache = new DocumentDataMemoryCache();
     }
 
@@ -66,31 +66,31 @@ public class NetworkRequestsManagerTest {
     public void should_uploadDocument() throws Exception {
         // Given
         final NetworkRequestsManager networkRequestsManager =
-                new NetworkRequestsManager(mGiniVisionNetworkService, mDocumentDataMemoryCache);
-        final GiniVisionDocument document = GiniVisionDocumentHelper.newImageDocument();
+                new NetworkRequestsManager(mGiniCaptureNetworkService, mDocumentDataMemoryCache);
+        final GiniCaptureDocument document = GiniCaptureDocumentHelper.newImageDocument();
         // When
-        final NetworkRequestResult<GiniVisionDocument> requestResult =
+        final NetworkRequestResult<GiniCaptureDocument> requestResult =
                 networkRequestsManager.upload(mContext, document).get();
         // Then
         assertThat(requestResult.getApiDocumentId()).isEqualTo(DEFAULT_DOCUMENT_ID);
-        assertThat(requestResult.getGiniVisionDocument()).isEqualTo(document);
+        assertThat(requestResult.getGiniCaptureDocument()).isEqualTo(document);
     }
 
     @Test
     public void should_throwException_forFailedDocumentUpload() throws Exception {
         // Given
         final String errorMessage = "Something went wrong.";
-        final GiniVisionNetworkService networkService = new GiniVisionNetworkServiceStub() {
+        final GiniCaptureNetworkService networkService = new GiniCaptureNetworkServiceStub() {
             @Override
             public CancellationToken upload(@NonNull final Document document,
-                    @NonNull final GiniVisionNetworkCallback<Result, Error> callback) {
+                    @NonNull final GiniCaptureNetworkCallback<Result, Error> callback) {
                 callback.failure(new Error(errorMessage));
                 return new CallbackCancellationToken(callback);
             }
         };
         final NetworkRequestsManager networkRequestsManager =
                 new NetworkRequestsManager(networkService, mDocumentDataMemoryCache);
-        final GiniVisionDocument document = GiniVisionDocumentHelper.newImageDocument();
+        final GiniCaptureDocument document = GiniCaptureDocumentHelper.newImageDocument();
         // When
         ExecutionException exception = null;
         try {
@@ -106,12 +106,12 @@ public class NetworkRequestsManagerTest {
     @Test
     public void should_allowUploadingSameDocument_afterFailure() throws Exception {
         // Given
-        final GiniVisionNetworkService networkService = new GiniVisionNetworkServiceStub() {
+        final GiniCaptureNetworkService networkService = new GiniCaptureNetworkServiceStub() {
             int counter = 0;
 
             @Override
             public CancellationToken upload(@NonNull final Document document,
-                    @NonNull final GiniVisionNetworkCallback<Result, Error> callback) {
+                    @NonNull final GiniCaptureNetworkCallback<Result, Error> callback) {
                 counter++;
                 if (counter == 1) {
                     callback.failure(new Error("Something went wrong."));
@@ -123,7 +123,7 @@ public class NetworkRequestsManagerTest {
         };
         final NetworkRequestsManager networkRequestsManager =
                 new NetworkRequestsManager(networkService, mDocumentDataMemoryCache);
-        final GiniVisionDocument document = GiniVisionDocumentHelper.newImageDocument();
+        final GiniCaptureDocument document = GiniCaptureDocumentHelper.newImageDocument();
         // When
         ExecutionException firstException = null;
         try {
@@ -131,7 +131,7 @@ public class NetworkRequestsManagerTest {
         } catch (final ExecutionException e) {
             firstException = e;
         }
-        final NetworkRequestResult<GiniVisionDocument> secondRequestResult =
+        final NetworkRequestResult<GiniCaptureDocument> secondRequestResult =
                 networkRequestsManager.upload(mContext, document).get();
         // Then
         assertThat(firstException).isNotNull();
@@ -142,49 +142,49 @@ public class NetworkRequestsManagerTest {
     public void should_uploadSameDocument_onlyOnce() throws Exception {
         // Given
         final NetworkRequestsManager networkRequestsManager =
-                new NetworkRequestsManager(mGiniVisionNetworkService, mDocumentDataMemoryCache);
-        final GiniVisionDocument document = GiniVisionDocumentHelper.newImageDocument();
+                new NetworkRequestsManager(mGiniCaptureNetworkService, mDocumentDataMemoryCache);
+        final GiniCaptureDocument document = GiniCaptureDocumentHelper.newImageDocument();
         // When
-        final NetworkRequestResult<GiniVisionDocument> firstRequestResult =
+        final NetworkRequestResult<GiniCaptureDocument> firstRequestResult =
                 networkRequestsManager.upload(mContext, document).get();
-        final NetworkRequestResult<GiniVisionDocument> secondRequestResult =
+        final NetworkRequestResult<GiniCaptureDocument> secondRequestResult =
                 networkRequestsManager.upload(mContext, document).get();
         // Then
         assertThat(firstRequestResult).isEqualTo(secondRequestResult);
-        Mockito.verify(mGiniVisionNetworkService)
-                .upload(eq(document), any(GiniVisionNetworkCallback.class));
+        Mockito.verify(mGiniCaptureNetworkService)
+                .upload(eq(document), any(GiniCaptureNetworkCallback.class));
     }
 
     @Test
     public void should_deleteDocument() throws Exception {
         // Given
         final NetworkRequestsManager networkRequestsManager =
-                new NetworkRequestsManager(mGiniVisionNetworkService, mDocumentDataMemoryCache);
-        final GiniVisionDocument document = GiniVisionDocumentHelper.newImageDocument();
+                new NetworkRequestsManager(mGiniCaptureNetworkService, mDocumentDataMemoryCache);
+        final GiniCaptureDocument document = GiniCaptureDocumentHelper.newImageDocument();
         networkRequestsManager.upload(mContext, document);
         // When
-        final NetworkRequestResult<GiniVisionDocument> requestResult =
+        final NetworkRequestResult<GiniCaptureDocument> requestResult =
                 networkRequestsManager.delete(document).get();
         // Then
         assertThat(requestResult.getApiDocumentId()).isEqualTo(DEFAULT_DOCUMENT_ID);
-        assertThat(requestResult.getGiniVisionDocument()).isEqualTo(document);
+        assertThat(requestResult.getGiniCaptureDocument()).isEqualTo(document);
     }
 
     @Test
     public void should_throwException_forFailedDocumentDeletion() throws Exception {
         // Given
         final String errorMessage = "Something went wrong.";
-        final GiniVisionNetworkService networkService = new GiniVisionNetworkServiceStub() {
+        final GiniCaptureNetworkService networkService = new GiniCaptureNetworkServiceStub() {
             @Override
             public CancellationToken delete(@NonNull final String giniApiDocumentId,
-                    @NonNull final GiniVisionNetworkCallback<Result, Error> callback) {
+                    @NonNull final GiniCaptureNetworkCallback<Result, Error> callback) {
                 callback.failure(new Error(errorMessage));
                 return new CallbackCancellationToken(callback);
             }
         };
         final NetworkRequestsManager networkRequestsManager =
                 new NetworkRequestsManager(networkService, mDocumentDataMemoryCache);
-        final GiniVisionDocument document = GiniVisionDocumentHelper.newImageDocument();
+        final GiniCaptureDocument document = GiniCaptureDocumentHelper.newImageDocument();
         networkRequestsManager.upload(mContext, document);
         // When
         ExecutionException exception = null;
@@ -201,12 +201,12 @@ public class NetworkRequestsManagerTest {
     @Test
     public void should_allowDeletingSameDocument_afterFailure() throws Exception {
         // Given
-        final GiniVisionNetworkService networkService = new GiniVisionNetworkServiceStub() {
+        final GiniCaptureNetworkService networkService = new GiniCaptureNetworkServiceStub() {
             int counter = 0;
 
             @Override
             public CancellationToken delete(@NonNull final String giniApiDocumentId,
-                    @NonNull final GiniVisionNetworkCallback<Result, Error> callback) {
+                    @NonNull final GiniCaptureNetworkCallback<Result, Error> callback) {
                 counter++;
                 if (counter == 1) {
                     callback.failure(new Error("Something went wrong."));
@@ -218,7 +218,7 @@ public class NetworkRequestsManagerTest {
         };
         final NetworkRequestsManager networkRequestsManager =
                 new NetworkRequestsManager(networkService, mDocumentDataMemoryCache);
-        final GiniVisionDocument document = GiniVisionDocumentHelper.newImageDocument();
+        final GiniCaptureDocument document = GiniCaptureDocumentHelper.newImageDocument();
         networkRequestsManager.upload(mContext, document);
         // When
         ExecutionException firstException = null;
@@ -227,7 +227,7 @@ public class NetworkRequestsManagerTest {
         } catch (final ExecutionException e) {
             firstException = e;
         }
-        final NetworkRequestResult<GiniVisionDocument> secondRequestResult =
+        final NetworkRequestResult<GiniCaptureDocument> secondRequestResult =
                 networkRequestsManager.delete(document).get();
         // Then
         assertThat(firstException).isNotNull();
@@ -238,8 +238,8 @@ public class NetworkRequestsManagerTest {
     public void should_completeSecondDocumentDeletion_withCancellation_forSameDocument() throws Exception {
         // Given
         final NetworkRequestsManager networkRequestsManager =
-                new NetworkRequestsManager(mGiniVisionNetworkService, mDocumentDataMemoryCache);
-        final GiniVisionDocument document = GiniVisionDocumentHelper.newImageDocument();
+                new NetworkRequestsManager(mGiniCaptureNetworkService, mDocumentDataMemoryCache);
+        final GiniCaptureDocument document = GiniCaptureDocumentHelper.newImageDocument();
         networkRequestsManager.upload(mContext, document);
         // When
         networkRequestsManager.delete(document).get();
@@ -252,10 +252,10 @@ public class NetworkRequestsManagerTest {
         // Given
         final Queue<Runnable> uploadCompletionRunnables = new ConcurrentLinkedQueue<>();
         // Simulate upload delays and queue completion to be executed on the main thread
-        final GiniVisionNetworkService networkService = spy(new GiniVisionNetworkServiceStub() {
+        final GiniCaptureNetworkService networkService = spy(new GiniCaptureNetworkServiceStub() {
             @Override
             public CancellationToken upload(@NonNull final Document document,
-                    @NonNull final GiniVisionNetworkCallback<Result, Error> callback) {
+                    @NonNull final GiniCaptureNetworkCallback<Result, Error> callback) {
                 final Thread delayThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -278,11 +278,11 @@ public class NetworkRequestsManagerTest {
         });
         final NetworkRequestsManager networkRequestsManager =
                 new NetworkRequestsManager(networkService, mDocumentDataMemoryCache);
-        final GiniVisionDocument document = GiniVisionDocumentHelper.newImageDocument();
+        final GiniCaptureDocument document = GiniCaptureDocumentHelper.newImageDocument();
         networkRequestsManager.upload(mContext, document);
         // When
         // Wait for completion on a secondary thread
-        final AtomicReference<NetworkRequestResult<GiniVisionDocument>> requestResult =
+        final AtomicReference<NetworkRequestResult<GiniCaptureDocument>> requestResult =
                 new AtomicReference<>();
         final Thread waitThread = new Thread(new Runnable() {
             @Override
@@ -305,10 +305,10 @@ public class NetworkRequestsManagerTest {
         // Then
         assertThat(requestResult.get()).isNotNull();
         assertThat(requestResult.get().getApiDocumentId()).isEqualTo(DEFAULT_DOCUMENT_ID);
-        assertThat(requestResult.get().getGiniVisionDocument()).isEqualTo(document);
+        assertThat(requestResult.get().getGiniCaptureDocument()).isEqualTo(document);
         verify(networkService).upload(any(Document.class),
-                any(GiniVisionNetworkCallback.class));
-        verify(networkService).delete(eq(DEFAULT_DOCUMENT_ID), any(GiniVisionNetworkCallback.class));
+                any(GiniCaptureNetworkCallback.class));
+        verify(networkService).delete(eq(DEFAULT_DOCUMENT_ID), any(GiniCaptureNetworkCallback.class));
     }
 
     @Test(expected = CancellationException.class)
@@ -316,11 +316,11 @@ public class NetworkRequestsManagerTest {
             throws Exception {
         // Given
         final NetworkRequestsManager networkRequestsManager =
-                new NetworkRequestsManager(mGiniVisionNetworkService, mDocumentDataMemoryCache);
+                new NetworkRequestsManager(mGiniCaptureNetworkService, mDocumentDataMemoryCache);
         final ImageMultiPageDocument multiPageDocument =
-                GiniVisionDocumentHelper.newMultiPageDocument();
+                GiniCaptureDocumentHelper.newMultiPageDocument();
         // When
-        final NetworkRequestResult<GiniVisionDocument> requestResult =
+        final NetworkRequestResult<GiniCaptureDocument> requestResult =
                 networkRequestsManager.delete(multiPageDocument).get();
     }
 
@@ -328,41 +328,41 @@ public class NetworkRequestsManagerTest {
     public void should_analyzeMultiPageDocument() throws Exception {
         // Given
         final NetworkRequestsManager networkRequestsManager =
-                new NetworkRequestsManager(mGiniVisionNetworkService, mDocumentDataMemoryCache);
+                new NetworkRequestsManager(mGiniCaptureNetworkService, mDocumentDataMemoryCache);
         final ImageMultiPageDocument multiPageDocument =
-                GiniVisionDocumentHelper.newMultiPageDocument();
+                GiniCaptureDocumentHelper.newMultiPageDocument();
         for (final ImageDocument imageDocument : multiPageDocument.getDocuments()) {
             networkRequestsManager.upload(mContext, imageDocument);
         }
         // When
-        final AnalysisNetworkRequestResult<GiniVisionMultiPageDocument>
+        final AnalysisNetworkRequestResult<GiniCaptureMultiPageDocument>
                 requestResult = networkRequestsManager.analyze(
                 multiPageDocument).get();
         // Then
         assertThat(requestResult.getApiDocumentId()).isEqualTo(DEFAULT_DOCUMENT_ID);
-        assertThat(requestResult.getGiniVisionDocument()).isEqualTo(multiPageDocument);
+        assertThat(requestResult.getGiniCaptureDocument()).isEqualTo(multiPageDocument);
     }
 
     @Test
     public void should_analyzeSameDocument_onlyOnce() throws Exception {
         // Given
         final NetworkRequestsManager networkRequestsManager =
-                new NetworkRequestsManager(mGiniVisionNetworkService, mDocumentDataMemoryCache);
+                new NetworkRequestsManager(mGiniCaptureNetworkService, mDocumentDataMemoryCache);
         final ImageMultiPageDocument multiPageDocument =
-                GiniVisionDocumentHelper.newMultiPageDocument();
+                GiniCaptureDocumentHelper.newMultiPageDocument();
         for (final ImageDocument imageDocument : multiPageDocument.getDocuments()) {
             networkRequestsManager.upload(mContext, imageDocument);
         }
         // When
-        final NetworkRequestResult<GiniVisionMultiPageDocument> firstRequestResult =
+        final NetworkRequestResult<GiniCaptureMultiPageDocument> firstRequestResult =
                 networkRequestsManager.analyze(multiPageDocument).get();
-        final NetworkRequestResult<GiniVisionMultiPageDocument> secondRequestResult =
+        final NetworkRequestResult<GiniCaptureMultiPageDocument> secondRequestResult =
                 networkRequestsManager.analyze(multiPageDocument).get();
         // Then
         assertThat(firstRequestResult).isEqualTo(secondRequestResult);
-        verify(mGiniVisionNetworkService)
+        verify(mGiniCaptureNetworkService)
                 .analyze(any(LinkedHashMap.class),
-                        any(GiniVisionNetworkCallback.class));
+                        any(GiniCaptureNetworkCallback.class));
     }
 
     @Test
@@ -371,10 +371,10 @@ public class NetworkRequestsManagerTest {
         // Given
         final Queue<Runnable> uploadCompletionRunnables = new ConcurrentLinkedQueue<>();
         // Simulate upload delays and queue completion to be executed on the main thread
-        final GiniVisionNetworkService networkService = spy(new GiniVisionNetworkServiceStub() {
+        final GiniCaptureNetworkService networkService = spy(new GiniCaptureNetworkServiceStub() {
             @Override
             public CancellationToken upload(@NonNull final Document document,
-                    @NonNull final GiniVisionNetworkCallback<Result, Error> callback) {
+                    @NonNull final GiniCaptureNetworkCallback<Result, Error> callback) {
                 final Thread delayThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -398,14 +398,14 @@ public class NetworkRequestsManagerTest {
         final NetworkRequestsManager networkRequestsManager =
                 new NetworkRequestsManager(networkService, mDocumentDataMemoryCache);
         final ImageMultiPageDocument multiPageDocument =
-                GiniVisionDocumentHelper.newMultiPageDocument();
+                GiniCaptureDocumentHelper.newMultiPageDocument();
         // Upload the page documents
         for (final ImageDocument imageDocument : multiPageDocument.getDocuments()) {
             networkRequestsManager.upload(mContext, imageDocument);
         }
         // When
         // Wait for completion on a secondary thread
-        final AtomicReference<NetworkRequestResult<GiniVisionMultiPageDocument>> requestResult =
+        final AtomicReference<NetworkRequestResult<GiniCaptureMultiPageDocument>> requestResult =
                 new AtomicReference<>();
         final Thread waitThread = new Thread(new Runnable() {
             @Override
@@ -428,9 +428,9 @@ public class NetworkRequestsManagerTest {
         // Then
         assertThat(requestResult.get()).isNotNull();
         assertThat(requestResult.get().getApiDocumentId()).isEqualTo(DEFAULT_DOCUMENT_ID);
-        assertThat(requestResult.get().getGiniVisionDocument()).isEqualTo(multiPageDocument);
+        assertThat(requestResult.get().getGiniCaptureDocument()).isEqualTo(multiPageDocument);
         verify(networkService, times(3)).upload(any(Document.class),
-                any(GiniVisionNetworkCallback.class));
+                any(GiniCaptureNetworkCallback.class));
     }
 
 
@@ -439,10 +439,10 @@ public class NetworkRequestsManagerTest {
         // Given
         final AtomicReference<CancellationToken> cancellationToken =
                 new AtomicReference<>();
-        final GiniVisionNetworkService networkService = spy(new GiniVisionNetworkServiceStub() {
+        final GiniCaptureNetworkService networkService = spy(new GiniCaptureNetworkServiceStub() {
             @Override
             public CancellationToken upload(@NonNull final Document document,
-                    @NonNull final GiniVisionNetworkCallback<Result, Error> callback) {
+                    @NonNull final GiniCaptureNetworkCallback<Result, Error> callback) {
                 final CancellationToken token = spy(new CallbackCancellationToken(callback));
                 cancellationToken.set(token);
                 return token;
@@ -450,7 +450,7 @@ public class NetworkRequestsManagerTest {
         });
         final NetworkRequestsManager networkRequestsManager =
                 new NetworkRequestsManager(networkService, mDocumentDataMemoryCache);
-        final ImageDocument document = GiniVisionDocumentHelper.newImageDocument();
+        final ImageDocument document = GiniCaptureDocumentHelper.newImageDocument();
         // When
         networkRequestsManager.upload(mContext, document);
         networkRequestsManager.cancel(document);
@@ -462,32 +462,32 @@ public class NetworkRequestsManagerTest {
     @Test
     public void should_allowUploadingSameDocument_afterCancellation() throws Exception {
         // Given
-        final GiniVisionNetworkService networkService = spy(new GiniVisionNetworkServiceStub() {
+        final GiniCaptureNetworkService networkService = spy(new GiniCaptureNetworkServiceStub() {
             @Override
             public CancellationToken upload(@NonNull final Document document,
-                    @NonNull final GiniVisionNetworkCallback<Result, Error> callback) {
+                    @NonNull final GiniCaptureNetworkCallback<Result, Error> callback) {
                 return new CallbackCancellationToken(callback);
             }
         });
         final NetworkRequestsManager networkRequestsManager =
                 new NetworkRequestsManager(networkService, mDocumentDataMemoryCache);
-        final GiniVisionDocument document = GiniVisionDocumentHelper.newImageDocument();
+        final GiniCaptureDocument document = GiniCaptureDocumentHelper.newImageDocument();
         // When
         networkRequestsManager.upload(mContext, document);
         networkRequestsManager.cancel(document);
         networkRequestsManager.upload(mContext, document);
         // Then
         verify(networkService, times(2)).upload(eq(document),
-                any(GiniVisionNetworkCallback.class));
+                any(GiniCaptureNetworkCallback.class));
     }
 
     @Test
     public void should_allowDeletingSameDocument_afterCancelation() throws Exception {
         // Given
-        final GiniVisionNetworkService networkService = spy(new GiniVisionNetworkServiceStub() {
+        final GiniCaptureNetworkService networkService = spy(new GiniCaptureNetworkServiceStub() {
             @Override
             public CancellationToken delete(@NonNull final String giniApiDocumentId,
-                    @NonNull final GiniVisionNetworkCallback<Result, Error> callback) {
+                    @NonNull final GiniCaptureNetworkCallback<Result, Error> callback) {
                 return new CancellationToken() {
                     @Override
                     public void cancel() {
@@ -498,7 +498,7 @@ public class NetworkRequestsManagerTest {
         });
         final NetworkRequestsManager networkRequestsManager =
                 new NetworkRequestsManager(networkService, mDocumentDataMemoryCache);
-        final GiniVisionDocument document = GiniVisionDocumentHelper.newImageDocument();
+        final GiniCaptureDocument document = GiniCaptureDocumentHelper.newImageDocument();
         // When
         networkRequestsManager.upload(mContext, document);
         networkRequestsManager.delete(document);
@@ -506,16 +506,16 @@ public class NetworkRequestsManagerTest {
         networkRequestsManager.delete(document);
         // Then
         verify(networkService, times(2)).delete(any(String.class),
-                any(GiniVisionNetworkCallback.class));
+                any(GiniCaptureNetworkCallback.class));
     }
 
     @Test
     public void should_allowAnalyzingSameDocument_afterCancelation() throws Exception {
         // Given
-        final GiniVisionNetworkService networkService = spy(new GiniVisionNetworkServiceStub() {
+        final GiniCaptureNetworkService networkService = spy(new GiniCaptureNetworkServiceStub() {
             @Override
             public CancellationToken analyze(@NonNull final LinkedHashMap<String, Integer> giniApiDocumentIdRotationMap,
-                    @NonNull final GiniVisionNetworkCallback<AnalysisResult, Error> callback) {
+                    @NonNull final GiniCaptureNetworkCallback<AnalysisResult, Error> callback) {
                 // Cancellation
                 return new CallbackCancellationToken(callback);
             }
@@ -523,7 +523,7 @@ public class NetworkRequestsManagerTest {
         final NetworkRequestsManager networkRequestsManager =
                 new NetworkRequestsManager(networkService, mDocumentDataMemoryCache);
         final ImageMultiPageDocument multiPageDocument =
-                GiniVisionDocumentHelper.newMultiPageDocument();
+                GiniCaptureDocumentHelper.newMultiPageDocument();
         for (final ImageDocument imageDocument : multiPageDocument.getDocuments()) {
             networkRequestsManager.upload(mContext, imageDocument);
         }
@@ -533,6 +533,6 @@ public class NetworkRequestsManagerTest {
         networkRequestsManager.analyze(multiPageDocument);
         // Then
         verify(networkService, times(2)).analyze(any(LinkedHashMap.class),
-                any(GiniVisionNetworkCallback.class));
+                any(GiniCaptureNetworkCallback.class));
     }
 }

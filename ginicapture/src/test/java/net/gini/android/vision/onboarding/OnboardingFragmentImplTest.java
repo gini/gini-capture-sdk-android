@@ -22,7 +22,7 @@ import android.app.Activity;
 
 import com.google.common.collect.Lists;
 
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.R;
 import net.gini.android.vision.test.FragmentImplFactory;
 
@@ -253,7 +253,7 @@ public class OnboardingFragmentImplTest {
             }
 
             @Override
-            public void onError(@NonNull final GiniVisionError error) {
+            public void onError(@NonNull final GiniCaptureError error) {
 
             }
         };

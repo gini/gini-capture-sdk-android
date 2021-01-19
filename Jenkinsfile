@@ -105,9 +105,9 @@ pipeline {
             }
             steps {
                 sh './gradlew generateJavadocCoverage'
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'GVL Javadoc Coverage Report', reportTitles: ''])
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-network/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'GVL Network Javadoc Coverage Report', reportTitles: ''])
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-accounting-network/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'GVL Accounting Network Javadoc Coverage Report', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'Gini Capture Javadoc Coverage Report', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-network/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'Gini Capture Network Javadoc Coverage Report', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-accounting-network/build/reports/javadoc-coverage', reportFiles: 'index.html', reportName: 'Gini Capture Accounting Network Javadoc Coverage Report', reportTitles: ''])
             }
         }
         stage('Code Analysis') {
@@ -179,9 +179,9 @@ pipeline {
             }
             steps {
                 sh './gradlew ginicapture:dokkaHtml ginicapture-network:generateJavadoc ginicapture-accounting-network:generateJavadoc'
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture/build/dokka/ginicapture', reportFiles: 'index.html', reportName: 'GVL KDoc', reportTitles: ''])
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-network/build/docs/javadoc', reportFiles: 'index.html', reportName: 'GVL Network Javadoc', reportTitles: ''])
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-accounting-network/build/docs/javadoc', reportFiles: 'index.html', reportName: 'GVL Accounting Network Javadoc', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture/build/dokka/ginicapture', reportFiles: 'index.html', reportName: 'Gini Capture KDoc', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-network/build/docs/javadoc', reportFiles: 'index.html', reportName: 'Gini Capture Network Javadoc', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'ginicapture-accounting-network/build/docs/javadoc', reportFiles: 'index.html', reportName: 'Gini Capture Accounting Network Javadoc', reportTitles: ''])
             }
         }
         stage('Archive Artifacts') {

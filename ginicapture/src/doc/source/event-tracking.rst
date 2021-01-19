@@ -5,11 +5,11 @@ In version `3.12.0 <https://github.com/gini/gini-capture-sdk-android/releases/ta
 events which occur during the usage of the Gini Capture SDK.
 
 To subscribe to the events you need to implement the ``EventTracker`` interface and pass it to the
-builder when creating a new ``GiniVision`` instance.
+builder when creating a new ``GiniCapture`` instance.
 
 .. code-block:: java
 
-    GiniVision.newInstance()
+    GiniCapture.newInstance()
         .setEventTracker(new MyEventTracker());
         .build();
 

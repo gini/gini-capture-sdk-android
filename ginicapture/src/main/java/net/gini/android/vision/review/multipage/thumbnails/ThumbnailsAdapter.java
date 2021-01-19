@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.gini.android.vision.AsyncCallback;
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.R;
 import net.gini.android.vision.document.ImageDocument;
 import net.gini.android.vision.document.ImageMultiPageDocument;
@@ -137,8 +137,8 @@ public class ThumbnailsAdapter extends
         holder.resetImageView();
         holder.showActivityIndicator();
         updateThumbnail(position, holder);
-        if (GiniVision.hasInstance()) {
-            GiniVision.getInstance().internal().getPhotoMemoryCache()
+        if (GiniCapture.hasInstance()) {
+            GiniCapture.getInstance().internal().getPhotoMemoryCache()
                     .get(mContext, mMultiPageDocument.getDocuments().get(position),
                             new AsyncCallback<Photo, Exception>() {
                                 @Override

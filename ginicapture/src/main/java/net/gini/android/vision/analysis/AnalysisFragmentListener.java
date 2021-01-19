@@ -1,10 +1,10 @@
 package net.gini.android.vision.analysis;
 
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionError;
-import net.gini.android.vision.network.GiniVisionNetworkService;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureError;
+import net.gini.android.vision.network.GiniCaptureNetworkService;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.noresults.NoResultsFragmentCompat;
 import net.gini.android.vision.noresults.NoResultsFragmentStandard;
 
@@ -24,8 +24,8 @@ public interface AnalysisFragmentListener {
      * </p>
      * @param document contains the image taken by the camera (original or modified)
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document
-     * is analyzed internally by using the configured {@link GiniVisionNetworkService}
+     * @Deprecated When a {@link GiniCapture} instance is available the document
+     * is analyzed internally by using the configured {@link GiniCaptureNetworkService}
      * implementation. The extractions will be returned in {@link AnalysisFragmentListener#onExtractionsAvailable(Map, Map)}.
      */
     @Deprecated
@@ -37,7 +37,7 @@ public interface AnalysisFragmentListener {
      * </p>
      * @param error details about what went wrong
      */
-    void onError(@NonNull GiniVisionError error);
+    void onError(@NonNull GiniCaptureError error);
 
     /**
      * Called when the document has been analyzed and extractions are available.
@@ -45,7 +45,7 @@ public interface AnalysisFragmentListener {
      * @param extractions a map of the extractions with the extraction labels as keys
      */
     void onExtractionsAvailable(
-            @NonNull final Map<String, GiniVisionSpecificExtraction> extractions);
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions);
 
     /**
      * Called when the document has been analyzed and no extractions were received.

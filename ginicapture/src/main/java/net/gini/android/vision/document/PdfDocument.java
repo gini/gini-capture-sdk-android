@@ -17,7 +17,7 @@ import androidx.annotation.VisibleForTesting;
  * </p>
  *
  */
-public class PdfDocument extends GiniVisionDocument {
+public class PdfDocument extends GiniCaptureDocument {
 
     /**
      * Creates an instance using the resource pointed to by the Intent's Uri.

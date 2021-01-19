@@ -48,7 +48,7 @@
 
     <TextView
         android:id="@+id/gv_badge"
-        style="@style/GiniVisionTheme.Camera.ImageStackBadge.TextStyle"
+        style="@style/GiniCaptureTheme.Camera.ImageStackBadge.TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -61,7 +61,7 @@
 
     <net.gini.android.vision.internal.ui.CustomFontTextView
         android:id="@+id/gv_stack_subtitle"
-        style="@style/GiniVisionTheme.Camera.ImageStackSubtitle.TextStyle"
+        style="@style/GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle"
         android:layout_width="56dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

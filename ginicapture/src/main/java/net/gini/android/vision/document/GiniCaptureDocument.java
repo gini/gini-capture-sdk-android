@@ -22,22 +22,22 @@ import androidx.annotation.Nullable;
  *
  * @suppress
  */
-public class GiniVisionDocument implements Document {
+public class GiniCaptureDocument implements Document {
 
     /**
      * Internal use only.
      *
      * @suppress
      */
-    public static final Creator<GiniVisionDocument> CREATOR = new Creator<GiniVisionDocument>() {
+    public static final Creator<GiniCaptureDocument> CREATOR = new Creator<GiniCaptureDocument>() {
         @Override
-        public GiniVisionDocument createFromParcel(final Parcel in) {
-            return new GiniVisionDocument(in);
+        public GiniCaptureDocument createFromParcel(final Parcel in) {
+            return new GiniCaptureDocument(in);
         }
 
         @Override
-        public GiniVisionDocument[] newArray(final int size) {
-            return new GiniVisionDocument[size];
+        public GiniCaptureDocument[] newArray(final int size) {
+            return new GiniCaptureDocument[size];
         }
     };
     private final String mUniqueId;
@@ -51,19 +51,19 @@ public class GiniVisionDocument implements Document {
     private byte[] mData;
     private String mParcelableMemoryCacheTag;
 
-    GiniVisionDocument(@NonNull final Type type,
-            @NonNull final Source source,
-            @NonNull final ImportMethod importMethod,
-            @NonNull final String mimeType,
-            @Nullable final byte[] data,
-            @Nullable final Intent intent,
-            @Nullable final Uri uri,
-            final boolean isReviewable) {
+    GiniCaptureDocument(@NonNull final Type type,
+                        @NonNull final Source source,
+                        @NonNull final ImportMethod importMethod,
+                        @NonNull final String mimeType,
+                        @Nullable final byte[] data,
+                        @Nullable final Intent intent,
+                        @Nullable final Uri uri,
+                        final boolean isReviewable) {
         this(generateUniqueId(), type, source, importMethod, mimeType, data, intent, uri,
                 isReviewable);
     }
 
-    GiniVisionDocument(
+    GiniCaptureDocument(
             @Nullable final String uniqueId,
             @NonNull final Type type,
             @NonNull final Source source,
@@ -88,7 +88,7 @@ public class GiniVisionDocument implements Document {
         return UUID.randomUUID().toString();
     }
 
-    GiniVisionDocument(final Parcel in) {
+    GiniCaptureDocument(final Parcel in) {
         mUniqueId = in.readString();
         final ParcelableMemoryCache cache = ParcelableMemoryCache.getInstance();
         final ParcelableMemoryCache.Token token = in.readParcelable(
@@ -235,7 +235,7 @@ public class GiniVisionDocument implements Document {
 
     @Override
     public String toString() {
-        return "GiniVisionDocument{"
+        return "GiniCaptureDocument{"
                 + "mUniqueId='" + mUniqueId + '\''
                 + ", mIntent=" + mIntent
                 + ", mUri=" + mUri
@@ -300,7 +300,7 @@ public class GiniVisionDocument implements Document {
             return false;
         }
 
-        final GiniVisionDocument that = (GiniVisionDocument) o;
+        final GiniCaptureDocument that = (GiniCaptureDocument) o;
 
         if (mIsReviewable != that.mIsReviewable) {
             return false;

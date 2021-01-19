@@ -13,7 +13,7 @@ import java.util.Date;
 
 /**
  * <p>
- * This class allows you to enable and disable debugging for the Gini Vision Library.
+ * This class allows you to enable and disable debugging for the Gini Capture SDK.
  * </p>
  * <p>
  * Debugging is disabled by default.
@@ -25,20 +25,20 @@ import java.util.Date;
  *     If debug is enabled:
  *     <ul>
  *         <li>
- *          The reviewed jpegs are written to a folder called {@code ginivisionlib} in your app's external directory.
+ *          The reviewed jpegs are written to a folder called {@code ginicapturesdk} in your app's external directory.
  *         </li>
  *     </ul>
  * </p>
  */
-public final class GiniVisionDebug {
+public final class GiniCaptureDebug {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GiniVisionDebug.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GiniCaptureDebug.class);
 
     private static boolean sEnabled;
 
     /**
      * <p>
-     *     Enables debugging for the Gini Vision Library.
+     *     Enables debugging for the Gini Capture SDK.
      * </p>
      */
     public static void enable() {
@@ -47,7 +47,7 @@ public final class GiniVisionDebug {
 
     /**
      * <p>
-     *     Disables debugging for the Gini Vision Library.
+     *     Disables debugging for the Gini Capture SDK.
      * </p>
      */
     public static void disable() {
@@ -62,7 +62,7 @@ public final class GiniVisionDebug {
      *     The filename consists of a timestamp concatenated with the suffix. Ex.: if suffix is "_original" then {@code 1469541253_original.jpeg}
      * </p>
      * <p>
-     *     Destination directory is {@code ginivisionlib} inside your apps external files directory: {@code /sdcard/Android/data/your.app.id/files/ginivisionlib/}
+     *     Destination directory is {@code ginicapturesdk} inside your apps external files directory: {@code /sdcard/Android/data/your.app.id/files/ginicapturesdk/}
      * </p>
      */
     public static void writeDocumentToFile(
@@ -83,7 +83,7 @@ public final class GiniVisionDebug {
      *     The filename consists of a timestamp concatenated with the suffix. Ex.: if suffix is "_original" then {@code 1469541253_original.jpeg}
      * </p>
      * <p>
-     *     Destination directory is {@code ginivisionlib} inside your apps external files directory: {@code /sdcard/Android/data/your.app.id/files/ginivisionlib/}
+     *     Destination directory is {@code ginicapturesdk} inside your apps external files directory: {@code /sdcard/Android/data/your.app.id/files/ginicapturesdk/}
      * </p>
      */
     private static void writeImageDocumentToFile(final Context context,
@@ -93,26 +93,26 @@ public final class GiniVisionDebug {
         }
         final long time = new Date().getTime();
         final String jpegFilename = time + suffix + ".jpeg";
-        final File giniVisionDir = createGiniVisionDir(context);
-        if (giniVisionDir == null) {
+        final File giniCaptureDir = createGiniCaptureDir(context);
+        if (giniCaptureDir == null) {
             LOG.error("Could not write document to file {}", jpegFilename);
             return;
         }
-        final File jpegFile = new File(giniVisionDir, jpegFilename);
+        final File jpegFile = new File(giniCaptureDir, jpegFilename);
         PhotoFactory.newPhotoFromDocument((ImageDocument) document).saveToFile(jpegFile);
         LOG.debug("Document written to {}", jpegFile.getAbsolutePath());
     }
 
-    private static File createGiniVisionDir(final Context context) {
+    private static File createGiniCaptureDir(final Context context) {
         final File externalFilesDir = context.getExternalFilesDir(null);
-        final File giniVisionDir = new File(externalFilesDir, "ginivisionlib");
-        if (giniVisionDir.exists() || giniVisionDir.mkdir()) {
-            return giniVisionDir;
+        final File ginicaptureDir = new File(externalFilesDir, "ginicapturesdk");
+        if (ginicaptureDir.exists() || ginicaptureDir.mkdir()) {
+            return ginicaptureDir;
         }
         return null;
     }
 
-    private GiniVisionDebug() {
+    private GiniCaptureDebug() {
 
     }
 }

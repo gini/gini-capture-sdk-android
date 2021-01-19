@@ -50,7 +50,7 @@
 
         <net.gini.android.vision.internal.ui.CustomFontTextView
             android:id="@+id/gv_analysis_message"
-            style="@style/GiniVisionTheme.Analysis.AnalysingMessage.TextStyle"
+            style="@style/GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -78,7 +78,7 @@
 
         <net.gini.android.vision.internal.ui.CustomFontTextView
             android:id="@+id/gv_pdf_filename"
-            style="@style/GiniVisionTheme.Analysis.PdfFilename.TextStyle"
+            style="@style/GiniCaptureTheme.Analysis.PdfFilename.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="@dimen/gv_analysis_pdf_filename_height"
             android:layout_gravity="center_horizontal"
@@ -92,7 +92,7 @@
 
         <net.gini.android.vision.internal.ui.CustomFontTextView
             android:id="@+id/gv_pdf_page_count"
-            style="@style/GiniVisionTheme.Analysis.PdfPageCount.TextStyle"
+            style="@style/GiniCaptureTheme.Analysis.PdfPageCount.TextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -112,7 +112,7 @@
 
         <net.gini.android.vision.internal.ui.CustomFontTextView
             android:id="@+id/gv_analysis_hint_headline"
-            style="@style/GiniVisionTheme.Analysis.HintHeadline.TextStyle"
+            style="@style/GiniCaptureTheme.Analysis.HintHeadline.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/gv_analysis_hint_headline_bottom_margin"
@@ -140,7 +140,7 @@
 
             <net.gini.android.vision.internal.ui.CustomFontTextView
                 android:id="@+id/gv_analysis_hint_text"
-                style="@style/GiniVisionTheme.Analysis.Hint.TextStyle"
+                style="@style/GiniCaptureTheme.Analysis.Hint.TextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/gv_analysis_hint_text_height"
                 android:layout_gravity="center"

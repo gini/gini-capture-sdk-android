@@ -1,6 +1,6 @@
 package net.gini.android.vision.network;
 
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 
 import java.util.Map;
 
@@ -13,11 +13,11 @@ import androidx.annotation.NonNull;
  */
 
 /**
- * Used by the {@link GiniVisionNetworkService} to return analysis results.
+ * Used by the {@link GiniCaptureNetworkService} to return analysis results.
  */
 public class AnalysisResult extends Result {
 
-    private final Map<String, GiniVisionSpecificExtraction> extractions;
+    private final Map<String, GiniCaptureSpecificExtraction> extractions;
 
     /**
      * Create a new analysis result for a Gini API document id.
@@ -26,7 +26,7 @@ public class AnalysisResult extends Result {
      * @param extractions       the extractions from the Gini API
      */
     public AnalysisResult(@NonNull final String giniApiDocumentId,
-            @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
         super(giniApiDocumentId);
         this.extractions = extractions;
     }
@@ -35,7 +35,7 @@ public class AnalysisResult extends Result {
      * @return map of extraction labels and specific extractions
      */
     @NonNull
-    public Map<String, GiniVisionSpecificExtraction> getExtractions() {
+    public Map<String, GiniCaptureSpecificExtraction> getExtractions() {
         return extractions;
     }
 }

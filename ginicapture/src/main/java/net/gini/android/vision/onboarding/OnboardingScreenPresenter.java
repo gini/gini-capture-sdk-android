@@ -5,7 +5,7 @@ import static net.gini.android.vision.tracking.EventTrackingHelper.trackOnboardi
 
 import android.app.Activity;
 
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.tracking.OnboardingScreenEvent;
 
 import java.util.List;
@@ -27,7 +27,7 @@ class OnboardingScreenPresenter extends OnboardingScreenContract.Presenter {
                 }
 
                 @Override
-                public void onError(@NonNull final GiniVisionError error) {
+                public void onError(@NonNull final GiniCaptureError error) {
                 }
             };
 

@@ -1,4 +1,4 @@
-package net.gini.android.vision.network;
+package net.gini.android.vision.accounting.network;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -8,16 +8,23 @@ import com.android.volley.Cache;
 import net.gini.android.DocumentMetadata;
 import net.gini.android.DocumentTaskManager;
 import net.gini.android.Gini;
+import net.gini.android.GiniApiType;
 import net.gini.android.SdkBuilder;
 import net.gini.android.authorization.CredentialsStore;
+import net.gini.android.authorization.EncryptedCredentialsStore;
 import net.gini.android.authorization.SessionManager;
-import net.gini.android.authorization.SharedPreferencesCredentialsStore;
-import net.gini.android.models.ExtractionsContainer;
+import net.gini.android.models.SpecificExtraction;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
-import net.gini.android.vision.network.model.SpecificExtractionMapper;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.accounting.network.model.SpecificExtractionMapper;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
+import net.gini.android.vision.document.ImageDocument;
+import net.gini.android.vision.network.AnalysisResult;
+import net.gini.android.vision.network.Error;
+import net.gini.android.vision.network.GiniCaptureNetworkCallback;
+import net.gini.android.vision.network.GiniCaptureNetworkService;
+import net.gini.android.vision.network.Result;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.util.CancellationToken;
 import net.gini.android.vision.util.NoOpCancellationToken;
 
@@ -29,7 +36,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,53 +50,56 @@ import bolts.Task;
  */
 
 /**
- * Default implementation of the network related tasks required by the Gini Vision Library.
+ * Implementation using the Gini Accounting API of the network related tasks required by the
+ * Gini Capture SDK.
  *
  * <p> Relies on the <a href="http://developer.gini.net/gini-sdk-android/">Gini API SDK</a> for
- * executing the requests, which implements communication with the Gini API using generated
+ * executing the requests, which implements communication with the Gini Accounting API using generated
  * anonymous Gini users.
  *
  * <p><b>Important:</b> Access to the Gini User Center API is required which is restricted to
  * selected clients only. Contact Gini if you require access.
  *
- * <p> To create an instance use the {@link GiniVisionDefaultNetworkService.Builder} returned by the
- * {@link #builder(Context)} method.
+ * <p> To create an instance use the {@link GiniCaptureAccountingNetworkService.Builder} returned by
+ * the {@link #builder(Context)} method.
  *
- * <p> In order for the Gini Vision Library to use this implementation pass an instance of it to
- * {@link GiniVision.Builder#setGiniVisionNetworkService(GiniVisionNetworkService)} when creating a
- * {@link GiniVision} instance.
+ * <p> In order for the Gini Capture SDK to use this implementation pass an instance of it to
+ * {@link GiniCapture.Builder#setGiniCaptureNetworkService(GiniCaptureNetworkService)} when creating a
+ * {@link GiniCapture} instance.
  */
-public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService {
+public class GiniCaptureAccountingNetworkService implements GiniCaptureNetworkService {
 
     private static final Logger LOG = LoggerFactory.getLogger(
-            GiniVisionDefaultNetworkService.class);
+            GiniCaptureAccountingNetworkService.class);
 
     private final Gini mGiniApi;
     private final Map<String, net.gini.android.models.Document> mGiniApiDocuments = new HashMap<>();
     private final DocumentMetadata mDocumentMetadata;
     private net.gini.android.models.Document mAnalyzedGiniApiDocument;
+    private final Map<String, Document> mDocuments = new HashMap<>();
+    private Document mAnalyzedDocument;
 
     /**
-     * Creates a new {@link GiniVisionDefaultNetworkService.Builder} to configure and create a new
-     * instance.
+     * Creates a new {@link GiniCaptureAccountingNetworkService.Builder} to configure and create a
+     * new instance.
      *
      * @param context Android context
      *
-     * @return a new {@link GiniVisionDefaultNetworkService.Builder}
+     * @return a new {@link GiniCaptureAccountingNetworkService.Builder}
      */
     public static Builder builder(@NonNull final Context context) {
         return new Builder(context);
     }
 
-    GiniVisionDefaultNetworkService(@NonNull final Gini giniApi,
-            @Nullable final DocumentMetadata documentMetadata) {
+    GiniCaptureAccountingNetworkService(@NonNull final Gini giniApi,
+                                        @Nullable final DocumentMetadata documentMetadata) {
         mGiniApi = giniApi;
         mDocumentMetadata = documentMetadata;
     }
 
     @Override
     public CancellationToken upload(@NonNull final Document document,
-            @NonNull final GiniVisionNetworkCallback<Result, Error> callback) {
+            @NonNull final GiniCaptureNetworkCallback<Result, Error> callback) {
         LOG.debug("Upload document {}", document.getId());
         if (document.getData() == null) {
             final Error error = new Error("Document has no data. Did you forget to load it?");
@@ -98,9 +107,9 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
             callback.failure(error);
             return new NoOpCancellationToken();
         }
-        if (document instanceof GiniVisionMultiPageDocument) {
+        if (document instanceof GiniCaptureMultiPageDocument) {
             final Error error = new Error(
-                    "Multi-page document cannot be uploaded. You have to upload each of its page documents separately.");
+                    "Multi-page document cannot be uploaded. You have to upload each of its page documents separately using the default networking library.");
             LOG.error("Document upload failed for {}: {}", document.getId(), error.getMessage());
             callback.failure(error);
             return new NoOpCancellationToken();
@@ -108,34 +117,34 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
         final DocumentTaskManager documentTaskManager = mGiniApi.getDocumentTaskManager();
         final Task<net.gini.android.models.Document> createDocumentTask;
         if (mDocumentMetadata != null) {
-            createDocumentTask = documentTaskManager.createPartialDocument(document.getData(),
-                    document.getMimeType(), null, null, mDocumentMetadata);
+            createDocumentTask = documentTaskManager.createDocument(document.getData(),
+                    null, null, mDocumentMetadata);
         } else {
-            createDocumentTask = documentTaskManager.createPartialDocument(document.getData(),
-                    document.getMimeType(), null, null);
+            createDocumentTask = documentTaskManager.createDocument(document.getData(), null, null);
         }
         createDocumentTask.continueWith(new Continuation<net.gini.android.models.Document, Void>() {
-                    @Override
-                    public Void then(final Task<net.gini.android.models.Document> task)
-                            throws Exception {
-                        if (task.isFaulted()) {
-                            final Error error = new Error(getTaskErrorMessage(task), task.getError());
-                            LOG.error("Document upload failed for {}: {}", document.getId(),
-                                    error.getMessage());
-                            callback.failure(error);
-                        } else if (task.getResult() != null) {
-                            final net.gini.android.models.Document apiDocument = task.getResult();
-                            LOG.debug("Document upload success for {}: {}", document.getId(),
-                                    apiDocument);
-                            mGiniApiDocuments.put(apiDocument.getId(), apiDocument);
-                            callback.success(new Result(apiDocument.getId()));
-                        } else {
-                            LOG.debug("Document upload cancelled for {}", document.getId());
-                            callback.cancelled();
-                        }
-                        return null;
-                    }
-                }, Task.UI_THREAD_EXECUTOR);
+            @Override
+            public Void then(final Task<net.gini.android.models.Document> task)
+                    throws Exception {
+                if (task.isFaulted()) {
+                    final Error error = new Error(getTaskErrorMessage(task));
+                    LOG.error("Document upload failed for {}: {}", document.getId(),
+                            error.getMessage());
+                    callback.failure(error);
+                } else if (task.getResult() != null) {
+                    final net.gini.android.models.Document apiDocument = task.getResult();
+                    LOG.debug("Document upload success for {}: {}", document.getId(),
+                            apiDocument);
+                    mGiniApiDocuments.put(apiDocument.getId(), apiDocument);
+                    mDocuments.put(apiDocument.getId(), document);
+                    callback.success(new Result(apiDocument.getId()));
+                } else {
+                    LOG.debug("Document upload cancelled for {}", document.getId());
+                    callback.cancelled();
+                }
+                return null;
+            }
+        }, Task.UI_THREAD_EXECUTOR);
         return new NoOpCancellationToken();
     }
 
@@ -147,23 +156,24 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
         return errorMessage != null ? errorMessage : task.getError().toString();
     }
 
-
     @Override
     public CancellationToken delete(@NonNull final String giniApiDocumentId,
-            @NonNull final GiniVisionNetworkCallback<Result, Error> callback) {
+            @NonNull final GiniCaptureNetworkCallback<Result, Error> callback) {
         LOG.debug("Delete document with api id {}", giniApiDocumentId);
-        mGiniApi.getDocumentTaskManager().deletePartialDocumentAndParents(giniApiDocumentId)
+        mGiniApi.getDocumentTaskManager().deleteDocument(giniApiDocumentId)
                 .continueWith(new Continuation<String, Void>() {
                     @Override
                     public Void then(final Task<String> task) throws Exception {
                         if (task.isFaulted()) {
-                            final Error error = new Error(getTaskErrorMessage(task), task.getError());
+                            final Error error = new Error(getTaskErrorMessage(task));
                             LOG.error("Document deletion failed for api id {}: {}",
                                     giniApiDocumentId,
                                     error.getMessage());
                             callback.failure(error);
                         } else if (task.getResult() != null) {
                             LOG.debug("Document deletion success for api id {}", giniApiDocumentId);
+                            mGiniApiDocuments.remove(giniApiDocumentId);
+                            mDocuments.remove(giniApiDocumentId);
                             callback.success(new Result(giniApiDocumentId));
                         } else {
                             LOG.debug("Document deletion cancelled for api id {}",
@@ -180,58 +190,50 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
     @Override
     public CancellationToken analyze(
             @NonNull final LinkedHashMap<String, Integer> giniApiDocumentIdRotationMap,
-            @NonNull final GiniVisionNetworkCallback<AnalysisResult, Error> callback) {
-        LOG.debug("Analyze documents {}", giniApiDocumentIdRotationMap);
-        final LinkedHashMap<net.gini.android.models.Document, Integer> giniApiDocumentRotationMap =
-                new LinkedHashMap<>();
-        final boolean success = collectGiniApiDocuments(giniApiDocumentRotationMap,
-                giniApiDocumentIdRotationMap, callback);
-        if (!success) {
+            @NonNull final GiniCaptureNetworkCallback<AnalysisResult, Error> callback) {
+        LOG.debug("Analyze document {}", giniApiDocumentIdRotationMap);
+        if (giniApiDocumentIdRotationMap.size() != 1) {
+            final String errorMessage;
+            if (giniApiDocumentIdRotationMap.isEmpty()) {
+                errorMessage = "No document id received.";
+            } else {
+                errorMessage = "Multi-page documents are not supported. "
+                        + "Use the default networking library instead.";
+            }
+            final Error error = new Error(errorMessage); // NOPMD
+            LOG.error("Document analysis failed for document {}: {}",
+                    giniApiDocumentIdRotationMap,
+                    error.getMessage());
+            callback.failure(error);
             return new NoOpCancellationToken();
         }
+
+        final String giniApiDocumentId = giniApiDocumentIdRotationMap.keySet().iterator().next();
+        final net.gini.android.models.Document giniApiDocument =
+                mGiniApiDocuments.get(giniApiDocumentId);
+        if (giniApiDocument == null) {
+            final Error error = new Error("Missing document."); // NOPMD
+            LOG.error("Document analysis failed for document {}: {}",
+                    giniApiDocumentIdRotationMap,
+                    error.getMessage());
+            callback.failure(error);
+            return new NoOpCancellationToken();
+        }
+
         mAnalyzedGiniApiDocument = null; // NOPMD
+        mAnalyzedDocument = null; // NOPMD
         final AtomicBoolean isCancelled = new AtomicBoolean();
-        final AtomicReference<net.gini.android.models.Document> compositeDocument =
-                new AtomicReference<>();
-        mGiniApi.getDocumentTaskManager().createCompositeDocument(giniApiDocumentRotationMap, null)
+        mGiniApi.getDocumentTaskManager().pollDocument(giniApiDocument)
                 .onSuccessTask(
                         new Continuation<net.gini.android.models.Document,
-                                Task<net.gini.android.models.Document>>() {
+                                Task<Map<String, SpecificExtraction>>>() {
                             @Override
-                            public Task<net.gini.android.models.Document> then(
+                            public Task<Map<String, SpecificExtraction>> then(
                                     final Task<net.gini.android.models.Document> task)
                                     throws Exception {
                                 if (isCancelled.get()) {
                                     LOG.debug(
-                                            "Document analysis cancelled after composite document creation for documents {}",
-                                            giniApiDocumentIdRotationMap);
-                                    return Task.cancelled();
-                                }
-                                if (task.isCancelled()) {
-                                    LOG.debug(
-                                            "Composite document creation cancelled for documents {}",
-                                            giniApiDocumentIdRotationMap);
-                                    return task;
-                                }
-                                final net.gini.android.models.Document giniApiDocument =
-                                        task.getResult();
-                                // Composite document needed to create the AnalysisResult later
-                                compositeDocument.set(giniApiDocument);
-                                mGiniApiDocuments.put(giniApiDocument.getId(), giniApiDocument);
-                                return mGiniApi.getDocumentTaskManager().pollDocument(
-                                        giniApiDocument);
-                            }
-                        })
-                .onSuccessTask(
-                        new Continuation<net.gini.android.models.Document,
-                                Task<ExtractionsContainer>>() {
-                            @Override
-                            public Task<ExtractionsContainer> then(
-                                    final Task<net.gini.android.models.Document> task)
-                                    throws Exception {
-                                if (isCancelled.get()) {
-                                    LOG.debug(
-                                            "Document analysis cancelled after polling for documents {}",
+                                            "Document analysis cancelled after polling for document {}",
                                             giniApiDocumentIdRotationMap);
                                     return Task.cancelled();
                                 }
@@ -239,36 +241,36 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
                                         task.getResult();
                                 if (task.isCancelled()) {
                                     LOG.debug(
-                                            "Composite document polling cancelled for documents {}",
+                                            "Document polling cancelled for document {}",
                                             giniApiDocumentIdRotationMap);
                                     return Task.cancelled();
                                 }
-                                return mGiniApi.getDocumentTaskManager().getAllExtractions(
+                                return mGiniApi.getDocumentTaskManager().getExtractions(
                                         giniApiDocument);
                             }
                         })
                 .continueWith(
-                        new Continuation<ExtractionsContainer, Void>() {
+                        new Continuation<Map<String, SpecificExtraction>, Void>() {
                             @Override
                             public Void then(
-                                    final Task<ExtractionsContainer> task)
+                                    final Task<Map<String, SpecificExtraction>> task)
                                     throws Exception {
                                 if (task.isFaulted()) {
-                                    final Error error = new Error(getTaskErrorMessage(task), task.getError());
-                                    LOG.error("Document analysis failed for documents {}: {}",
+                                    final Error error = new Error(getTaskErrorMessage(task));
+                                    LOG.error("Document analysis failed for document {}: {}",
                                             giniApiDocumentIdRotationMap, error.getMessage());
                                     callback.failure(error);
                                 } else if (task.getResult() != null) {
-                                    mAnalyzedGiniApiDocument = compositeDocument.get();
-                                    final Map<String, GiniVisionSpecificExtraction> extractions =
-                                            SpecificExtractionMapper.mapToGVL(task.getResult().getSpecificExtractions());
-                                    LOG.debug("Document analysis success for documents {}: extractions = {}; compoundExtractions = {}; returnReasons = {}",
+                                    mAnalyzedGiniApiDocument = giniApiDocument;
+                                    mAnalyzedDocument = mDocuments.get(giniApiDocument.getId());
+                                    final Map<String, GiniCaptureSpecificExtraction> extractions =
+                                            SpecificExtractionMapper.mapToGiniCapture(task.getResult());
+                                    LOG.debug("Document analysis success for document {}: {}",
                                             giniApiDocumentIdRotationMap, extractions);
                                     callback.success(
-                                            new AnalysisResult(compositeDocument.get().getId(),
-                                                    extractions));
+                                            new AnalysisResult(giniApiDocumentId, extractions));
                                 } else {
-                                    LOG.debug("Document analysis cancelled for documents {}",
+                                    LOG.debug("Document analysis cancelled for document {}",
                                             giniApiDocumentIdRotationMap);
                                     callback.cancelled();
                                 }
@@ -278,13 +280,10 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
         return new CancellationToken() {
             @Override
             public void cancel() {
-                LOG.debug("Document analaysis cancellation requested for documents {}",
+                LOG.debug("Document analaysis cancellation requested for document {}",
                         giniApiDocumentIdRotationMap);
                 isCancelled.set(true);
-                if (compositeDocument.get() != null) {
-                    mGiniApi.getDocumentTaskManager().cancelDocumentPolling(
-                            compositeDocument.get());
-                }
+                    mGiniApi.getDocumentTaskManager().cancelDocumentPolling(giniApiDocument);
             }
         };
 
@@ -293,27 +292,8 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
     @Override
     public void cleanup() {
         mAnalyzedGiniApiDocument = null; // NOPMD
+        mAnalyzedDocument = null; // NOPMD
         mGiniApiDocuments.clear();
-    }
-
-    private boolean collectGiniApiDocuments(
-            @NonNull final LinkedHashMap<net.gini.android.models.Document, Integer> // NOPMD
-                    giniApiDocumentRotationMap,
-            @NonNull final LinkedHashMap<String, Integer> giniApiDocumentIdRotationMap, // NOPMD
-            @NonNull final GiniVisionNetworkCallback<AnalysisResult, Error> callback) {
-        for (final Map.Entry<String, Integer> entry : giniApiDocumentIdRotationMap.entrySet()) {
-            final net.gini.android.models.Document document = mGiniApiDocuments.get(entry.getKey());
-            if (document == null) {
-                final Error error = new Error("Missing partial document."); // NOPMD
-                LOG.error("Document analysis failed for documents {}: {}",
-                        giniApiDocumentIdRotationMap,
-                        error.getMessage());
-                callback.failure(error);
-                return false;
-            }
-            giniApiDocumentRotationMap.put(document, entry.getValue());
-        }
-        return true;
     }
 
     @Nullable
@@ -321,12 +301,33 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
         return mAnalyzedGiniApiDocument;
     }
 
+    /**
+     * Get the last successfully analyzed picture taken by the camera.
+     * <p>
+     * <b>Important:</b> Call this method before calling {@link #cleanup()} (or {@link
+     * GiniCapture#cleanup(Context)}), otherwise it will
+     * return {@code null}.
+     * <p>
+     *
+     * @return a byte array containing the picture in jpeg format. Returns {@code null}, if {@link
+     * #cleanup()} (or {@link GiniCapture#cleanup(Context)}) was called before or the analyzed
+     * document was not an image taken by the camera with the Gini Capture SDK.
+     */
+    @Nullable
+    public byte[] getAnalyzedCameraPictureAsJpeg() {
+        if (mAnalyzedDocument instanceof ImageDocument
+                && !mAnalyzedDocument.isImported()) {
+            return mAnalyzedDocument.getData();
+        }
+        return null;
+    }
+
     Gini getGiniApi() {
         return mGiniApi;
     }
 
     /**
-     * Builder for configuring a new instance of the {@link GiniVisionDefaultNetworkService}.
+     * Builder for configuring a new instance of the {@link GiniCaptureAccountingNetworkService}.
      */
     public static class Builder {
 
@@ -352,18 +353,19 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
         }
 
         /**
-         * Create a new instance of the {@link GiniVisionDefaultNetworkService}.
+         * Create a new instance of the {@link GiniCaptureAccountingNetworkService}.
          *
-         * @return new {@link GiniVisionDefaultNetworkService} instance
+         * @return new {@link GiniCaptureAccountingNetworkService} instance
          */
         @NonNull
-        public GiniVisionDefaultNetworkService build() {
+        public GiniCaptureAccountingNetworkService build() {
             final SdkBuilder sdkBuilder;
             if (mSessionManager != null) {
                 sdkBuilder = new SdkBuilder(mContext, mSessionManager);
             } else {
                 sdkBuilder = new SdkBuilder(mContext, mClientId, mClientSecret, mEmailDomain);
             }
+            sdkBuilder.setGiniApiType(GiniApiType.ACCOUNTING);
             if (!TextUtils.isEmpty(mBaseUrl)) {
                 sdkBuilder.setApiBaseUrl(mBaseUrl);
             }
@@ -391,15 +393,15 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
                 sdkBuilder.setConnectionBackOffMultiplier(mBackoffMultiplier);
             }
             final Gini giniApi = sdkBuilder.build();
-            return new GiniVisionDefaultNetworkService(giniApi, mDocumentMetadata);
+            return new GiniCaptureAccountingNetworkService(giniApi, mDocumentMetadata);
         }
 
         /**
-         * Set your Gini API client ID and secret. The email domain is used when generating
+         * Set your Gini Accounting API client ID and secret. The email domain is used when generating
          * anonymous Gini users in the form of {@code UUID@your-email-domain}.
          *
-         * @param clientId     your application's client ID for the Gini API
-         * @param clientSecret your application's client secret for the Gini API
+         * @param clientId     your application's client ID for the Gini Accounting API
+         * @param clientSecret your application's client secret for the Gini Accounting API
          * @param emailDomain  the email domain which is used for created Gini users
          *
          * @return the {@link Builder} instance
@@ -427,9 +429,9 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
         }
 
         /**
-         * Set the base URL of the Gini API.
+         * Set the base URL of the Gini Accounting API.
          *
-         * @param baseUrl custom Gini API base URL
+         * @param baseUrl custom Gini Accounting API base URL
          *
          * @return the {@link Builder} instance
          */
@@ -442,7 +444,7 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
         /**
          * Set the base URL of the Gini User Center API.
          *
-         * @param userCenterBaseUrl custom Gini API base URL
+         * @param userCenterBaseUrl custom Gini User Center API base URL
          *
          * @return the {@link Builder} instance
          */
@@ -468,7 +470,7 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
 
         /**
          * Set the credentials store which is used by the Gini API SDK to store user credentials. If
-         * no credentials store is set, the {@link SharedPreferencesCredentialsStore} from the Gini
+         * no credentials store is set, the {@link EncryptedCredentialsStore} from the Gini
          * API SDK is used by default.
          *
          * @param credentialsStore a credentials store instance (specified by the CredentialsStore
@@ -483,9 +485,11 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
         }
 
         /**
-         * Set the resource id for the network security configuration xml to enable public key pinning.
+         * Set the resource id for the network security configuration xml to enable public key
+         * pinning.
          *
          * @param networkSecurityConfigResId xml resource id
+         *
          * @return the {@link Builder} instance
          */
         @NonNull
@@ -555,6 +559,7 @@ public class GiniVisionDefaultNetworkService implements GiniVisionNetworkService
          *
          * @param documentMetadata a {@link DocumentMetadata} instance containing additional
          *                         information for the uploaded documents
+         *
          * @return the {@link Builder} instance
          */
         public Builder setDocumentMetadata(@NonNull final DocumentMetadata documentMetadata) {

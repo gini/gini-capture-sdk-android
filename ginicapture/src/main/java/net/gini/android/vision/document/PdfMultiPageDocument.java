@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
  * A document consisting of multiple pdf documents.
  */
 public class PdfMultiPageDocument extends
-        GiniVisionMultiPageDocument<PdfDocument, GiniVisionDocumentError> {
+        GiniCaptureMultiPageDocument<PdfDocument, GiniCaptureDocumentError> {
 
     public static final Creator<PdfMultiPageDocument> CREATOR =
             new Creator<PdfMultiPageDocument>() {

@@ -12,13 +12,13 @@
         <activity
             android:name="net.gini.android.vision.review.ReviewActivityTestSpy"
             android:label="@string/gv_title_review"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.analysis.AnalysisActivityTestSpy"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.internal.ui.ErrorSnackbarTestActivity"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity android:name="net.gini.android.vision.internal.camera.api.NoOpActivity" />
 
         <provider
@@ -33,31 +33,31 @@
 
         <activity
             android:name="net.gini.android.vision.camera.CameraActivityFake"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.camera.CameraFragmentHostActivityNotListener"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.camera.CameraFragmentHostActivity"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.onboarding.OnboardingFragmentHostActivityNotListener"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.onboarding.OnboardingFragmentHostActivity"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.review.ReviewFragmentHostActivityNotListener"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.review.ReviewFragmentHostActivity"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.analysis.AnalysisFragmentHostActivityNotListener"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.analysis.AnalysisFragmentHostActivity"
-            android:theme="@style/GiniVisionTheme" />
+            android:theme="@style/GiniCaptureTheme" />
     </application>
 
 </manifest>

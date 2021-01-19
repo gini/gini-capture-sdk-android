@@ -1,6 +1,6 @@
 package net.gini.android.vision.internal.network;
 
-import net.gini.android.vision.document.GiniVisionDocument;
+import net.gini.android.vision.document.GiniCaptureDocument;
 import net.gini.android.vision.network.AnalysisResult;
 
 import androidx.annotation.NonNull;
@@ -16,15 +16,15 @@ import androidx.annotation.NonNull;
  *
  * @suppress
  */
-public class AnalysisNetworkRequestResult<T extends GiniVisionDocument>
+public class AnalysisNetworkRequestResult<T extends GiniCaptureDocument>
         extends NetworkRequestResult<T> {
 
     private final AnalysisResult mAnalysisResult;
 
-    public AnalysisNetworkRequestResult(@NonNull final T giniVisionDocument,
+    public AnalysisNetworkRequestResult(@NonNull final T giniCaptureDocument,
             @NonNull final String apiDocumentId,
             @NonNull final AnalysisResult analysisResult) {
-        super(giniVisionDocument, apiDocumentId);
+        super(giniCaptureDocument, apiDocumentId);
         mAnalysisResult = analysisResult;
     }
 

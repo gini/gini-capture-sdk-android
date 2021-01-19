@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import net.gini.android.vision.AsyncCallback;
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.R;
 import net.gini.android.vision.document.ImageDocument;
 import net.gini.android.vision.internal.camera.photo.ParcelableMemoryCache;
@@ -101,8 +101,8 @@ public class PreviewFragment extends Fragment {
         if (shouldShowPreviewImage()) {
             LOG.debug("Loading preview bitmap ({})", this);
             showActivityIndicator();
-            if (GiniVision.hasInstance()) {
-                GiniVision.getInstance().internal().getPhotoMemoryCache()
+            if (GiniCapture.hasInstance()) {
+                GiniCapture.getInstance().internal().getPhotoMemoryCache()
                         .get(context, mDocument, new AsyncCallback<Photo, Exception>() {
                             @Override
                             public void onSuccess(final Photo result) {
@@ -138,7 +138,7 @@ public class PreviewFragment extends Fragment {
                         });
             } else {
                 LOG.error(
-                        "Cannot show preview. GiniVision instance not available. Create it with GiniVision.newInstance().");
+                        "Cannot show preview. GiniCapture instance not available. Create it with GiniCapture.newInstance().");
             }
         }
         if (!TextUtils.isEmpty(mErrorMessage)) {

@@ -2,8 +2,8 @@ package net.gini.android.vision.onboarding;
 
 import android.app.Activity;
 
-import net.gini.android.vision.GiniVisionBasePresenter;
-import net.gini.android.vision.GiniVisionBaseView;
+import net.gini.android.vision.GiniCaptureBasePresenter;
+import net.gini.android.vision.GiniCaptureBaseView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -16,7 +16,7 @@ import androidx.annotation.StringRes;
  */
 interface OnboardingPageContract {
 
-    abstract class View implements GiniVisionBaseView<Presenter> {
+    abstract class View implements GiniCaptureBaseView<Presenter> {
 
         private Presenter mPresenter;
 
@@ -36,7 +36,7 @@ interface OnboardingPageContract {
         abstract void showTransparentBackground();
     }
 
-    abstract class Presenter extends GiniVisionBasePresenter<View> {
+    abstract class Presenter extends GiniCaptureBasePresenter<View> {
 
         Presenter(
                 @NonNull final Activity activity,

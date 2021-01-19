@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class NoExtractionsActivity extends AppCompatActivity {
 
-    public static final int RESULT_START_GINI_VISION = RESULT_FIRST_USER + 1;
+    public static final int RESULT_START_GINI_CAPTURE = RESULT_FIRST_USER + 1;
 
     private Button mButtonNew;
 
@@ -40,7 +40,7 @@ public class NoExtractionsActivity extends AppCompatActivity {
         mButtonNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                setResult(RESULT_START_GINI_VISION);
+                setResult(RESULT_START_GINI_CAPTURE);
                 finish();
             }
         });

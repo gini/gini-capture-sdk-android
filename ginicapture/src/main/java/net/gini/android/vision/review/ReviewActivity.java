@@ -9,16 +9,16 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionCoordinator;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureCoordinator;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.R;
 import net.gini.android.vision.analysis.AnalysisActivity;
 import net.gini.android.vision.analysis.AnalysisFragmentListener;
 import net.gini.android.vision.camera.CameraActivity;
-import net.gini.android.vision.network.GiniVisionNetworkApi;
-import net.gini.android.vision.network.GiniVisionNetworkService;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.GiniCaptureNetworkApi;
+import net.gini.android.vision.network.GiniCaptureNetworkService;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.noresults.NoResultsActivity;
 import net.gini.android.vision.onboarding.OnboardingActivity;
 import net.gini.android.vision.tracking.ReviewScreenEvent;
@@ -38,12 +38,12 @@ import androidx.appcompat.app.AppCompatActivity;
  * the image. The user can correct the orientation by rotating the image.
  *
  * <p> Extending the {@code ReviewActivity} in your application has been deprecated. The preferred
- * way of adding network calls to the Gini Vision Library is by creating a {@link GiniVision}
- * instance with a {@link GiniVisionNetworkService} and a {@link GiniVisionNetworkApi}
+ * way of adding network calls to the Gini Capture SDK is by creating a {@link GiniCapture}
+ * instance with a {@link GiniCaptureNetworkService} and a {@link GiniCaptureNetworkApi}
  * implementation.
  *
  * <p> <b>Note:</b> When declaring your {@code ReviewActivity} subclass in the {@code
- * AndroidManifest.xml} you should set the theme to the {@code GiniVisionTheme} and the title to the
+ * AndroidManifest.xml} you should set the theme to the {@code GiniCaptureTheme} and the title to the
  * string resource named {@code gv_title_review}. If you would like to use your own theme please
  * consider that {@code ReviewActivity} extends {@link AppCompatActivity} and requires an AppCompat
  * Theme.
@@ -51,7 +51,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * <p> The {@code ReviewActivity} is started by the {@link CameraActivity} after the user has taken
  * a photo or imported an image of a document.
  *
- * <p> If you didn't create {@link GiniVision} instance you have to implement the following methods
+ * <p> If you didn't create {@link GiniCapture} instance you have to implement the following methods
  * in your {@code ReviewActivity} subclass:
  *
  * <ul>
@@ -70,13 +70,13 @@ import androidx.appcompat.app.AppCompatActivity;
  *
  * </ul>
  *
- * You can also override the following methods, if you didn't create a {@link GiniVision} instance:
+ * You can also override the following methods, if you didn't create a {@link GiniCapture} instance:
  *
  * <ul>
  *
  * <li>{@link ReviewActivity#onDocumentWasRotated(Document, int, int)} - you should cancel the
  * analysis started in {@link ReviewActivity#onShouldAnalyzeDocument(Document)} because the document
- * was rotated and analysing the original is not necessary anymore. The Gini Vision Library will
+ * was rotated and analysing the original is not necessary anymore. The Gini Capture SDK will
  * proceed to the Analysis Screen where the reviewed document can be analyzed.
  *
  * <li>{@link ReviewActivity#onProceedToAnalysisScreen(Document)} - called when the Gini Vision
@@ -114,15 +114,15 @@ import androidx.appcompat.app.AppCompatActivity;
  * <li><b>Bottom text color:</b> via the color resource named {@code gv_review_bottom_panel_text}
  *
  * <li><b>Bottom text font:</b> via overriding the style named {@code
- * GiniVisionTheme.Review.BottomPanel.TextStyle} and setting an item named {@code gvCustomFont} with
+ * GiniCaptureTheme.Review.BottomPanel.TextStyle} and setting an item named {@code gvCustomFont} with
  * the path to the font file in your {@code assets} folder
  *
  * <li><b>Bottom text style:</b> via overriding the style named {@code
- * GiniVisionTheme.Review.BottomPanel.TextStyle} and setting an item named {@code android:textStyle}
+ * GiniCaptureTheme.Review.BottomPanel.TextStyle} and setting an item named {@code android:textStyle}
  * to {@code normal}, {@code bold} or {@code italic}
  *
  * <li><b>Bottom text size:</b> via overriding the style named {@code
- * GiniVisionTheme.Review.BottomPanel.TextStyle} and setting an item named {@code android:textSize}
+ * GiniCaptureTheme.Review.BottomPanel.TextStyle} and setting an item named {@code android:textSize}
  * to the desired {@code sp} size
  *
  * <li><b>Bottom panel background color:</b> via the color resource named {@code
@@ -135,8 +135,8 @@ import androidx.appcompat.app.AppCompatActivity;
  * </ul>
  *
  * <p> <b>Important:</b> All overridden styles must have their respective {@code Root.} prefixed
- * style as their parent. Ex.: the parent of {@code GiniVisionTheme.Review.BottomPanel.TextStyle}
- * must be {@code Root.GiniVisionTheme.Review.BottomPanel.TextStyle}.
+ * style as their parent. Ex.: the parent of {@code GiniCaptureTheme.Review.BottomPanel.TextStyle}
+ * must be {@code Root.GiniCaptureTheme.Review.BottomPanel.TextStyle}.
  *
  * <h3>Customizing the Action Bar</h3>
  *
@@ -336,8 +336,8 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
     /**
      * @param document contains the original image taken by the camera
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document is analyzed
-     * internally by using the configured {@link GiniVisionNetworkService} implementation. The
+     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
+     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
      * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
      * of the {@link CameraActivity}'s result Intent.
      */
@@ -355,7 +355,7 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
     public void onProceedToAnalysisScreen(@NonNull final Document document,
             @Nullable final String errorMessage) {
         if (mNoExtractionsFound) {
-            if (GiniVisionCoordinator.shouldShowGiniVisionNoResultsScreen(document)) {
+            if (GiniCaptureCoordinator.shouldShowGiniCaptureNoResultsScreen(document)) {
                 final Intent noResultsActivity = new Intent(this, NoResultsActivity.class);
                 noResultsActivity.putExtra(NoResultsActivity.EXTRA_IN_DOCUMENT, mDocument);
                 noResultsActivity.setExtrasClassLoader(ReviewActivity.class.getClassLoader());
@@ -398,8 +398,8 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
      *
      * @param result the {@link Intent} which will be returned as the result data.
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document is analyzed
-     * internally by using the configured {@link GiniVisionNetworkService} implementation. The
+     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
+     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
      * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
      * of the {@link CameraActivity}'s result Intent.
      */
@@ -416,9 +416,9 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
      * @param oldRotation the previous rotation in degrees
      * @param newRotation the new rotation in degrees
      *
-     * @Deprecated When a {@link GiniVision} and a {@link GiniVisionNetworkService} instance is
+     * @Deprecated When a {@link GiniCapture} and a {@link GiniCaptureNetworkService} instance is
      * available rotation is handled internally. The document is analyzed by using the configured
-     * {@link GiniVisionNetworkService} implementation. The extractions will be returned in the
+     * {@link GiniCaptureNetworkService} implementation. The extractions will be returned in the
      * Analysis Screen in {@link AnalysisFragmentListener#onExtractionsAvailable(Map, Map)}.
      */
     @Override
@@ -428,8 +428,8 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
     }
 
     /**
-     * @Deprecated When a {@link GiniVision} instance is available the document is analyzed
-     * internally by using the configured {@link GiniVisionNetworkService} implementation. The
+     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
+     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
      * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
      * of the {@link CameraActivity}'s result Intent.
      */
@@ -440,8 +440,8 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
     }
 
     /**
-     * @Deprecated When a {@link GiniVision} instance is available the document is analyzed
-     * internally by using the configured {@link GiniVisionNetworkService} implementation.
+     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
+     * internally by using the configured {@link GiniCaptureNetworkService} implementation.
      */
     @Deprecated
     @Override
@@ -450,7 +450,7 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
     }
 
     @Override
-    public void onError(@NonNull final GiniVisionError error) {
+    public void onError(@NonNull final GiniCaptureError error) {
         final Intent result = new Intent();
         result.putExtra(EXTRA_OUT_ERROR, error);
         setResult(RESULT_ERROR, result);
@@ -464,8 +464,8 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
      *
      * @param message an error message to be shown to the user
      *
-     * @Deprecated When a {@link GiniVision} instance is available the document is analyzed
-     * internally by using the configured {@link GiniVisionNetworkService} implementation.
+     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
+     * internally by using the configured {@link GiniCaptureNetworkService} implementation.
      */
     @Deprecated
     protected void onDocumentAnalysisError(final String message) {
@@ -502,10 +502,10 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
 
     @Override
     public void onExtractionsAvailable(
-            @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
         final Intent result = new Intent();
         final Bundle extractionsBundle = new Bundle();
-        for (final Map.Entry<String, GiniVisionSpecificExtraction> extraction
+        for (final Map.Entry<String, GiniCaptureSpecificExtraction> extraction
                 : extractions.entrySet()) {
             extractionsBundle.putParcelable(extraction.getKey(), extraction.getValue());
         }
@@ -517,7 +517,7 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
 
     @Override
     public void onProceedToNoExtractionsScreen(@NonNull final Document document) {
-        if (GiniVisionCoordinator.shouldShowGiniVisionNoResultsScreen(document)) {
+        if (GiniCaptureCoordinator.shouldShowGiniCaptureNoResultsScreen(document)) {
             final Intent noResultsActivity = new Intent(this, NoResultsActivity.class);
             noResultsActivity.putExtra(NoResultsActivity.EXTRA_IN_DOCUMENT, mDocument);
             noResultsActivity.setExtrasClassLoader(ReviewActivity.class.getClassLoader());

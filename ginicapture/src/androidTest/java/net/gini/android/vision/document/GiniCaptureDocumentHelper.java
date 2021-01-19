@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
  * Copyright (c) 2018 Gini GmbH.
  */
 
-public class GiniVisionDocumentHelper {
+public class GiniCaptureDocumentHelper {
 
     public static ImageDocument newImageDocument() {
         final int random = (int) (1 + Math.round(Math.random() * 5));
@@ -25,10 +25,10 @@ public class GiniVisionDocumentHelper {
     public static ImageMultiPageDocument newMultiPageDocument() {
         final List<ImageDocument> imageDocuments = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            final ImageDocument imageDocument = GiniVisionDocumentHelper.newImageDocument();
+            final ImageDocument imageDocument = GiniCaptureDocumentHelper.newImageDocument();
             imageDocuments.add(imageDocument);
         }
-        return GiniVisionDocumentHelper.newMultiPageDocument(imageDocuments);
+        return GiniCaptureDocumentHelper.newMultiPageDocument(imageDocuments);
     }
 
     private static ImageMultiPageDocument newMultiPageDocument(@NonNull final List<ImageDocument> imageDocuments) {

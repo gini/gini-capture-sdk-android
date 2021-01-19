@@ -1,7 +1,7 @@
 package net.gini.android.vision.network;
 
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 
 import java.util.Map;
 
@@ -18,21 +18,21 @@ import androidx.annotation.NonNull;
  * Library (e.g. for sending feedback).
  *
  * * <p> In order to easily access your implementation pass an instance of it to {@link
- * GiniVision.Builder#setGiniVisionNetworkApi(GiniVisionNetworkApi)} when creating a {@link
- * GiniVision} instance. You can then get the instance in your app with {@link
- * GiniVision#getGiniVisionNetworkApi()}.
+ * GiniCapture.Builder#setGiniCaptureNetworkApi(GiniCaptureNetworkApi)} when creating a {@link
+ * GiniCapture} instance. You can then get the instance in your app with {@link
+ * GiniCapture#getGiniCaptureNetworkApi()}.
  */
-public interface GiniVisionNetworkApi {
+public interface GiniCaptureNetworkApi {
 
     /**
      * Call this method with the extractions the user has seen and accepted. The {@link
-     * GiniVisionSpecificExtraction}s must contain the final user corrected and/or accepted values.
+     * GiniCaptureSpecificExtraction}s must contain the final user corrected and/or accepted values.
      *
      * @param extractions a map of extraction labels and specific extractions
      * @param callback    a callback implementation to return the outcome
      */
-    void sendFeedback(@NonNull final Map<String, GiniVisionSpecificExtraction> extractions,
-            @NonNull final GiniVisionNetworkCallback<Void, Error> callback);
+    void sendFeedback(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
+            @NonNull final GiniCaptureNetworkCallback<Void, Error> callback);
 
     /**
      * Delete the anonymous gini user credentials. These were automatically generated when the first document was uploaded.

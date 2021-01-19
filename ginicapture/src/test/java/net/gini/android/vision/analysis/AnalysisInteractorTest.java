@@ -10,16 +10,16 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 import android.app.Application;
 
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionHelper;
-import net.gini.android.vision.document.GiniVisionDocument;
-import net.gini.android.vision.document.GiniVisionDocumentError;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureHelper;
+import net.gini.android.vision.document.GiniCaptureDocument;
+import net.gini.android.vision.document.GiniCaptureDocumentError;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.internal.network.AnalysisNetworkRequestResult;
 import net.gini.android.vision.internal.network.NetworkRequestResult;
 import net.gini.android.vision.internal.network.NetworkRequestsManager;
 import net.gini.android.vision.network.AnalysisResult;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 
 import org.junit.After;
 import org.junit.Before;
@@ -58,16 +58,16 @@ public class AnalysisInteractorTest {
 
     @After
     public void tearDown() throws Exception {
-        GiniVisionHelper.setGiniVisionInstance(null);
+        GiniCaptureHelper.setGiniCaptureInstance(null);
     }
 
     @Test
-    public void should_completeWithNoNetworkService_whenGiniVision_isNotAvailable()
+    public void should_completeWithNoNetworkService_whenGiniCapture_isNotAvailable()
             throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
 
         // When
         final CompletableFuture<AnalysisInteractor.ResultHolder> future =
@@ -83,10 +83,10 @@ public class AnalysisInteractorTest {
             throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
 
-        createGiniVision(null);
+        createGiniCapture(null);
 
         // When
         final CompletableFuture<AnalysisInteractor.ResultHolder> future =
@@ -97,44 +97,44 @@ public class AnalysisInteractorTest {
                 AnalysisInteractor.Result.NO_NETWORK_SERVICE);
     }
 
-    private void createGiniVision(
+    private void createGiniCapture(
             @Nullable final NetworkRequestsManager networkRequestsManager) {
-        final GiniVision.Internal internal = mock(GiniVision.Internal.class);
+        final GiniCapture.Internal internal = mock(GiniCapture.Internal.class);
         when(internal.getNetworkRequestsManager()).thenReturn(networkRequestsManager);
 
-        final GiniVision giniVision = mock(GiniVision.class);
-        when(giniVision.internal()).thenReturn(internal);
+        final GiniCapture giniCapture = mock(GiniCapture.class);
+        when(giniCapture.internal()).thenReturn(internal);
 
-        GiniVisionHelper.setGiniVisionInstance(giniVision);
+        GiniCaptureHelper.setGiniCaptureInstance(giniCapture);
     }
 
     @Test
     public void should_uploadEveryPage_ofMultiPageDocument() throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
-        final List<GiniVisionDocument> documents = new ArrayList<>();
-        documents.add(mock(GiniVisionDocument.class));
-        documents.add(mock(GiniVisionDocument.class));
-        documents.add(mock(GiniVisionDocument.class));
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
+        final List<GiniCaptureDocument> documents = new ArrayList<>();
+        documents.add(mock(GiniCaptureDocument.class));
+        documents.add(mock(GiniCaptureDocument.class));
+        documents.add(mock(GiniCaptureDocument.class));
         when(multiPageDocument.getDocuments()).thenReturn(documents);
 
         final NetworkRequestsManager networkRequestsManager = mock(NetworkRequestsManager.class);
 
-        final CompletableFuture<AnalysisNetworkRequestResult<GiniVisionMultiPageDocument>>
+        final CompletableFuture<AnalysisNetworkRequestResult<GiniCaptureMultiPageDocument>>
                 analysisResult = CompletableFuture.completedFuture(null);
 
-        when(networkRequestsManager.analyze(any(GiniVisionMultiPageDocument.class))).thenReturn(
+        when(networkRequestsManager.analyze(any(GiniCaptureMultiPageDocument.class))).thenReturn(
                 analysisResult);
 
-        createGiniVision(networkRequestsManager);
+        createGiniCapture(networkRequestsManager);
 
         // When
         mAnalysisInteractor.analyzeMultiPageDocument(multiPageDocument);
 
         // Then
-        for (final GiniVisionDocument document : documents) {
+        for (final GiniCaptureDocument document : documents) {
             verify(networkRequestsManager).upload(mApp, document);
         }
     }
@@ -144,15 +144,15 @@ public class AnalysisInteractorTest {
             throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
 
         final RuntimeException analysisException = new RuntimeException();
 
         final NetworkRequestsManager networkRequestsManager =
                 createtNetworkRequestsManagerWithAnalysisException(analysisException);
 
-        createGiniVision(networkRequestsManager);
+        createGiniCapture(networkRequestsManager);
 
         // When
         final CompletableFuture<AnalysisInteractor.ResultHolder> future =
@@ -173,12 +173,12 @@ public class AnalysisInteractorTest {
     @NonNull
     private NetworkRequestsManager createtNetworkRequestsManagerWithAnalysisException(
             final RuntimeException analysisException) {
-        final CompletableFuture<AnalysisNetworkRequestResult<GiniVisionMultiPageDocument>>
+        final CompletableFuture<AnalysisNetworkRequestResult<GiniCaptureMultiPageDocument>>
                 analysisResult = new CompletableFuture<>();
         analysisResult.completeExceptionally(analysisException);
 
         final NetworkRequestsManager networkRequestsManager = mock(NetworkRequestsManager.class);
-        when(networkRequestsManager.analyze(any(GiniVisionMultiPageDocument.class))).thenReturn(
+        when(networkRequestsManager.analyze(any(GiniCaptureMultiPageDocument.class))).thenReturn(
                 analysisResult);
         return networkRequestsManager;
     }
@@ -188,15 +188,15 @@ public class AnalysisInteractorTest {
             throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
 
         final RuntimeException analysisException = new CancellationException();
 
         final NetworkRequestsManager networkRequestsManager =
                 createtNetworkRequestsManagerWithAnalysisException(analysisException);
 
-        createGiniVision(networkRequestsManager);
+        createGiniCapture(networkRequestsManager);
 
         // When
         final CompletableFuture<AnalysisInteractor.ResultHolder> future =
@@ -218,16 +218,16 @@ public class AnalysisInteractorTest {
             throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
 
         final AnalysisResult analysisResult = new AnalysisResult("apiDocumentId",
-                Collections.<String, GiniVisionSpecificExtraction>emptyMap());
+                Collections.<String, GiniCaptureSpecificExtraction>emptyMap());
 
         final NetworkRequestsManager networkRequestsManager = createtNetworkRequestsManager(
                 analysisResult);
 
-        createGiniVision(networkRequestsManager);
+        createGiniCapture(networkRequestsManager);
 
         // When
         final CompletableFuture<AnalysisInteractor.ResultHolder> future =
@@ -243,16 +243,16 @@ public class AnalysisInteractorTest {
     private NetworkRequestsManager createtNetworkRequestsManager(
             @NonNull final AnalysisResult analysisResult) {
         //noinspection unchecked
-        final AnalysisNetworkRequestResult<GiniVisionMultiPageDocument>
+        final AnalysisNetworkRequestResult<GiniCaptureMultiPageDocument>
                 analysisNetworkRequestResult = mock(AnalysisNetworkRequestResult.class);
         when(analysisNetworkRequestResult.getAnalysisResult()).thenReturn(analysisResult);
 
-        final CompletableFuture<AnalysisNetworkRequestResult<GiniVisionMultiPageDocument>>
+        final CompletableFuture<AnalysisNetworkRequestResult<GiniCaptureMultiPageDocument>>
                 analysisResultFuture = new CompletableFuture<>();
         analysisResultFuture.complete(analysisNetworkRequestResult);
 
         final NetworkRequestsManager networkRequestsManager = mock(NetworkRequestsManager.class);
-        when(networkRequestsManager.analyze(any(GiniVisionMultiPageDocument.class))).thenReturn(
+        when(networkRequestsManager.analyze(any(GiniCaptureMultiPageDocument.class))).thenReturn(
                 analysisResultFuture);
         return networkRequestsManager;
     }
@@ -262,14 +262,14 @@ public class AnalysisInteractorTest {
             throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
 
-        final Map<String, GiniVisionSpecificExtraction> extractions = new HashMap<>();
-        extractions.put("amountToPay", mock(GiniVisionSpecificExtraction.class));
-        extractions.put("paymentRecipient", mock(GiniVisionSpecificExtraction.class));
-        extractions.put("iban", mock(GiniVisionSpecificExtraction.class));
-        extractions.put("paymentReference", mock(GiniVisionSpecificExtraction.class));
+        final Map<String, GiniCaptureSpecificExtraction> extractions = new HashMap<>();
+        extractions.put("amountToPay", mock(GiniCaptureSpecificExtraction.class));
+        extractions.put("paymentRecipient", mock(GiniCaptureSpecificExtraction.class));
+        extractions.put("iban", mock(GiniCaptureSpecificExtraction.class));
+        extractions.put("paymentReference", mock(GiniCaptureSpecificExtraction.class));
 
         final AnalysisResult analysisResult = new AnalysisResult("apiDocumentId",
                 extractions);
@@ -277,7 +277,7 @@ public class AnalysisInteractorTest {
         final NetworkRequestsManager networkRequestsManager = createtNetworkRequestsManager(
                 analysisResult);
 
-        createGiniVision(networkRequestsManager);
+        createGiniCapture(networkRequestsManager);
 
         // When
         final CompletableFuture<AnalysisInteractor.ResultHolder> future =
@@ -296,18 +296,18 @@ public class AnalysisInteractorTest {
             throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
 
-        final CompletableFuture<AnalysisNetworkRequestResult<GiniVisionMultiPageDocument>>
+        final CompletableFuture<AnalysisNetworkRequestResult<GiniCaptureMultiPageDocument>>
                 analysisResultFuture = new CompletableFuture<>();
         analysisResultFuture.complete(null);
 
         final NetworkRequestsManager networkRequestsManager = mock(NetworkRequestsManager.class);
-        when(networkRequestsManager.analyze(any(GiniVisionMultiPageDocument.class))).thenReturn(
+        when(networkRequestsManager.analyze(any(GiniCaptureMultiPageDocument.class))).thenReturn(
                 analysisResultFuture);
 
-        createGiniVision(networkRequestsManager);
+        createGiniCapture(networkRequestsManager);
 
         // When
         final CompletableFuture<AnalysisInteractor.ResultHolder> future =
@@ -324,10 +324,10 @@ public class AnalysisInteractorTest {
             throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
 
-        createGiniVision(null);
+        createGiniCapture(null);
 
         // When
         final CompletableFuture<Void> future =
@@ -341,17 +341,17 @@ public class AnalysisInteractorTest {
     public void should_deleteMultiPageDocument() throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
 
         //noinspection unchecked
-        final NetworkRequestResult<GiniVisionDocument> deletionRequestResult = mock(
+        final NetworkRequestResult<GiniCaptureDocument> deletionRequestResult = mock(
                 NetworkRequestResult.class);
 
         final NetworkRequestsManager networkRequestsManager = createtNetworkRequestsManager(
                 deletionRequestResult);
 
-        createGiniVision(networkRequestsManager);
+        createGiniCapture(networkRequestsManager);
 
         // When
         mAnalysisInteractor.deleteMultiPageDocument(multiPageDocument);
@@ -362,13 +362,13 @@ public class AnalysisInteractorTest {
     }
 
     private NetworkRequestsManager createtNetworkRequestsManager(
-            final NetworkRequestResult<GiniVisionDocument> deletionRequestResult) {
-        final CompletableFuture<NetworkRequestResult<GiniVisionDocument>>
+            final NetworkRequestResult<GiniCaptureDocument> deletionRequestResult) {
+        final CompletableFuture<NetworkRequestResult<GiniCaptureDocument>>
                 deletionResultFuture = new CompletableFuture<>();
         deletionResultFuture.complete(deletionRequestResult);
 
         final NetworkRequestsManager networkRequestsManager = mock(NetworkRequestsManager.class);
-        when(networkRequestsManager.delete(any(GiniVisionDocument.class))).thenReturn(
+        when(networkRequestsManager.delete(any(GiniCaptureDocument.class))).thenReturn(
                 deletionResultFuture);
         return networkRequestsManager;
     }
@@ -377,28 +377,28 @@ public class AnalysisInteractorTest {
     public void should_deleteEveryPage_ofMultiPageDocument() throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
-        final List<GiniVisionDocument> documents = new ArrayList<>();
-        documents.add(mock(GiniVisionDocument.class));
-        documents.add(mock(GiniVisionDocument.class));
-        documents.add(mock(GiniVisionDocument.class));
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
+        final List<GiniCaptureDocument> documents = new ArrayList<>();
+        documents.add(mock(GiniCaptureDocument.class));
+        documents.add(mock(GiniCaptureDocument.class));
+        documents.add(mock(GiniCaptureDocument.class));
         when(multiPageDocument.getDocuments()).thenReturn(documents);
 
         //noinspection unchecked
-        final NetworkRequestResult<GiniVisionDocument> deletionRequestResult = mock(
+        final NetworkRequestResult<GiniCaptureDocument> deletionRequestResult = mock(
                 NetworkRequestResult.class);
 
         final NetworkRequestsManager networkRequestsManager = createtNetworkRequestsManager(
                 deletionRequestResult);
 
-        createGiniVision(networkRequestsManager);
+        createGiniCapture(networkRequestsManager);
 
         // When
         mAnalysisInteractor.deleteMultiPageDocument(multiPageDocument);
 
         // Then
-        for (final GiniVisionDocument document : documents) {
+        for (final GiniCaptureDocument document : documents) {
             verify(networkRequestsManager).cancel(document);
             verify(networkRequestsManager).delete(document);
         }
@@ -409,18 +409,18 @@ public class AnalysisInteractorTest {
             throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
-                multiPageDocument = mock(GiniVisionMultiPageDocument.class);
-        final List<GiniVisionDocument> documents = new ArrayList<>();
-        documents.add(mock(GiniVisionDocument.class));
-        documents.add(mock(GiniVisionDocument.class));
-        documents.add(mock(GiniVisionDocument.class));
+        final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
+                multiPageDocument = mock(GiniCaptureMultiPageDocument.class);
+        final List<GiniCaptureDocument> documents = new ArrayList<>();
+        documents.add(mock(GiniCaptureDocument.class));
+        documents.add(mock(GiniCaptureDocument.class));
+        documents.add(mock(GiniCaptureDocument.class));
         when(multiPageDocument.getDocuments()).thenReturn(documents);
 
         final NetworkRequestsManager networkRequestsManager =
                 createtNetworkRequestsManagerWithDeletionException(new RuntimeException());
 
-        createGiniVision(networkRequestsManager);
+        createGiniCapture(networkRequestsManager);
 
         // When
         mAnalysisInteractor.deleteMultiPageDocument(multiPageDocument);
@@ -429,7 +429,7 @@ public class AnalysisInteractorTest {
         verify(networkRequestsManager).cancel(multiPageDocument);
         verify(networkRequestsManager).delete(multiPageDocument);
 
-        for (final GiniVisionDocument document : documents) {
+        for (final GiniCaptureDocument document : documents) {
             verify(networkRequestsManager).cancel(document);
             verify(networkRequestsManager).delete(document);
         }
@@ -437,24 +437,24 @@ public class AnalysisInteractorTest {
 
     private NetworkRequestsManager createtNetworkRequestsManagerWithDeletionException(
             @NonNull final RuntimeException deletionException) {
-        final CompletableFuture<NetworkRequestResult<GiniVisionDocument>>
+        final CompletableFuture<NetworkRequestResult<GiniCaptureDocument>>
                 deletionResultFuture = new CompletableFuture<>();
         deletionResultFuture.completeExceptionally(deletionException);
 
         final NetworkRequestsManager networkRequestsManager = mock(NetworkRequestsManager.class);
-        when(networkRequestsManager.delete(any(GiniVisionMultiPageDocument.class))).thenReturn(
+        when(networkRequestsManager.delete(any(GiniCaptureMultiPageDocument.class))).thenReturn(
                 deletionResultFuture);
         return networkRequestsManager;
     }
 
     @Test
-    public void should_notDeleteDocument_whenGiniVision_isNotAvailable() throws Exception {
+    public void should_notDeleteDocument_whenGiniCapture_isNotAvailable() throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionDocument document = mock(GiniVisionDocument.class);
+        final GiniCaptureDocument document = mock(GiniCaptureDocument.class);
 
         // When
-        final  CompletableFuture<NetworkRequestResult<GiniVisionDocument>> future = mAnalysisInteractor.deleteDocument(
+        final  CompletableFuture<NetworkRequestResult<GiniCaptureDocument>> future = mAnalysisInteractor.deleteDocument(
                 document);
 
         // Then
@@ -465,12 +465,12 @@ public class AnalysisInteractorTest {
     public void should_notDeleteDocument_whenNetworkRequestsManager_isNotAvailable() throws Exception {
         // Given
         //noinspection unchecked
-        final GiniVisionDocument document = mock(GiniVisionDocument.class);
+        final GiniCaptureDocument document = mock(GiniCaptureDocument.class);
 
-        createGiniVision(null);
+        createGiniCapture(null);
 
         // When
-        final  CompletableFuture<NetworkRequestResult<GiniVisionDocument>> future = mAnalysisInteractor.deleteDocument(
+        final  CompletableFuture<NetworkRequestResult<GiniCaptureDocument>> future = mAnalysisInteractor.deleteDocument(
                 document);
 
         // Then
@@ -480,16 +480,16 @@ public class AnalysisInteractorTest {
     @Test
     public void should_deleteDocument() throws Exception {
         // Given
-        final GiniVisionDocument document = mock(GiniVisionDocument.class);
+        final GiniCaptureDocument document = mock(GiniCaptureDocument.class);
 
         //noinspection unchecked
-        final NetworkRequestResult<GiniVisionDocument> deletionRequestResult = mock(
+        final NetworkRequestResult<GiniCaptureDocument> deletionRequestResult = mock(
                 NetworkRequestResult.class);
 
         final NetworkRequestsManager networkRequestsManager = createtNetworkRequestsManager(
                 deletionRequestResult);
 
-        createGiniVision(networkRequestsManager);
+        createGiniCapture(networkRequestsManager);
 
         // When
         mAnalysisInteractor.deleteDocument(document);

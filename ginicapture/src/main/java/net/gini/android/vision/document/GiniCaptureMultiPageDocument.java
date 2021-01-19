@@ -24,39 +24,39 @@ import androidx.annotation.Nullable;
  *
  * @suppress
  */
-public class GiniVisionMultiPageDocument<T extends GiniVisionDocument,
-        E extends GiniVisionDocumentError> extends GiniVisionDocument {
+public class GiniCaptureMultiPageDocument<T extends GiniCaptureDocument,
+        E extends GiniCaptureDocumentError> extends GiniCaptureDocument {
 
-    public static final Creator<GiniVisionMultiPageDocument> CREATOR =
-            new Creator<GiniVisionMultiPageDocument>() {
+    public static final Creator<GiniCaptureMultiPageDocument> CREATOR =
+            new Creator<GiniCaptureMultiPageDocument>() {
                 @Override
-                public GiniVisionMultiPageDocument createFromParcel(final Parcel in) {
-                    return new GiniVisionMultiPageDocument(in);
+                public GiniCaptureMultiPageDocument createFromParcel(final Parcel in) {
+                    return new GiniCaptureMultiPageDocument(in);
                 }
 
                 @Override
-                public GiniVisionMultiPageDocument[] newArray(final int size) {
-                    return new GiniVisionMultiPageDocument[size];
+                public GiniCaptureMultiPageDocument[] newArray(final int size) {
+                    return new GiniCaptureMultiPageDocument[size];
                 }
             };
 
     private final List<T> mDocuments = new ArrayList<>();
     private final Map<T, E> mDocumentErrorMap = new HashMap<>();
 
-    public GiniVisionMultiPageDocument(@NonNull final Type type, @NonNull final Source source,
-            @NonNull final ImportMethod importMethod, @NonNull final String mimeType,
-            @NonNull final boolean isReviewable) {
+    public GiniCaptureMultiPageDocument(@NonNull final Type type, @NonNull final Source source,
+                                        @NonNull final ImportMethod importMethod, @NonNull final String mimeType,
+                                        @NonNull final boolean isReviewable) {
         super(type, source, importMethod, mimeType, null, null, null, isReviewable);
     }
 
-    public GiniVisionMultiPageDocument(@NonNull final Type type, @NonNull final String mimeType,
-            @NonNull final T document) {
+    public GiniCaptureMultiPageDocument(@NonNull final Type type, @NonNull final String mimeType,
+                                        @NonNull final T document) {
         super(type, document.getSource(), document.getImportMethod(), mimeType, null, null, null,
                 document.isReviewable());
         mDocuments.add(document);
     }
 
-    GiniVisionMultiPageDocument(final Parcel in) {
+    GiniCaptureMultiPageDocument(final Parcel in) {
         super(in);
         final int size = in.readInt();
         for (int i = 0; i < size; i++) {
@@ -179,7 +179,7 @@ public class GiniVisionMultiPageDocument<T extends GiniVisionDocument,
             return false;
         }
 
-        final GiniVisionMultiPageDocument<?, ?> that = (GiniVisionMultiPageDocument<?, ?>) o;
+        final GiniCaptureMultiPageDocument<?, ?> that = (GiniCaptureMultiPageDocument<?, ?>) o;
 
         if (!mDocuments.equals(that.mDocuments)) {
             return false;

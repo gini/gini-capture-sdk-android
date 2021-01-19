@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
  * A document consisting of multiple QRCode documents.
  */
 public class QRCodeMultiPageDocument extends
-        GiniVisionMultiPageDocument<QRCodeDocument, GiniVisionDocumentError> {
+        GiniCaptureMultiPageDocument<QRCodeDocument, GiniCaptureDocumentError> {
 
     public static final Creator<QRCodeMultiPageDocument> CREATOR =
             new Creator<QRCodeMultiPageDocument>() {

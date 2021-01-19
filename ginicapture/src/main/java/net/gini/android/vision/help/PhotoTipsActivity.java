@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.R;
 import net.gini.android.vision.analysis.AnalysisActivity;
 import net.gini.android.vision.camera.CameraActivity;
@@ -39,10 +39,10 @@ import androidx.appcompat.app.AppCompatActivity;
  *             <b>Background color:</b> via the color resource named {@code gv_photo_tips_activity_background}.
  *         </li>
  *         <li>
- *             <b>Header text style:</b> via overriding the style named {@code GiniVisionTheme.Help.PhotoTips.Header.TextStyle}
+ *             <b>Header text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.PhotoTips.Header.TextStyle}
  *         </li>
  *         <li>
- *             <b>Tip text style:</b> via overriding the style named {@code GiniVisionTheme.Help.PhotoTips.Tip.TextStyle}
+ *             <b>Tip text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle}
  *         </li>
  *         <li>
  *             <b>Tip image - Good lighting:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
@@ -72,7 +72,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * </p>
  *
  * <p>
- *     <b>Important:</b> All overriden styles must have their respective {@code Root.} prefixed style as their parent. Ex.: the parent of {@code GiniVisionTheme.Onboarding.Message.TextStyle} must be {@code Root.GiniVisionTheme.Onboarding.Message.TextStyle}.
+ *     <b>Important:</b> All overriden styles must have their respective {@code Root.} prefixed style as their parent. Ex.: the parent of {@code GiniCaptureTheme.Onboarding.Message.TextStyle} must be {@code Root.GiniCaptureTheme.Onboarding.Message.TextStyle}.
  * </p>
  *
  * <h3>Customizing the Action Bar</h3>
@@ -126,7 +126,7 @@ public class PhotoTipsActivity extends AppCompatActivity {
     }
 
     private void setupHomeButton() {
-        if (GiniVision.hasInstance() && GiniVision.getInstance().areBackButtonsEnabled()) {
+        if (GiniCapture.hasInstance() && GiniCapture.getInstance().areBackButtonsEnabled()) {
             enableHomeAsUp(this);
         }
     }

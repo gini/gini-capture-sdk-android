@@ -7,16 +7,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.camera.CameraFragmentListener;
 import net.gini.android.vision.camera.CameraFragmentStandard;
 import net.gini.android.vision.component.R;
 import net.gini.android.vision.component.analysis.standard.AnalysisExampleActivity;
 import net.gini.android.vision.component.review.standard.ReviewExampleActivity;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.document.QRCodeDocument;
 import net.gini.android.vision.help.HelpActivity;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.onboarding.OnboardingFragmentListener;
 import net.gini.android.vision.onboarding.OnboardingFragmentStandard;
 
@@ -94,7 +94,7 @@ public class CameraExampleActivity extends Activity implements CameraFragmentLis
 
     @Override
     public void onProceedToMultiPageReviewScreen(
-            @NonNull final GiniVisionMultiPageDocument multiPageDocument) {
+            @NonNull final GiniCaptureMultiPageDocument multiPageDocument) {
         mCameraScreenHandler.onProceedToMultiPageReviewScreen(multiPageDocument);
     }
 
@@ -110,13 +110,13 @@ public class CameraExampleActivity extends Activity implements CameraFragmentLis
     }
 
     @Override
-    public void onError(@NonNull final GiniVisionError error) {
+    public void onError(@NonNull final GiniCaptureError error) {
         mCameraScreenHandler.onError(error);
     }
 
     @Override
     public void onExtractionsAvailable(
-            @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
         mCameraScreenHandler.onExtractionsAvailable(extractions);
     }
 }

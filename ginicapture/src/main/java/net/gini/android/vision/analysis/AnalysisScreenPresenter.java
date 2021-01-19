@@ -11,13 +11,13 @@ import android.view.View;
 
 import net.gini.android.vision.AsyncCallback;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.R;
 import net.gini.android.vision.document.DocumentFactory;
-import net.gini.android.vision.document.GiniVisionDocument;
-import net.gini.android.vision.document.GiniVisionDocumentError;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.document.GiniCaptureDocument;
+import net.gini.android.vision.document.GiniCaptureDocumentError;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.document.PdfDocument;
 import net.gini.android.vision.internal.camera.photo.ParcelableMemoryCache;
 import net.gini.android.vision.internal.document.DocumentRenderer;
@@ -26,7 +26,7 @@ import net.gini.android.vision.internal.storage.ImageDiskStore;
 import net.gini.android.vision.internal.ui.ErrorSnackbar;
 import net.gini.android.vision.internal.util.FileImportHelper;
 import net.gini.android.vision.internal.util.MimeType;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.tracking.AnalysisScreenEvent;
 import net.gini.android.vision.tracking.AnalysisScreenEvent.ERROR_DETAILS_MAP_KEY;
 import net.gini.android.vision.util.UriHelper;
@@ -61,11 +61,11 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
         }
 
         @Override
-        public void onError(@NonNull final GiniVisionError error) {
+        public void onError(@NonNull final GiniCaptureError error) {
         }
 
         @Override
-        public void onExtractionsAvailable(@NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+        public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
         }
 
         @Override
@@ -78,7 +78,7 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
 
     };
 
-    private final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
+    private final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
             mMultiPageDocument;
     private final String mDocumentAnalysisErrorMessage;
     private final AnalysisInteractor mAnalysisInteractor;
@@ -123,22 +123,22 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
 
     private void tagDocumentsForParcelableMemoryCache(
             @NonNull final Document document,
-            @NonNull final GiniVisionMultiPageDocument<GiniVisionDocument, GiniVisionDocumentError>
+            @NonNull final GiniCaptureMultiPageDocument<GiniCaptureDocument, GiniCaptureDocumentError>
                     multiPageDocument) {
-        if (document instanceof GiniVisionDocument) {
-            ((GiniVisionDocument) document).setParcelableMemoryCacheTag(
+        if (document instanceof GiniCaptureDocument) {
+            ((GiniCaptureDocument) document).setParcelableMemoryCacheTag(
                     PARCELABLE_MEMORY_CACHE_TAG);
         }
         multiPageDocument.setParcelableMemoryCacheTag(PARCELABLE_MEMORY_CACHE_TAG);
     }
 
     @SuppressWarnings("unchecked")
-    private GiniVisionMultiPageDocument<GiniVisionDocument,
-            GiniVisionDocumentError> asMultiPageDocument(@NonNull final Document document) {
-        if (!(document instanceof GiniVisionMultiPageDocument)) {
-            return DocumentFactory.newMultiPageDocument((GiniVisionDocument) document);
+    private GiniCaptureMultiPageDocument<GiniCaptureDocument,
+            GiniCaptureDocumentError> asMultiPageDocument(@NonNull final Document document) {
+        if (!(document instanceof GiniCaptureMultiPageDocument)) {
+            return DocumentFactory.newMultiPageDocument((GiniCaptureDocument) document);
         } else {
-            return (GiniVisionMultiPageDocument) document;
+            return (GiniCaptureMultiPageDocument) document;
         }
     }
 
@@ -222,8 +222,8 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
         stopScanAnimation();
         if (!mAnalysisCompleted) {
             deleteUploadedDocuments();
-        } else if (GiniVision.hasInstance()) {
-            GiniVision.getInstance().internal().getImageMultiPageDocumentMemoryStore()
+        } else if (GiniCapture.hasInstance()) {
+            GiniCapture.getInstance().internal().getImageMultiPageDocumentMemoryStore()
                     .clear();
         }
     }
@@ -245,8 +245,8 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
     }
 
     @VisibleForTesting
-    GiniVisionMultiPageDocument<
-            GiniVisionDocument, GiniVisionDocumentError> getMultiPageDocument() {
+    GiniCaptureMultiPageDocument<
+            GiniCaptureDocument, GiniCaptureDocumentError> getMultiPageDocument() {
         return mMultiPageDocument;
     }
 
@@ -257,7 +257,7 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
 
     @VisibleForTesting
     void createDocumentRenderer() {
-        final GiniVisionDocument documentToRender = getFirstDocument();
+        final GiniCaptureDocument documentToRender = getFirstDocument();
         if (documentToRender != null) {
             mDocumentRenderer = DocumentRendererFactory.fromDocument(documentToRender);
         }
@@ -313,7 +313,7 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
 
     @VisibleForTesting
     CompletableFuture<Void> showAlertIfOpenWithDocumentAndAppIsDefault(
-            @NonNull final GiniVisionDocument document,
+            @NonNull final GiniCaptureDocument document,
             @NonNull final FileImportHelper.ShowAlertCallback showAlertCallback) {
         return FileImportHelper.showAlertIfOpenWithDocumentAndAppIsDefault(getActivity(), document,
                 showAlertCallback);
@@ -392,7 +392,7 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
                             return;
                         }
                         getAnalysisFragmentListenerOrNoOp().onError(
-                                new GiniVisionError(GiniVisionError.ErrorCode.ANALYSIS,
+                                new GiniCaptureError(GiniCaptureError.ErrorCode.ANALYSIS,
                                         "An error occurred while loading the document."));
                     }
 
@@ -421,12 +421,12 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
         }
     }
 
-    private GiniVisionDocument getFirstDocument() {
+    private GiniCaptureDocument getFirstDocument() {
         return mMultiPageDocument.getDocuments().get(0);
     }
 
     private void showPdfInfoForPdfDocument() {
-        final GiniVisionDocument documentToRender = getFirstDocument();
+        final GiniCaptureDocument documentToRender = getFirstDocument();
         if (documentToRender instanceof PdfDocument) {
             final PdfDocument pdfDocument = (PdfDocument) documentToRender;
             getView().showPdfInfoPanel();
@@ -480,8 +480,8 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
             final Map<String, Object> errorDetails = new HashMap<>();
             errorDetails.put(ERROR_DETAILS_MAP_KEY.MESSAGE, mDocumentAnalysisErrorMessage);
 
-            if (GiniVision.hasInstance()) {
-                final Throwable reviewScreenAnalysisError = GiniVision.getInstance().internal().getReviewScreenAnalysisError();
+            if (GiniCapture.hasInstance()) {
+                final Throwable reviewScreenAnalysisError = GiniCapture.getInstance().internal().getReviewScreenAnalysisError();
                 if (reviewScreenAnalysisError != null) {
                     errorDetails.put(ERROR_DETAILS_MAP_KEY.ERROR_OBJECT, reviewScreenAnalysisError);
                 }

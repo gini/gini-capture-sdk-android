@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 
 /**
  * This class is the container for transferring documents between the client application and the
- * Gini Vision Library and between the Fragments of the Gini Vision Library.
+ * Gini Capture SDK and between the Fragments of the Gini Capture SDK.
  * <p>
  * Due to the size limitations of the {@link android.os.Bundle}, the document data byte array has to
  * be stored in a memory cache when parceling and read from the cache when unparceling.
@@ -115,7 +115,7 @@ public interface Document extends Parcelable {
 
     /**
      * <p> Document is imported if it was picked from another app from the Camera Screen's document
-     * upload button or if a file was passed to the Gini Vision Library through the client
+     * upload button or if a file was passed to the Gini Capture SDK through the client
      * application from another app. </p>
      *
      * @return {@code true} if the document was imported
@@ -185,7 +185,7 @@ public interface Document extends Parcelable {
      */
     enum ImportMethod {
         /**
-         * Document was sent from another app. It was "opened with" the app containing the Gini Vision Library.
+         * Document was sent from another app. It was "opened with" the app containing the Gini Capture SDK.
          */
         OPEN_WITH("openwith"),
         /**

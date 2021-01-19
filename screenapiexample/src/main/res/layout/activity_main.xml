@@ -16,17 +16,17 @@
         android:layout_gravity="center"
         android:layout_centerInParent="true"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:text="@string/start_gini_vision_library"
+        android:text="@string/start_gini_capture_sdk"
         android:textColor="@color/colorPrimary"
         android:layout_marginBottom="8dp"/>
 
     <TextView
-        android:id="@+id/text_gini_vision_version"
+        android:id="@+id/text_gini_capture_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/button_start_scanner"
         android:layout_below="@+id/button_start_scanner"
-        tools:text="Gini Vision Library v2.0.0-stub1" />
+        tools:text="Gini Capture SDK v2.0.0-stub1" />
 
     <TextView
         android:id="@+id/text_app_version"

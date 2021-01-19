@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.R;
 
 import java.util.ArrayList;
@@ -28,22 +28,22 @@ class HelpItemsAdapter extends RecyclerView.Adapter<HelpItemsAdapter.HelpItemsVi
     private final HelpItemSelectedListener mItemSelectedListener;
     private final List<HelpItem> mItems;
 
-    HelpItemsAdapter(@NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration,
+    HelpItemsAdapter(@NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration,
             @NonNull final HelpItemSelectedListener itemSelectedListener) {
         mItemSelectedListener = itemSelectedListener;
-        mItems = setUpItems(giniVisionFeatureConfiguration);
+        mItems = setUpItems(giniCaptureFeatureConfiguration);
     }
 
     @NonNull
     private List<HelpItem> setUpItems(
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
         final ArrayList<HelpItem> items = new ArrayList<>();
         items.add(HelpItem.PHOTO_TIPS);
-        if (isFileImportEnabled(giniVisionFeatureConfiguration)) {
+        if (isFileImportEnabled(giniCaptureFeatureConfiguration)) {
             items.add(HelpItem.FILE_IMPORT_GUIDE);
         }
-        if (GiniVision.hasInstance()
-                && GiniVision.getInstance().isSupportedFormatsHelpScreenEnabled()) {
+        if (GiniCapture.hasInstance()
+                && GiniCapture.getInstance().isSupportedFormatsHelpScreenEnabled()) {
             items.add(HelpItem.SUPPORTED_FORMATS);
         }
         return items;

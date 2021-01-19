@@ -1,7 +1,7 @@
 package net.gini.android.vision.review.multipage;
 
-import static net.gini.android.vision.document.GiniVisionDocumentError.ErrorCode.FILE_VALIDATION_FAILED;
-import static net.gini.android.vision.document.GiniVisionDocumentError.ErrorCode.UPLOAD_FAILED;
+import static net.gini.android.vision.document.GiniCaptureDocumentError.ErrorCode.FILE_VALIDATION_FAILED;
+import static net.gini.android.vision.document.GiniCaptureDocumentError.ErrorCode.UPLOAD_FAILED;
 import static net.gini.android.vision.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
 import static net.gini.android.vision.internal.util.FileImportHelper.showAlertIfOpenWithDocumentAndAppIsDefault;
 import static net.gini.android.vision.review.multipage.previews.PreviewFragment.ErrorButtonAction.DELETE;
@@ -21,10 +21,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVision;
+import net.gini.android.vision.GiniCapture;
 import net.gini.android.vision.R;
-import net.gini.android.vision.document.GiniVisionDocument;
-import net.gini.android.vision.document.GiniVisionDocumentError;
+import net.gini.android.vision.document.GiniCaptureDocument;
+import net.gini.android.vision.document.GiniCaptureDocumentError;
 import net.gini.android.vision.document.ImageDocument;
 import net.gini.android.vision.document.ImageMultiPageDocument;
 import net.gini.android.vision.internal.network.NetworkRequestResult;
@@ -84,7 +84,7 @@ import jersey.repackaged.jsr166e.CompletableFuture;
  *
  * <ul>
  *
- * <li> A {@link GiniVision} instance is required to use the {@code MultiPageReviewFragment}
+ * <li> A {@link GiniCapture} instance is required to use the {@code MultiPageReviewFragment}
  *
  * <li> Your Activity hosting this Fragment must extend the {@link androidx.appcompat.app.AppCompatActivity}
  * and use an AppCompat Theme.
@@ -165,8 +165,8 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     }
 
     private void initMultiPageDocument() {
-        if (GiniVision.hasInstance()) {
-            mMultiPageDocument = GiniVision.getInstance().internal()
+        if (GiniCapture.hasInstance()) {
+            mMultiPageDocument = GiniCapture.getInstance().internal()
                     .getImageMultiPageDocumentMemoryStore().getMultiPageDocument();
         }
         if (mMultiPageDocument == null) {
@@ -215,7 +215,7 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
         final PreviewsAdapterListener previewsAdapterListener = new PreviewsAdapterListener() {
             @Override
             public PreviewFragment.ErrorButtonAction getErrorButtonAction(
-                    @NonNull final GiniVisionDocumentError documentError) {
+                    @NonNull final GiniCaptureDocumentError documentError) {
                 if (documentError.getErrorCode() == UPLOAD_FAILED) {
                     return RETRY;
                 } else if (documentError.getErrorCode() == FILE_VALIDATION_FAILED) {
@@ -410,15 +410,15 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     private void deleteFromMultiPageDocument(@NonNull final ImageDocument document) {
         mMultiPageDocument.getDocuments().remove(document);
         if (mMultiPageDocument.getDocuments().size() == 0
-                && GiniVision.hasInstance()) {
-            GiniVision.getInstance().internal().getImageMultiPageDocumentMemoryStore().clear();
+                && GiniCapture.hasInstance()) {
+            GiniCapture.getInstance().internal().getImageMultiPageDocumentMemoryStore().clear();
         }
     }
 
     private void deleteFromGiniApi(final ImageDocument document) {
-        if (GiniVision.hasInstance()) {
+        if (GiniCapture.hasInstance()) {
             final NetworkRequestsManager networkRequestsManager =
-                    GiniVision.getInstance().internal().getNetworkRequestsManager();
+                    GiniCapture.getInstance().internal().getNetworkRequestsManager();
             if (networkRequestsManager != null) {
                 networkRequestsManager.delete(document);
             }
@@ -426,18 +426,18 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     }
 
     private void deleteFromDisk(final ImageDocument document) {
-        if (GiniVision.hasInstance()) {
+        if (GiniCapture.hasInstance()) {
             final Uri uri = document.getUri();
             if (uri != null) {
-                GiniVision.getInstance().internal().getImageDiskStore().delete(uri);
+                GiniCapture.getInstance().internal().getImageDiskStore().delete(uri);
             }
         }
     }
 
     @NonNull
     private void deleteFromCaches(final ImageDocument document) {
-        if (GiniVision.hasInstance()) {
-            final GiniVision.Internal gvInternal = GiniVision.getInstance().internal();
+        if (GiniCapture.hasInstance()) {
+            final GiniCapture.Internal gvInternal = GiniCapture.getInstance().internal();
             gvInternal.getDocumentDataMemoryCache().invalidate(document);
             gvInternal.getPhotoMemoryCache().invalidate(document);
         }
@@ -501,9 +501,9 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     }
 
     private void onRotateButtonClicked() {
-        if (!GiniVision.hasInstance()) {
+        if (!GiniCapture.hasInstance()) {
             LOG.error(
-                    "Cannot rotate document. GiniVision instance not available. Create it with GiniVision.newInstance().");
+                    "Cannot rotate document. GiniCapture instance not available. Create it with GiniCapture.newInstance().");
             return;
         }
         final Activity activity = getActivity();
@@ -575,11 +575,11 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
 
     @VisibleForTesting
     void uploadDocument(final ImageDocument document) {
-        if (!GiniVision.hasInstance()) {
+        if (!GiniCapture.hasInstance()) {
             return;
         }
         final NetworkRequestsManager networkRequestsManager =
-                GiniVision.getInstance().internal().getNetworkRequestsManager();
+                GiniCapture.getInstance().internal().getNetworkRequestsManager();
         if (networkRequestsManager == null) {
             return;
         }
@@ -593,11 +593,11 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
         mMultiPageDocument.removeErrorForDocument(document);
         mDocumentUploadResults.put(document.getId(), false);
         networkRequestsManager.upload(activity, document)
-                .handle(new CompletableFuture.BiFun<NetworkRequestResult<GiniVisionDocument>,
+                .handle(new CompletableFuture.BiFun<NetworkRequestResult<GiniCaptureDocument>,
                         Throwable, Void>() {
                     @Override
                     public Void apply(
-                            final NetworkRequestResult<GiniVisionDocument> requestResult,
+                            final NetworkRequestResult<GiniCaptureDocument> requestResult,
                             final Throwable throwable) {
                         if (throwable != null
                                 && !NetworkRequestsManager.isCancellation(throwable)) {
@@ -629,7 +629,7 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
 
     private void showErrorOnPreview(final String errorMessage, final ImageDocument imageDocument) {
         mMultiPageDocument.setErrorForDocument(imageDocument,
-                new GiniVisionDocumentError(errorMessage,
+                new GiniCaptureDocumentError(errorMessage,
                         UPLOAD_FAILED));
         mPreviewsAdapter.notifyDataSetChanged();
     }
@@ -676,8 +676,8 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     @Override
     public void onPause() {
         super.onPause();
-        if (GiniVision.hasInstance()) {
-            GiniVision.getInstance().internal().getImageMultiPageDocumentMemoryStore()
+        if (GiniCapture.hasInstance()) {
+            GiniCapture.getInstance().internal().getImageMultiPageDocumentMemoryStore()
                     .setMultiPageDocument(mMultiPageDocument);
         }
     }
@@ -694,23 +694,23 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     }
 
     private void deleteUploadedDocuments() {
-        if (GiniVision.hasInstance()) {
-            final NetworkRequestsManager networkRequestsManager = GiniVision.getInstance()
+        if (GiniCapture.hasInstance()) {
+            final NetworkRequestsManager networkRequestsManager = GiniCapture.getInstance()
                     .internal().getNetworkRequestsManager();
             if (networkRequestsManager != null) {
                 networkRequestsManager.cancel(mMultiPageDocument);
                 networkRequestsManager.delete(mMultiPageDocument)
                         .handle(new CompletableFuture.BiFun<NetworkRequestResult<
-                                GiniVisionDocument>, Throwable, Void>() {
+                                GiniCaptureDocument>, Throwable, Void>() {
                             @Override
                             public Void apply(
-                                    final NetworkRequestResult<GiniVisionDocument> requestResult,
+                                    final NetworkRequestResult<GiniCaptureDocument> requestResult,
                                     final Throwable throwable) {
                                 for (final Object document : mMultiPageDocument.getDocuments()) {
-                                    final GiniVisionDocument giniVisionDocument =
-                                            (GiniVisionDocument) document;
-                                    networkRequestsManager.cancel(giniVisionDocument);
-                                    networkRequestsManager.delete(giniVisionDocument);
+                                    final GiniCaptureDocument giniCaptureDocument =
+                                            (GiniCaptureDocument) document;
+                                    networkRequestsManager.cancel(giniCaptureDocument);
+                                    networkRequestsManager.delete(giniCaptureDocument);
                                 }
                                 return null;
                             }

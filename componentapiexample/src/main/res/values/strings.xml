@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Component API Example</string>
 
-    <string name="start_gini_vision_lib_standard">Start Gini Vision Lib Standard</string>
-    <string name="start_gini_vision_lib_compat">Start Gini Vision Lib Compat</string>
+    <string name="start_gini_capture_sdk_standard">Start Gini Capture Capture SDK</string>
+    <string name="start_gini_capture_sdk_compat">Start Gini Capture SDK Compat</string>
 
     <string name="title_camera">Camera Screen</string>
     <string name="title_onboarding">Onboarding Screen</string>
@@ -19,7 +19,7 @@
     <string name="grant_access">Zugriff erteilen</string>
     <string name="cancel">Abbrechen</string>
     <string name="storage_permission_rationale">Um gespeicherte Bilder oder PDFs zu analysieren, wird Datei-Zugriff auf dem Gerät benötigt.</string>
-    <string name="camera_permission_denied_message">Nur mit Kamera-Zugriff können Sie die Gini Vision Library verwenden.</string>
+    <string name="camera_permission_denied_message">Nur mit Kamera-Zugriff können Sie die Gini Capture SDK verwenden.</string>
     <string name="camera_permission_rationale">Um Rechnungen fotografieren zu können, wird Kamera-Zugriff benötigt.</string>
     <string name="amount_changed_feedback_message">Amount changed to %1$s</string>
     <string name="amount_added_feedback_message">Added amount of %1$s</string>
@@ -28,10 +28,10 @@
     <string name="feedback_error_no_gini_api_document">Feedback not set: no Gini Api Document available</string>
     <string name="unknown_error">unknown</string>
     <string name="unfulfilled_requirements">Requirements not fulfilled: %1$s</string>
-    <string name="open_file_standard_or_compat">Open file with standard or compat Gini Vision Library?</string>
+    <string name="open_file_standard_or_compat">Open file with standard or compat Gini Capture SDK?</string>
     <string name="component_api_min_sdk_level_error">Component API Standard requires API Level 17 or higher</string>
     <string name="analysis_failed">Analysis failed: %1$s</string>
-    <string name="gini_vision_error">Error: %1$s - %2$s</string>
+    <string name="gini_capture_error">Error: %1$s - %2$s</string>
     <string name="one_moment_please">Einen Moment bitte …</string>
     <string name="ok">OK</string>
     <string name="camera_screen_title">Seite abfotografieren</string>

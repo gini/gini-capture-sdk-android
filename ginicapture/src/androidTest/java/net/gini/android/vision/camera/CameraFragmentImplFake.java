@@ -2,7 +2,7 @@ package net.gini.android.vision.camera;
 
 import android.app.Activity;
 
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.document.QRCodeDocument;
 import net.gini.android.vision.internal.camera.api.CameraControllerFake;
 import net.gini.android.vision.internal.camera.api.CameraInterface;
@@ -31,8 +31,8 @@ public class CameraFragmentImplFake extends CameraFragmentImpl {
 
     CameraFragmentImplFake(
             @NonNull final FragmentImplCallback fragment,
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
-        super(fragment, giniVisionFeatureConfiguration);
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
+        super(fragment, giniCaptureFeatureConfiguration);
     }
 
     @Override

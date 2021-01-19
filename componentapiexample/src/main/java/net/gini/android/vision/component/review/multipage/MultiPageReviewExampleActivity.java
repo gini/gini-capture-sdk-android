@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import net.gini.android.vision.component.R;
 import net.gini.android.vision.component.analysis.compat.AnalysisExampleAppCompatActivity;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.review.multipage.MultiPageReviewFragment;
 import net.gini.android.vision.review.multipage.MultiPageReviewFragmentListener;
 
@@ -31,7 +31,7 @@ public class MultiPageReviewExampleActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onProceedToAnalysisScreen(@NonNull final GiniVisionMultiPageDocument document) {
+    public void onProceedToAnalysisScreen(@NonNull final GiniCaptureMultiPageDocument document) {
         final Intent intent = AnalysisExampleAppCompatActivity.newInstance(document, null,
                 this);
         startActivityForResult(intent, ANALYSIS_REQUEST);

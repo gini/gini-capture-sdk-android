@@ -1,6 +1,6 @@
 package net.gini.android.vision.internal.network;
 
-import net.gini.android.vision.document.GiniVisionDocument;
+import net.gini.android.vision.document.GiniCaptureDocument;
 
 import androidx.annotation.NonNull;
 
@@ -15,20 +15,20 @@ import androidx.annotation.NonNull;
  *
  * @suppress
  */
-public class NetworkRequestResult<T extends GiniVisionDocument> {
+public class NetworkRequestResult<T extends GiniCaptureDocument> {
 
-    private final T mGiniVisionDocument;
+    private final T mGiniCaptureDocument;
     private final String mApiDocumentId;
 
-    public NetworkRequestResult(@NonNull final T giniVisionDocument,
+    public NetworkRequestResult(@NonNull final T giniCaptureDocument,
             @NonNull final String apiDocumentId) {
-        mGiniVisionDocument = giniVisionDocument;
+        mGiniCaptureDocument = giniCaptureDocument;
         mApiDocumentId = apiDocumentId;
     }
 
     @NonNull
-    public T getGiniVisionDocument() {
-        return mGiniVisionDocument;
+    public T getGiniCaptureDocument() {
+        return mGiniCaptureDocument;
     }
 
     @NonNull

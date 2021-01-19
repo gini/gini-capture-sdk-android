@@ -7,7 +7,7 @@ package net.gini.android.vision.network;
  */
 
 /**
- * Used by the {@link GiniVisionNetworkService} to return network call results.
+ * Used by the {@link GiniCaptureNetworkService} to return network call results.
  */
 public class Result {
 

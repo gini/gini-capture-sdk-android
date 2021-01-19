@@ -9,7 +9,7 @@ import android.view.View;
 
 import net.gini.android.models.SpecificExtraction;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVisionDebug;
+import net.gini.android.vision.GiniCaptureDebug;
 import net.gini.android.vision.example.shared.BaseExampleApp;
 import net.gini.android.vision.example.shared.DocumentAnalyzer;
 import net.gini.android.vision.example.shared.SingleDocumentAnalyzer;
@@ -22,7 +22,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 
 /**
- * Implements callbacks required by the Gini Vision Library's {@link net.gini.android.vision.analysis.AnalysisActivity}
+ * Implements callbacks required by the Gini Capture SDK's {@link net.gini.android.vision.analysis.AnalysisActivity}
  * to perform document analysis using the Gini API SDK.
  */
 public class AnalysisActivity extends net.gini.android.vision.analysis.AnalysisActivity {
@@ -45,7 +45,7 @@ public class AnalysisActivity extends net.gini.android.vision.analysis.AnalysisA
     @Override
     public void onAnalyzeDocument(@NonNull final Document document) {
         LOG.debug("Analyze document");
-        GiniVisionDebug.writeDocumentToFile(this, document, "_for_analysis");
+        GiniCaptureDebug.writeDocumentToFile(this, document, "_for_analysis");
 
         startScanAnimation();
         // We can start analyzing the document by sending it to the Gini API

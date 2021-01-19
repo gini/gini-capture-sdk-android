@@ -1,6 +1,6 @@
 package net.gini.android.vision.camera;
 
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.document.QRCodeDocument;
 import net.gini.android.vision.internal.camera.api.CameraControllerFake;
 
@@ -24,9 +24,9 @@ public class CameraActivityFake extends CameraActivity {
 
     @Override
     protected CameraFragmentCompat createCameraFragmentCompat(
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
         return mCameraFragmentCompatFake = CameraFragmentCompatFake.createInstance(
-                giniVisionFeatureConfiguration);
+                giniCaptureFeatureConfiguration);
     }
 
     @Override

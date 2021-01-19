@@ -29,20 +29,20 @@ import android.view.View;
 
 import net.gini.android.vision.Document;
 import net.gini.android.vision.DocumentImportEnabledFileTypes;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionError;
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureError;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.R;
 import net.gini.android.vision.analysis.AnalysisActivityTestSpy;
 import net.gini.android.vision.document.DocumentFactory;
-import net.gini.android.vision.document.GiniVisionMultiPageDocument;
+import net.gini.android.vision.document.GiniCaptureMultiPageDocument;
 import net.gini.android.vision.document.ImageDocument;
 import net.gini.android.vision.document.QRCodeDocument;
 import net.gini.android.vision.document.QRCodeDocumentHelper;
 import net.gini.android.vision.internal.camera.api.CameraControllerFake;
 import net.gini.android.vision.internal.camera.photo.PhotoFactory;
 import net.gini.android.vision.internal.qrcode.PaymentQRCodeData;
-import net.gini.android.vision.network.model.GiniVisionSpecificExtraction;
+import net.gini.android.vision.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.vision.onboarding.OnboardingActivity;
 import net.gini.android.vision.onboarding.OnboardingPage;
 import net.gini.android.vision.review.ReviewActivity;
@@ -122,7 +122,7 @@ public class CameraScreenTest {
         // Wait a little for the camera to close
         Thread.sleep(CLOSE_CAMERA_PAUSE_DURATION);
         resetDeviceOrientation();
-        GiniVision.cleanup(ApplicationProvider.getApplicationContext());
+        GiniCapture.cleanup(ApplicationProvider.getApplicationContext());
     }
 
     @Test
@@ -142,7 +142,7 @@ public class CameraScreenTest {
     @NonNull
     private <T extends CameraActivity> Intent getCameraActivityIntent(
             @NonNull final Class<T> cameraActivityClass,
-            @Nullable final GiniVisionFeatureConfiguration featureConfiguration) {
+            @Nullable final GiniCaptureFeatureConfiguration featureConfiguration) {
         final Intent intent = new Intent(ApplicationProvider.getApplicationContext(),
                 cameraActivityClass);
         CameraActivity.setReviewActivityExtra(intent, ApplicationProvider.getApplicationContext(),
@@ -150,7 +150,7 @@ public class CameraScreenTest {
         CameraActivity.setAnalysisActivityExtra(intent, ApplicationProvider.getApplicationContext(),
                 AnalysisActivityTestSpy.class);
         if (featureConfiguration != null) {
-            intent.putExtra(CameraActivity.EXTRA_IN_GINI_VISION_FEATURE_CONFIGURATION,
+            intent.putExtra(CameraActivity.EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION,
                     featureConfiguration);
         }
         return intent;
@@ -165,8 +165,8 @@ public class CameraScreenTest {
     }
 
     @Test
-    public void should_notShowOnboarding_onFirstLaunch_ifDisabledUsingGiniVision() {
-        GiniVision.newInstance()
+    public void should_notShowOnboarding_onFirstLaunch_ifDisabledUsingGiniCapture() {
+        GiniCapture.newInstance()
                 .setShouldShowOnboardingAtFirstRun(false)
                 .build();
 
@@ -186,7 +186,7 @@ public class CameraScreenTest {
 
     @NonNull
     private CameraActivityFake startCameraActivityFakeWithoutOnboarding(
-            @Nullable final GiniVisionFeatureConfiguration featureConfiguration) {
+            @Nullable final GiniCaptureFeatureConfiguration featureConfiguration) {
         final Intent intent = getCameraActivityIntent(CameraActivityFake.class,
                 featureConfiguration);
         intent.putExtra(CameraActivity.EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN, false);
@@ -206,10 +206,10 @@ public class CameraScreenTest {
     }
 
     @Test
-    public void should_showOnboarding_ifRequested_andWasAlreadyShownOnFirstLaunch_usingGiniVision() {
+    public void should_showOnboarding_ifRequested_andWasAlreadyShownOnFirstLaunch_usingGiniCapture() {
         setOnboardingWasShownPreference();
 
-        GiniVision.newInstance()
+        GiniCapture.newInstance()
                 .setShouldShowOnboarding(true)
                 .build();
 
@@ -267,7 +267,7 @@ public class CameraScreenTest {
     public void should_showNoPermissionView_ifNoCameraPermission() throws Exception {
         PermissionsHelper.revokeCameraPermission();
 
-        // Gini Vision Library does not handle runtime permissions and the no permission view is
+        // Gini Capture SDK does not handle runtime permissions and the no permission view is
         // shown by default
         startCameraActivityWithoutOnboarding();
 
@@ -500,7 +500,7 @@ public class CameraScreenTest {
 
     private void detectAndCheckQRCode(@NonNull final String jpegFilename,
             @NonNull final String nv21Filename, @NonNull final PaymentQRCodeData paymentData,
-            @Nullable final GiniVisionFeatureConfiguration featureConfiguration)
+            @Nullable final GiniCaptureFeatureConfiguration featureConfiguration)
             throws IOException, InterruptedException {
         // Given
         assumeTrue(!isTablet());
@@ -533,7 +533,7 @@ public class CameraScreenTest {
     private void detectAndCheckQRCode(@NonNull final String jpegFilename,
             @NonNull final String nv21Filename, @NonNull final PaymentQRCodeData paymentData)
             throws IOException, InterruptedException {
-        final GiniVisionFeatureConfiguration featureConfiguration = GiniVisionFeatureConfiguration
+        final GiniCaptureFeatureConfiguration featureConfiguration = GiniCaptureFeatureConfiguration
                 .buildNewConfiguration()
                 .setQRCodeScanningEnabled(true)
                 .build();
@@ -580,7 +580,7 @@ public class CameraScreenTest {
     public void should_ignoreUnsupported_IFSC_QRCode() throws Exception {
         // Given
         assumeTrue(!isTablet());
-        final GiniVisionFeatureConfiguration featureConfiguration = GiniVisionFeatureConfiguration
+        final GiniCaptureFeatureConfiguration featureConfiguration = GiniCaptureFeatureConfiguration
                 .buildNewConfiguration()
                 .setQRCodeScanningEnabled(true)
                 .build();
@@ -597,9 +597,9 @@ public class CameraScreenTest {
     }
 
     @Test
-    public void should_detectQRCode_whenConfiguredUsingGiniVision()
+    public void should_detectQRCode_whenConfiguredUsingGiniCapture()
             throws IOException, InterruptedException {
-        GiniVision.newInstance()
+        GiniCapture.newInstance()
                 .setQRCodeScanningEnabled(true)
                 .setShouldShowOnboardingAtFirstRun(false)
                 .build();
@@ -621,7 +621,7 @@ public class CameraScreenTest {
         // Given
         assumeTrue(!isTablet());
 
-        final GiniVisionFeatureConfiguration featureConfiguration = GiniVisionFeatureConfiguration
+        final GiniCaptureFeatureConfiguration featureConfiguration = GiniCaptureFeatureConfiguration
                 .buildNewConfiguration()
                 .setQRCodeScanningEnabled(true)
                 .build();
@@ -647,7 +647,7 @@ public class CameraScreenTest {
         // Given
         assumeTrue(!isTablet());
 
-        final GiniVisionFeatureConfiguration featureConfiguration = GiniVisionFeatureConfiguration
+        final GiniCaptureFeatureConfiguration featureConfiguration = GiniCaptureFeatureConfiguration
                 .buildNewConfiguration()
                 .setQRCodeScanningEnabled(true)
                 .build();
@@ -674,7 +674,7 @@ public class CameraScreenTest {
         // Given
         assumeTrue(!isTablet());
 
-        final GiniVisionFeatureConfiguration featureConfiguration = GiniVisionFeatureConfiguration
+        final GiniCaptureFeatureConfiguration featureConfiguration = GiniCaptureFeatureConfiguration
                 .buildNewConfiguration()
                 .setQRCodeScanningEnabled(true)
                 .build();
@@ -704,7 +704,7 @@ public class CameraScreenTest {
         // Given
         assumeTrue(!isTablet());
 
-        final GiniVisionFeatureConfiguration featureConfiguration = GiniVisionFeatureConfiguration
+        final GiniCaptureFeatureConfiguration featureConfiguration = GiniCaptureFeatureConfiguration
                 .buildNewConfiguration()
                 .setQRCodeScanningEnabled(true)
                 .setDocumentImportEnabledFileTypes(DocumentImportEnabledFileTypes.PDF_AND_IMAGES)
@@ -747,7 +747,7 @@ public class CameraScreenTest {
 
             @Override
             public void onProceedToMultiPageReviewScreen(
-                    @NonNull final GiniVisionMultiPageDocument multiPageDocument) {
+                    @NonNull final GiniCaptureMultiPageDocument multiPageDocument) {
 
             }
 
@@ -763,13 +763,13 @@ public class CameraScreenTest {
             }
 
             @Override
-            public void onError(@NonNull final GiniVisionError error) {
+            public void onError(@NonNull final GiniCaptureError error) {
 
             }
 
             @Override
             public void onExtractionsAvailable(
-                    @NonNull final Map<String, GiniVisionSpecificExtraction> extractions) {
+                    @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
 
             }
         };
@@ -817,7 +817,7 @@ public class CameraScreenTest {
     @Test
     public void should_turnOffFlashByDefault_whenRequested() {
         // Given
-        GiniVision.newInstance()
+        GiniCapture.newInstance()
                 .setFlashOnByDefault(false)
                 .build();
         // When
@@ -831,7 +831,7 @@ public class CameraScreenTest {
     @Test
     public void should_turnOnFlashByDefault_ifNotChanged() {
         // Given
-        GiniVision.newInstance().build();
+        GiniCapture.newInstance().build();
 
         // When
         final CameraActivityFake cameraActivityFake = startCameraActivityFakeWithoutOnboarding(

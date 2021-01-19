@@ -11,8 +11,8 @@ import static org.junit.Assume.assumeTrue;
 import android.content.Intent;
 import android.view.Surface;
 
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.R;
 import net.gini.android.vision.test.EspressoMatchers;
 
@@ -58,7 +58,7 @@ public class OnboardingScreenTest {
     public void tearDown() throws Exception {
         OnboardingFragmentHostActivityNotListener.sListener = null;
         resetDeviceOrientation();
-        GiniVision.cleanup(ApplicationProvider.getApplicationContext());
+        GiniCapture.cleanup(ApplicationProvider.getApplicationContext());
     }
 
     @Test
@@ -101,13 +101,13 @@ public class OnboardingScreenTest {
     }
 
     @Test
-    public void should_showCustomPages_whenSetUsingGiniVision() throws InterruptedException {
+    public void should_showCustomPages_whenSetUsingGiniCapture() throws InterruptedException {
         final ArrayList<OnboardingPage> customPages = new ArrayList<>(1);
         customPages.add(new OnboardingPage(R.string.gv_title_camera, R.drawable.gv_camera_trigger));
         customPages.add(
                 new OnboardingPage(R.string.gv_title_review, R.drawable.gv_review_button_rotate));
 
-        GiniVision.newInstance()
+        GiniCapture.newInstance()
                 .setCustomOnboardingPages(customPages)
                 .build();
 
@@ -202,7 +202,7 @@ public class OnboardingScreenTest {
             }
 
             @Override
-            public void onError(@NonNull final GiniVisionError error) {
+            public void onError(@NonNull final GiniCaptureError error) {
 
             }
         };

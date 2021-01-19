@@ -4,7 +4,7 @@ import static android.content.Intent.ACTION_GET_CONTENT;
 import static android.content.Intent.ACTION_OPEN_DOCUMENT;
 import static android.content.Intent.ACTION_PICK;
 
-import static net.gini.android.vision.GiniVisionError.ErrorCode.DOCUMENT_IMPORT;
+import static net.gini.android.vision.GiniCaptureError.ErrorCode.DOCUMENT_IMPORT;
 import static net.gini.android.vision.internal.util.ContextHelper.isTablet;
 import static net.gini.android.vision.internal.util.FeatureConfiguration.isMultiPageEnabled;
 
@@ -21,7 +21,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import net.gini.android.vision.DocumentImportEnabledFileTypes;
-import net.gini.android.vision.GiniVisionError;
+import net.gini.android.vision.GiniCaptureError;
 import net.gini.android.vision.R;
 import net.gini.android.vision.internal.fileimport.providerchooser.ProvidersAdapter;
 import net.gini.android.vision.internal.fileimport.providerchooser.ProvidersAppItem;
@@ -261,7 +261,7 @@ public class FileChooserActivity extends AppCompatActivity implements AlertDialo
         if (requestCode == REQ_CODE_CHOOSE_FILE) {
             setResult(resultCode, data);
         } else {
-            final GiniVisionError error = new GiniVisionError(DOCUMENT_IMPORT,
+            final GiniCaptureError error = new GiniCaptureError(DOCUMENT_IMPORT,
                     "Unexpected request code for activity result.");
             final Intent result = new Intent();
             result.putExtra(EXTRA_OUT_ERROR, error);

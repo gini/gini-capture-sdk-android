@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import net.gini.android.models.SpecificExtraction;
 import net.gini.android.vision.Document;
-import net.gini.android.vision.GiniVisionDebug;
+import net.gini.android.vision.GiniCaptureDebug;
 import net.gini.android.vision.example.shared.BaseExampleApp;
 import net.gini.android.vision.example.shared.DocumentAnalyzer;
 import net.gini.android.vision.example.shared.SingleDocumentAnalyzer;
@@ -21,7 +21,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 
 /**
- * Implements callbacks required by the Gini Vision Library's {@link net.gini.android.vision.review.ReviewActivity}
+ * Implements callbacks required by the Gini Capture SDK's {@link net.gini.android.vision.review.ReviewActivity}
  * to perform document analysis using the Gini API SDK.
  */
 public class ReviewActivity extends net.gini.android.vision.review.ReviewActivity {
@@ -60,11 +60,11 @@ public class ReviewActivity extends net.gini.android.vision.review.ReviewActivit
     @Override
     public void onShouldAnalyzeDocument(@NonNull final Document document) {
         LOG.debug("Should analyze document");
-        GiniVisionDebug.writeDocumentToFile(this, document, "_for_review");
+        GiniCaptureDebug.writeDocumentToFile(this, document, "_for_review");
         // We should start analyzing the document by sending it to the Gini API.
         // If the user did not modify the image we can get the analysis results earlier.
-        // The Gini Vision Library does not go to the Analysis Screen, if the results were received in the Review Screen.
-        // If the user modified the image or the analysis didn't complete or it failed the Gini Vision Library
+        // The Gini Capture SDK does not go to the Analysis Screen, if the results were received in the Review Screen.
+        // If the user modified the image or the analysis didn't complete or it failed the Gini Capture SDK
         // goes to the Analysis Screen.
         analyzeDocument(document);
     }

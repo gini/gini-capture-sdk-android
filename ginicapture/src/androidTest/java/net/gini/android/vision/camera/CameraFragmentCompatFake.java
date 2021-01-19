@@ -1,6 +1,6 @@
 package net.gini.android.vision.camera;
 
-import net.gini.android.vision.GiniVisionFeatureConfiguration;
+import net.gini.android.vision.GiniCaptureFeatureConfiguration;
 import net.gini.android.vision.internal.camera.api.CameraControllerFake;
 
 import androidx.annotation.NonNull;
@@ -20,10 +20,10 @@ public class CameraFragmentCompatFake extends CameraFragmentCompat {
     }
 
     public static CameraFragmentCompatFake createInstance(
-            @NonNull final GiniVisionFeatureConfiguration giniVisionFeatureConfiguration) {
+            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
         final CameraFragmentCompatFake fragment = new CameraFragmentCompatFake();
         fragment.setArguments(
-                CameraFragmentHelper.createArguments(giniVisionFeatureConfiguration));
+                CameraFragmentHelper.createArguments(giniCaptureFeatureConfiguration));
         return fragment;
     }
 

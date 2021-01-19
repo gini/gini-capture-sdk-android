@@ -16,15 +16,15 @@ import android.widget.Toast;
 
 import net.gini.android.GiniApiType;
 import net.gini.android.vision.DocumentImportEnabledFileTypes;
-import net.gini.android.vision.GiniVision;
-import net.gini.android.vision.GiniVisionDebug;
+import net.gini.android.vision.GiniCapture;
+import net.gini.android.vision.GiniCaptureDebug;
 import net.gini.android.vision.component.camera.compat.CameraExampleAppCompatActivity;
 import net.gini.android.vision.component.camera.standard.CameraExampleActivity;
 import net.gini.android.vision.example.shared.BaseExampleApp;
 import net.gini.android.vision.example.shared.RuntimePermissionHandler;
 import net.gini.android.vision.onboarding.DefaultPagesPhone;
 import net.gini.android.vision.onboarding.OnboardingPage;
-import net.gini.android.vision.requirements.GiniVisionRequirements;
+import net.gini.android.vision.requirements.GiniCaptureRequirements;
 import net.gini.android.vision.requirements.RequirementReport;
 import net.gini.android.vision.requirements.RequirementsReport;
 
@@ -40,12 +40,12 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private Button mButtonStartGiniVisionCompat;
-    private Button mButtonStartGiniVisionStandard;
+    private Button mButtonStartGiniCaptureCompat;
+    private Button mButtonStartGiniCaptureStandard;
     private boolean mRestoredInstance;
     private RuntimePermissionHandler mRuntimePermissionHandler;
     private TextView mTextAppVersion;
-    private TextView mTextGiniVisionLibVersion;
+    private TextView mTextGiniCaptureLibVersion;
     private Spinner mGiniApiTypeSpinner;
     private GiniApiType mGiniApiType = GiniApiType.DEFAULT;
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bindViews();
         addInputHandlers();
-        setGiniVisionLibDebugging();
+        setGiniCaptureLibDebugging();
         showVersions();
         createRuntimePermissionsHandler();
         mRestoredInstance = savedInstanceState != null;
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         if (!mRestoredInstance) {
             final Intent intent = getIntent();
             if (isIntentActionViewOrSend(intent)) {
-                startGiniVisionLibraryForImportedFile(intent);
+                startGiniCaptureLibraryForImportedFile(intent);
             }
         }
     }
@@ -76,19 +76,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(final Intent intent) {
         super.onNewIntent(intent);
         if (isIntentActionViewOrSend(intent)) {
-            startGiniVisionLibraryForImportedFile(intent);
+            startGiniCaptureLibraryForImportedFile(intent);
         }
     }
 
-    private void initGiniVision() {
+    private void initGiniCapture() {
         final BaseExampleApp app = (BaseExampleApp) getApplication();
-        GiniVision.cleanup(this);
-        app.clearGiniVisionNetworkInstances();
-        final GiniVision.Builder builder = GiniVision.newInstance()
-                .setGiniVisionNetworkService(
-                        app.getGiniVisionNetworkService("ComponentAPI",
+        GiniCapture.cleanup(this);
+        app.clearGiniCaptureNetworkInstances();
+        final GiniCapture.Builder builder = GiniCapture.newInstance()
+                .setGiniCaptureNetworkService(
+                        app.getGiniCaptureNetworkService("ComponentAPI",
                                 mGiniApiType)
-                ).setGiniVisionNetworkApi(app.getGiniVisionNetworkApi());
+                ).setGiniCaptureNetworkApi(app.getGiniCaptureNetworkApi());
         if (mGiniApiType == GiniApiType.DEFAULT) {
             builder.setDocumentImportEnabledFileTypes(DocumentImportEnabledFileTypes.PDF_AND_IMAGES)
                     .setFileImportEnabled(true)
@@ -113,25 +113,25 @@ public class MainActivity extends AppCompatActivity {
         return pages;
     }
 
-    private void startGiniVisionLibraryForImportedFile(final Intent importedFileIntent) {
-        initGiniVision();
+    private void startGiniCaptureLibraryForImportedFile(final Intent importedFileIntent) {
+        initGiniCapture();
         new AlertDialog.Builder(this)
                 .setMessage(R.string.open_file_standard_or_compat)
                 .setPositiveButton("Compat", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialogInterface, final int i) {
-                        startGiniVisionCompatForImportedFile(importedFileIntent);
+                        startGiniCaptureCompatForImportedFile(importedFileIntent);
                     }
                 })
                 .setNegativeButton("Standard", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialogInterface, final int i) {
-                        startGiniVisionStandardForImportedFile(importedFileIntent);
+                        startGiniCaptureStandardForImportedFile(importedFileIntent);
                     }
                 }).show();
     }
 
-    private void startGiniVisionStandardForImportedFile(@NonNull final Intent importedFileIntent) {
+    private void startGiniCaptureStandardForImportedFile(@NonNull final Intent importedFileIntent) {
         mRuntimePermissionHandler.requestStoragePermission(
                 new RuntimePermissionHandler.Listener() {
                     @Override
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void startGiniVisionCompatForImportedFile(@Nullable final Intent importedFileIntent) {
+    private void startGiniCaptureCompatForImportedFile(@Nullable final Intent importedFileIntent) {
         mRuntimePermissionHandler.requestStoragePermission(
                 new RuntimePermissionHandler.Listener() {
                     @Override
@@ -168,16 +168,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addInputHandlers() {
-        mButtonStartGiniVisionStandard.setOnClickListener(new View.OnClickListener() {
+        mButtonStartGiniCaptureStandard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                startGiniVisionStandard();
+                startGiniCaptureStandard();
             }
         });
-        mButtonStartGiniVisionCompat.setOnClickListener(new View.OnClickListener() {
+        mButtonStartGiniCaptureCompat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                startGiniVisionCompat();
+                startGiniCaptureCompat();
             }
         });
         mGiniApiTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -194,17 +194,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void startGiniVisionCompat() {
-        initGiniVision();
+    private void startGiniCaptureCompat() {
+        initGiniCapture();
         mRuntimePermissionHandler.requestCameraPermission(
                 new RuntimePermissionHandler.Listener() {
                     @Override
                     public void permissionGranted() {
                         // NOTE: on Android 6.0 and later the camera permission is required before checking the requirements
-                        final RequirementsReport report = GiniVisionRequirements.checkRequirements(
+                        final RequirementsReport report = GiniCaptureRequirements.checkRequirements(
                                 MainActivity.this);
                         if (!report.isFulfilled()) {
-                            // In production apps you should not launch GVL if requirements were not fulfilled
+                            // In production apps you should not launch Gini Capture if requirements were not fulfilled
                             // We make an exception here to allow running the app on emulators
                             showUnfulfilledRequirementsToast(report);
                         }
@@ -220,17 +220,17 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void startGiniVisionStandard() {
-        initGiniVision();
+    private void startGiniCaptureStandard() {
+        initGiniCapture();
         mRuntimePermissionHandler.requestCameraPermission(
                 new RuntimePermissionHandler.Listener() {
                     @Override
                     public void permissionGranted() {
                         // NOTE: on Android 6.0 and later the camera permission is required before checking the requirements
-                        final RequirementsReport report = GiniVisionRequirements.checkRequirements(
+                        final RequirementsReport report = GiniCaptureRequirements.checkRequirements(
                                 MainActivity.this);
                         if (!report.isFulfilled()) {
-                            // In production apps you should not launch GVL if requirements were not fulfilled
+                            // In production apps you should not launch Gini Capture if requirements were not fulfilled
                             // We make an exception here to allow running the app on emulators
                             showUnfulfilledRequirementsToast(report);
                         }
@@ -267,10 +267,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void bindViews() {
-        mButtonStartGiniVisionStandard = (Button) findViewById(
-                R.id.button_start_gini_vision_standard);
-        mButtonStartGiniVisionCompat = (Button) findViewById(R.id.button_start_gini_vision_compat);
-        mTextGiniVisionLibVersion = (TextView) findViewById(R.id.text_gini_vision_version);
+        mButtonStartGiniCaptureStandard = (Button) findViewById(
+                R.id.button_start_gini_capture_standard);
+        mButtonStartGiniCaptureCompat = (Button) findViewById(R.id.button_start_gini_capture_compat);
+        mTextGiniCaptureLibVersion = (TextView) findViewById(R.id.text_gini_capture_version);
         mTextAppVersion = (TextView) findViewById(R.id.text_app_version);
         mGiniApiTypeSpinner = findViewById(R.id.gini_api_type_spinner);
     }
@@ -289,16 +289,16 @@ public class MainActivity extends AppCompatActivity {
                 .build();
     }
 
-    private void setGiniVisionLibDebugging() {
+    private void setGiniCaptureLibDebugging() {
         if (BuildConfig.DEBUG) {
-            GiniVisionDebug.enable();
+            GiniCaptureDebug.enable();
         }
     }
 
     @SuppressLint("SetTextI18n")
     private void showVersions() {
-        mTextGiniVisionLibVersion.setText(
-                "Gini Vision Library v" + net.gini.android.vision.BuildConfig.VERSION_NAME);
+        mTextGiniCaptureLibVersion.setText(
+                "Gini Capture SDK v" + net.gini.android.vision.BuildConfig.VERSION_NAME);
         mTextAppVersion.setText("v" + BuildConfig.VERSION_NAME);
     }
 

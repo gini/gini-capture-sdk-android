@@ -14,21 +14,21 @@ import androidx.annotation.NonNull;
 
 /**
  * <p>
- *     Checks the device's hardware capabilities to determine, if it is compatible with the Gini Vision Library.
+ *     Checks the device's hardware capabilities to determine, if it is compatible with the Gini Capture SDK.
  * </p>
  * <p>
  *     The checked requirements are listed in the {@link RequirementId} enum.
  * </p>
  * <p>
- *     Call {@link GiniVisionRequirements#checkRequirements(Context)} to get a report of the requirement checks.
+ *     Call {@link GiniCaptureRequirements#checkRequirements(Context)} to get a report of the requirement checks.
  * </p>
  * <p>
  *     On Android 6.0 and later you need to ask the user for the camera permission before you check the requirements.
  * </p>
  */
-public final class GiniVisionRequirements {
+public final class GiniCaptureRequirements {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GiniVisionRequirements.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GiniCaptureRequirements.class);
 
     /**
      * <p>
@@ -82,6 +82,6 @@ public final class GiniVisionRequirements {
         );
     }
 
-    private GiniVisionRequirements() {
+    private GiniCaptureRequirements() {
     }
 }

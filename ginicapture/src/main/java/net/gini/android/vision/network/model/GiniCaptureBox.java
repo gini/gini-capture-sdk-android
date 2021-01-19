@@ -9,23 +9,23 @@ import android.os.Parcelable;
  * box</a> for a Gini API extraction. The bounding box describes the page and the position where the
  * extraction originates.
  */
-public class GiniVisionBox implements Parcelable {
+public class GiniCaptureBox implements Parcelable {
 
-    public static final Creator<GiniVisionBox> CREATOR = new Creator<GiniVisionBox>() {
+    public static final Creator<GiniCaptureBox> CREATOR = new Creator<GiniCaptureBox>() {
 
         @Override
-        public GiniVisionBox createFromParcel(final Parcel in) {
+        public GiniCaptureBox createFromParcel(final Parcel in) {
             final int pageNumber = in.readInt();
             final double left = in.readDouble();
             final double top = in.readDouble();
             final double width = in.readDouble();
             final double height = in.readDouble();
-            return new GiniVisionBox(pageNumber, left, top, width, height);
+            return new GiniCaptureBox(pageNumber, left, top, width, height);
         }
 
         @Override
-        public GiniVisionBox[] newArray(final int size) {
-            return new GiniVisionBox[size];
+        public GiniCaptureBox[] newArray(final int size) {
+            return new GiniCaptureBox[size];
         }
     };
 
@@ -44,9 +44,9 @@ public class GiniVisionBox implements Parcelable {
      * @param width      horizontal dimension of the box
      * @param height     vertical dimension of the box
      */
-    public GiniVisionBox(final int pageNumber, final double left, final double top,
-            final double width,
-            final double height) {
+    public GiniCaptureBox(final int pageNumber, final double left, final double top,
+                          final double width,
+                          final double height) {
         mPageNumber = pageNumber;
         mLeft = left;
         mTop = top;
@@ -105,7 +105,7 @@ public class GiniVisionBox implements Parcelable {
 
     @Override
     public String toString() {
-        return "GiniVisionBox{"
+        return "GiniCaptureBox{"
                 + "mPageNumber=" + mPageNumber
                 + ", mLeft=" + mLeft
                 + ", mTop=" + mTop

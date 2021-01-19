@@ -5,9 +5,9 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 import jersey.repackaged.jsr166e.CompletableFuture
-import net.gini.android.vision.GiniVision
-import net.gini.android.vision.GiniVisionHelper
-import net.gini.android.vision.document.GiniVisionDocument
+import net.gini.android.vision.GiniCapture
+import net.gini.android.vision.GiniCaptureHelper
+import net.gini.android.vision.document.GiniCaptureDocument
 import net.gini.android.vision.document.ImageDocumentFake
 import net.gini.android.vision.internal.network.NetworkRequestResult
 import net.gini.android.vision.internal.network.NetworkRequestsManager
@@ -33,21 +33,21 @@ class MultipageReviewFragmentTest {
 
     @After
     fun after() {
-        GiniVisionHelper.setGiniVisionInstance(null)
+        GiniCaptureHelper.setGiniCaptureInstance(null)
 //        GiniVision.cleanup(InstrumentationRegistry.getInstrumentation().targetContext)
     }
 
     @Test
     fun `triggers Next event`() {
         // Given
-        val giniVision = mock<GiniVision>()
-        GiniVisionHelper.setGiniVisionInstance(giniVision)
+        val giniCapture = mock<GiniCapture>()
+        GiniCaptureHelper.setGiniCaptureInstance(giniCapture)
 
-        val internal = mock<GiniVision.Internal>()
-        `when`(giniVision.internal()).thenReturn(internal)
+        val internal = mock<GiniCapture.Internal>()
+        `when`(giniCapture.internal()).thenReturn(internal)
 
         val eventTracker = spy<EventTracker>()
-        `when`(giniVision.internal().eventTracker).thenReturn(eventTracker)
+        `when`(giniCapture.internal().eventTracker).thenReturn(eventTracker)
 
         val fragment = MultiPageReviewFragment()
         fragment.setListener(mock())
@@ -75,22 +75,22 @@ class MultipageReviewFragmentTest {
 
         val exception = RuntimeException("error message")
 
-        val future = CompletableFuture<NetworkRequestResult<GiniVisionDocument>>()
+        val future = CompletableFuture<NetworkRequestResult<GiniCaptureDocument>>()
         future.completeExceptionally(exception)
 
         val networkRequestsManager = mock<NetworkRequestsManager>()
         `when`(networkRequestsManager.upload(any(), any())).thenReturn(future)
 
-        val internal = mock<GiniVision.Internal>()
+        val internal = mock<GiniCapture.Internal>()
         `when`(internal.networkRequestsManager).thenReturn(networkRequestsManager)
 
-        val giniVision = mock<GiniVision>()
-        GiniVisionHelper.setGiniVisionInstance(giniVision)
+        val giniCapture = mock<GiniCapture>()
+        GiniCaptureHelper.setGiniCaptureInstance(giniCapture)
 
-        `when`(giniVision.internal()).thenReturn(internal)
+        `when`(giniCapture.internal()).thenReturn(internal)
 
         val eventTracker = spy<EventTracker>()
-        `when`(giniVision.internal().eventTracker).thenReturn(eventTracker)
+        `when`(giniCapture.internal().eventTracker).thenReturn(eventTracker)
 
         // When
         fragment.uploadDocument(ImageDocumentFake())

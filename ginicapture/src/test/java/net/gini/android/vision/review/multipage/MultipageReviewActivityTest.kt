@@ -8,7 +8,7 @@ import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
-import net.gini.android.vision.GiniVision
+import net.gini.android.vision.GiniCapture
 import net.gini.android.vision.tracking.Event
 import net.gini.android.vision.tracking.EventTracker
 import net.gini.android.vision.tracking.ReviewScreenEvent
@@ -29,15 +29,15 @@ class MultipageReviewActivityTest {
 
     @After
     fun after() {
-        GiniVision.cleanup(getInstrumentation().targetContext)
+        GiniCapture.cleanup(getInstrumentation().targetContext)
     }
 
     @Test
     fun `triggers Back event when back was pressed`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
-        GiniVision.getInstance().internal().imageMultiPageDocumentMemoryStore.setMultiPageDocument(mock())
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.getInstance().internal().imageMultiPageDocumentMemoryStore.setMultiPageDocument(mock())
 
         ActivityScenario.launch<MultiPageReviewActivity>(Intent(getInstrumentation().targetContext, MultiPageReviewActivity::class.java)).use { scenario ->
             scenario.moveToState(Lifecycle.State.STARTED)

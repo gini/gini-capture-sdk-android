@@ -10,7 +10,7 @@ Adding this library along with the Gini Capture SDK to your application is the q
 integrate invoice scanning.
 
 In order for the Gini Capture SDK to use the default implementations, pass the instances to the
-`GiniVision.Builder` when creating a new `GiniVision`.
+`GiniCapture.Builder` when creating a new `GiniCapture`.
 
 Example
 -------

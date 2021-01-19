@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
  * @suppress
  */
 @SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
-public interface GiniVisionBaseView<P extends GiniVisionBasePresenter> {
+public interface GiniCaptureBaseView<P extends GiniCaptureBasePresenter> {
 
     void setPresenter(@NonNull final P presenter);
 }

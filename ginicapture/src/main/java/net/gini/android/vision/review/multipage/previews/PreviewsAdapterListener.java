@@ -1,6 +1,6 @@
 package net.gini.android.vision.review.multipage.previews;
 
-import net.gini.android.vision.document.GiniVisionDocumentError;
+import net.gini.android.vision.document.GiniCaptureDocumentError;
 
 import androidx.annotation.NonNull;
 
@@ -18,5 +18,5 @@ import androidx.annotation.NonNull;
 public interface PreviewsAdapterListener {
 
     PreviewFragment.ErrorButtonAction getErrorButtonAction(
-            @NonNull final GiniVisionDocumentError documentError);
+            @NonNull final GiniCaptureDocumentError documentError);
 }

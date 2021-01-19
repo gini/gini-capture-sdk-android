@@ -9,7 +9,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import net.gini.android.vision.GiniVision
+import net.gini.android.vision.GiniCapture
 import net.gini.android.vision.R
 import net.gini.android.vision.tracking.CameraScreenEvent
 import net.gini.android.vision.tracking.Event
@@ -29,14 +29,14 @@ class CameraActivityTest {
 
     @After
     fun after() {
-        GiniVision.cleanup(InstrumentationRegistry.getInstrumentation().targetContext)
+        GiniCapture.cleanup(InstrumentationRegistry.getInstrumentation().targetContext)
     }
 
     @Test
     fun `triggers Exit event when back was pressed`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         ActivityScenario.launch(CameraActivity::class.java).use {scenario ->
             scenario.moveToState(Lifecycle.State.STARTED)
@@ -55,7 +55,7 @@ class CameraActivityTest {
     fun `triggers Help event when help was started`() {
         // Given
         val eventTracker = spy<EventTracker>()
-        GiniVision.Builder().setEventTracker(eventTracker).build()
+        GiniCapture.Builder().setEventTracker(eventTracker).build()
 
         ActivityScenario.launch(CameraActivity::class.java).use {scenario ->
             scenario.moveToState(Lifecycle.State.STARTED)
