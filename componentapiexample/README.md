@@ -3,8 +3,8 @@ Component API Example App
 
 This example app provides you with a sample usage of the Gini Capture SDK's Component API.
 
-The Gini Capture SDK supports both standard Activities and Fragments and Android Support Library ones. Activities without `AppCompat` in
-their name use standard Activities and Fragments while the other ones use the Android Support Library.
+The Gini Capture SDK supports both standard Activities and Fragments and AndroidX ones. Activities without `AppCompat` in
+their name use standard Activities and Fragments while the other ones use Androidx.
 
 The Gini API SDK is used for analyzing documents and sending feedback.
 
@@ -45,8 +45,6 @@ Camera Screen
 The `BaseCameraScreenHandler` contains the main logic. The `compat` and `standard` sub-packages provide the implementations for the Support
 Library components and standard components, respectively. They contain an Activity and a concrete handler.
 
-### GVL 2.5.0 and older
-
 It starts by showing the `CameraFragment`. When a picture was taken or file was imported using the document import button the
 `CameraFragmentListener#onDocumentAvailable()` is called where either the Review Screen or the Analysis Screen is shown.
 
@@ -62,9 +60,7 @@ On first launch or when using the `Tipps` menu item the `OnboardingFragment` is 
 
 The Help Screen is shown by clicking the help menu item (question mark).
 
-### GVL 3.0.0 and newer
-
-In addition to the above, if there is a `GiniCapture` instance and multi-page is enabled, it starts the Multi-Page Review Screen when the
+If there is a `GiniCapture` instance and multi-page is enabled, it starts the Multi-Page Review Screen when the
 `CameraFragmentListener#onProceedToMultiPageReviewScreen()` is called.
 
 Help Screen
@@ -79,38 +75,12 @@ Review Screen
 The `BaseReviewScreenHandler` contains the main logic. The `compat` and `standard` sub-packages provide the implementations for the Support
 Library components and standard components, respectively. They contain an Activity and a concrete handler.
 
-### GVL 2.5.0 and older
-
-The `ReviewFragmentListener#onShouldAnalyzeDocument()` method is called when the `ReviewFragment` starts. In this method the document
-analysis is started to use the time for analysis while the user reviews the picture. If the picture was rotated the
-`BaseReviewScreenHandler` cancels the analysis in `ReviewFragmentListener#onDocumentWasRotated()`. If the analysis fails it caches an error
-message which will be passed to the Analysis Screen to be shown to the user.
-
-When the document analysis successfully completed it calls `ReviewFragmentInterface#onDocumentAnalyzed()`. When the user clicks the next
-button either `ReviewFragmentListener#onDocumentReviewedAndAnalyzed()` or `ReviewFragmentListener#onProceedToAnalysisScreen()` is called. In
-the first method the extractions are shown in the `ExtractionsActivity` and in the second one the `AnalysisFragment` is shown.
-
-The table below shows you when one of those methods is called:
-
-|Document was rotated|Analysis started|Analysis successful|Next button clicked|
-|---|---|---|---|
-|no|no|-|`GiniCaptureActivity#onProceedToAnalysisScreen()`|
-|no|yes|no|`GiniCaptureActivity#onProceedToAnalysisScreen()`|
-|no|yes|yes|`GiniCaptureActivity#onDocumentReviewedAndAnalyzed()`|
-|yes|no|-|`GiniCaptureActivity#onProceedToAnalysisScreen()`|
-|yes|yes|no|`GiniCaptureActivity#onProceedToAnalysisScreen()`|
-|yes|yes|yes|`GiniCaptureActivity#onProceedToAnalysisScreen()`|
-
-### GVL 3.0.0 and newer
-
-In GVL 3.0.0+ you should create a `GiniCapture` instance before running the GVL. If you have done that, then analysis is executed internally
+You should create a `GiniCapture` instance first. If you have done that, then analysis is executed internally
 by the networking service implementation you have configured. When the user clicks the next button then
 `ReviewFragmentListener#onProceedToAnalysisScreen()` is called.
 
 Multi-Page Review Screen
 ------------------------
-
-### GVL 3.0.0 and newer
 
 This screen requires a `GiniCapture` instance and is shown if you have enabled multi-page scanning. It shows the `MultiPageReviewFragment`
 and goes to the Analysis Screen when `MultiPageReviewFragmentListener#onProceedToAnalysisScreen()` is called. If the user opted to go back
@@ -122,47 +92,11 @@ Analysis Screen
 The `BaseAnalysisScreenHandler` contains the main logic. The `compat` and `standard` sub-packages provide the implementations for the
 Support Library components and standard components, respectively. They contain an Activity and a concrete handler.
 
-### GVL 2.5.0 and older
-
-When the `AnalysisFragment` starts the `AnalysisFragmentListener#onAnalyzeDocument()` is called (if an error message was given, this method
-is called only when the user clicks the retry button) where the document analysis is started or resumed. Notifying the Fragment about
-successful completion of the analysis is done similarly to the `ReviewFragment` with `AnalysisFragmentInterface#onDocumentAnalyzed()`.
-
-An error message is displayed, if the analysis fails with `AnalysisFragmentInterface#showError()`. The activity indicator can be started and
-stopped with `AnalysisFragmentInterface#startScanAnimation()` and `AnalysisFragmentInterface#stopScanAnimation()`.
-
-### GVL 3.0.0 and newer
-
-In GVL 3.0.0+ you should create a `GiniCapture` instance before running the GVL. If you have done that, then analysis is executed internally
+You should create a `GiniCapture` instance first. If you have done that, then analysis is executed internally
 by the networking service implementation you have configured. When the `AnalysisFragment` receives the extractions the
 `AnalysisFragmentListener#onExtractionsAvailable()` is called and you may proceed with the extractions as desired.
 
 If there were no extractions, then the `AnalysisFragment` calls the `AnalysisFragmentListener#onProceedToNoExtractionsScreen()` method.
-
-### GVL 4.0.0 and newer
-
-If the return assistant was enabled when the `GiniCapture` instance was created and the client id is configured to extract line items and all
-the required line item information was successfully extracted, then the `AnalysisFragment` calls the
-`AnalysisFragmentListener#onProceedToReturnAssistant()` with the extractions needed to show the digital invoice of the return assistant.
-
-Digital Invoice Screen
-----------------------
-
-### GVL 4.0.0 and newer
-
-The `DigitalInvoiceFragment` is shown with the line items from the analyzed document. When the user taps on a line item from the digital
-invoice to edit it, then the `DigitalInvoiceFragmentListener#onEditLineItem()` is called and the Line Item Details Screen is shown.
-
-When the user is done and taps on the pay button, then the `DigitalInvoiceFragmentListener#onPayInvoice()` is called with the extractions
-updated according to the user's changes.
-
-Line Item Details Screen
-------------------------
-
-### GVL 4.0.0 and newer
-
-The `LineItemDetailsFragment` is shown where the user can edit the line item extractions. When the user taps on the save button, then the
-`LineItemDetailsFragmentListener#onSave()` is called with the updated line item.
 
 No Results Screen
 -----------------

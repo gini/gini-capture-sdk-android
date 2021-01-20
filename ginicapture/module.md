@@ -9,7 +9,7 @@ By integrating this library in your application you can allow your users to easi
 implementing the necessary callbacks - upload the document to the Gini API for analysis.
 
 Communication with the Gini API is not part of the Gini Capture SDK to allow clients the freedom of using a networking implementation of
-chossing. The quickest way to add networking is to use the Gini Capture Network Library. You may also use the Gini API SDK for Android
+choosing. The quickest way to add networking is to use the Gini Capture Network Library. You may also use the Gini API SDK for Android
 or implement communication with the Gini API yourself.
 
 The Gini Capture SDK for Android can be integrated in two ways, either by using the Screen API or the Component API. The Screen API
@@ -47,19 +47,9 @@ removed the camera flash requirement for tablets since flash is not present on a
 
 ### Screen API
 
-#### GVL 2.5.0 and older
-
-The Screen API provides a main Activity with which to start the Gini Capture SDK and two abstract Activities which you need to override
-to react to events coming from the Gini Capture SDK.
-
-In order to support the widest variety of Android versions while keeping the look and feel consistent, we use the Android Support Library
-and provide only Activities subclassing the AppCompatActivity.
-
-#### GVL 3.0.0 and newer
-
 The Screen API provides a configuration singleton and a main Activity with which to start the Gini Capture SDK. 
 
-In order to support the widest variety of Android versions while keeping the look and feel consistent, we use the Android Support Library
+In order to support the widest variety of Android versions while keeping the look and feel consistent, we use the AndroidX libraries
 and provide only Activities subclassing the AppCompatActivity.
 
 ### Component API
@@ -67,4 +57,4 @@ and provide only Activities subclassing the AppCompatActivity.
 The Component API provides Fragments which you can include in your own layouts. This allows you more freedom to customize the Gini
 Capture SDK, without being restricted to AppCompatActivities and the Gini Capture SDK Theme.
 
-To allow usage even if you aren't using the Android Support Library, we provide a Standard and a Compat version of each Fragment.
+To allow usage even if you aren't using AndroidX, we provide a Standard and a Compat version of each Fragment.
