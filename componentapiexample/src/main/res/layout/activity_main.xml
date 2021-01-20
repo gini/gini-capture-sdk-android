@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="net.gini.android.vision.component.MainActivity">
+    tools:context="net.gini.android.capture.component.MainActivity">
 
     <Spinner
         android:id="@+id/gini_api_type_spinner"

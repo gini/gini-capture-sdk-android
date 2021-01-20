@@ -124,19 +124,19 @@ dokkaHtml {
                 suppress.set(true)
             }
             perPackageOption {
-                prefix.set('net.gini.android.vision.internal')
+                prefix.set('net.gini.android.capture.internal')
                 suppress.set(true)
             }
             perPackageOption {
-                prefix.set('net.gini.android.vision.util')
+                prefix.set('net.gini.android.capture.util')
                 suppress.set(true)
             }
             perPackageOption {
-                prefix.set('net.gini.android.vision.review.multipage.previews')
+                prefix.set('net.gini.android.capture.review.multipage.previews')
                 suppress.set(true)
             }
             perPackageOption {
-                prefix.set('net.gini.android.vision.review.multipage.thumbnails')
+                prefix.set('net.gini.android.capture.review.multipage.thumbnails')
                 suppress.set(true)
             }
         }

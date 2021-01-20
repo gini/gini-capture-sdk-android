@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/gc_help_activity_background"
     android:orientation="vertical"
-    tools:context="net.gini.android.vision.help.HelpActivity">
+    tools:context="net.gini.android.capture.help.HelpActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gc_help_items"

@@ -35,7 +35,7 @@
         </RelativeLayout>
 
 
-        <net.gini.android.vision.internal.ui.CustomFontTextView
+        <net.gini.android.capture.internal.ui.CustomFontTextView
             android:id="@+id/gc_format_info_item_label"
             style="@style/GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle"
             android:layout_width="match_parent"

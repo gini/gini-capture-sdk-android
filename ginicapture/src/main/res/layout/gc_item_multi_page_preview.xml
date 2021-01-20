@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <net.gini.android.vision.review.RotatableTouchImageViewContainer
+    <net.gini.android.capture.review.RotatableTouchImageViewContainer
         android:id="@+id/gc_image_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </net.gini.android.vision.review.RotatableTouchImageViewContainer>
+    </net.gini.android.capture.review.RotatableTouchImageViewContainer>
 
     <ProgressBar
         android:id="@+id/gc_activity_indicator"

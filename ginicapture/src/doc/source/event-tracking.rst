@@ -86,4 +86,4 @@ Screen + Component        Analysis Screen           ``AnalysisScreenEvent.ERROR`
 Screen + Component        Analysis Screen           ``AnalysisScreenEvent.RETRY``                                        The user decides to retry after an analysis error.     3.12.0
 ========================  ========================  ===================================================================  =====================================================  ==========================
 
-The supported events are listed for each screen in a dedicated enum. You can view these enums in our `Javadoc <http://developer.gini.net/gini-capture-sdk-android/javadoc/net/gini/android/vision/tracking/package-summary.html>`_.
+The supported events are listed for each screen in a dedicated enum. You can view these enums in our `Javadoc <http://developer.gini.net/gini-capture-sdk-android/javadoc/net/gini/android/capture/tracking/package-summary.html>`_.

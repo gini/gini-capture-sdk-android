@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/gc_snackbar_error_background">
 
-    <net.gini.android.vision.internal.ui.CustomFontTextView
+    <net.gini.android.capture.internal.ui.CustomFontTextView
         android:id="@+id/gc_text_error"
         style="@style/GiniCaptureTheme.Snackbar.Error.TextStyle"
         android:layout_width="wrap_content"
@@ -21,7 +21,7 @@
         android:textColor="@color/gc_snackbar_error_text"
         tools:text="This is an error. Sorry ... " />
 
-    <net.gini.android.vision.internal.ui.CustomFontButton
+    <net.gini.android.capture.internal.ui.CustomFontButton
         android:id="@+id/gc_button_error"
         style="@style/GiniCaptureTheme.Snackbar.Error.Button.TextStyle"
         android:layout_width="wrap_content"

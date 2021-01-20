@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <net.gini.android.vision.review.RotatableImageViewContainer
+        <net.gini.android.capture.review.RotatableImageViewContainer
             android:id="@+id/gc_thumbnail_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,7 +33,7 @@
             android:layout_height="@dimen/gc_multi_page_review_thumbnail_card_handle_height"
             android:layout_alignParentBottom="true">
 
-            <net.gini.android.vision.internal.ui.CustomFontTextView
+            <net.gini.android.capture.internal.ui.CustomFontTextView
                 android:id="@+id/gc_badge"
                 style="@style/GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle"
                 android:layout_width="wrap_content"

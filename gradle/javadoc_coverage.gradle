@@ -17,7 +17,7 @@ task generateJavadocCoverage(type: Exec) {
             "${project.rootDir}/tools/doccheck-doclet/doccheck.jar",
             "${project.rootDir}/tools/doccheck-doclet/tools.jar",
             project.file("src/main/java").absolutePath,
-            "net.gini.android.vision",
-            "net.gini.android.vision.internal",
+            "net.gini.android.capture",
+            "net.gini.android.capture.internal",
             "${buildDir}/reports/javadoc-coverage"
 }

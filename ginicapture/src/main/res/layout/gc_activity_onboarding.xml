@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gc_onboarding_activity_background"
-    tools:context="net.gini.android.vision.onboarding.OnboardingActivity">
+    tools:context="net.gini.android.capture.onboarding.OnboardingActivity">
 
     <FrameLayout
         android:id="@+id/gc_fragment_onboarding"

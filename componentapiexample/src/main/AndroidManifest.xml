@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="net.gini.android.vision.component">
+    package="net.gini.android.capture.component">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -32,13 +32,13 @@
         android:required="true" />
 
     <application
-        android:name=".ComponentApiExampleApp"
+        android:name="net.gini.android.capture.component.ComponentApiExampleApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true">
         <activity
-            android:name=".MainActivity"
+            android:name="net.gini.android.capture.component.MainActivity"
             android:theme="@style/AppThemeCompat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,34 +66,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".camera.compat.CameraExampleAppCompatActivity"
+            android:name="net.gini.android.capture.component.camera.compat.CameraExampleAppCompatActivity"
             android:theme="@style/AppThemeCompat.NoActionBar" />
         <activity
-            android:name=".camera.standard.CameraExampleActivity"
+            android:name="net.gini.android.capture.component.camera.standard.CameraExampleActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".review.compat.ReviewExampleAppCompatActivity"
+            android:name="net.gini.android.capture.component.review.compat.ReviewExampleAppCompatActivity"
             android:theme="@style/AppThemeCompat.NoActionBar" />
         <activity
-            android:name=".review.standard.ReviewExampleActivity"
+            android:name="net.gini.android.capture.component.review.standard.ReviewExampleActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".review.multipage.MultiPageReviewExampleActivity"
+            android:name="net.gini.android.capture.component.review.multipage.MultiPageReviewExampleActivity"
             android:theme="@style/AppThemeCompat.NoActionBar" />
         <activity
-            android:name=".analysis.compat.AnalysisExampleAppCompatActivity"
+            android:name="net.gini.android.capture.component.analysis.compat.AnalysisExampleAppCompatActivity"
             android:theme="@style/AppThemeCompat.NoActionBar" />
         <activity
-            android:name=".analysis.standard.AnalysisExampleActivity"
+            android:name="net.gini.android.capture.component.analysis.standard.AnalysisExampleActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".noresults.compat.NoResultsExampleAppCompatActivity"
+            android:name="net.gini.android.capture.component.noresults.compat.NoResultsExampleAppCompatActivity"
             android:theme="@style/AppThemeCompat.NoActionBar" />
         <activity
-            android:name=".noresults.standard.NoResultsExampleActivity"
+            android:name="net.gini.android.capture.component.noresults.standard.NoResultsExampleActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="net.gini.android.vision.component.ExtractionsActivity"
+            android:name="net.gini.android.capture.component.ExtractionsActivity"
             android:theme="@style/AppThemeCompat" />
     </application>
 

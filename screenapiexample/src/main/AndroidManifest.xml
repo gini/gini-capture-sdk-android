@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="net.gini.android.vision.screen">
+    package="net.gini.android.capture.screen">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -32,13 +32,13 @@
         android:required="true" />
 
     <application
-        android:name=".ScreenApiExampleApp"
+        android:name="net.gini.android.capture.screen.ScreenApiExampleApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name="net.gini.android.vision.screen.MainActivity">
+        <activity android:name="net.gini.android.capture.screen.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,26 +62,26 @@
                 <data android:mimeType="application/pdf" />
             </intent-filter>
         </activity>
-        <activity android:name="net.gini.android.vision.screen.CameraScreenApiActivity"
+        <activity android:name="net.gini.android.capture.screen.CameraScreenApiActivity"
             android:label="@string/gc_title_camera"
             android:theme="@style/GiniCaptureTheme"/>
         <activity
-            android:name="net.gini.android.vision.screen.ReviewActivity"
+            android:name="net.gini.android.capture.screen.ReviewActivity"
             android:label="@string/gc_title_review"
             android:theme="@style/GiniCaptureTheme" />
         <activity
-            android:name="net.gini.android.vision.screen.AnalysisActivity"
+            android:name="net.gini.android.capture.screen.AnalysisActivity"
             android:theme="@style/GiniCaptureTheme" />
         <activity
-            android:name="net.gini.android.vision.screen.ExtractionsActivity"
+            android:name="net.gini.android.capture.screen.ExtractionsActivity"
             android:label="@string/title_extractions" />
         <activity
-            android:name="net.gini.android.vision.screen.NoExtractionsActivity"
+            android:name="net.gini.android.capture.screen.NoExtractionsActivity"
             android:label="@string/title_no_extractions"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="net.gini.android.vision.screen.fileprovider"
+            android:authorities="net.gini.android.capture.screen.fileprovider"
             android:grantUriPermissions="true"
             android:exported="false">
             <meta-data

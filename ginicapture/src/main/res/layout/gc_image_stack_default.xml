@@ -66,7 +66,7 @@
         tools:text="3"
         tools:visibility="visible" />
 
-    <net.gini.android.vision.internal.ui.CustomFontTextView
+    <net.gini.android.capture.internal.ui.CustomFontTextView
         android:id="@+id/gc_stack_subtitle"
         style="@style/GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle"
         android:layout_width="56dp"

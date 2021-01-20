@@ -1,4 +1,4 @@
-package c.net.gini.android.ginivisionlibrarynetworking;
+package c.net.gini.android.ginicapturenetworking;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,7 +23,7 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         final Context appContext = ApplicationProvider.getApplicationContext();
 
-        assertEquals("c.net.gini.android.ginivisionlibrarynetworking.test",
+        assertEquals("c.net.gini.android.ginicapturenetworking.test",
                 appContext.getPackageName());
     }
 }

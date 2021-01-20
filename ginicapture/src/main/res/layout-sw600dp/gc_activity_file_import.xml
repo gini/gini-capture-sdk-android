@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/gc_file_import_activity_background"
     android:fillViewport="true"
-    tools:context="net.gini.android.vision.help.FileImportActivity">
+    tools:context="net.gini.android.capture.help.FileImportActivity">
 
     <LinearLayout
         android:layout_width="@dimen/gc_file_import_content_width"
@@ -13,7 +13,7 @@
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
 
-        <net.gini.android.vision.internal.ui.CustomFontTextView
+        <net.gini.android.capture.internal.ui.CustomFontTextView
             android:id="@+id/gc_file_import_header"
             style="@style/GiniCaptureTheme.Help.FileImport.Header.TextStyle"
             android:layout_width="match_parent"
@@ -40,14 +40,14 @@
             android:text="1"
             android:textColor="@color/gc_file_import_section_number" />
 
-        <net.gini.android.vision.internal.ui.CustomFontTextView
+        <net.gini.android.capture.internal.ui.CustomFontTextView
             style="@style/GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/gc_file_import_section_title_margin"
             android:text="@string/gc_file_import_section_1_title" />
 
-        <net.gini.android.vision.internal.ui.CustomFontTextView
+        <net.gini.android.capture.internal.ui.CustomFontTextView
             style="@style/GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,14 +82,14 @@
             android:text="2"
             android:textColor="@color/gc_file_import_section_number" />
 
-        <net.gini.android.vision.internal.ui.CustomFontTextView
+        <net.gini.android.capture.internal.ui.CustomFontTextView
             style="@style/GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/gc_file_import_section_title_margin"
             android:text="@string/gc_file_import_section_2_title" />
 
-        <net.gini.android.vision.internal.ui.CustomFontTextView
+        <net.gini.android.capture.internal.ui.CustomFontTextView
             style="@style/GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -122,21 +122,21 @@
             android:text="3"
             android:textColor="@color/gc_file_import_section_number" />
 
-        <net.gini.android.vision.internal.ui.CustomFontTextView
+        <net.gini.android.capture.internal.ui.CustomFontTextView
             style="@style/GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/gc_file_import_section_title_margin"
             android:text="@string/gc_file_import_section_3_title" />
 
-        <net.gini.android.vision.internal.ui.CustomFontTextView
+        <net.gini.android.capture.internal.ui.CustomFontTextView
             style="@style/GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/gc_file_import_section_body_margin"
             android:text="@string/gc_file_import_section_3_body" />
 
-        <net.gini.android.vision.internal.ui.CustomFontTextView
+        <net.gini.android.capture.internal.ui.CustomFontTextView
             style="@style/GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -150,14 +150,14 @@
             android:layout_margin="@dimen/gc_file_import_illustration_margin"
             android:src="@drawable/gc_file_import_section_3_illustration" />
 
-        <net.gini.android.vision.internal.ui.CustomFontTextView
+        <net.gini.android.capture.internal.ui.CustomFontTextView
             style="@style/GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/gc_file_import_section_title_margin"
             android:text="@string/gc_file_import_section_3_clear_app_defaults_title" />
 
-        <net.gini.android.vision.internal.ui.CustomFontTextView
+        <net.gini.android.capture.internal.ui.CustomFontTextView
             style="@style/GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

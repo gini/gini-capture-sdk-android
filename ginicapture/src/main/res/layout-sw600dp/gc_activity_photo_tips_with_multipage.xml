@@ -5,7 +5,7 @@
     android:background="@color/gc_photo_tips_activity_background"
     android:orientation="vertical">
 
-    <net.gini.android.vision.internal.ui.CustomFontTextView
+    <net.gini.android.capture.internal.ui.CustomFontTextView
         android:id="@+id/gc_photo_tips_headline"
         style="@style/GiniCaptureTheme.Help.PhotoTips.Header.TextStyle"
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                     android:layout_margin="@dimen/gc_photo_tips_tip_icon_margin"
                     android:src="@drawable/gc_photo_tip_lighting" />
 
-                <net.gini.android.vision.internal.ui.CustomFontTextView
+                <net.gini.android.capture.internal.ui.CustomFontTextView
                     style="@style/GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -67,7 +67,7 @@
                     android:layout_margin="@dimen/gc_photo_tips_tip_icon_margin"
                     android:src="@drawable/gc_photo_tip_flat" />
 
-                <net.gini.android.vision.internal.ui.CustomFontTextView
+                <net.gini.android.capture.internal.ui.CustomFontTextView
                     style="@style/GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -94,7 +94,7 @@
                     android:layout_margin="@dimen/gc_photo_tips_tip_icon_margin"
                     android:src="@drawable/gc_photo_tip_parallel" />
 
-                <net.gini.android.vision.internal.ui.CustomFontTextView
+                <net.gini.android.capture.internal.ui.CustomFontTextView
                     style="@style/GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -121,7 +121,7 @@
                     android:layout_margin="@dimen/gc_photo_tips_tip_icon_margin"
                     android:src="@drawable/gc_photo_tip_align" />
 
-                <net.gini.android.vision.internal.ui.CustomFontTextView
+                <net.gini.android.capture.internal.ui.CustomFontTextView
                     style="@style/GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -148,7 +148,7 @@
                     android:layout_margin="@dimen/gc_photo_tips_tip_icon_margin"
                     android:src="@drawable/gc_photo_tip_multipage" />
 
-                <net.gini.android.vision.internal.ui.CustomFontTextView
+                <net.gini.android.capture.internal.ui.CustomFontTextView
                     style="@style/GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

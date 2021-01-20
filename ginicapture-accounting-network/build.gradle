@@ -57,7 +57,7 @@ apply from: rootProject.file('gradle/javadoc_coverage.gradle')
 
 task generateJavadoc(type: GenerateJavadoc) {
     projectTitle = "Gini Capture Accounting Network Library for Android"
-    source += project(":ginicapture").fileTree("src/main/java/net/gini/android/vision/network")
+    source += project(":ginicapture").fileTree("src/main/java/net/gini/android/capture/network")
             .files.grep { it.name.endsWith('.java') && it.name != "package-info.java"}
 }
 

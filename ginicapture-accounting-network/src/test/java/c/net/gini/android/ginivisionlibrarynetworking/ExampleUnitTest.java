@@ -1,4 +1,4 @@
-package c.net.gini.android.ginivisionlibrarynetworking;
+package c.net.gini.android.ginicapturenetworking;
 
 import org.junit.Test;
 

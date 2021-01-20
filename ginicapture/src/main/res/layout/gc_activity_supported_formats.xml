@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/gc_supported_formats_activity_background"
     android:orientation="vertical"
-    tools:context="net.gini.android.vision.help.SupportedFormatsActivity">
+    tools:context="net.gini.android.capture.help.SupportedFormatsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gc_formats_list"

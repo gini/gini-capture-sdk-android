@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/gc_thumbnails_panel" />
 
-    <net.gini.android.vision.internal.ui.CustomFontTextView
+    <net.gini.android.capture.internal.ui.CustomFontTextView
         android:id="@+id/gc_page_indicator"
         style="@style/GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle"
         android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
         android:paddingRight="@dimen/gc_multi_page_review_thumbnail_cards_container_horizontal_padding"
         android:paddingStart="@dimen/gc_multi_page_review_thumbnail_cards_container_horizontal_padding" />
 
-    <net.gini.android.vision.internal.ui.CustomFontTextView
+    <net.gini.android.capture.internal.ui.CustomFontTextView
         android:id="@+id/gc_reorder_pages_tip"
         style="@style/GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle"
         android:layout_width="match_parent"
