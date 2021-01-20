@@ -160,9 +160,9 @@ public class AnalysisFragmentImplTest {
         try (final ActivityScenario<AnalysisFragmentHostActivity> scenario = launchHostActivity(
                 analysisFragmentImplRef)) {
             // Then
-            onView(withId(R.id.gv_progress_activity)).check(matches(
+            onView(withId(R.id.gc_progress_activity)).check(matches(
                     withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
-            onView(withId(R.id.gv_analysis_message)).check(matches(
+            onView(withId(R.id.gc_analysis_message)).check(matches(
                     withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
         }
     }
@@ -194,9 +194,9 @@ public class AnalysisFragmentImplTest {
                     });
 
             // Then
-            onView(withId(R.id.gv_progress_activity)).check(matches(
+            onView(withId(R.id.gc_progress_activity)).check(matches(
                     withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
-            onView(withId(R.id.gv_analysis_message)).check(matches(
+            onView(withId(R.id.gc_analysis_message)).check(matches(
                     withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
         }
     }
@@ -223,9 +223,9 @@ public class AnalysisFragmentImplTest {
                     });
 
             // Then
-            onView(withId(R.id.gv_progress_activity)).check(matches(
+            onView(withId(R.id.gc_progress_activity)).check(matches(
                     withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
-            onView(withId(R.id.gv_analysis_message)).check(matches(
+            onView(withId(R.id.gc_analysis_message)).check(matches(
                     withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
         }
     }
@@ -283,11 +283,11 @@ public class AnalysisFragmentImplTest {
                     });
 
             // Then
-            onView(withId(R.id.gv_pdf_info)).check(matches(
+            onView(withId(R.id.gc_pdf_info)).check(matches(
                     withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
-            onView(withId(R.id.gv_analysis_overlay)).check(
+            onView(withId(R.id.gc_analysis_overlay)).check(
                     matches(hasBackgroundColor(Color.TRANSPARENT)));
-            onView(withId(R.id.gv_analysis_message)).check(matches(withText("")));
+            onView(withId(R.id.gc_analysis_message)).check(matches(withText("")));
         }
     }
 
@@ -313,7 +313,7 @@ public class AnalysisFragmentImplTest {
                     });
 
             // Then
-            onView(withId(R.id.gv_pdf_filename)).check(matches(
+            onView(withId(R.id.gc_pdf_filename)).check(matches(
                     withText("PdfTitle")));
         }
     }
@@ -340,7 +340,7 @@ public class AnalysisFragmentImplTest {
                     });
 
             // Then
-            onView(withId(R.id.gv_pdf_page_count)).check(matches(
+            onView(withId(R.id.gc_pdf_page_count)).check(matches(
                     withText("42")));
         }
     }
@@ -368,7 +368,7 @@ public class AnalysisFragmentImplTest {
                     });
 
             // Then
-            onView(withId(R.id.gv_pdf_page_count)).check(matches(
+            onView(withId(R.id.gc_pdf_page_count)).check(matches(
                     withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
         }
     }
@@ -429,7 +429,7 @@ public class AnalysisFragmentImplTest {
                     });
 
             // Then
-            onView(withId(R.id.gv_image_picture)).check(matches(withBitmap(bitmap)));
+            onView(withId(R.id.gc_image_picture)).check(matches(withBitmap(bitmap)));
         }
     }
 
@@ -458,7 +458,7 @@ public class AnalysisFragmentImplTest {
                     });
 
             // Then
-            onView(withId(R.id.gv_image_picture)).check(matches(withRotation(180)));
+            onView(withId(R.id.gc_image_picture)).check(matches(withRotation(180)));
         }
     }
 

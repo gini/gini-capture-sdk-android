@@ -109,7 +109,7 @@ import jersey.repackaged.jsr166e.CompletableFuture;
 
 class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader.Listener {
 
-    private static final String GV_SHARED_PREFS = "GV_SHARED_PREFS";
+    private static final String GC_SHARED_PREFS = "GC_SHARED_PREFS";
     @VisibleForTesting
     static final int DEFAULT_ANIMATION_DURATION = 200;
     private static final long HIDE_QRCODE_DETECTED_POPUP_DELAY_MS = 10000;
@@ -351,7 +351,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
 
     View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.gv_fragment_camera, container, false);
+        final View view = inflater.inflate(R.layout.gc_fragment_camera, container, false);
         bindViews(view);
         setInputHandlers();
         setSurfaceViewCallback();
@@ -545,9 +545,9 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         }
         final Context context = mFragment.getActivity();
         if (context != null) {
-            final SharedPreferences gvSharedPrefs = context.getSharedPreferences(GV_SHARED_PREFS,
+            final SharedPreferences gcSharedPrefs = context.getSharedPreferences(GC_SHARED_PREFS,
                     Context.MODE_PRIVATE);
-            return gvSharedPrefs.getBoolean(SHOW_HINT_POP_UP, true);
+            return gcSharedPrefs.getBoolean(SHOW_HINT_POP_UP, true);
         }
         return false;
     }
@@ -752,27 +752,27 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
     }
 
     private void bindViews(final View view) {
-        mLayoutRoot = view.findViewById(R.id.gv_root);
-        mCameraPreview = view.findViewById(R.id.gv_camera_preview);
-        mImageCorners = view.findViewById(R.id.gv_image_corners);
-        mCameraFocusIndicator = view.findViewById(R.id.gv_camera_focus_indicator);
-        mButtonCameraTrigger = view.findViewById(R.id.gv_button_camera_trigger);
+        mLayoutRoot = view.findViewById(R.id.gc_root);
+        mCameraPreview = view.findViewById(R.id.gc_camera_preview);
+        mImageCorners = view.findViewById(R.id.gc_image_corners);
+        mCameraFocusIndicator = view.findViewById(R.id.gc_camera_focus_indicator);
+        mButtonCameraTrigger = view.findViewById(R.id.gc_button_camera_trigger);
         bindFlashButtonView(view);
-        final ViewStub stubNoPermission = view.findViewById(R.id.gv_stub_camera_no_permission);
+        final ViewStub stubNoPermission = view.findViewById(R.id.gc_stub_camera_no_permission);
         mViewStubInflater = new ViewStubSafeInflater(stubNoPermission);
-        mButtonImportDocument = view.findViewById(R.id.gv_button_import_document);
-        mImportButtonContainer = view.findViewById(R.id.gv_document_import_button_container);
-        mUploadHintContainer = view.findViewById(R.id.gv_document_import_hint_container);
-        mUploadHintContainerArrow = view.findViewById(R.id.gv_document_import_hint_container_arrow);
-        mUploadHintCloseButton = view.findViewById(R.id.gv_document_import_hint_close_button);
-        mCameraPreviewShade = view.findViewById(R.id.gv_camera_preview_shade);
+        mButtonImportDocument = view.findViewById(R.id.gc_button_import_document);
+        mImportButtonContainer = view.findViewById(R.id.gc_document_import_button_container);
+        mUploadHintContainer = view.findViewById(R.id.gc_document_import_hint_container);
+        mUploadHintContainerArrow = view.findViewById(R.id.gc_document_import_hint_container_arrow);
+        mUploadHintCloseButton = view.findViewById(R.id.gc_document_import_hint_close_button);
+        mCameraPreviewShade = view.findViewById(R.id.gc_camera_preview_shade);
         mActivityIndicatorBackground =
-                view.findViewById(R.id.gv_activity_indicator_background);
-        mActivityIndicator = view.findViewById(R.id.gv_activity_indicator);
+                view.findViewById(R.id.gc_activity_indicator_background);
+        mActivityIndicator = view.findViewById(R.id.gc_activity_indicator);
         mQRCodeDetectedPopupContainer = view.findViewById(
 
-                R.id.gv_qrcode_detected_popup_container);
-        mImageStack = view.findViewById(R.id.gv_image_stack);
+                R.id.gc_qrcode_detected_popup_container);
+        mImageStack = view.findViewById(R.id.gc_image_stack);
     }
 
     private void bindFlashButtonView(final View view) {
@@ -781,7 +781,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
             return;
         }
         if (isTablet(activity)) {
-            mButtonCameraFlash = view.findViewById(R.id.gv_button_camera_flash);
+            mButtonCameraFlash = view.findViewById(R.id.gc_button_camera_flash);
             if (mButtonCameraFlash != null) {
                 return;
             }
@@ -790,13 +790,13 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
                 isDocumentImportEnabled(activity), isMultiPageEnabled());
         switch (flashButtonPosition) {
             case LEFT_OF_CAMERA_TRIGGER:
-                mButtonCameraFlash = view.findViewById(R.id.gv_button_camera_flash_left_of_trigger);
+                mButtonCameraFlash = view.findViewById(R.id.gc_button_camera_flash_left_of_trigger);
                 break;
             case BOTTOM_LEFT:
-                mButtonCameraFlash = view.findViewById(R.id.gv_button_camera_flash_bottom_left);
+                mButtonCameraFlash = view.findViewById(R.id.gc_button_camera_flash_bottom_left);
                 break;
             case BOTTOM_RIGHT:
-                mButtonCameraFlash = view.findViewById(R.id.gv_button_camera_flash_bottom_right);
+                mButtonCameraFlash = view.findViewById(R.id.gc_button_camera_flash_bottom_right);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown flash button position: "
@@ -939,8 +939,8 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
     }
 
     private void updateFlashButtonImage() {
-        final int flashIconRes = mIsFlashEnabled ? R.drawable.gv_camera_flash_on
-                : R.drawable.gv_camera_flash_off;
+        final int flashIconRes = mIsFlashEnabled ? R.drawable.gc_camera_flash_on
+                : R.drawable.gc_camera_flash_off;
         mButtonCameraFlash.setImageResource(flashIconRes);
     }
 
@@ -1025,7 +1025,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         if (activity == null) {
             return;
         }
-        showError(activity.getString(R.string.gv_document_analysis_error), 3000);
+        showError(activity.getString(R.string.gc_document_analysis_error), 3000);
     }
 
     private void closeUploadHintPopUp() {
@@ -1071,9 +1071,9 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
     }
 
     private void savePopUpShown(final Context context) {
-        final SharedPreferences gvSharedPrefs = context.getSharedPreferences(GV_SHARED_PREFS,
+        final SharedPreferences gcSharedPrefs = context.getSharedPreferences(GC_SHARED_PREFS,
                 Context.MODE_PRIVATE);
-        gvSharedPrefs.edit().putBoolean(SHOW_HINT_POP_UP, false).apply();
+        gcSharedPrefs.edit().putBoolean(SHOW_HINT_POP_UP, false).apply();
     }
 
     private void showFileChooser() {
@@ -1440,7 +1440,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         if (activity == null) {
             return;
         }
-        final String message = activity.getString(R.string.gv_document_import_invalid_document);
+        final String message = activity.getString(R.string.gc_document_import_invalid_document);
         LOG.error("Invalid document {}", message);
         showInvalidFileAlert(message);
     }
@@ -1451,7 +1451,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
             return;
         }
         mFragment.showAlertDialog(message,
-                activity.getString(R.string.gv_document_import_pick_another_document),
+                activity.getString(R.string.gc_document_import_pick_another_document),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(
@@ -1459,7 +1459,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
                             final int i) {
                         showFileChooser();
                     }
-                }, activity.getString(R.string.gv_document_import_close_error), null, null);
+                }, activity.getString(R.string.gc_document_import_close_error), null, null);
     }
 
     @UiThread
@@ -1563,8 +1563,8 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         if (activity == null) {
             return;
         }
-        mFragment.showAlertDialog(activity.getString(R.string.gv_document_error_too_many_pages),
-                activity.getString(R.string.gv_document_error_multi_page_limit_review_pages_button),
+        mFragment.showAlertDialog(activity.getString(R.string.gc_document_error_too_many_pages),
+                activity.getString(R.string.gc_document_error_multi_page_limit_review_pages_button),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(
@@ -1573,7 +1573,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
                         mProceededToMultiPageReview = true;
                         mListener.onProceedToMultiPageReviewScreen(mMultiPageDocument);
                     }
-                }, activity.getString(R.string.gv_document_error_multi_page_limit_cancel_button),
+                }, activity.getString(R.string.gc_document_error_multi_page_limit_cancel_button),
                 null, null);
     }
 
@@ -1797,7 +1797,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         if (view == null) {
             return;
         }
-        final Button button = view.findViewById(R.id.gv_button_camera_no_permission);
+        final Button button = view.findViewById(R.id.gc_button_camera_no_permission);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -1811,7 +1811,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         if (view == null) {
             return;
         }
-        final Button button = (Button) view.findViewById(R.id.gv_button_camera_no_permission);
+        final Button button = (Button) view.findViewById(R.id.gc_button_camera_no_permission);
         button.setVisibility(View.GONE);
     }
 

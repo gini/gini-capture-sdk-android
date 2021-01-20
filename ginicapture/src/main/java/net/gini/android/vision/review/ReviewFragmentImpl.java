@@ -169,7 +169,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
 
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.gv_fragment_review, container, false);
+        final View view = inflater.inflate(R.layout.gc_fragment_review, container, false);
         bindViews(view);
         setInputHandlers();
         return view;
@@ -290,7 +290,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
         if (GiniCapture.hasInstance()) {
             GiniCapture.getInstance().internal().setReviewScreenAnalysisError(throwable);
         }
-        mDocumentAnalysisErrorMessage = activity.getString(R.string.gv_document_analysis_error);
+        mDocumentAnalysisErrorMessage = activity.getString(R.string.gc_document_analysis_error);
     }
 
     private void createPhoto() {
@@ -494,11 +494,11 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
     }
 
     private void bindViews(@NonNull final View view) {
-        mLayoutDocumentContainer = view.findViewById(R.id.gv_layout_document_container);
-        mImageDocument = view.findViewById(R.id.gv_image_document);
-        mButtonRotate = view.findViewById(R.id.gv_button_rotate);
-        mButtonNext = view.findViewById(R.id.gv_button_next);
-        mActivityIndicator = view.findViewById(R.id.gv_activity_indicator);
+        mLayoutDocumentContainer = view.findViewById(R.id.gc_layout_document_container);
+        mImageDocument = view.findViewById(R.id.gc_image_document);
+        mButtonRotate = view.findViewById(R.id.gc_button_rotate);
+        mButtonNext = view.findViewById(R.id.gc_button_next);
+        mActivityIndicator = view.findViewById(R.id.gc_activity_indicator);
     }
 
     private void restoreSavedState(@Nullable final Bundle savedInstanceState) {

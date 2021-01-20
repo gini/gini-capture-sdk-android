@@ -17,7 +17,7 @@ public class OncePerInstallEventStore {
 
     private static final Logger LOG = LoggerFactory.getLogger(OncePerInstallEventStore.class);
 
-    private static final String ONCE_PER_INSTALL_EVENTS = "GV_ONCE_PER_INSTALL_EVENTS";
+    private static final String ONCE_PER_INSTALL_EVENTS = "GC_ONCE_PER_INSTALL_EVENTS";
 
     private final SharedPreferences mSharedPreferences;
 

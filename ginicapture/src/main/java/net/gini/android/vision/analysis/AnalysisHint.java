@@ -12,9 +12,9 @@ import androidx.annotation.StringRes;
 
 enum AnalysisHint {
 
-    FLAT(R.drawable.gv_hint_icon, R.string.gv_photo_tip_flat),
-    ALIGN(R.drawable.gv_hint_icon, R.string.gv_photo_tip_align),
-    PARALLEL(R.drawable.gv_hint_icon, R.string.gv_photo_tip_parallel);
+    FLAT(R.drawable.gc_hint_icon, R.string.gc_photo_tip_flat),
+    ALIGN(R.drawable.gc_hint_icon, R.string.gc_photo_tip_align),
+    PARALLEL(R.drawable.gc_hint_icon, R.string.gc_photo_tip_parallel);
 
     public int getDrawableResource() {
         return mDrawableResource;

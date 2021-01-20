@@ -6,17 +6,17 @@
         <activity
             android:name=".camera.CameraActivity"
             android:exported="false"
-            android:label="@string/gv_title_camera"
+            android:label="@string/gc_title_camera"
             android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name=".review.ReviewActivity"
             android:exported="false"
-            android:label="@string/gv_title_review"
+            android:label="@string/gc_title_review"
             android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name=".analysis.AnalysisActivity"
             android:exported="false"
-            android:label="@string/gv_title_analysis"
+            android:label="@string/gc_title_analysis"
             android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name=".noresults.NoResultsActivity"
@@ -25,7 +25,7 @@
         <activity
             android:name=".onboarding.OnboardingActivity"
             android:exported="false"
-            android:label="@string/gv_title_onboarding"
+            android:label="@string/gc_title_onboarding"
             android:theme="@style/GiniCaptureTheme.Transparent" />
         <activity
             android:name=".internal.fileimport.FileChooserActivity"
@@ -34,27 +34,27 @@
         <activity
             android:name=".help.HelpActivity"
             android:exported="false"
-            android:label="@string/gv_title_help"
+            android:label="@string/gc_title_help"
             android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name=".help.PhotoTipsActivity"
             android:exported="false"
-            android:label="@string/gv_title_photo_tips"
+            android:label="@string/gc_title_photo_tips"
             android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name=".help.SupportedFormatsActivity"
             android:exported="false"
-            android:label="@string/gv_title_supported_formats"
+            android:label="@string/gc_title_supported_formats"
             android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name=".help.FileImportActivity"
             android:exported="false"
-            android:label="@string/gv_title_file_import"
+            android:label="@string/gc_title_file_import"
             android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name=".review.multipage.MultiPageReviewActivity"
             android:exported="false"
-            android:label="@string/gv_title_multi_page_review"
+            android:label="@string/gc_title_multi_page_review"
             android:theme="@style/GiniCaptureTheme" />
 
 

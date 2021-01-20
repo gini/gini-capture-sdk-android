@@ -63,11 +63,11 @@
             </intent-filter>
         </activity>
         <activity android:name="net.gini.android.vision.screen.CameraScreenApiActivity"
-            android:label="@string/gv_title_camera"
+            android:label="@string/gc_title_camera"
             android:theme="@style/GiniCaptureTheme"/>
         <activity
             android:name="net.gini.android.vision.screen.ReviewActivity"
-            android:label="@string/gv_title_review"
+            android:label="@string/gc_title_review"
             android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.screen.AnalysisActivity"

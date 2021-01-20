@@ -27,7 +27,7 @@ import androidx.fragment.app.Fragment;
  * </p>
  * <p>
  * <b>Note:</b> You can use the activity indicator message to display a message under the activity
- * indicator by overriding the string resource named {@code gv_analysis_activity_indicator_message}.
+ * indicator by overriding the string resource named {@code gc_analysis_activity_indicator_message}.
  * The message is displayed for images only.
  * </p>
  * <p>

@@ -239,28 +239,28 @@ class AnalysisFragmentImpl extends AnalysisScreenContract.View {
 
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.gv_fragment_analysis, container, false);
+        final View view = inflater.inflate(R.layout.gc_fragment_analysis, container, false);
         bindViews(view);
         createHintsAnimator(view);
         return view;
     }
 
     private void bindViews(@NonNull final View view) {
-        mLayoutRoot = view.findViewById(R.id.gv_layout_root);
-        mImageDocumentView = view.findViewById(R.id.gv_image_picture);
-        mProgressActivity = view.findViewById(R.id.gv_progress_activity);
-        mAnalysisMessageTextView = view.findViewById(R.id.gv_analysis_message);
-        mPdfOverlayLayout = view.findViewById(R.id.gv_pdf_info);
-        mPdfTitleTextView = view.findViewById(R.id.gv_pdf_filename);
-        mPdfPageCountTextView = view.findViewById(R.id.gv_pdf_page_count);
-        mAnalysisOverlay = view.findViewById(R.id.gv_analysis_overlay);
+        mLayoutRoot = view.findViewById(R.id.gc_layout_root);
+        mImageDocumentView = view.findViewById(R.id.gc_image_picture);
+        mProgressActivity = view.findViewById(R.id.gc_progress_activity);
+        mAnalysisMessageTextView = view.findViewById(R.id.gc_analysis_message);
+        mPdfOverlayLayout = view.findViewById(R.id.gc_pdf_info);
+        mPdfTitleTextView = view.findViewById(R.id.gc_pdf_filename);
+        mPdfPageCountTextView = view.findViewById(R.id.gc_pdf_page_count);
+        mAnalysisOverlay = view.findViewById(R.id.gc_analysis_overlay);
     }
 
     private void createHintsAnimator(@NonNull final View view) {
-        final ImageView hintImageView = view.findViewById(R.id.gv_analysis_hint_image);
-        final TextView hintTextView = view.findViewById(R.id.gv_analysis_hint_text);
-        final View hintContainer = view.findViewById(R.id.gv_analysis_hint_container);
-        final TextView hintHeadlineTextView = view.findViewById(R.id.gv_analysis_hint_headline);
+        final ImageView hintImageView = view.findViewById(R.id.gc_analysis_hint_image);
+        final TextView hintTextView = view.findViewById(R.id.gc_analysis_hint_text);
+        final View hintContainer = view.findViewById(R.id.gc_analysis_hint_container);
+        final TextView hintHeadlineTextView = view.findViewById(R.id.gc_analysis_hint_headline);
         mHintsAnimator = new AnalysisHintsAnimator(mFragment.getActivity().getApplication(),
                 hintContainer, hintImageView, hintTextView, hintHeadlineTextView);
     }

@@ -36,23 +36,23 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Title**
 
-  Via the string resource named ``gv_title_onboarding``.
+  Via the string resource named ``gc_title_onboarding``.
 
 - **Title Color**
 
-  Via the color resource named ``gv_action_bar_title``.
+  Via the color resource named ``gc_action_bar_title``.
 
 - **Back Button Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_action_bar_back``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_action_bar_back``.
 
 - **Background Color**
 
-  Via the color resource named ``gv_action_bar``.
+  Via the color resource named ``gc_action_bar``.
 
 - **Status Bar Background Color**
 
-  Via the color resource named ``gv_status_bar``.
+  Via the color resource named ``gc_status_bar``.
 
 :ref:`Back to screenshot. <onboarding>`
 
@@ -63,11 +63,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_onboarding_fab_next.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_onboarding_fab_next.png``.
 
 - **Color**
 
-  Via the color resources named ``gv_onboarding_fab`` and ``gv_onboarding_fab_pressed``.
+  Via the color resources named ``gc_onboarding_fab`` and ``gc_onboarding_fab_pressed``.
 
 :ref:`Back to screenshot. <onboarding>`
 
@@ -78,11 +78,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Active**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_onboarding_indicator_active.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_onboarding_indicator_active.png``.
 
 - **Inactive**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_onboarding_indicator_inactive.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_onboarding_indicator_inactive.png``.
 
 :ref:`Back to screenshot. <onboarding>`
 
@@ -93,7 +93,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_onboarding_message``.
+  Via the color resource named ``gc_onboarding_message``.
 
 - **Text Style**
 
@@ -103,7 +103,7 @@ All Action Bar customizations except the title are global to all Activities.
 - **Font**
 
   Via overriding the style named ``GiniCaptureTheme.Onboarding.Message.TextStyle`` (with parent style
-  ``Root.GiniCaptureTheme.Onboarding.Message.TextStyle``) and setting an item named ``gvCustomFont``
+  ``Root.GiniCaptureTheme.Onboarding.Message.TextStyle``) and setting an item named ``gcCustomFont``
   with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <onboarding>`
@@ -121,31 +121,31 @@ All Action Bar customizations except the title are global to all Activities.
 
       - **Image**
 
-        Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_onboarding_flat.png``.
+        Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_onboarding_flat.png``.
 
       - **Text**
 
-        Via the string resource named ``gv_onboarding_flat``.
+        Via the string resource named ``gc_onboarding_flat``.
 
     - **Second Page**
 
       - **Image**
 
-        Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_onboarding_parallel.png``.
+        Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_onboarding_parallel.png``.
 
       - **Text**
 
-        Via the string resource named ``gv_onboarding_parallel``.
+        Via the string resource named ``gc_onboarding_parallel``.
 
     - **Third Page**
 
       - **Image**
 
-        Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_onboarding_align.png``.
+        Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_onboarding_align.png``.
 
       - **Text**
 
-        Via the string resource named ``gv_onboarding_align``.
+        Via the string resource named ``gc_onboarding_align``.
 
     - **Fourth Page**
 
@@ -153,11 +153,11 @@ All Action Bar customizations except the title are global to all Activities.
 
       - **Image**
 
-        Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_onboarding_multipage.png``.
+        Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_onboarding_multipage.png``.
 
       - **Text**
 
-        Via the string resource named ``gv_onboarding_multipage``.
+        Via the string resource named ``gc_onboarding_multipage``.
 
     :ref:`Back to screenshot. <onboarding>`
 
@@ -168,44 +168,44 @@ All Action Bar customizations except the title are global to all Activities.
       - **Image**
 
         Via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi, sw600dp-xxhdpi, sw600dp-xxxhdpi
-        named ``gv_onboarding_lighting.png``.
+        named ``gc_onboarding_lighting.png``.
 
       - **Text**
 
-        Via the string resource named ``gv_onboarding_ligthing``.
+        Via the string resource named ``gc_onboarding_ligthing``.
 
     - **Second Page**
 
       - **Image**
 
         Via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi, sw600dp-xxhdpi, sw600dp-xxxhdpi
-        named ``gv_onboarding_flat.png``.
+        named ``gc_onboarding_flat.png``.
 
       - **Text**
 
-        Via the string resource named ``gv_onboarding_flat``.
+        Via the string resource named ``gc_onboarding_flat``.
 
     - **Third Page**
 
       - **Image**
 
         Via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi, sw600dp-xxhdpi, sw600dp-xxxhdpi
-        named ``gv_onboarding_parallel.png``.
+        named ``gc_onboarding_parallel.png``.
 
       - **Text**
 
-        Via the string resource named ``gv_onboarding_parallel``.
+        Via the string resource named ``gc_onboarding_parallel``.
 
     - **Fourth Page**
 
       - **Image**
 
         Via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi, sw600dp-xxhdpi, sw600dp-xxxhdpi
-        named ``gv_onboarding_align.png``.
+        named ``gc_onboarding_align.png``.
 
       - **Text**
 
-        Via the string resource named ``gv_onboarding_align``.
+        Via the string resource named ``gc_onboarding_align``.
 
     - **Fifth Page**
 
@@ -213,11 +213,11 @@ All Action Bar customizations except the title are global to all Activities.
 
       - **Image**
 
-        Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_onboarding_multipage.png``.
+        Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_onboarding_multipage.png``.
 
       - **Text**
 
-        Via the string resource named ``gv_onboarding_multipage``.
+        Via the string resource named ``gc_onboarding_multipage``.
 
     :ref:`Back to screenshot. <onboarding>`
 
@@ -238,12 +238,12 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Color**
 
-    Via the color resource named ``gv_background``. **Note**: this color resource is global to all
+    Via the color resource named ``gc_background``. **Note**: this color resource is global to all
     Activities.
 
   - **Transparency**
 
-    Via the string resource named ``gv_onboarding_page_fragment_background_alpha`` which must
+    Via the string resource named ``gc_onboarding_page_fragment_background_alpha`` which must
     contain a real number between ``[0,1]``.
     
   :ref:`Back to screenshot. <onboarding>`
@@ -316,23 +316,23 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Title**
 
-  Via the string resource named ``gv_title_camera``.
+  Via the string resource named ``gc_title_camera``.
 
 - **Title Color**
 
-  Via the color resource named ``gv_action_bar_title``.
+  Via the color resource named ``gc_action_bar_title``.
 
 - **Back Button Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_action_bar_back``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_action_bar_back``.
 
 - **Background Color**
 
-  Via the color resource named ``gv_action_bar``.
+  Via the color resource named ``gc_action_bar``.
 
 - **Status Bar Background Color**
 
-  Via the color resource named ``gv_status_bar``.
+  Via the color resource named ``gc_status_bar``.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -343,7 +343,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_camera_preview_corners``.
+  Via the color resource named ``gc_camera_preview_corners``.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -354,11 +354,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Normal**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_camera_trigger_default.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_camera_trigger_default.png``.
 
 - **Pressed**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_camera_trigger_pressed.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_camera_trigger_pressed.png``.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -369,7 +369,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_camera_focus_indicator.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_camera_focus_indicator.png``.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -380,11 +380,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_help_icon.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_help_icon.png``.
 
 - **Title**
 
-  Via the string resource named ``gv_show_onboarding``.
+  Via the string resource named ``gc_show_onboarding``.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -395,7 +395,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_background``. **Note**: this color resource is global to all
+  Via the color resource named ``gc_background``. **Note**: this color resource is global to all
   Activities.
 
 :ref:`Back to screenshots. <camera>`
@@ -407,13 +407,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_document_import_icon.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_document_import_icon.png``.
 
 - **Subtitle**
 
   - **Text**
 
-    Via the string resource named ``gv_camera_document_import_subtitle``.
+    Via the string resource named ``gc_camera_document_import_subtitle``.
 
   - **Text Style**
 
@@ -424,7 +424,7 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle``) and setting an
-    item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -435,17 +435,17 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_document_import_hint_background``.
+  Via the color resource named ``gc_document_import_hint_background``.
 
 - **Close Icon Color**
 
-  Via the color resource name ``gv_hint_close``.
+  Via the color resource name ``gc_hint_close``.
 
 - **Message**
 
   - **Text**
 
-    Via the string resource named ``gv_document_import_hint_text``.
+    Via the string resource named ``gc_document_import_hint_text``.
 
   - **Text Style**
 
@@ -456,7 +456,7 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Camera.DocumentImportHint.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Camera.DocumentImportHint.TextStyle``) and setting an
-    item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -476,22 +476,22 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Camera.ImageStackBadge.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Camera.ImageStackBadge.TextStyle``) and setting an
-    item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
   - **Background Color**
 
-    Via the color resources named ``gv_camera_image_stack_badge_background`` and
-    ``gv_camera_image_stack_badge_background_border``.
+    Via the color resources named ``gc_camera_image_stack_badge_background`` and
+    ``gc_camera_image_stack_badge_background_border``.
 
   - **Background Size**
 
-    Via the dimension resource named ``gv_camera_image_stack_badge_size``.
+    Via the dimension resource named ``gc_camera_image_stack_badge_size``.
 
 - **Subtitle**
 
   - **Text**
 
-    Via the string resource named ``gv_camera_image_stack_subtitle``.
+    Via the string resource named ``gc_camera_image_stack_subtitle``.
 
   - **Text Style**
 
@@ -502,7 +502,7 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle``) and setting an item
-    named ``gvCustomFont`` with the path to the font file in your assets folder.
+    named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -513,14 +513,14 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_qrcode_detected_popup_background``.
+  Via the color resource named ``gc_qrcode_detected_popup_background``.
 
 - **Message**
 
   - **Text**
 
-    Via the string resources named ``gv_qrcode_detected_popup_message_1`` and
-    ``gv_qrcode_detected_popup_message_2``.
+    Via the string resources named ``gc_qrcode_detected_popup_message_1`` and
+    ``gc_qrcode_detected_popup_message_2``.
 
   - **Text Style**
 
@@ -537,7 +537,7 @@ All Action Bar customizations except the title are global to all Activities.
     ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle``) and
     ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle`` (with parent style
     ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle``). and setting an
-    item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -550,37 +550,37 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Message**
 
-    Via the string resource named ``gv_storage_permission_rationale``.
+    Via the string resource named ``gc_storage_permission_rationale``.
 
   - **Positive Button Text**
 
-    Via the string resource named ``gv_storage_permission_rationale_positive_button``.
+    Via the string resource named ``gc_storage_permission_rationale_positive_button``.
 
   - **Negative Button Text**
 
-    Via the string resource named ``gv_storage_permission_rationale_negative_button``.
+    Via the string resource named ``gc_storage_permission_rationale_negative_button``.
 
   - **Button Color**
 
-    Via the color resource named ``gv_accent``. **Note**: this color resource is global.
+    Via the color resource named ``gc_accent``. **Note**: this color resource is global.
 
 - **Permission Denied Dialog**
 
   - **Message**
 
-    Via the string resource named ``gv_storage_permission_denied``.
+    Via the string resource named ``gc_storage_permission_denied``.
 
   - **Positive Button Text**
 
-    Via the string resource named ``gv_storage_permission_denied_positive_button``.
+    Via the string resource named ``gc_storage_permission_denied_positive_button``.
 
   - **Negative Button Text**
 
-    Via the string resource named ``gv_storage_permission_denied_negative_button``.
+    Via the string resource named ``gc_storage_permission_denied_negative_button``.
 
   - **Button Color**
 
-    Via the color resource named ``gv_accent``. **Note**: this color resource is global.
+    Via the color resource named ``gc_accent``. **Note**: this color resource is global.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -591,13 +591,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_no_camera.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_no_camera.png``.
 
 - **Message**
 
   - **Text**
 
-    Via the string resource named ``gv_camera_error_no_permission``.
+    Via the string resource named ``gc_camera_error_no_permission``.
 
    - **Text Style**
 
@@ -608,13 +608,13 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Camera.Error.NoPermission.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Camera.Error.NoPermission.TextStyle``) and setting an
-    item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 - **Button**
 
   - **Title**
 
-    Via the string resource named ``gv_camera_error_no_permission_button_title``.
+    Via the string resource named ``gc_camera_error_no_permission_button_title``.
 
   - **Text Style**
 
@@ -625,7 +625,7 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle``) and setting an
-    item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -636,19 +636,19 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Message**
 
-   Via the string resource named ``gv_document_error_too_many_pages``.
+   Via the string resource named ``gc_document_error_too_many_pages``.
 
  - **Positive Button Text**
 
-  Via the string resource named ``gv_document_error_multi_page_limit_review_pages_button``.
+  Via the string resource named ``gc_document_error_multi_page_limit_review_pages_button``.
 
   - **Negative Button Text**
 
-  Via the string resource named ``gv_document_error_multi_page_limit_cancel_button``.
+  Via the string resource named ``gc_document_error_multi_page_limit_cancel_button``.
 
   - **Button Color**
 
-  Via the color resource named ``gv_accent``. **Note**: this color resource is global.
+  Via the color resource named ``gc_accent``. **Note**: this color resource is global.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -659,7 +659,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_camera_flash_on.png`` and ``gv_camera_flash_off.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_camera_flash_on.png`` and ``gc_camera_flash_off.png``.
 
 :ref:`Back to screenshots. <camera>`
 
@@ -690,23 +690,23 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Title**
 
-  Via the string resource named ``gv_title_review``.
+  Via the string resource named ``gc_title_review``.
 
 - **Title Color**
 
-  Via the color resource named ``gv_action_bar_title``.
+  Via the color resource named ``gc_action_bar_title``.
 
 - **Back Button Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_action_bar_back``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_action_bar_back``.
 
 - **Background Color**
 
-  Via the color resource named ``gv_action_bar``.
+  Via the color resource named ``gc_action_bar``.
 
 - **Status Bar Background Color**
 
-  Via the color resource named ``gv_status_bar``.
+  Via the color resource named ``gc_status_bar``.
 
 :ref:`Back to screenshot. <review>`
 
@@ -717,11 +717,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_review_fab_next.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_review_fab_next.png``.
 
 - **Color**
 
-  Via the color resources named ``gv_review_fab`` and ``gv_review_fab_pressed``.
+  Via the color resources named ``gc_review_fab`` and ``gc_review_fab_pressed``.
 
 :ref:`Back to screenshot. <review>`
 
@@ -732,11 +732,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_review_button_rotate.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_review_button_rotate.png``.
 
 - **Color**
 
-  Via the color resources named ``gv_review_fab_mini`` and ``gv_review_fab_mini_pressed``.
+  Via the color resources named ``gc_review_fab_mini`` and ``gc_review_fab_mini_pressed``.
 
 :ref:`Back to screenshot. <review>`
 
@@ -747,7 +747,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text**
 
-  Via the string resource named ``gv_review_bottom_panel_text``.
+  Via the string resource named ``gc_review_bottom_panel_text``.
 
 - **Text Style**
 
@@ -758,11 +758,11 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Review.BottomPanel.TextStyle`` (with
   parent style ``Root.GiniCaptureTheme.Review.BottomPanel.TextStyle``) and setting an
-  item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 - **Background Color**
 
-  Via the color resource named ``gv_review_bottom_panel_background``.
+  Via the color resource named ``gc_review_bottom_panel_background``.
 
 :ref:`Back to screenshot. <review>`
 
@@ -773,7 +773,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_background``. **Note**: this color resource is global to all Activities.
+  Via the color resource named ``gc_background``. **Note**: this color resource is global to all Activities.
 
 :ref:`Back to screenshot. <review>`
 
@@ -813,15 +813,15 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Back Button Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_action_bar_back``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_action_bar_back``.
 
 - **Background Color**
 
-  Via the color resource named ``gv_action_bar``.
+  Via the color resource named ``gc_action_bar``.
 
 - **Status Bar Background Color**
 
-  Via the color resource named ``gv_status_bar``.
+  Via the color resource named ``gc_status_bar``.
 
 :ref:`Back to screenshots. <analysis>`
 
@@ -832,13 +832,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_analysis_activity_indicator``.
+  Via the color resource named ``gc_analysis_activity_indicator``.
 
 - **Message**
 
   - **Text**
   
-    Via the string resource named ``gv_analysis_activity_indicator_message``.
+    Via the string resource named ``gc_analysis_activity_indicator_message``.
 
   - **Text Style**
 
@@ -849,7 +849,7 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle``) and setting an
-    item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <analysis>`
 
@@ -860,7 +860,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_analysis_pdf_info_background``.
+  Via the color resource named ``gc_analysis_pdf_info_background``.
 
 - **Filename**
 
@@ -873,7 +873,7 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Analysis.PdfFilename.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Analysis.PdfFilename.TextStyle``) and setting an
-    item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 - **Page Count**
 
@@ -886,7 +886,7 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Analysis.PdfPageCount.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Analysis.PdfPageCount.TextStyle``) and setting an
-    item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
   :ref:`Back to screenshots. <analysis>`
 
@@ -906,7 +906,7 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Snackbar.Error.TextStyle``) and setting an
-    item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 - **Button**
 
@@ -919,15 +919,15 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.Button.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Snackbar.Error.Button.TextStyle``) and setting an
-    item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
   - **Retry Button Text**
 
-    Via the string resource named ``gv_document_analysis_error_retry``.
+    Via the string resource named ``gc_document_analysis_error_retry``.
 
 - **Background Color**
 
-  Via the color resource named ``gv_snackbar_error_background``.
+  Via the color resource named ``gc_snackbar_error_background``.
 
 :ref:`Back to screenshots. <analysis>`
 
@@ -938,7 +938,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_background``. **Note**: this color resource is global to all Activities.
+  Via the color resource named ``gc_background``. **Note**: this color resource is global to all Activities.
 
 :ref:`Back to screenshots. <analysis>`
 
@@ -996,23 +996,23 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Title**
 
-  Via the string resource named ``gv_title_multi_page_review``.
+  Via the string resource named ``gc_title_multi_page_review``.
 
 - **Title Color**
 
-  Via the color resource named ``gv_action_bar_title``.
+  Via the color resource named ``gc_action_bar_title``.
 
 - **Back Button Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_action_bar_back``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_action_bar_back``.
 
 - **Background Color**
 
-  Via the color resource named ``gv_action_bar``.
+  Via the color resource named ``gc_action_bar``.
 
 - **Status Bar Background Color**
 
-  Via the color resource named ``gv_status_bar``.
+  Via the color resource named ``gc_status_bar``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1030,11 +1030,11 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle`` (with
   parent style ``Root.GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle``) and setting an
-  item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 - **Background Color**
 
-  Via the color resource named ``gv_multi_page_review_page_indicator_background``.
+  Via the color resource named ``gc_multi_page_review_page_indicator_background``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1045,11 +1045,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_review_fab_checkmark.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_review_fab_checkmark.png``.
 
 - **Color**
 
-  Via the color resources named ``gv_review_fab`` and ``gv_review_fab_pressed``.
+  Via the color resources named ``gc_review_fab`` and ``gc_review_fab_pressed``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1060,7 +1060,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_multi_page_review_thumbnails_panel_background``.
+  Via the color resource named ``gc_multi_page_review_thumbnails_panel_background``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1071,7 +1071,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_multi_page_review_thumbnail_card_background``.
+  Via the color resource named ``gc_multi_page_review_thumbnail_card_background``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1089,11 +1089,11 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle`` (with
   parent style ``Root.GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle``) and setting an
-  item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 - **Background Border Color**
 
-  Via the color resource named ``gv_multi_page_thumbnail_badge_background_border``.
+  Via the color resource named ``gc_multi_page_thumbnail_badge_background_border``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1104,7 +1104,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
- Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_bumps_icon.png``.
+ Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_bumps_icon.png``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1115,7 +1115,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_multi_page_thumbnail_highlight_strip``.
+  Via the color resource named ``gc_multi_page_thumbnail_highlight_strip``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1126,7 +1126,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
- Via the color resource named ``gv_analysis_activity_indicator``.
+ Via the color resource named ``gc_analysis_activity_indicator``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1137,11 +1137,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_multi_page_thumbnail_upload_success_icon_background``.
+  Via the color resource named ``gc_multi_page_thumbnail_upload_success_icon_background``.
 
 - **Tick Color**
 
-  Via the color resource named ``gv_multi_page_thumbnail_upload_success_icon_foreground``.
+  Via the color resource named ``gc_multi_page_thumbnail_upload_success_icon_foreground``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1152,11 +1152,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_multi_page_thumbnail_upload_failure_icon_background``.
+  Via the color resource named ``gc_multi_page_thumbnail_upload_failure_icon_background``.
 
 - **Cross Color**
 
-  Via the color resource named ``gv_multi_page_thumbnail_upload_failure_icon_foreground``.
+  Via the color resource named ``gc_multi_page_thumbnail_upload_failure_icon_foreground``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1167,13 +1167,13 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_multi_page_add_page_icon.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_multi_page_add_page_icon.png``.
 
 - **Subtitle**
 
   - **Text**
 
-    Via the string resource named ``gv_multi_page_review_add_pages_subtitle``.
+    Via the string resource named ``gc_multi_page_review_add_pages_subtitle``.
 
   - **Text Style**
 
@@ -1184,7 +1184,7 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle``
     (with parent style ``Root.GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle``) and
-    setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
   :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1195,7 +1195,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text**
 
-  Via the string resource named ``gv_multi_page_review_reorder_pages_tip``.
+  Via the string resource named ``gc_multi_page_review_reorder_pages_tip``.
 
 - **Text Style**
 
@@ -1206,7 +1206,7 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle``
   (with parent style ``Root.GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle``) and
-  setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1217,11 +1217,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Rotate Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_rotate_icon.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_rotate_icon.png``.
 
 - **Delete Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_delete_icon.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_delete_icon.png``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1232,7 +1232,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_snackbar_error_background``.
+  Via the color resource named ``gc_snackbar_error_background``.
 
 - **Message**
 
@@ -1245,7 +1245,7 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.TextStyle``
     (with parent style ``Root.GiniCaptureTheme.Snackbar.Error.TextStyle``) and
-    setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 - **Button**
 
@@ -1258,15 +1258,15 @@ All Action Bar customizations except the title are global to all Activities.
 
     Via overriding the style named ``GiniCaptureTheme.Snackbar.Error.Button.TextStyle``
     (with parent style ``Root.GiniCaptureTheme.Snackbar.Error.Button.TextStyle``) and
-    setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+    setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
   - **Retry Text (Analysis)**
   
-    Via the string resource named ``gv_document_analysis_error_retry``.
+    Via the string resource named ``gc_document_analysis_error_retry``.
 
   - **Delete Text (Imported Image)**
 
-    Via the string resource named ``gv_multi_page_review_delete_invalid_document``.
+    Via the string resource named ``gc_multi_page_review_delete_invalid_document``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1277,19 +1277,19 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Message**
 
-  Via the string resource named ``gv_multi_page_review_file_import_delete_last_page_dialog_message``.
+  Via the string resource named ``gc_multi_page_review_file_import_delete_last_page_dialog_message``.
 
 - **Positive Button Title**
 
-  Via the string resource named ``gv_multi_page_review_file_import_delete_last_page_dialog_positive_button``.
+  Via the string resource named ``gc_multi_page_review_file_import_delete_last_page_dialog_positive_button``.
 
 - **Negative Button Title**
 
-  Via the string resource named ``gv_multi_page_review_file_import_delete_last_page_dialog_negative_button``.
+  Via the string resource named ``gc_multi_page_review_file_import_delete_last_page_dialog_negative_button``.
 
 - **Button Color**
 
-  Via the color resource named ``gv_accent``.
+  Via the color resource named ``gc_accent``.
 
 :ref:`Back to screenshots. <multi-page-review>`
 
@@ -1318,23 +1318,23 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Title**
 
-  Via the string resource named ``gv_title_help``.
+  Via the string resource named ``gc_title_help``.
 
 - **Title Color**
 
-  Via the color resource named ``gv_action_bar_title``.
+  Via the color resource named ``gc_action_bar_title``.
 
 - **Back Button Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_action_bar_back``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_action_bar_back``.
 
 - **Background Color**
 
-  Via the color resource named ``gv_action_bar``.
+  Via the color resource named ``gc_action_bar``.
 
 - **Status Bar Background Color**
 
-  Via the color resource named ``gv_status_bar``.
+  Via the color resource named ``gc_status_bar``.
 
 :ref:`Back to screenshot. <help-screen>`
 
@@ -1345,7 +1345,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_help_activity_background``.
+  Via the color resource named ``gc_help_activity_background``.
 
 :ref:`Back to screenshot. <help-screen>`
 
@@ -1356,7 +1356,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource name ``gv_help_item_background``.
+  Via the color resource name ``gc_help_item_background``.
   
 - **Text Style**
 
@@ -1367,7 +1367,7 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Help.Item.TextStyle``
   (with parent style ``Root.GiniCaptureTheme.Help.Item.TextStyle``) and
-  setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <help-screen>`
 
@@ -1408,23 +1408,23 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Title**
 
-  Via the string resource named ``gv_title_photo_tips``.
+  Via the string resource named ``gc_title_photo_tips``.
 
 - **Title Color**
 
-  Via the color resource named ``gv_action_bar_title``.
+  Via the color resource named ``gc_action_bar_title``.
 
 - **Back Button Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_action_bar_back``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_action_bar_back``.
 
 - **Background Color**
 
-  Via the color resource named ``gv_action_bar``.
+  Via the color resource named ``gc_action_bar``.
 
 - **Status Bar Background Color**
 
-  Via the color resource named ``gv_status_bar``.
+  Via the color resource named ``gc_status_bar``.
 
 :ref:`Back to screenshot. <photo-tips>`
 
@@ -1435,7 +1435,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_photo_tips_activity_background``.
+  Via the color resource named ``gc_photo_tips_activity_background``.
 
 :ref:`Back to screenshot. <photo-tips>`
 
@@ -1453,7 +1453,7 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Help.PhotoTips.Header.TextStyle``
   (with parent style ``Root.GiniCaptureTheme.Help.PhotoTips.Header.TextStyle``) and
-  setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <photo-tips>`
 
@@ -1471,7 +1471,7 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle``
   (with parent style ``Root.GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle``) and
-  setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <photo-tips>`
 
@@ -1482,7 +1482,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_photo_tip_lighting.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_photo_tip_lighting.png``.
 
 :ref:`Back to screenshot. <photo-tips>`
 
@@ -1493,7 +1493,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_photo_tip_flat.png``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_photo_tip_flat.png``.
 
 :ref:`Back to screenshot. <photo-tips>`
 
@@ -1504,7 +1504,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named ``gv_photo_tip_parallel.png``.
+  Via images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named ``gc_photo_tip_parallel.png``.
 
 :ref:`Back to screenshot. <photo-tips>`
 
@@ -1515,7 +1515,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named ``gv_photo_tip_align.png``.
+  Via images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named ``gc_photo_tip_align.png``.
 
 :ref:`Back to screenshot. <photo-tips>`
 
@@ -1526,7 +1526,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Icon**
 
-  Via images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named ``gv_photo_tip_multipage.png``.
+  Via images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named ``gc_photo_tip_multipage.png``.
 
 :ref:`Back to screenshot. <photo-tips>`
 
@@ -1537,11 +1537,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_photo_tips_button``.
+  Via the color resource named ``gc_photo_tips_button``.
 
 - **Text Color**
 
-  Via the color resource named ``gv_photo_tips_button_text``.
+  Via the color resource named ``gc_photo_tips_button_text``.
 
 :ref:`Back to screenshot. <photo-tips>`
 
@@ -1573,23 +1573,23 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Title**
 
-  Via the string resource named ``gv_title_supported_formats``.
+  Via the string resource named ``gc_title_supported_formats``.
 
 - **Title Color**
 
-  Via the color resource named ``gv_action_bar_title``.
+  Via the color resource named ``gc_action_bar_title``.
 
 - **Back Button Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_action_bar_back``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_action_bar_back``.
 
 - **Background Color**
 
-  Via the color resource named ``gv_action_bar``.
+  Via the color resource named ``gc_action_bar``.
 
 - **Status Bar Background Color**
 
-  Via the color resource named ``gv_status_bar``.
+  Via the color resource named ``gc_status_bar``.
 
 :ref:`Back to screenshot. <supported-formats>`
 
@@ -1600,7 +1600,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_supported_formats_activity_background``.
+  Via the color resource named ``gc_supported_formats_activity_background``.
 
 :ref:`Back to screenshot. <supported-formats>`
 
@@ -1618,7 +1618,7 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle``
   (with parent style ``Root.GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle``) and
-  setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <supported-formats>`
 
@@ -1636,11 +1636,11 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle``
   (with parent style ``Root.GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle``) and
-  setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 - **Background Color**
 
-  Via overriding the style named ``gv_supported_formats_item_background``.
+  Via overriding the style named ``gc_supported_formats_item_background``.
 
 :ref:`Back to screenshot. <supported-formats>`
 
@@ -1651,11 +1651,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_supported_formats_item_supported_icon_background``.
+  Via the color resource named ``gc_supported_formats_item_supported_icon_background``.
 
 - **Tick Color**
 
-  Via the color resource named ``gv_supported_formats_item_supported_icon_foreground``.
+  Via the color resource named ``gc_supported_formats_item_supported_icon_foreground``.
 
 :ref:`Back to screenshot. <supported-formats>`
 
@@ -1666,11 +1666,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_supported_formats_item_unsupported_icon_background``.
+  Via the color resource named ``gc_supported_formats_item_unsupported_icon_background``.
 
 - **Cross Color**
 
-  Via the color resource named ``gv_supported_formats_item_unsupported_icon_foreground``.
+  Via the color resource named ``gc_supported_formats_item_unsupported_icon_foreground``.
 
 :ref:`Back to screenshot. <supported-formats>`
 
@@ -1706,23 +1706,23 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Title**
 
-  Via the string resource named ``gv_title_file_import``.
+  Via the string resource named ``gc_title_file_import``.
 
 - **Title Color**
 
-  Via the color resource named ``gv_action_bar_title``.
+  Via the color resource named ``gc_action_bar_title``.
 
 - **Back Button Icon**
 
-  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gv_action_bar_back``.
+  Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named ``gc_action_bar_back``.
 
 - **Background Color**
 
-  Via the color resource named ``gv_action_bar``.
+  Via the color resource named ``gc_action_bar``.
 
 - **Status Bar Background Color**
 
-  Via the color resource named ``gv_status_bar``.
+  Via the color resource named ``gc_status_bar``.
 
 :ref:`Back to screenshot. <file-import>`
 
@@ -1733,7 +1733,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_file_import_activity_background``.
+  Via the color resource named ``gc_file_import_activity_background``.
 
 :ref:`Back to screenshot. <file-import>`
 
@@ -1744,7 +1744,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Text**
 
-  Via overriding the string resource named ``gv_file_import_header``.
+  Via overriding the string resource named ``gc_file_import_header``.
 
 - **Text Style**
 
@@ -1755,7 +1755,7 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Help.FileImport.Header.TextStyle``
   (with parent style ``Root.GiniCaptureTheme.Help.FileImport.Header.TextStyle``) and
-  setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <file-import>`
 
@@ -1766,7 +1766,7 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Color**
 
-  Via the color resource named ``gv_file_import_separator``.
+  Via the color resource named ``gc_file_import_separator``.
 
 :ref:`Back to screenshot. <file-import>`
 
@@ -1782,11 +1782,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gv_file_import_section_number_background``.
+  Via the color resource named ``gc_file_import_section_number_background``.
 
 - **Text Color**
 
-  Via the color resource named ``gv_file_import_section_number``.
+  Via the color resource named ``gc_file_import_section_number``.
 
 :ref:`Back to screenshot. <file-import>`
 
@@ -1804,7 +1804,7 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle``
   (with parent style ``Root.GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle``) and
-  setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <file-import>`
 
@@ -1822,7 +1822,7 @@ All Action Bar customizations except the title are global to all Activities.
 
   Via overriding the style named ``GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle``
   (with parent style ``Root.GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle``) and
-  setting an item named ``gvCustomFont`` with the path to the font file in your assets folder.
+  setting an item named ``gcCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshot. <file-import>`
 
@@ -1846,16 +1846,16 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Title**
 
-    Via overriding the string resource named ``gv_file_import_section_1_title``.
+    Via overriding the string resource named ``gc_file_import_section_1_title``.
 
   - **Body**
 
-    Via overriding the string resource named ``gv_file_import_section_1_body``.
+    Via overriding the string resource named ``gc_file_import_section_1_body``.
     
   - **Illustration**
 
     Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
-    ``gv_file_import_section_1_illustration.png``. 
+    ``gc_file_import_section_1_illustration.png``.
     
     **Note**: For creating your custom illustration you may use `this template
     <https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_1.pdf>`_
@@ -1866,16 +1866,16 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Title**
 
-    Via overriding the string resource named ``gv_file_import_section_2_title``.
+    Via overriding the string resource named ``gc_file_import_section_2_title``.
 
   - **Body**
 
-    Via overriding the string resource named ``gv_file_import_section_2_body``.
+    Via overriding the string resource named ``gc_file_import_section_2_body``.
     
   - **Illustration**
 
     Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
-    ``gv_file_import_section_2_illustration.png``. 
+    ``gc_file_import_section_2_illustration.png``.
     
     **Note**: For creating your custom illustration you may use `this template
     <https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_2.pdf>`_
@@ -1888,16 +1888,16 @@ All Action Bar customizations except the title are global to all Activities.
 
   - **Title**
 
-    Via overriding the string resource named ``gv_file_import_section_3_title``.
+    Via overriding the string resource named ``gc_file_import_section_3_title``.
 
   - **Body**
 
-    Via overriding the string resource named ``gv_file_import_section_3_body`` and ``gv_file_import_section_3_body_2``.
+    Via overriding the string resource named ``gc_file_import_section_3_body`` and ``gc_file_import_section_3_body_2``.
     
   - **Illustration**
 
     Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
-    ``gv_file_import_section_3_illustration.png``.
+    ``gc_file_import_section_3_illustration.png``.
     **Note**: For creating your custom illustration you may use `this template
     <https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_3.pdf>`_
     from the `Gini Vision Library UI Assets
@@ -1907,11 +1907,11 @@ All Action Bar customizations except the title are global to all Activities.
 
     - **Title**
 
-    Via overriding the string resource named ``gv_file_import_section_3_clear_app_defaults_title``.
+    Via overriding the string resource named ``gc_file_import_section_3_clear_app_defaults_title``.
 
     - **Body**
 
-    Via overriding the string resource named ``gv_file_import_section_3_clear_app_defaults_body``.
+    Via overriding the string resource named ``gc_file_import_section_3_clear_app_defaults_body``.
 
 :ref:`Back to screenshot. <file-import>`
 
@@ -1936,7 +1936,7 @@ Clear Defaults Dialog
 1. Message
 ^^^^
 
-Via the string resource named ``gv_file_import_default_app_dialog_message``.
+Via the string resource named ``gc_file_import_default_app_dialog_message``.
 
 .. _clear-defaults-1-1:
 
@@ -1945,28 +1945,28 @@ Via the string resource named ``gv_file_import_default_app_dialog_message``.
 
 - **PDF**
 
-  Via the string resources named ``gv_file_import_default_app_dialog_pdf_file_type``.
+  Via the string resources named ``gc_file_import_default_app_dialog_pdf_file_type``.
 
 - **Image**
 
-  Via the string resources named ``gv_file_import_default_app_dialog_image_file_type``.
+  Via the string resources named ``gc_file_import_default_app_dialog_image_file_type``.
 
 - **Document (Other)**
 
-  Via the string resources named ``gv_file_import_default_app_dialog_document_file_type``.
+  Via the string resources named ``gc_file_import_default_app_dialog_document_file_type``.
 
 .. _clear-defaults-2:
 
 2. Positive Button Title
 ~~~~
 
-Via the string resources named ``gv_file_import_default_app_dialog_positive_button``.
+Via the string resources named ``gc_file_import_default_app_dialog_positive_button``.
 
 .. _clear-defaults-3:
 
 3. Negative Button Title
 ~~~~
 
-Via the string resources named ``gv_file_import_default_app_dialog_negative_button``.
+Via the string resources named ``gc_file_import_default_app_dialog_negative_button``.
 
 :ref:`Back to screenshot. <file-import>`

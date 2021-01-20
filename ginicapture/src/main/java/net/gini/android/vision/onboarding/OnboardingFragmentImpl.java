@@ -132,7 +132,7 @@ class OnboardingFragmentImpl extends OnboardingScreenContract.View {
 
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.gv_fragment_onboarding, container, false);
+        final View view = inflater.inflate(R.layout.gc_fragment_onboarding, container, false);
         bindViews(view);
         setInputHandlers();
         getPresenter().start();
@@ -140,9 +140,9 @@ class OnboardingFragmentImpl extends OnboardingScreenContract.View {
     }
 
     private void bindViews(final View view) {
-        mViewPager = (ViewPager) view.findViewById(R.id.gv_onboarding_viewpager);
-        mLayoutPageIndicators = (LinearLayout) view.findViewById(R.id.gv_layout_page_indicators);
-        mButtonNext = (ImageButton) view.findViewById(R.id.gv_button_next);
+        mViewPager = (ViewPager) view.findViewById(R.id.gc_onboarding_viewpager);
+        mLayoutPageIndicators = (LinearLayout) view.findViewById(R.id.gc_layout_page_indicators);
+        mButtonNext = (ImageButton) view.findViewById(R.id.gc_button_next);
     }
 
     private void setInputHandlers() {
@@ -195,13 +195,13 @@ class OnboardingFragmentImpl extends OnboardingScreenContract.View {
             final ImageView pageIndicator = new ImageView(mContext);
             final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     mContext.getResources().getDimensionPixelSize(
-                            R.dimen.gv_onboarding_indicator_width),
+                            R.dimen.gc_onboarding_indicator_width),
                     mContext.getResources().getDimensionPixelSize(
-                            R.dimen.gv_onboarding_indicator_height));
+                            R.dimen.gc_onboarding_indicator_height));
             pageIndicator.setLayoutParams(layoutParams);
             pageIndicator.setScaleType(ImageView.ScaleType.CENTER);
             pageIndicator.setImageDrawable(mContext.getResources().getDrawable(
-                    R.drawable.gv_onboarding_indicator_inactive));
+                    R.drawable.gc_onboarding_indicator_inactive));
             pageIndicator.setTag("pageIndicator");
             pageIndicator.setContentDescription("inactive");
             return pageIndicator;
@@ -211,9 +211,9 @@ class OnboardingFragmentImpl extends OnboardingScreenContract.View {
             final Space space = new Space(mContext);
             final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     mContext.getResources().getDimensionPixelSize(
-                            R.dimen.gv_onboarding_indicator_width),
+                            R.dimen.gc_onboarding_indicator_width),
                     mContext.getResources().getDimensionPixelSize(
-                            R.dimen.gv_onboarding_indicator_height));
+                            R.dimen.gc_onboarding_indicator_height));
             space.setLayoutParams(layoutParams);
             return space;
         }
@@ -225,14 +225,14 @@ class OnboardingFragmentImpl extends OnboardingScreenContract.View {
             deactivatePageIndicators();
             final ImageView pageIndicator = mPageIndicators.get(page);
             pageIndicator.setImageDrawable(
-                    mContext.getResources().getDrawable(R.drawable.gv_onboarding_indicator_active));
+                    mContext.getResources().getDrawable(R.drawable.gc_onboarding_indicator_active));
             pageIndicator.setContentDescription("active");
         }
 
         private void deactivatePageIndicators() {
             for (final ImageView pageIndicator : mPageIndicators) {
                 pageIndicator.setImageDrawable(mContext.getResources().getDrawable(
-                        R.drawable.gv_onboarding_indicator_inactive));
+                        R.drawable.gc_onboarding_indicator_inactive));
                 pageIndicator.setContentDescription("inactive");
             }
         }

@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
  */
 final class ReviewFragmentHelper {
 
-    private static final String ARGS_DOCUMENT = "GV_ARGS_DOCUMENT";
+    private static final String ARGS_DOCUMENT = "GC_ARGS_DOCUMENT";
 
     public static Bundle createArguments(@NonNull final Document document) {
         final Bundle arguments = new Bundle();

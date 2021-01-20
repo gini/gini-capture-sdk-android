@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @suppress
  */
 public enum ConditionalPages {
-    MULTI_PAGE(new OnboardingPage(R.string.gv_onboarding_multi_page, R.drawable.gv_onboarding_multipage));
+    MULTI_PAGE(new OnboardingPage(R.string.gc_onboarding_multi_page, R.drawable.gc_onboarding_multipage));
 
     private final OnboardingPage mOnboardingPage;
 

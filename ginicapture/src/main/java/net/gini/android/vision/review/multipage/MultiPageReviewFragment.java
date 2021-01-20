@@ -196,7 +196,7 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.gv_fragment_multi_page_review, container,
+        final View view = inflater.inflate(R.layout.gc_fragment_multi_page_review, container,
                 false);
         bindViews(view);
         setInputHandlers();
@@ -301,13 +301,13 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     }
 
     private void bindViews(final View view) {
-        mButtonNext = view.findViewById(R.id.gv_button_next);
-        mPreviewsPager = view.findViewById(R.id.gv_view_pager);
-        mPageIndicator = view.findViewById(R.id.gv_page_indicator);
-        mThumbnailsRecycler = view.findViewById(R.id.gv_thumbnails_panel);
-        mRotateButton = view.findViewById(R.id.gv_button_rotate);
-        mDeleteButton = view.findViewById(R.id.gv_button_delete);
-        mReorderPagesTip = view.findViewById(R.id.gv_reorder_pages_tip);
+        mButtonNext = view.findViewById(R.id.gc_button_next);
+        mPreviewsPager = view.findViewById(R.id.gc_view_pager);
+        mPageIndicator = view.findViewById(R.id.gc_page_indicator);
+        mThumbnailsRecycler = view.findViewById(R.id.gc_thumbnails_panel);
+        mRotateButton = view.findViewById(R.id.gc_button_rotate);
+        mDeleteButton = view.findViewById(R.id.gc_button_delete);
+        mReorderPagesTip = view.findViewById(R.id.gc_reorder_pages_tip);
     }
 
     private void setInputHandlers() {
@@ -350,9 +350,9 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
             if (mMultiPageDocument.getImportMethod() == Document.ImportMethod.OPEN_WITH) {
                 new AlertDialog.Builder(activity)
                         .setMessage(
-                                R.string.gv_multi_page_review_file_import_delete_last_page_dialog_message)
+                                R.string.gc_multi_page_review_file_import_delete_last_page_dialog_message)
                         .setPositiveButton(
-                                R.string.gv_multi_page_review_file_import_delete_last_page_dialog_positive_button,
+                                R.string.gc_multi_page_review_file_import_delete_last_page_dialog_positive_button,
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(final DialogInterface dialog,
@@ -361,7 +361,7 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
                                     }
                                 })
                         .setNegativeButton(
-                                R.string.gv_multi_page_review_file_import_delete_last_page_dialog_negative_button,
+                                R.string.gc_multi_page_review_file_import_delete_last_page_dialog_negative_button,
                                 null)
                         .create().show();
             } else {
@@ -437,9 +437,9 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     @NonNull
     private void deleteFromCaches(final ImageDocument document) {
         if (GiniCapture.hasInstance()) {
-            final GiniCapture.Internal gvInternal = GiniCapture.getInstance().internal();
-            gvInternal.getDocumentDataMemoryCache().invalidate(document);
-            gvInternal.getPhotoMemoryCache().invalidate(document);
+            final GiniCapture.Internal gcInternal = GiniCapture.getInstance().internal();
+            gcInternal.getDocumentDataMemoryCache().invalidate(document);
+            gcInternal.getPhotoMemoryCache().invalidate(document);
         }
     }
 
@@ -447,7 +447,7 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
         final int nrOfDocuments = mMultiPageDocument.getDocuments().size();
         String text = null;
         if (nrOfDocuments > 0) {
-            text = getString(R.string.gv_multi_page_review_page_indicator, position + 1,
+            text = getString(R.string.gc_multi_page_review_page_indicator, position + 1,
                     nrOfDocuments);
         }
         mPageIndicator.setText(text);
@@ -455,7 +455,7 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
 
     private void updateReorderPagesTip() {
         if (mMultiPageDocument.getDocuments().size() > 1) {
-            mReorderPagesTip.setText(getText(R.string.gv_multi_page_review_reorder_pages_tip));
+            mReorderPagesTip.setText(getText(R.string.gc_multi_page_review_reorder_pages_tip));
         } else {
             mReorderPagesTip.setText("");
         }
@@ -603,7 +603,7 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
                                 && !NetworkRequestsManager.isCancellation(throwable)) {
                             trackUploadError(throwable);
                             final String errorMessage = getString(
-                                    R.string.gv_document_analysis_error);
+                                    R.string.gc_document_analysis_error);
                             showErrorOnPreview(errorMessage, document);
                             mThumbnailsAdapter.setUploadState(
                                     ThumbnailsAdapter.UploadState.FAILED,

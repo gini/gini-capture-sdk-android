@@ -28,7 +28,7 @@ public final class ContextHelper {
      * @suppress
      */
     public static boolean isTablet(@NonNull final Context context) {
-        return context.getResources().getBoolean(R.bool.gv_is_tablet);
+        return context.getResources().getBoolean(R.bool.gc_is_tablet);
     }
 
     /**
@@ -37,7 +37,7 @@ public final class ContextHelper {
      * @suppress
      */
     public static boolean isPortraitOrientation(@NonNull final Context context) {
-        return context.getResources().getBoolean(R.bool.gv_is_portrait);
+        return context.getResources().getBoolean(R.bool.gc_is_portrait);
     }
 
     private ContextHelper() {

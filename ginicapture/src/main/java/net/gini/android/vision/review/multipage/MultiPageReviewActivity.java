@@ -60,89 +60,89 @@ import androidx.appcompat.app.AppCompatActivity;
  *
  * <li> <b>Page indicator font:</b> via overriding the style named {@code
  * GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle} and setting an item named {@code
- * gvCustomFont} with the path to the font file in your {@code assets} folder
+ * gcCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li><b>Page indicator background color:</b> via the color resource named {@code
- * gv_multi_page_review_page_indicator_background}
+ * gc_multi_page_review_page_indicator_background}
  *
  * <li><b>Next button icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_review_fab_checkmark.png}
+ * gc_review_fab_checkmark.png}
  *
- * <li><b>Next button color:</b> via the color resources named {@code gv_review_fab} and {@code
- * gv_review_fab_pressed}
+ * <li><b>Next button color:</b> via the color resources named {@code gc_review_fab} and {@code
+ * gc_review_fab_pressed}
  *
  * <li><b>Thumbnails panel background color:</b> via the color resource named {@code
- * gv_multi_page_review_thumbnails_panel_background}
+ * gc_multi_page_review_thumbnails_panel_background}
  *
  * <li><b>Thumbnail card background color:</b> via the color resource named {@code
- * gv_multi_page_review_thumbnail_card_background}
+ * gc_multi_page_review_thumbnail_card_background}
  *
  * <li> <b>Thumbnail badge text style:</b> via overriding the style named {@code
  * GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle}
  *
  * <li> <b>Thumbnail badge font:</b> via overriding the style named {@code
  * GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle} and setting an item named {@code
- * gvCustomFont} with the path to the font file in your {@code assets} folder
+ * gcCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li><b>Thumbnail badge background border color:</b> via the color resource named {@code
- * gv_multi_page_thumbnail_badge_background_border}
+ * gc_multi_page_thumbnail_badge_background_border}
  *
  * <li><b>Thumbnail drag indicator bumps icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
- * named {@code gv_bumps_icon.png}
+ * named {@code gc_bumps_icon.png}
  *
  * <li><b>Thumbnail highlight strip color:</b> via the color resource named {@code
- * gv_multi_page_thumbnail_highlight_strip}
+ * gc_multi_page_thumbnail_highlight_strip}
  *
  * <li> <b>Thumbnail activity indicator color:</b> via the color resource named {@code
- * gv_analysis_activity_indicator}
+ * gc_analysis_activity_indicator}
  *
  * <li> <b>Thumbnail upload success background circle color:</b> via the color resource named {@code
- * gv_multi_page_thumbnail_upload_success_icon_background}
+ * gc_multi_page_thumbnail_upload_success_icon_background}
  *
  * <li> <b>Thumbnail upload success foreground tick color:</b> via the color resource named {@code
- * gv_multi_page_thumbnail_upload_success_icon_foreground}
+ * gc_multi_page_thumbnail_upload_success_icon_foreground}
  *
  * <li> <b>Thumbnail upload failure background circle color:</b> via the color resource named {@code
- * gv_multi_page_thumbnail_upload_failure_icon_background}
+ * gc_multi_page_thumbnail_upload_failure_icon_background}
  *
  * <li> <b>Thumbnail upload failure foreground cross color:</b> via the color resource named {@code
- * gv_multi_page_thumbnail_upload_failure_icon_foreground}
+ * gc_multi_page_thumbnail_upload_failure_icon_foreground}
  *
  * <li><b>Add page icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_multi_page_add_page_icon.png}
+ * gc_multi_page_add_page_icon.png}
  *
  * <li> <b>Add page icon subtitle text:</b> via the string resource named {@code
- * gv_multi_page_review_add_pages_subtitle}
+ * gc_multi_page_review_add_pages_subtitle}
  *
  * <li> <b>Add page icon subtitle text style:</b> via overriding the style named {@code
  * GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle}
  *
  * <li> <b>Add page icon subtitle font:</b> via overriding the style named {@code
  * GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle} and setting an item named {@code
- * gvCustomFont} with the path to the font file in your {@code assets} folder
+ * gcCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Reorder pages tip text:</b> via the string resource named {@code
- * gv_multi_page_review_reorder_pages_tip}
+ * gc_multi_page_review_reorder_pages_tip}
  *
  * <li> <b>Reorder pages tip text style:</b> via overriding the style named {@code
  * GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle}
  *
  * <li> <b>Reorder pages tip font:</b> via overriding the style named {@code
  * GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle} and setting an item named {@code
- * gvCustomFont} with the path to the font file in your {@code assets} folder
+ * gcCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li><b>Rotate icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_rotate_icon.png}
+ * gc_rotate_icon.png}
  *
  * <li><b>Delete icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_delete_icon.png}
+ * gc_delete_icon.png}
  *
  * <li> <b>Image error message text style:</b> via overriding the style named {@code
  * GiniCaptureTheme.Snackbar.Error.TextStyle} and setting an item named {@code android:textStyle} to
  * {@code normal}, {@code bold} or {@code italic}
  *
  * <li> <b>Image error message font:</b> via overriding the style named {@code
- * GiniCaptureTheme.Snackbar.Error.TextStyle} and setting an item named {@code gvCustomFont} with the
+ * GiniCaptureTheme.Snackbar.Error.TextStyle} and setting an item named {@code gcCustomFont} with the
  * path to the font file in your {@code assets} folder
  *
  * <li> <b>Image error message button text style:</b> via overriding the style named {@code
@@ -150,29 +150,29 @@ import androidx.appcompat.app.AppCompatActivity;
  * android:textStyle} to {@code normal}, {@code bold} or {@code italic}
  *
  * <li> <b>Image error message button font:</b> via overriding the style named {@code
- * GiniCaptureTheme.Snackbar.Error.Button.TextStyle} and setting an item named {@code gvCustomFont}
+ * GiniCaptureTheme.Snackbar.Error.Button.TextStyle} and setting an item named {@code gcCustomFont}
  * with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Image error message background color:</b> via the color resource named {@code
- * gv_snackbar_error_background}
+ * gc_snackbar_error_background}
  *
  * <li> <b>Image analysis error message retry button text:</b> via the string resource named {@code
- * gv_document_analysis_error_retry}
+ * gc_document_analysis_error_retry}
  *
  * <li> <b>Imported image error message delete button text:</b> via the string resource named {@code
- * gv_multi_page_review_delete_invalid_document}
+ * gc_multi_page_review_delete_invalid_document}
  *
  * <li> <b>Imported image delete last page dialog message:</b> via the string resource named {@code
- * gv_multi_page_review_file_import_delete_last_page_dialog_message}
+ * gc_multi_page_review_file_import_delete_last_page_dialog_message}
  *
  * <li> <b>Imported image delete last page dialog positive button text:</b> via the string resource
- * named {@code gv_multi_page_review_file_import_delete_last_page_dialog_positive_button}
+ * named {@code gc_multi_page_review_file_import_delete_last_page_dialog_positive_button}
  *
  * <li> <b>Imported image delete last page dialog negative button text:</b> via the string resource
- * named {@code gv_multi_page_review_file_import_delete_last_page_dialog_negative_button}
+ * named {@code gc_multi_page_review_file_import_delete_last_page_dialog_negative_button}
  *
  * <li> <b>Imported image delete last page dialog button color:</b> via the color resource named
- * {@code gv_accent}
+ * {@code gc_accent}
  *
  * </ul>
  *
@@ -191,16 +191,16 @@ import androidx.appcompat.app.AppCompatActivity;
  *
  * <ul>
  *
- * <li><b>Background color:</b> via the color resource named {@code gv_action_bar} (highly
- * recommended for Android 5+: customize the status bar color via {@code gv_status_bar})
+ * <li><b>Background color:</b> via the color resource named {@code gc_action_bar} (highly
+ * recommended for Android 5+: customize the status bar color via {@code gc_status_bar})
  *
- * <li><b>Title:</b> via the string resource named {@code gv_title_multi_page_review}
+ * <li><b>Title:</b> via the string resource named {@code gc_title_multi_page_review}
  *
- * <li><b>Title color:</b> via the color resource named {@code gv_action_bar_title}
+ * <li><b>Title color:</b> via the color resource named {@code gc_action_bar_title}
  *
  * <li><b>Back button (only for {@link ReviewActivity}, {@link MultiPageReviewActivity} and {@link
  * AnalysisActivity}):</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_action_bar_back}
+ * gc_action_bar_back}
  *
  * </ul>
  */
@@ -219,7 +219,7 @@ public class MultiPageReviewActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gv_activity_multi_page_review);
+        setContentView(R.layout.gc_activity_multi_page_review);
         if (savedInstanceState == null) {
             initFragment();
         } else {
@@ -246,7 +246,7 @@ public class MultiPageReviewActivity extends AppCompatActivity implements
     private void showFragment() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.gv_fragment_review_multi_page_document, mFragment, MP_REVIEW_FRAGMENT)
+                .add(R.id.gc_fragment_review_multi_page_document, mFragment, MP_REVIEW_FRAGMENT)
                 .commit();
     }
 

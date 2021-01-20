@@ -146,7 +146,7 @@ public class ReviewScreenTest {
             throws IOException, InterruptedException {
         final ReviewActivityTestSpy activity = startReviewActivity(TEST_JPEG, 90);
 
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_rotate))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_rotate))
                 .perform(ViewActions.click());
 
         // Give some time for the rotation animation to finish
@@ -225,7 +225,7 @@ public class ReviewScreenTest {
         final ReviewActivityTestSpy activity = startReviewActivity(TEST_JPEG, 0);
 
         // Modify the document
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_rotate))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_rotate))
                 .perform(ViewActions.click());
 
         final AtomicBoolean proceedToAnalysisInvoked = new AtomicBoolean();
@@ -247,7 +247,7 @@ public class ReviewScreenTest {
         Thread.sleep(PAUSE_DURATION);
 
         // Click next
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         assertThat(proceedToAnalysisInvoked.get()).isTrue();
@@ -265,7 +265,7 @@ public class ReviewScreenTest {
         final ReviewActivityTestSpy activity = startReviewActivity(TEST_JPEG, 0);
 
         // Modify the document
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_rotate))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_rotate))
                 .perform(ViewActions.click());
 
         final AtomicBoolean proceedToAnalysisInvoked = new AtomicBoolean();
@@ -293,7 +293,7 @@ public class ReviewScreenTest {
         Thread.sleep(PAUSE_DURATION);
 
         // Click next
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         assertThat(proceedToAnalysisInvoked.get()).isTrue();
@@ -324,7 +324,7 @@ public class ReviewScreenTest {
         Thread.sleep(PAUSE_DURATION);
 
         // Click next
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         assertThat(proceedToAnalysisInvoked.get()).isTrue();
@@ -361,7 +361,7 @@ public class ReviewScreenTest {
         Thread.sleep(PAUSE_DURATION);
 
         // Click next
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         assertThat(documentReviewedCalled.get()).isTrue();
@@ -426,7 +426,7 @@ public class ReviewScreenTest {
 
         activity.setListenerHook(listenerHook);
 
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_rotate))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_rotate))
                 .perform(ViewActions.click());
 
         InstrumentationRegistry.getInstrumentation().waitForIdleSync();
@@ -487,11 +487,11 @@ public class ReviewScreenTest {
         });
 
         // Modify the document
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_rotate))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_rotate))
                 .perform(ViewActions.click());
 
         // Click next
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         // Allow the activity to run a little for listeners to be invoked
@@ -536,11 +536,11 @@ public class ReviewScreenTest {
         });
 
         // Modify the document
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_rotate))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_rotate))
                 .perform(ViewActions.click());
 
         // Click next
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         // Allow the activity to run a little for listeners to be invoked
@@ -564,14 +564,14 @@ public class ReviewScreenTest {
         });
 
         // Modify the document
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_rotate))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_rotate))
                 .perform(ViewActions.click());
         // Modify the document
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_rotate))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_rotate))
                 .perform(ViewActions.click());
 
         // Click next
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         // Allow the activity to run a little for listeners to be invoked
@@ -597,12 +597,12 @@ public class ReviewScreenTest {
 
         // Rotate the document 5 times
         for (int i = 0; i < 5; i++) {
-            Espresso.onView(ViewMatchers.withId(R.id.gv_button_rotate))
+            Espresso.onView(ViewMatchers.withId(R.id.gc_button_rotate))
                     .perform(ViewActions.click());
         }
 
         // Click next
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         // Allow the activity to run a little for listeners to be invoked
@@ -624,7 +624,7 @@ public class ReviewScreenTest {
         startReviewActivity(TEST_JPEG, 90);
 
         // Rotate the document
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_rotate))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_rotate))
                 .perform(ViewActions.click())
                 .perform(ViewActions.click());
 

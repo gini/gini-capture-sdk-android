@@ -150,84 +150,84 @@ import androidx.appcompat.app.AppCompatActivity;
  * <ul>
  *
  * <li> <b>Document corner guides:</b> via the color resource named {@code
- * gv_camera_preview_corners}
+ * gc_camera_preview_corners}
  *
  * <li> <b>Camera trigger button:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_camera_trigger_default.png} and {@code gv_camera_trigger_pressed.png}
+ * gc_camera_trigger_default.png} and {@code gc_camera_trigger_pressed.png}
  *
  * <li> <b>Document import button:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
- * {@code gv_document_import_icon.png}
+ * {@code gc_document_import_icon.png}
  *
  * <li> <b>Document import button subtitle text:</b> via the string resource named {@code
- * gv_camera_document_import_subtitle}
+ * gc_camera_document_import_subtitle}
  *
  * <li> <b>Document import button subtitle text style:</b> via overriding the style named {@code
  * GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle}
  *
  * <li> <b>Document import button subtitle font:</b> via overriding the style named {@code
  * GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle} and setting an item named {@code
- * gvCustomFont} with the path to the font file in your {@code assets} folder
+ * gcCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Document import hint background:</b> via the color resource named {@code
- * gv_document_import_hint_background}
+ * gc_document_import_hint_background}
  *
  * <li> <b>Document import hint close icon color:</b> via the color resource name {@code
- * gv_hint_close}
+ * gc_hint_close}
  *
  * <li> <b>Document import hint text:</b> via the string resource named {@code
- * gv_document_import_hint_text}
+ * gc_document_import_hint_text}
  *
  * <li> <b>Document import hint text size:</b>  via overriding the style named {@code
  * GiniCaptureTheme.Camera.DocumentImportHint.TextStyle} and setting an item named {@code
  * android:textSize} with the desired {@code sp} size
  *
  * <li> <b>Document import hint text color:</b> via the color resource name {@code
- * gv_document_import_hint_text}
+ * gc_document_import_hint_text}
  *
  * <li> <b>Document import hint font:</b> via overriding the style named {@code
  * GiniCaptureTheme.Camera.DocumentImportHint.TextStyle} and setting an item named {@code
- * gvCustomFont} with the path to the font file in your {@code assets} folder
+ * gcCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Images stack badge text style:</b> via overriding the style named {@code
  * GiniCaptureTheme.Camera.ImageStackBadge.TextStyle}
  *
  * <li> <b>Images stack badge font:</b> via overriding the style named {@code
- * GiniCaptureTheme.Camera.ImageStackBadge.TextStyle} and setting an item named {@code gvCustomFont}
+ * GiniCaptureTheme.Camera.ImageStackBadge.TextStyle} and setting an item named {@code gcCustomFont}
  * with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Images stack badge background colors:</b> via the color resources named {@code
- * gv_camera_image_stack_badge_background} and {@code gv_camera_image_stack_badge_background_border}
+ * gc_camera_image_stack_badge_background} and {@code gc_camera_image_stack_badge_background_border}
  *
  * <li> <b>Images stack badge background size:</b> via the dimension resource named {@code
- * gv_camera_image_stack_badge_size}
+ * gc_camera_image_stack_badge_size}
  *
  * <li> <b>Images stack subtitle text:</b> via the string resource named {@code
- * gv_camera_image_stack_subtitle}
+ * gc_camera_image_stack_subtitle}
  *
  * <li> <b>Images stack subtitle text style:</b> via overriding the style named {@code
  * GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle}
  *
  * <li> <b>Images stack subtitle font:</b> via overriding the style named {@code
  * GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle} and setting an item named {@code
- * gvCustomFont} with the path to the font file in your {@code assets} folder
+ * gcCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Multi-page document page limit exceeded alert message:</b> via the string resource named {@code
- * gv_document_error_too_many_pages}
+ * gc_document_error_too_many_pages}
  *
  * <li> <b>Multi-page document page limit exceeded alert positive button text:</b> via the string resource named
- * {@code gv_document_error_multi_page_limit_review_pages_button}
+ * {@code gc_document_error_multi_page_limit_review_pages_button}
  *
  * <li> <b>Multi-page document page limit exceeded alert cancel button text:</b> via the string resource named
- * {@code gv_document_error_multi_page_limit_cancel_button}
+ * {@code gc_document_error_multi_page_limit_cancel_button}
  *
  * <li> <b>Read storage permission denied button color:</b> via the color resource named {@code
- * gv_accent}
+ * gc_accent}
  *
  * <li> <b>QRCode detected popup background:</b> via the color resource named {@code
- * gv_qrcode_detected_popup_background}
+ * gc_qrcode_detected_popup_background}
  *
  * <li> <b>QRCode detected popup texts:</b> via the string resources named {@code
- * gv_qrcode_detected_popup_message_1} and {@code gv_qrcode_detected_popup_message_2}
+ * gc_qrcode_detected_popup_message_1} and {@code gc_qrcode_detected_popup_message_2}
  *
  * <li> <b>QRCode detected popup text sizes:</b>  via overriding the styles named {@code
  * GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle} and {@code
@@ -235,61 +235,61 @@ import androidx.appcompat.app.AppCompatActivity;
  * android:textSize} with the desired {@code sp} size
  *
  * <li> <b>QRCode detected popup text colors:</b> via the color resource name {@code
- * gv_qrcode_detected_popup_message_1} and {@code gv_qrcode_detected_popup_message_2}
+ * gc_qrcode_detected_popup_message_1} and {@code gc_qrcode_detected_popup_message_2}
  *
  * <li> <b>QRCode detected popup fonts:</b>  via overriding the styles named {@code
  * GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle} and {@code
  * GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle} and setting an item named {@code
- * gvCustomFont} with the path to the font file in your {@code assets} folder
+ * gcCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>Read storage permission rationale text:</b> via the string resource named {@code
- * gv_storage_permission_rationale}
+ * gc_storage_permission_rationale}
  *
  * <li> <b>Read storage permission rationale positive button text:</b> via the string resource named
- * {@code gv_storage_permission_rationale_positive_button}
+ * {@code gc_storage_permission_rationale_positive_button}
  *
  * <li> <b>Read storage permission rationale negative button text:</b> via the string resource named
- * {@code gv_storage_permission_rationale_negative_button}
+ * {@code gc_storage_permission_rationale_negative_button}
  *
  * <li> <b>Read storage permission rationale button color:</b> via the color resource named {@code
- * gv_accent}
+ * gc_accent}
  *
  * <li> <b>Read storage permission denied text:</b> via the string resource named {@code
- * gv_storage_permission_denied}
+ * gc_storage_permission_denied}
  *
  * <li> <b>Read storage permission denied positive button text:</b> via the string resource named
- * {@code gv_storage_permission_denied_positive_button}
+ * {@code gc_storage_permission_denied_positive_button}
  *
  * <li> <b>Read storage permission denied negative button text:</b> via the string resource named
- * {@code gv_storage_permission_denied_negative_button}
+ * {@code gc_storage_permission_denied_negative_button}
  *
  * <li> <b>Read storage permission denied button color:</b> via the color resource named {@code
- * gv_accent}
+ * gc_accent}
  *
  * <li> <b>Tap-to-focus indicator:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
- * {@code gv_camera_focus_indicator.png}
+ * {@code gc_camera_focus_indicator.png}
  *
  * <li> <b>Help menu item icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_help_icon.png}
+ * gc_help_icon.png}
  *
- * <li> <b>Onboarding menu item title:</b> via the string resource named {@code gv_show_onboarding}
+ * <li> <b>Onboarding menu item title:</b> via the string resource named {@code gc_show_onboarding}
  *
- * <li> <b>Background color:</b> via the color resource named {@code gv_background}. <b>Note:</b>
+ * <li> <b>Background color:</b> via the color resource named {@code gc_background}. <b>Note:</b>
  * this color resource is global to all Activities ({@link CameraActivity}, {@link
  * OnboardingActivity}, {@link ReviewActivity}, {@link AnalysisActivity})
  *
  * <li> <b>No-camera icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_no_camera.png}
+ * gc_no_camera.png}
  *
  * <li> <b>No camera permission text:</b> via the string resource named {@code
- * gv_camera_error_no_permission}
+ * gc_camera_error_no_permission}
  *
  * <li> <b>No camera permission text color:</b> via the color resource named {@code
- * gv_camera_error_no_permission}
+ * gc_camera_error_no_permission}
  *
  * <li> <b>No camera permission font:</b> via overriding the style named {@code
  * GiniCaptureTheme.Camera.Error.NoPermission.TextStyle} and setting an item named {@code
- * gvCustomFont} with the path to the font file in your {@code assets} folder
+ * gcCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>No camera permission text style:</b> via overriding the style named {@code
  * GiniCaptureTheme.Camera.Error.NoPermission.TextStyle} and setting an item named {@code
@@ -300,14 +300,14 @@ import androidx.appcompat.app.AppCompatActivity;
  * android:textSize} to the desired {@code sp} size
  *
  * <li> <b>No camera permission button title:</b> via the string resource named {@code
- * gv_camera_error_no_permission_button_title}
+ * gc_camera_error_no_permission_button_title}
  *
  * <li> <b>No camera permission button title color:</b> via the color resources named {@code
- * gv_camera_error_no_permission_button_title} and {@code gv_camera_error_no_permission_button_title_pressed}
+ * gc_camera_error_no_permission_button_title} and {@code gc_camera_error_no_permission_button_title_pressed}
  *
  * <li> <b>No camera permission button font:</b> via overriding the style named {@code
  * GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle} and setting an item named {@code
- * gvCustomFont} with the path to the font file in your {@code assets} folder
+ * gcCustomFont} with the path to the font file in your {@code assets} folder
  *
  * <li> <b>No camera permission button text style:</b> via overriding the style named {@code
  * GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle} and setting an item named {@code
@@ -334,15 +334,15 @@ import androidx.appcompat.app.AppCompatActivity;
  *
  * <ul>
  *
- * <li> <b>Background color:</b> via the color resource named {@code gv_action_bar} (highly
- * recommended for Android 5+: customize the status bar color via {@code gv_status_bar})
+ * <li> <b>Background color:</b> via the color resource named {@code gc_action_bar} (highly
+ * recommended for Android 5+: customize the status bar color via {@code gc_status_bar})
  *
- * <li> <b>Title:</b> via the string resource name {@code gv_title_camera}
+ * <li> <b>Title:</b> via the string resource name {@code gc_title_camera}
  *
- * <li> <b>Title color:</b> via the color resource named {@code gv_action_bar_title}
+ * <li> <b>Title color:</b> via the color resource named {@code gc_action_bar_title}
  *
  * <li> <b>Back button:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
- * {@code gv_action_bar_back}
+ * {@code gc_action_bar_back}
  *
  * </ul>
  **/
@@ -359,7 +359,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
      * of the {@link CameraActivity}'s result Intent.
      */
-    public static final String EXTRA_IN_REVIEW_ACTIVITY = "GV_EXTRA_IN_REVIEW_ACTIVITY";
+    public static final String EXTRA_IN_REVIEW_ACTIVITY = "GC_EXTRA_IN_REVIEW_ACTIVITY";
     /**
      * <p> Mandatory extra which must contain an explicit Intent to the {@link AnalysisActivity}
      * subclass from your application. </p> <p> Use the {@link CameraActivity#setAnalysisActivityExtra(Intent,
@@ -370,14 +370,14 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
      * of the {@link CameraActivity}'s result Intent.
      */
-    public static final String EXTRA_IN_ANALYSIS_ACTIVITY = "GV_EXTRA_IN_ANALYSIS_ACTIVITY";
+    public static final String EXTRA_IN_ANALYSIS_ACTIVITY = "GC_EXTRA_IN_ANALYSIS_ACTIVITY";
     /**
      * Optional extra which must contain an {@code ArrayList} with {@link OnboardingPage} objects.
      *
      * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
      * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
-    public static final String EXTRA_IN_ONBOARDING_PAGES = "GV_EXTRA_IN_ONBOARDING_PAGES";
+    public static final String EXTRA_IN_ONBOARDING_PAGES = "GC_EXTRA_IN_ONBOARDING_PAGES";
     /**
      * <p> Optional extra which must contain a boolean and indicates whether the Onboarding Screen
      * should be shown when the Gini Capture SDK is started for the first time. </p> <p> Default
@@ -387,7 +387,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
     public static final String EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN =
-            "GV_EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN";
+            "GC_EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN";
     /**
      * <p> Optional extra which must contain a boolean and indicates whether the Onboarding Screen
      * should be shown when the Gini Capture SDK is started. </p> <p> Default value is {@code
@@ -396,7 +396,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
      * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
-    public static final String EXTRA_IN_SHOW_ONBOARDING = "GV_EXTRA_IN_SHOW_ONBOARDING";
+    public static final String EXTRA_IN_SHOW_ONBOARDING = "GC_EXTRA_IN_SHOW_ONBOARDING";
 
     /**
      * <p> Optional extra wich must contain a boolean and indicates whether the back button should
@@ -406,7 +406,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * removed in a future version.
      */
     public static final String EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY =
-            "GV_EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY";
+            "GC_EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY";
 
     /**
      * Optional extra which must contain a {@link GiniCaptureFeatureConfiguration} instance.
@@ -415,19 +415,19 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
     public static final String EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION =
-            "GV_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
+            "GC_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
 
     /**
      * <p> Returned when the result code is {@link CameraActivity#RESULT_ERROR} and contains a
      * {@link GiniCaptureError} object detailing what went wrong. </p>
      */
-    public static final String EXTRA_OUT_ERROR = "GV_EXTRA_OUT_ERROR";
+    public static final String EXTRA_OUT_ERROR = "GC_EXTRA_OUT_ERROR";
 
     /**
      * Returned when extractions are available. Contains a Bundle with the extraction labels as keys
      * and {@link GiniCaptureSpecificExtraction} as values.
      */
-    public static final String EXTRA_OUT_EXTRACTIONS = "GV_EXTRA_OUT_EXTRACTIONS";
+    public static final String EXTRA_OUT_EXTRACTIONS = "GC_EXTRA_OUT_EXTRACTIONS";
 
     /**
      * <p> Returned result code in case something went wrong. You should retrieve the {@link
@@ -505,7 +505,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gv_activity_camera);
+        setContentView(R.layout.gc_activity_camera);
         readExtras();
         createGiniCaptureCoordinator();
         if (savedInstanceState == null) {
@@ -573,7 +573,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     private void showFragment() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.gv_fragment_camera, mFragment, CAMERA_FRAGMENT)
+                .add(R.id.gc_fragment_camera, mFragment, CAMERA_FRAGMENT)
                 .commit();
     }
 
@@ -645,7 +645,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      */
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.gv_camera, menu);
+        getMenuInflater().inflate(R.menu.gc_camera, menu);
         return true;
     }
 
@@ -656,7 +656,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      */
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (item.getItemId() == R.id.gv_action_show_onboarding) {
+        if (item.getItemId() == R.id.gc_action_show_onboarding) {
             startHelpActivity();
             return true;
         } else if (item.getItemId() == android.R.id.home) {

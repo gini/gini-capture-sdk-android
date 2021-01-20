@@ -66,10 +66,10 @@ public class FileChooserActivity extends AppCompatActivity implements AlertDialo
     private static final int REQ_CODE_CHOOSE_FILE = 1;
 
     public static final String EXTRA_IN_DOCUMENT_IMPORT_FILE_TYPES =
-            "GV_EXTRA_IN_DOCUMENT_IMPORT_FILE_TYPES";
+            "GC_EXTRA_IN_DOCUMENT_IMPORT_FILE_TYPES";
 
     public static final int RESULT_ERROR = RESULT_FIRST_USER + 1;
-    public static final String EXTRA_OUT_ERROR = "GV_EXTRA_OUT_ERROR";
+    public static final String EXTRA_OUT_ERROR = "GC_EXTRA_OUT_ERROR";
 
     public static final int GRID_SPAN_COUNT_PHONE = 3;
     public static final int GRID_SPAN_COUNT_TABLET = 6;
@@ -111,7 +111,7 @@ public class FileChooserActivity extends AppCompatActivity implements AlertDialo
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gv_activity_file_chooser);
+        setContentView(R.layout.gc_activity_file_chooser);
         bindViews();
         setInputHandlers();
         readExtras();
@@ -154,8 +154,8 @@ public class FileChooserActivity extends AppCompatActivity implements AlertDialo
     }
 
     private void bindViews() {
-        mLayoutRoot = findViewById(R.id.gv_layout_root);
-        mFileProvidersView = findViewById(R.id.gv_file_providers);
+        mLayoutRoot = findViewById(R.id.gc_layout_root);
+        mFileProvidersView = findViewById(R.id.gc_file_providers);
     }
 
     private void setInputHandlers() {
@@ -248,7 +248,7 @@ public class FileChooserActivity extends AppCompatActivity implements AlertDialo
         TransitionManager.beginDelayedTransition(mLayoutRoot, transition);
         final RelativeLayout.LayoutParams layoutParams =
                 (RelativeLayout.LayoutParams) mFileProvidersView.getLayoutParams();
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.gv_space);
+        layoutParams.addRule(RelativeLayout.BELOW, R.id.gc_space);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         mFileProvidersView.setLayoutParams(layoutParams);
         mFileProvidersView.setTag(false);
@@ -370,9 +370,9 @@ public class FileChooserActivity extends AppCompatActivity implements AlertDialo
 
     private void showStoragePermissionDeniedDialog() {
         final AlertDialogFragment dialogFragment = new AlertDialogFragment.Builder()
-                .setMessage(R.string.gv_storage_permission_denied)
-                .setPositiveButton(R.string.gv_storage_permission_denied_positive_button)
-                .setNegativeButton(R.string.gv_storage_permission_denied_negative_button)
+                .setMessage(R.string.gc_storage_permission_denied)
+                .setPositiveButton(R.string.gc_storage_permission_denied_positive_button)
+                .setNegativeButton(R.string.gc_storage_permission_denied_negative_button)
                 .setDialogId(PERMISSION_DENIED_DIALOG)
                 .disableCancelOnTouchOutside()
                 .create();
@@ -395,9 +395,9 @@ public class FileChooserActivity extends AppCompatActivity implements AlertDialo
 
     private void showStoragePermissionRationale() {
         final AlertDialogFragment dialogFragment = new AlertDialogFragment.Builder()
-                .setMessage(R.string.gv_storage_permission_rationale)
-                .setPositiveButton(R.string.gv_storage_permission_rationale_positive_button)
-                .setNegativeButton(R.string.gv_storage_permission_rationale_negative_button)
+                .setMessage(R.string.gc_storage_permission_rationale)
+                .setPositiveButton(R.string.gc_storage_permission_rationale_positive_button)
+                .setNegativeButton(R.string.gc_storage_permission_rationale_negative_button)
                 .setDialogId(PERMISSION_RATIONALE_DIALOG)
                 .disableCancelOnTouchOutside()
                 .create();
@@ -450,7 +450,7 @@ public class FileChooserActivity extends AppCompatActivity implements AlertDialo
         if (!imagePickerResolveInfos.isEmpty()
                 || !imageProviderResolveInfos.isEmpty()) {
             providerItems.add(new ProvidersSectionItem(
-                    getString(R.string.gv_file_chooser_fotos_section_header)));
+                    getString(R.string.gc_file_chooser_fotos_section_header)));
             final Intent imagePickerIntent = createImagePickerIntent();
             for (final ResolveInfo imagePickerResolveInfo : imagePickerResolveInfos) {
                 providerItems.add(new ProvidersAppItem(imagePickerIntent, imagePickerResolveInfo)); // NOPMD
@@ -469,7 +469,7 @@ public class FileChooserActivity extends AppCompatActivity implements AlertDialo
         final List<ProvidersItem> providerItems = new ArrayList<>();
         if (!pdfProviderResolveInfos.isEmpty()) {
             providerItems.add(new ProvidersSectionItem(
-                    getString(R.string.gv_file_chooser_pdfs_section_header)));
+                    getString(R.string.gc_file_chooser_pdfs_section_header)));
             final Intent getPdfDocumentIntent = createGetPdfDocumentIntent();
             for (final ResolveInfo pdfProviderResolveInfo : pdfProviderResolveInfos) {
                 providerItems.add(

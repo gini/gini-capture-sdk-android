@@ -64,9 +64,9 @@ public class OnboardingScreenTest {
     @Test
     public void should_showCustomPages_whenSet() throws InterruptedException {
         final ArrayList<OnboardingPage> customPages = new ArrayList<>(1);
-        customPages.add(new OnboardingPage(R.string.gv_title_camera, R.drawable.gv_camera_trigger));
+        customPages.add(new OnboardingPage(R.string.gc_title_camera, R.drawable.gc_camera_trigger));
         customPages.add(
-                new OnboardingPage(R.string.gv_title_review, R.drawable.gv_review_button_rotate));
+                new OnboardingPage(R.string.gc_title_review, R.drawable.gc_review_button_rotate));
 
         final Intent intent = getOnboardingActivityIntent();
         intent.putExtra(OnboardingActivity.EXTRA_ONBOARDING_PAGES, customPages);
@@ -76,22 +76,22 @@ public class OnboardingScreenTest {
         Thread.sleep(TEST_PAUSE_DURATION);
 
         // Verify the first page
-        Espresso.onView(ViewMatchers.withText(R.string.gv_title_camera))
+        Espresso.onView(ViewMatchers.withText(R.string.gc_title_camera))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
         // Go to the second page
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         // Give some time for paging animation to finish
         Thread.sleep(TEST_PAUSE_DURATION);
 
         // Verify the second page
-        Espresso.onView(ViewMatchers.withText(R.string.gv_title_review))
+        Espresso.onView(ViewMatchers.withText(R.string.gc_title_review))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
         // Click the next button again to finish
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         // Give some time for paging animation to finish
@@ -103,9 +103,9 @@ public class OnboardingScreenTest {
     @Test
     public void should_showCustomPages_whenSetUsingGiniCapture() throws InterruptedException {
         final ArrayList<OnboardingPage> customPages = new ArrayList<>(1);
-        customPages.add(new OnboardingPage(R.string.gv_title_camera, R.drawable.gv_camera_trigger));
+        customPages.add(new OnboardingPage(R.string.gc_title_camera, R.drawable.gc_camera_trigger));
         customPages.add(
-                new OnboardingPage(R.string.gv_title_review, R.drawable.gv_review_button_rotate));
+                new OnboardingPage(R.string.gc_title_review, R.drawable.gc_review_button_rotate));
 
         GiniCapture.newInstance()
                 .setCustomOnboardingPages(customPages)
@@ -118,22 +118,22 @@ public class OnboardingScreenTest {
         Thread.sleep(TEST_PAUSE_DURATION);
 
         // Verify the first page
-        Espresso.onView(ViewMatchers.withText(R.string.gv_title_camera))
+        Espresso.onView(ViewMatchers.withText(R.string.gc_title_camera))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
         // Go to the second page
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         // Give some time for paging animation to finish
         Thread.sleep(TEST_PAUSE_DURATION);
 
         // Verify the second page
-        Espresso.onView(ViewMatchers.withText(R.string.gv_title_review))
+        Espresso.onView(ViewMatchers.withText(R.string.gc_title_review))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
         // Click the next button again to finish
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_next))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_next))
                 .perform(ViewActions.click());
 
         // Give some time for paging animation to finish
@@ -147,7 +147,7 @@ public class OnboardingScreenTest {
         startOnboardingActivity();
 
         // ViewPager should contain the default pages and an empty last page
-        Espresso.onView(ViewMatchers.withId(R.id.gv_onboarding_viewpager))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_onboarding_viewpager))
                 .check(ViewAssertions.matches(EspressoMatchers.hasPageCount(
                         getDefaultPages().length + 1)));
     }

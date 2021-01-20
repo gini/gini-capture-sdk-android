@@ -82,11 +82,11 @@ public class ThumbnailsAdapter extends
         switch (type) {
             case THUMBNAIL:
                 view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.gv_item_multi_page_thumbnail, parent, false);
+                        .inflate(R.layout.gc_item_multi_page_thumbnail, parent, false);
                 break;
             case PLUS_BUTTON:
                 view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.gv_item_multi_page_plus_button, parent, false);
+                        .inflate(R.layout.gc_item_multi_page_plus_button, parent, false);
                 break;
             default:
                 throw new IllegalStateException("Unknown view type " + type);
@@ -423,16 +423,16 @@ public class ThumbnailsAdapter extends
 
         ViewHolder(@NonNull final View itemView, @NonNull final ViewType viewType) {
             super(itemView);
-            thumbnailContainer = itemView.findViewById(R.id.gv_thumbnail_container);
-            badge = itemView.findViewById(R.id.gv_badge);
-            highlight = itemView.findViewById(R.id.gv_highlight);
-            handle = itemView.findViewById(R.id.gv_handle);
-            activityIndicator = itemView.findViewById(R.id.gv_activity_indicator);
+            thumbnailContainer = itemView.findViewById(R.id.gc_thumbnail_container);
+            badge = itemView.findViewById(R.id.gc_badge);
+            highlight = itemView.findViewById(R.id.gc_highlight);
+            handle = itemView.findViewById(R.id.gc_handle);
+            activityIndicator = itemView.findViewById(R.id.gc_activity_indicator);
             this.viewType = viewType;
             uploadResultIconBackground = itemView.findViewById(
-                    R.id.gv_upload_result_icon_background);
+                    R.id.gc_upload_result_icon_background);
             uploadResultIconForeground = itemView.findViewById(
-                    R.id.gv_upload_result_icon_foreground);
+                    R.id.gc_upload_result_icon_foreground);
         }
 
         void showActivityIndicator() {
@@ -483,13 +483,13 @@ public class ThumbnailsAdapter extends
             }
             uploadResultIconBackground.setVisibility(View.VISIBLE);
             uploadResultIconBackground.setImageResource(
-                    R.drawable.gv_multi_page_upload_success_icon_background);
+                    R.drawable.gc_multi_page_upload_success_icon_background);
             uploadResultIconForeground.setVisibility(View.VISIBLE);
             uploadResultIconForeground.setImageResource(
-                    R.drawable.gv_multi_page_upload_success_icon_foreground);
+                    R.drawable.gc_multi_page_upload_success_icon_foreground);
             final int tintColor = ContextCompat.getColor(
                     itemView.getContext(),
-                    R.color.gv_multi_page_thumbnail_upload_success_icon_foreground);
+                    R.color.gc_multi_page_thumbnail_upload_success_icon_foreground);
             uploadResultIconForeground.setColorFilter(tintColor, PorterDuff.Mode.MULTIPLY);
         }
 
@@ -500,13 +500,13 @@ public class ThumbnailsAdapter extends
             }
             uploadResultIconBackground.setVisibility(View.VISIBLE);
             uploadResultIconBackground.setImageResource(
-                    R.drawable.gv_multi_page_upload_failure_icon_background);
+                    R.drawable.gc_multi_page_upload_failure_icon_background);
             uploadResultIconForeground.setVisibility(View.VISIBLE);
             uploadResultIconForeground.setImageResource(
-                    R.drawable.gv_multi_page_upload_failure_icon_foreground);
+                    R.drawable.gc_multi_page_upload_failure_icon_foreground);
             final int tintColor = ContextCompat.getColor(
                     itemView.getContext(),
-                    R.color.gv_multi_page_thumbnail_upload_failure_icon_foreground);
+                    R.color.gc_multi_page_thumbnail_upload_failure_icon_foreground);
             uploadResultIconForeground.setColorFilter(tintColor, PorterDuff.Mode.MULTIPLY);
         }
     }

@@ -12,9 +12,9 @@ import androidx.test.uiautomator.UiSelector;
 public class ReviewScreen implements Screen {
 
     private static final String ROTATE_BUTTON_RES_ID =
-            "net.gini.android.vision.screenapiexample:id/gv_button_rotate";
+            "net.gini.android.vision.screenapiexample:id/gc_button_rotate";
     private static final String NEXT_BUTTON_RES_ID =
-            "net.gini.android.vision.screenapiexample:id/gv_button_next";
+            "net.gini.android.vision.screenapiexample:id/gc_button_next";
 
     private final UiDevice mUiDevice;
 

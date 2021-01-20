@@ -49,10 +49,10 @@ import static net.gini.android.vision.internal.util.ActivityHelper.forcePortrait
  *     The following items are customizable:
  * <ul>
  *     <li>
- *         <b>Background color:</b> via the color resource named {@code gv_help_activity_background}
+ *         <b>Background color:</b> via the color resource named {@code gc_help_activity_background}
  *     </li>
  *     <li>
- *         <b>Help list item background color:</b> via the color resource name {@code gv_help_item_background}
+ *         <b>Help list item background color:</b> via the color resource name {@code gc_help_item_background}
  *     </li>
  *     <li>
  *         <b>Help list item text style:</b> via overriding the style named {@code
@@ -79,17 +79,17 @@ import static net.gini.android.vision.internal.util.ActivityHelper.forcePortrait
  * The following items are customizable:
  * <ul>
  * <li>
- * <b>Background color:</b> via the color resource named {@code gv_action_bar} (highly recommended
- * for Android 5+: customize the status bar color via {@code gv_status_bar})
+ * <b>Background color:</b> via the color resource named {@code gc_action_bar} (highly recommended
+ * for Android 5+: customize the status bar color via {@code gc_status_bar})
  * </li>
  * <li>
- * <b>Title:</b> via the string resource name {@code gv_title_help}
+ * <b>Title:</b> via the string resource name {@code gc_title_help}
  * </li>
  * <li>
- * <b>Title color:</b> via the color resource named {@code gv_action_bar_title}
+ * <b>Title color:</b> via the color resource named {@code gc_action_bar_title}
  * </li>
  * <li><b>Back button:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
- * {@code gv_action_bar_back}
+ * {@code gc_action_bar_back}
  * </li>
  * </ul>
  * </p>
@@ -103,7 +103,7 @@ public class HelpActivity extends AppCompatActivity {
      * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
     public static final String EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION =
-            "GV_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
+            "GC_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
 
     private static final Logger LOG = LoggerFactory.getLogger(HelpActivity.class);
     private static final int PHOTO_TIPS_REQUEST = 1;
@@ -123,7 +123,7 @@ public class HelpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gv_activity_help);
+        setContentView(R.layout.gc_activity_help);
         readExtras();
         setUpHelpItems();
         forcePortraitOrientationOnPhones(this);
@@ -162,7 +162,7 @@ public class HelpActivity extends AppCompatActivity {
     }
 
     private void setUpHelpItems() {
-        mRecyclerView = findViewById(R.id.gv_help_items);
+        mRecyclerView = findViewById(R.id.gc_help_items);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(new HelpItemsAdapter(mGiniCaptureFeatureConfiguration,
                 new HelpItemsAdapter.HelpItemSelectedListener() {

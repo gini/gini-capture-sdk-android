@@ -156,12 +156,12 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
             // (document.getData() may be null)
             final Intent intent = document.getIntent();
             if (intent == null) {
-                callback.documentRejected(mActivity.getString(R.string.gv_document_import_error));
+                callback.documentRejected(mActivity.getString(R.string.gc_document_import_error));
                 return;
             }
             final Uri uri = IntentHelper.getUri(intent);
             if (uri == null) {
-                callback.documentRejected(mActivity.getString(R.string.gv_document_import_error));
+                callback.documentRejected(mActivity.getString(R.string.gc_document_import_error));
                 return;
             }
             // IMPORTANT: always call one of the callback methods

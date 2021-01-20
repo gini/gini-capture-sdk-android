@@ -57,20 +57,20 @@ public class ProvidersAdapter extends RecyclerView.Adapter<ProvidersItemViewHold
     private ProvidersItemViewHolder createSectionItemViewHolder(
             @NonNull final ViewGroup parent) {
         final View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.gv_item_file_provider_section, parent, false);
+                .inflate(R.layout.gc_item_file_provider_section, parent, false);
         return new ProvidersSectionItemViewHolder(itemView);
     }
 
     @NonNull
     private ProvidersItemViewHolder createAppItemViewHolder(@NonNull final ViewGroup parent) {
         final View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.gv_item_file_provider_app, parent, false);
+                .inflate(R.layout.gc_item_file_provider_app, parent, false);
         return new ProvidersAppItemViewHolder(itemView);
     }
 
     private ProvidersItemViewHolder createSeparatorItemViewHolder(@NonNull final ViewGroup parent) {
         final View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.gv_item_file_provider_separator, parent, false);
+                .inflate(R.layout.gc_item_file_provider_separator, parent, false);
         return new ProvidersSeparatorItemViewHolder(itemView);
     }
 
@@ -125,8 +125,8 @@ public class ProvidersAdapter extends RecyclerView.Adapter<ProvidersItemViewHold
 
         ProvidersAppItemViewHolder(@NonNull final View itemView) {
             super(itemView, ProvidersItem.FileProviderItemType.APP);
-            icon = itemView.findViewById(R.id.gv_app_icon);
-            label = itemView.findViewById(R.id.gv_app_label);
+            icon = itemView.findViewById(R.id.gc_app_icon);
+            label = itemView.findViewById(R.id.gc_app_label);
         }
     }
 
@@ -137,7 +137,7 @@ public class ProvidersAdapter extends RecyclerView.Adapter<ProvidersItemViewHold
 
         ProvidersSectionItemViewHolder(final View itemView) {
             super(itemView, ProvidersItem.FileProviderItemType.SECTION);
-            sectionTitle = itemView.findViewById(R.id.gv_section_title);
+            sectionTitle = itemView.findViewById(R.id.gc_section_title);
         }
     }
 

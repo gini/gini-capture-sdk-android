@@ -14,11 +14,11 @@ import androidx.test.uiautomator.UiSelector;
 public class CameraScreen implements Screen {
 
     private static final String NEXT_BUTTON_RES_ID =
-            "net.gini.android.vision.screenapiexample:id/gv_button_next";
+            "net.gini.android.vision.screenapiexample:id/gc_button_next";
     private static final String TRIGGER_BUTTON_RES_ID =
-            "net.gini.android.vision.screenapiexample:id/gv_button_camera_trigger";
+            "net.gini.android.vision.screenapiexample:id/gc_button_camera_trigger";
     private static final String ONBOARDING_BUTTON_RES_ID =
-            "net.gini.android.vision.screenapiexample:id/gv_action_show_onboarding";
+            "net.gini.android.vision.screenapiexample:id/gc_action_show_onboarding";
 
     private final UiDevice mUiDevice;
 

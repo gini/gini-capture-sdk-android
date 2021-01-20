@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 /**
  * Internal use only.
  *
- * Custom Button with an additional 'gvCustomFont' attribute. System font names or font file paths (full path in the assets folder)
+ * Custom Button with an additional 'gcCustomFont' attribute. System font names or font file paths (full path in the assets folder)
  * can be used.
  *
  * <pre> {@code
@@ -22,13 +22,13 @@ import android.util.AttributeSet;
  *           android:id="@+id/giniTextView"
  *           android:layout_width="wrap_content"
  *           android:layout_height="wrap_content"
- *           gini:gvCustomFont="sans-serif-light" />
+ *           gini:gcCustomFont="sans-serif-light" />
  *   </LinearLayout>
  * }</pre>
  *
  * <pre> {@code
  *  <net.gini.android.vision.ui.CustomFontButton
- *      gini:gvCustomFont="myFonts/Cave-Story.ttf" />
+ *      gini:gcCustomFont="myFonts/Cave-Story.ttf" />
  * }</pre>
  *
  * @suppress

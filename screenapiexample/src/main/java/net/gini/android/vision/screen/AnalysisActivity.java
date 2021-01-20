@@ -59,7 +59,7 @@ public class AnalysisActivity extends net.gini.android.vision.analysis.AnalysisA
                             message += exception.getMessage();
                         }
                         final DocumentAnalyzer.Listener listener = this;
-                        showError(message, getString(net.gini.android.vision.R.string.gv_document_analysis_error_retry),
+                        showError(message, getString(net.gini.android.vision.R.string.gc_document_analysis_error_retry),
                                 new View.OnClickListener() {
                                     @Override
                                     public void onClick(final View v) {

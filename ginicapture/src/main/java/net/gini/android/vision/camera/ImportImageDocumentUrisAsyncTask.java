@@ -55,14 +55,14 @@ class ImportImageDocumentUrisAsyncTask extends AbstractImportImageUrisAsyncTask 
     protected void onError(@NonNull final ImageMultiPageDocument multiPageDocument,
             @NonNull final ImportedFileValidationException exception) {
         addMultiPageDocumentError(getContext().getString(
-                R.string.gv_document_import_invalid_document), multiPageDocument);
+                R.string.gc_document_import_invalid_document), multiPageDocument);
     }
 
     @Override
     protected boolean shouldHaltOnError(@NonNull final ImageMultiPageDocument multiPageDocument,
             @NonNull final ImportedFileValidationException exception) {
         addMultiPageDocumentError(getContext().getString(
-                R.string.gv_document_import_invalid_document), multiPageDocument);
+                R.string.gc_document_import_invalid_document), multiPageDocument);
         return false;
     }
 

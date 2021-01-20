@@ -35,7 +35,7 @@ ReviewActivity
 ### GVL 2.5.0 and older
 
 The `ReviewActivity` handles the events from the Review Screen. As it is a subclass of the Gini Capture SDK's `ReviewActivity` you have
-to declare it in your `AndroidManifest.xml`. We recommend setting the title to `gv_title_review`, limit the orientation to portrait and use
+to declare it in your `AndroidManifest.xml`. We recommend setting the title to `gc_title_review`, limit the orientation to portrait and use
 the `GiniCaptureTheme`
 
 It starts analyzing the taken picture in `ReviewActivity#onShouldAnalyzeDocument()` while the user reviews the picture. If the picture was
@@ -72,7 +72,7 @@ AnalysisActivity
 ### GVL 2.5.0 and older
 
 The `AnalysisActivity` handles the Analysis Screen's events. As it is a subclass of the Gini Capture SDK's `AnalysisActivity` you have to
-declare it in your `AndroidManifest.xml`. We recommend setting the title to `gv_title_analysis` and use the `GiniCaptureTheme`.
+declare it in your `AndroidManifest.xml`. We recommend setting the title to `gc_title_analysis` and use the `GiniCaptureTheme`.
 
 The analysis is started or resumed in `AnalysisActivity#onAnalyzeDocument()` (if an error message was given, this method is called only when
 the user clicks the retry button). Notifying the base class about successful completion of the analysis is done similarly as in the

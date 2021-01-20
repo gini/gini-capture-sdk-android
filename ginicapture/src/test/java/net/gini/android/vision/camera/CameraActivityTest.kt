@@ -63,7 +63,7 @@ class CameraActivityTest {
             // When
             scenario.onActivity {activity ->
                 val menuItem = mock<MenuItem>()
-                whenever(menuItem.itemId).thenReturn(R.id.gv_action_show_onboarding)
+                whenever(menuItem.itemId).thenReturn(R.id.gc_action_show_onboarding)
                 activity.onOptionsItemSelected(menuItem)
 
                 // Then

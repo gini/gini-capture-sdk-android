@@ -36,7 +36,7 @@ public class ImageDiskStore {
     private static final Logger LOG = LoggerFactory.getLogger(ImageDiskStore.class);
 
     @VisibleForTesting
-    static final String STORE_DIR = "gv-images";
+    static final String STORE_DIR = "gc-images";
 
     @Nullable
     public Uri save(@NonNull final Context context, @NonNull final byte[] bytes) {

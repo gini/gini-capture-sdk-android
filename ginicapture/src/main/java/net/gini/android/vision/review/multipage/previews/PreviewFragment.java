@@ -34,8 +34,8 @@ public class PreviewFragment extends Fragment {
 
     private static final Logger LOG = LoggerFactory.getLogger(PreviewFragment.class);
 
-    private static final String ARGS_DOCUMENT = "GV_ARGS_DOCUMENT";
-    private static final String ARGS_ERROR_MESSAGE = "GV_ARGS_ERROR_MESSAGE";
+    private static final String ARGS_DOCUMENT = "GC_ARGS_DOCUMENT";
+    private static final String ARGS_ERROR_MESSAGE = "GC_ARGS_ERROR_MESSAGE";
     private static final String ARGS_ERROR_BUTTON_ACTION = "ARGS_ERROR_BUTTON_ACTION";
     private static final String PARCELABLE_MEMORY_CACHE_TAG = "PAGE_PREVIEW_FRAGMENT";
 
@@ -81,10 +81,10 @@ public class PreviewFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.gv_item_multi_page_preview, container,
+        final View view = inflater.inflate(R.layout.gc_item_multi_page_preview, container,
                 false);
-        mImageViewContainer = view.findViewById(R.id.gv_image_container);
-        mActivityIndicator = view.findViewById(R.id.gv_activity_indicator);
+        mImageViewContainer = view.findViewById(R.id.gc_image_container);
+        mActivityIndicator = view.findViewById(R.id.gc_activity_indicator);
         return view;
     }
 
@@ -152,7 +152,7 @@ public class PreviewFragment extends Fragment {
             return;
         }
         ErrorSnackbar.make(context, (RelativeLayout) view, ErrorSnackbar.Position.TOP,
-                context.getString(R.string.gv_multi_page_review_image_preview_error),
+                context.getString(R.string.gc_multi_page_review_image_preview_error),
                 null, null, ErrorSnackbar.LENGTH_INDEFINITE)
                 .showWithoutAnimation();
     }
@@ -184,9 +184,9 @@ public class PreviewFragment extends Fragment {
 
     private String getErrorButtonTitle(@NonNull final Context context) {
         if (mErrorButtonAction == ErrorButtonAction.RETRY) {
-            return context.getString(R.string.gv_document_analysis_error_retry);
+            return context.getString(R.string.gc_document_analysis_error_retry);
         } else if (mErrorButtonAction == ErrorButtonAction.DELETE) {
-            return context.getString(R.string.gv_multi_page_review_delete_invalid_document);
+            return context.getString(R.string.gc_multi_page_review_delete_invalid_document);
         }
         return null;
     }

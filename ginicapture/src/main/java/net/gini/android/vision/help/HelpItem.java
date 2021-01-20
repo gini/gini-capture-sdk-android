@@ -16,10 +16,10 @@ public enum HelpItem {
      *     Shows tips for taking better pictures.
      * </p>
      * <p>
-     *     Item label customizable by overriding the string resource named {@code gv_help_item_photo_tips_title}
+     *     Item label customizable by overriding the string resource named {@code gc_help_item_photo_tips_title}
      * </p>
      */
-    PHOTO_TIPS(R.string.gv_help_item_photo_tips_title),
+    PHOTO_TIPS(R.string.gc_help_item_photo_tips_title),
     /**
      * <p>
      *     Shows a guide for importing files from other apps via "open with".
@@ -28,19 +28,19 @@ public enum HelpItem {
      *     <b>Important:</b> This item is shown only if file import was enabled with the {@link GiniCaptureFeatureConfiguration}.
      * </p>
      * <p>
-     *     Item label customizable by overriding the string resource named {@code gv_help_item_file_import_guide_title}
+     *     Item label customizable by overriding the string resource named {@code gc_help_item_file_import_guide_title}
      * </p>
      */
-    FILE_IMPORT_GUIDE(R.string.gv_help_item_file_import_guide_title),
+    FILE_IMPORT_GUIDE(R.string.gc_help_item_file_import_guide_title),
     /**
      * <p>
      *     Shows information about the document formats supported by the Gini Capture SDK.
      * </p>
      * <p>
-     *     Item label customizable by overriding the string resource named {@code gv_help_item_supported_formats_title}
+     *     Item label customizable by overriding the string resource named {@code gc_help_item_supported_formats_title}
      * </p>
      */
-    SUPPORTED_FORMATS(R.string.gv_help_item_supported_formats_title);
+    SUPPORTED_FORMATS(R.string.gc_help_item_supported_formats_title);
 
     @StringRes
     final int title;

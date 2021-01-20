@@ -35,7 +35,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * document and an activity indicator while the document is being analyzed by the Gini API.
  *
  * <p> <b>Note:</b> The title from the ActionBar was removed. Use the activity indicator message
- * instead by overriding the string resource named {@code gv_analysis_activity_indicator_message}. The message is displayed for images
+ * instead by overriding the string resource named {@code gc_analysis_activity_indicator_message}. The message is displayed for images
  * only.
  *
  * <p> For PDF documents the first page is shown (only on Android 5.0 Lollipop and newer) along with
@@ -93,20 +93,20 @@ import androidx.appcompat.app.AppCompatActivity;
  * <ul>
  *
  * <li> <b>Activity indicator color:</b> via the color resource named {@code
- * gv_analysis_activity_indicator}
+ * gc_analysis_activity_indicator}
  *
  * <li> <b>Activity indicator message:</b> via the string resource named {@code
- * gv_analysis_activity_indicator_message}
+ * gc_analysis_activity_indicator_message}
  *
  * <li> <b>Activity indicator message text style:</b> via overriding the style named {@code
  * GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle}
  *
  * <li> <b>Activity indicator message font:</b> via overriding the style named {@code
- * GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in
+ * GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle} and setting an item named {@code gcCustomFont} with the path to the font file in
  * your {@code assets} folder
  *
  * <li> <b>PDF info panel background:</b> via the color resource named {@code
- * gv_analysis_pdf_info_background}
+ * gc_analysis_pdf_info_background}
  *
  * <li> <b>PDF filename text style:</b> via overriding the style named {@code
  * GiniCaptureTheme.Analysis.PdfFilename.TextStyle} and setting an item named {@code android:textStyle} to {@code normal}, {@code bold} or
@@ -117,10 +117,10 @@ import androidx.appcompat.app.AppCompatActivity;
  * the desired maximum and minimum {@code sp} sizes
  *
  * <li> <b>PDF filename text color:</b> via the color resource named {@code
- * gv_analysis_pdf_info_text}
+ * gc_analysis_pdf_info_text}
  *
  * <li> <b>PDF filename font:</b> via overriding the style named {@code
- * GiniCaptureTheme.Analysis.PdfFilename.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your
+ * GiniCaptureTheme.Analysis.PdfFilename.TextStyle} and setting an item named {@code gcCustomFont} with the path to the font file in your
  * {@code assets} folder
  *
  * <li> <b>PDF page count text style:</b> via overriding the style named {@code
@@ -131,21 +131,21 @@ import androidx.appcompat.app.AppCompatActivity;
  * GiniCaptureTheme.Analysis.PdfPageCount.TextStyle} and setting an item named {@code android:textSize} to the desired {@code sp} size
  *
  * <li> <b>PDF page count text color:</b> via the color resource named {@code
- * gv_analysis_pdf_info_text}
+ * gc_analysis_pdf_info_text}
  *
  * <li> <b>PDF page count font:</b> via overriding the style named {@code
- * GiniCaptureTheme.Analysis.PdfPageCount.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your
+ * GiniCaptureTheme.Analysis.PdfPageCount.TextStyle} and setting an item named {@code gcCustomFont} with the path to the font file in your
  * {@code assets} folder
  *
- * <li> <b>Background color:</b> via the color resource named {@code gv_background}. <b>Note:</b>
+ * <li> <b>Background color:</b> via the color resource named {@code gc_background}. <b>Note:</b>
  * this color resource is global to all Activities ({@link CameraActivity}, {@link OnboardingActivity}, {@link ReviewActivity}, {@link
  * AnalysisActivity})
  *
  * <li> <b>Error message text color:</b> via the color resource named {@code
- * gv_snackbar_error_text}
+ * gc_snackbar_error_text}
  *
  * <li> <b>Error message font:</b> via overriding the style named {@code
- * GiniCaptureTheme.Snackbar.Error.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your {@code
+ * GiniCaptureTheme.Snackbar.Error.TextStyle} and setting an item named {@code gcCustomFont} with the path to the font file in your {@code
  * assets} folder
  *
  * <li> <b>Error message text style:</b> via overriding the style named {@code
@@ -156,10 +156,10 @@ import androidx.appcompat.app.AppCompatActivity;
  * GiniCaptureTheme.Snackbar.Error.TextStyle} and setting an item named {@code android:textSize} to the desired {@code sp} size
  *
  * <li> <b>Error message button text color:</b> via the color resource named {@code
- * gv_snackbar_error_button_title} and {@code gv_snackbar_error_button_title_pressed}
+ * gc_snackbar_error_button_title} and {@code gc_snackbar_error_button_title_pressed}
  *
  * <li> <b>Error message button font:</b> via overriding the style named {@code
- * GiniCaptureTheme.Snackbar.Error.Button.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your
+ * GiniCaptureTheme.Snackbar.Error.Button.TextStyle} and setting an item named {@code gcCustomFont} with the path to the font file in your
  * {@code assets} folder
  *
  * <li> <b>Error message button text style:</b> via overriding the style named {@code
@@ -170,10 +170,10 @@ import androidx.appcompat.app.AppCompatActivity;
  * GiniCaptureTheme.Snackbar.Error.Button.TextStyle} and setting an item named {@code android:textSize} to the desired {@code sp} size
  *
  * <li> <b>Error message background color:</b> via the color resource named {@code
- * gv_snackbar_error_background}
+ * gc_snackbar_error_background}
  *
  * <li> <b>Document analysis error message retry button text:</b> via the string resource named
- * {@code gv_document_analysis_error_retry}
+ * {@code gc_document_analysis_error_retry}
  *
  * </ul>
  *
@@ -191,11 +191,11 @@ import androidx.appcompat.app.AppCompatActivity;
  *
  * <ul>
  *
- * <li> <b>Background color:</b> via the color resource named {@code gv_action_bar} (highly
- * recommended for Android 5+: customize the status bar color via {@code gv_status_bar})
+ * <li> <b>Background color:</b> via the color resource named {@code gc_action_bar} (highly
+ * recommended for Android 5+: customize the status bar color via {@code gc_status_bar})
  *
  * <li> <b>Back button (only for {@link ReviewActivity} and {@link AnalysisActivity}):</b> via
- * images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code gv_action_bar_back}
+ * images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code gc_action_bar_back}
  *
  * </ul>
  */
@@ -207,20 +207,20 @@ public class AnalysisActivity extends AppCompatActivity implements
      *
      * @suppress
      */
-    public static final String EXTRA_IN_DOCUMENT = "GV_EXTRA_IN_DOCUMENT";
+    public static final String EXTRA_IN_DOCUMENT = "GC_EXTRA_IN_DOCUMENT";
     /**
      * Internal use only.
      *
      * @suppress
      */
     public static final String EXTRA_IN_DOCUMENT_ANALYSIS_ERROR_MESSAGE =
-            "GV_EXTRA_IN_DOCUMENT_ANALYSIS_ERROR_MESSAGE";
+            "GC_EXTRA_IN_DOCUMENT_ANALYSIS_ERROR_MESSAGE";
     /**
      * Internal use only.
      *
      * @suppress
      */
-    public static final String EXTRA_OUT_ERROR = "GV_EXTRA_OUT_ERROR";
+    public static final String EXTRA_OUT_ERROR = "GC_EXTRA_OUT_ERROR";
 
     /**
      * Internal use only.
@@ -290,7 +290,7 @@ public class AnalysisActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gv_activity_analysis);
+        setContentView(R.layout.gc_activity_analysis);
         setTitle("");
         readExtras();
         if (savedInstanceState == null) {
@@ -441,7 +441,7 @@ public class AnalysisActivity extends AppCompatActivity implements
     }
 
     private void showFragment() {
-        getSupportFragmentManager().beginTransaction().add(R.id.gv_fragment_analyze_document,
+        getSupportFragmentManager().beginTransaction().add(R.id.gc_fragment_analyze_document,
                 mFragment, ANALYSIS_FRAGMENT).commit();
     }
 

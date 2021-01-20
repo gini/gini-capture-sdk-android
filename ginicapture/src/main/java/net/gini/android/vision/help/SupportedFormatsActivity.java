@@ -40,7 +40,7 @@ import androidx.recyclerview.widget.RecyclerView;
  *     The following items are customizable:
  *     <ul>
  *         <li>
- *             <b>Background color:</b> via the color resource named {@code gv_supported_formats_activity_background}.
+ *             <b>Background color:</b> via the color resource named {@code gc_supported_formats_activity_background}.
  *         </li>
  *         <li>
  *             <b>Header text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle}
@@ -49,19 +49,19 @@ import androidx.recyclerview.widget.RecyclerView;
  *             <b>Format info text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle}
  *         </li>
  *         <li>
- *             <b>Format info list item background color:</b> via overriding the style named {@code gv_supported_formats_item_background}
+ *             <b>Format info list item background color:</b> via overriding the style named {@code gc_supported_formats_item_background}
  *         </li>
  *         <li>
- *             <b>Supported format background circle color:</b> via the color resource named {@code gv_supported_formats_item_supported_icon_background}
+ *             <b>Supported format background circle color:</b> via the color resource named {@code gc_supported_formats_item_supported_icon_background}
  *         </li>
  *         <li>
- *             <b>Supported format foreground tick color:</b> via the color resource named {@code gv_supported_formats_item_supported_icon_foreground}
+ *             <b>Supported format foreground tick color:</b> via the color resource named {@code gc_supported_formats_item_supported_icon_foreground}
  *         </li>
  *         <li>
- *             <b>Unsupported format background circle color:</b> via the color resource named {@code gv_supported_formats_item_unsupported_icon_background}
+ *             <b>Unsupported format background circle color:</b> via the color resource named {@code gc_supported_formats_item_unsupported_icon_background}
  *         </li>
  *         <li>
- *             <b>Unsupported format foreground cross color:</b> via the color resource named {@code gv_supported_formats_item_unsupported_icon_foreground}
+ *             <b>Unsupported format foreground cross color:</b> via the color resource named {@code gc_supported_formats_item_unsupported_icon_foreground}
  *         </li>
  *     </ul>
  * </p>
@@ -81,17 +81,17 @@ import androidx.recyclerview.widget.RecyclerView;
  * The following items are customizable:
  * <ul>
  * <li>
- * <b>Background color:</b> via the color resource named {@code gv_action_bar} (highly recommended
- * for Android 5+: customize the status bar color via {@code gv_status_bar})
+ * <b>Background color:</b> via the color resource named {@code gc_action_bar} (highly recommended
+ * for Android 5+: customize the status bar color via {@code gc_status_bar})
  * </li>
  * <li>
- * <b>Title:</b> via the string resource name {@code gv_title_supported_formats}
+ * <b>Title:</b> via the string resource name {@code gc_title_supported_formats}
  * </li>
  * <li>
- * <b>Title color:</b> via the color resource named {@code gv_action_bar_title}
+ * <b>Title color:</b> via the color resource named {@code gc_action_bar_title}
  * </li>
  * <li><b>Back button:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
- * {@code gv_action_bar_back}
+ * {@code gc_action_bar_back}
  * </li>
  * </ul>
  * </p>
@@ -105,14 +105,14 @@ public class SupportedFormatsActivity extends AppCompatActivity {
      * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
     public static final String EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION =
-            "GV_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
+            "GC_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
 
     private GiniCaptureFeatureConfiguration mGiniCaptureFeatureConfiguration;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gv_activity_supported_formats);
+        setContentView(R.layout.gc_activity_supported_formats);
         readExtras();
         setUpFormatsList();
         forcePortraitOrientationOnPhones(this);
@@ -138,7 +138,7 @@ public class SupportedFormatsActivity extends AppCompatActivity {
     }
 
     private void setUpFormatsList() {
-        final RecyclerView recyclerView = findViewById(R.id.gv_formats_list);
+        final RecyclerView recyclerView = findViewById(R.id.gc_formats_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new SupportedFormatsAdapter(mGiniCaptureFeatureConfiguration));
     }

@@ -41,7 +41,7 @@ public class FrameView extends View {
         super(context, attrs);
 
         mPaintLine = new Paint();
-        mPaintLine.setColor(ContextCompat.getColor(context, R.color.gv_camera_preview_corners));
+        mPaintLine.setColor(ContextCompat.getColor(context, R.color.gc_camera_preview_corners));
         mPaintLine.setStyle(Paint.Style.STROKE);
 
         setLineWidth(LINE_WIDTH);

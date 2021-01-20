@@ -29,8 +29,8 @@ public class OnboardingFragmentCompatTest {
     public void should_throwException_whenListener_wasNotSet() {
         // Given
         final ArrayList<OnboardingPage> pages = new ArrayList<>();
-        pages.add(new OnboardingPage(R.string.gv_onboarding_flat,
-                R.drawable.gv_onboarding_flat));
+        pages.add(new OnboardingPage(R.string.gc_onboarding_flat,
+                R.drawable.gc_onboarding_flat));
 
         final OnboardingFragmentCompat fragment = spy(
                 OnboardingFragmentCompat.createInstance(pages));

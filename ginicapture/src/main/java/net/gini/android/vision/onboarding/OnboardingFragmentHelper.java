@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 
 final class OnboardingFragmentHelper {
 
-    private static final String ARGS_PAGES = "GV_PAGES";
-    private static final String ARGS_SHOW_EMPTY_LAST_PAGE = "GV_SHOW_EMPTY_LAST_PAGE";
+    private static final String ARGS_PAGES = "GC_PAGES";
+    private static final String ARGS_SHOW_EMPTY_LAST_PAGE = "GC_SHOW_EMPTY_LAST_PAGE";
 
     static Bundle createArguments(@NonNull final ArrayList<OnboardingPage> pages, // NOPMD - Bundle
             final boolean showEmptyLastPage) {

@@ -130,7 +130,7 @@ public class CameraScreenTest {
         final Intent intent = getCameraActivityIntent();
         mCameraActivityIntentsTestRule.launchActivity(intent);
 
-        Espresso.onView(ViewMatchers.withId(R.id.gv_onboarding_viewpager))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_onboarding_viewpager))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
@@ -160,7 +160,7 @@ public class CameraScreenTest {
     public void should_notShowOnboarding_onFirstLaunch_ifDisabled() {
         startCameraActivityWithoutOnboarding();
 
-        Espresso.onView(ViewMatchers.withId(R.id.gv_onboarding_viewpager))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_onboarding_viewpager))
                 .check(ViewAssertions.doesNotExist());
     }
 
@@ -173,7 +173,7 @@ public class CameraScreenTest {
         final Intent intent = getCameraActivityIntent();
         mCameraActivityIntentsTestRule.launchActivity(intent);
 
-        Espresso.onView(ViewMatchers.withId(R.id.gv_onboarding_viewpager))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_onboarding_viewpager))
                 .check(ViewAssertions.doesNotExist());
     }
 
@@ -201,7 +201,7 @@ public class CameraScreenTest {
         intent.putExtra(CameraActivity.EXTRA_IN_SHOW_ONBOARDING, true);
         mCameraActivityIntentsTestRule.launchActivity(intent);
 
-        Espresso.onView(ViewMatchers.withId(R.id.gv_onboarding_viewpager))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_onboarding_viewpager))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
@@ -216,7 +216,7 @@ public class CameraScreenTest {
         final Intent intent = getCameraActivityIntent();
         mCameraActivityIntentsTestRule.launchActivity(intent);
 
-        Espresso.onView(ViewMatchers.withId(R.id.gv_onboarding_viewpager))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_onboarding_viewpager))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
@@ -225,7 +225,7 @@ public class CameraScreenTest {
             throws Exception {
         final ArrayList<OnboardingPage> onboardingPages = new ArrayList<>(1);
         onboardingPages.add(
-                new OnboardingPage(R.string.gv_onboarding_align, R.drawable.gv_onboarding_align));
+                new OnboardingPage(R.string.gc_onboarding_align, R.drawable.gc_onboarding_align));
 
         final Intent intent = getCameraActivityIntent();
         intent.putExtra(CameraActivity.EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN, false);
@@ -271,7 +271,7 @@ public class CameraScreenTest {
         // shown by default
         startCameraActivityWithoutOnboarding();
 
-        Espresso.onView(ViewMatchers.withId(R.id.gv_layout_camera_no_permission))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_layout_camera_no_permission))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
@@ -287,7 +287,7 @@ public class CameraScreenTest {
                 InstrumentationRegistry.getInstrumentation());
 
         // Open the Application Details in the Settings
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_camera_no_permission))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_camera_no_permission))
                 .perform(ViewActions.click());
 
         // Open the Permissions settings
@@ -305,12 +305,12 @@ public class CameraScreenTest {
         uiDevice.pressBack();
 
         // Verifiy that the no permission view was removed
-        Espresso.onView(ViewMatchers.withId(R.id.gv_layout_camera_no_permission))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_layout_camera_no_permission))
                 .check(ViewAssertions.matches(
                         ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
 
         // Verify that the camera preview is visible
-        Espresso.onView(ViewMatchers.withId(R.id.gv_camera_preview))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_camera_preview))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
@@ -319,7 +319,7 @@ public class CameraScreenTest {
     public void should_showReviewScreen_afterPictureWasTaken() throws InterruptedException {
         startCameraActivityWithoutOnboarding();
 
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_camera_trigger))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_camera_trigger))
                 .perform(ViewActions.click());
 
         // Give some time for the camera to take a picture
@@ -334,7 +334,7 @@ public class CameraScreenTest {
             throws InterruptedException {
         startCameraActivityWithoutOnboarding();
 
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_camera_trigger))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_camera_trigger))
                 .perform(ViewActions.doubleClick());
 
         // Give some time for the camera to take a picture
@@ -348,7 +348,7 @@ public class CameraScreenTest {
     public void should_passAnalysisActivityIntent_toReviewActivity() throws InterruptedException {
         startCameraActivityWithoutOnboarding();
 
-        Espresso.onView(ViewMatchers.withId(R.id.gv_button_camera_trigger))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_button_camera_trigger))
                 .perform(ViewActions.click());
 
         // Give some time for the camera to take a picture
@@ -420,7 +420,7 @@ public class CameraScreenTest {
         waitForWindowUpdate(uiDevice);
 
         final CameraActivity cameraActivity = startCameraActivityWithoutOnboarding();
-        final View cameraPreview = cameraActivity.findViewById(R.id.gv_camera_preview);
+        final View cameraPreview = cameraActivity.findViewById(R.id.gc_camera_preview);
         final int initialWidth = cameraPreview.getWidth();
         final int initialHeight = cameraPreview.getHeight();
 
@@ -431,7 +431,7 @@ public class CameraScreenTest {
         // Then
         // Preview should have the reverse aspect ratio
         Espresso.onView(
-                ViewMatchers.withId(R.id.gv_camera_preview)).check(
+                ViewMatchers.withId(R.id.gc_camera_preview)).check(
                 EspressoAssertions.hasSizeRatio((float) initialHeight / initialWidth));
     }
 
@@ -512,7 +512,7 @@ public class CameraScreenTest {
 
         // When
         Thread.sleep(PAUSE_DURATION);
-        Espresso.onView(ViewMatchers.withId(R.id.gv_qrcode_detected_popup_container))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_qrcode_detected_popup_container))
                 .perform(ViewActions.click());
 
         // Then
@@ -592,7 +592,7 @@ public class CameraScreenTest {
 
         // Then
         Thread.sleep(PAUSE_DURATION);
-        Espresso.onView(ViewMatchers.withId(R.id.gv_qrcode_detected_popup_container))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_qrcode_detected_popup_container))
                 .check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
     }
 
@@ -637,7 +637,7 @@ public class CameraScreenTest {
         final long hideDelay =
                 mCameraActivityFakeActivityTestRule.getActivity().getCameraFragmentImplFake().getHideQRCodeDetectedPopupDelayMs();
         Thread.sleep(hideDelay + CameraFragmentImpl.DEFAULT_ANIMATION_DURATION + 200);
-        Espresso.onView(ViewMatchers.withId(R.id.gv_qrcode_detected_popup_container))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_qrcode_detected_popup_container))
                 .check(ViewAssertions.matches(ViewMatchers.withAlpha(0)));
     }
 
@@ -694,7 +694,7 @@ public class CameraScreenTest {
 
         // Then
         Thread.sleep(CameraFragmentImpl.DEFAULT_ANIMATION_DURATION + 100);
-        Espresso.onView(ViewMatchers.withId(R.id.gv_qrcode_detected_popup_container))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_qrcode_detected_popup_container))
                 .check(ViewAssertions.matches(ViewMatchers.withAlpha(0)));
     }
 
@@ -725,7 +725,7 @@ public class CameraScreenTest {
 
         // Then
         Thread.sleep(CameraFragmentImpl.DEFAULT_ANIMATION_DURATION + 100);
-        Espresso.onView(ViewMatchers.withId(R.id.gv_qrcode_detected_popup_container))
+        Espresso.onView(ViewMatchers.withId(R.id.gc_qrcode_detected_popup_container))
                 .check(ViewAssertions.matches(ViewMatchers.withAlpha(0)));
     }
 

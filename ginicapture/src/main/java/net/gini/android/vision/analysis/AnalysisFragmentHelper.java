@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 
 final class AnalysisFragmentHelper {
 
-    private static final String ARGS_DOCUMENT = "GV_ARGS_DOCUMENT";
+    private static final String ARGS_DOCUMENT = "GC_ARGS_DOCUMENT";
     private static final String ARGS_DOCUMENT_ANALYSIS_ERROR_MESSAGE =
-            "GV_ARGS_DOCUMENT_ANALYSIS_ERROR_MESSAGE";
+            "GC_ARGS_DOCUMENT_ANALYSIS_ERROR_MESSAGE";
 
     public static Bundle createArguments(@NonNull final Document document,
             @Nullable final String documentAnalysisErrorMessage) {

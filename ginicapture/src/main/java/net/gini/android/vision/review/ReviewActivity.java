@@ -44,7 +44,7 @@ import androidx.appcompat.app.AppCompatActivity;
  *
  * <p> <b>Note:</b> When declaring your {@code ReviewActivity} subclass in the {@code
  * AndroidManifest.xml} you should set the theme to the {@code GiniCaptureTheme} and the title to the
- * string resource named {@code gv_title_review}. If you would like to use your own theme please
+ * string resource named {@code gc_title_review}. If you would like to use your own theme please
  * consider that {@code ReviewActivity} extends {@link AppCompatActivity} and requires an AppCompat
  * Theme.
  *
@@ -98,23 +98,23 @@ import androidx.appcompat.app.AppCompatActivity;
  * <ul>
  *
  * <li><b>Rotate button icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_review_button_rotate.png}
+ * gc_review_button_rotate.png}
  *
- * <li><b>Rotate button color:</b>  via the color resources named {@code gv_review_fab_mini} and
- * {@code gv_review_fab_mini_pressed}
+ * <li><b>Rotate button color:</b>  via the color resources named {@code gc_review_fab_mini} and
+ * {@code gc_review_fab_mini_pressed}
  *
  * <li><b>Next button icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_review_fab_next.png}
+ * gc_review_fab_next.png}
  *
- * <li><b>Next button color:</b> via the color resources named {@code gv_review_fab} and {@code
- * gv_review_fab_pressed}
+ * <li><b>Next button color:</b> via the color resources named {@code gc_review_fab} and {@code
+ * gc_review_fab_pressed}
  *
- * <li><b>Bottom advice text:</b> via the string resource named {@code gv_review_bottom_panel_text}
+ * <li><b>Bottom advice text:</b> via the string resource named {@code gc_review_bottom_panel_text}
  *
- * <li><b>Bottom text color:</b> via the color resource named {@code gv_review_bottom_panel_text}
+ * <li><b>Bottom text color:</b> via the color resource named {@code gc_review_bottom_panel_text}
  *
  * <li><b>Bottom text font:</b> via overriding the style named {@code
- * GiniCaptureTheme.Review.BottomPanel.TextStyle} and setting an item named {@code gvCustomFont} with
+ * GiniCaptureTheme.Review.BottomPanel.TextStyle} and setting an item named {@code gcCustomFont} with
  * the path to the font file in your {@code assets} folder
  *
  * <li><b>Bottom text style:</b> via overriding the style named {@code
@@ -126,9 +126,9 @@ import androidx.appcompat.app.AppCompatActivity;
  * to the desired {@code sp} size
  *
  * <li><b>Bottom panel background color:</b> via the color resource named {@code
- * gv_review_bottom_panel_background}
+ * gc_review_bottom_panel_background}
  *
- * <li><b>Background color:</b> via the color resource named {@code gv_background}. <b>Note:</b>
+ * <li><b>Background color:</b> via the color resource named {@code gc_background}. <b>Note:</b>
  * this color resource is global to all Activities ({@link CameraActivity}, {@link
  * OnboardingActivity}, {@link ReviewActivity}, {@link AnalysisActivity})
  *
@@ -148,17 +148,17 @@ import androidx.appcompat.app.AppCompatActivity;
  *
  * <ul>
  *
- * <li><b>Background color:</b> via the color resource named {@code gv_action_bar} (highly
- * recommended for Android 5+: customize the status bar color via {@code gv_status_bar})
+ * <li><b>Background color:</b> via the color resource named {@code gc_action_bar} (highly
+ * recommended for Android 5+: customize the status bar color via {@code gc_status_bar})
  *
  * <li><b>Title:</b> via the string resource you set in your {@code AndroidManifest.xml} when
  * declaring your Activity that extends {@link ReviewActivity}. The default title string resource is
- * named {@code gv_title_review}
+ * named {@code gc_title_review}
  *
- * <li><b>Title color:</b> via the color resource named {@code gv_action_bar_title}
+ * <li><b>Title color:</b> via the color resource named {@code gc_action_bar_title}
  *
  * <li><b>Back button:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
- * {@code gv_action_bar_back}
+ * {@code gc_action_bar_back}
  *
  * </ul>
  */
@@ -170,32 +170,32 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
      *
      * @suppress
      */
-    public static final String EXTRA_IN_DOCUMENT = "GV_EXTRA_IN_DOCUMENT";
+    public static final String EXTRA_IN_DOCUMENT = "GC_EXTRA_IN_DOCUMENT";
     /**
      * Internal use only.
      *
      * @suppress
      */
-    public static final String EXTRA_IN_ANALYSIS_ACTIVITY = "GV_EXTRA_IN_ANALYSIS_ACTIVITY";
+    public static final String EXTRA_IN_ANALYSIS_ACTIVITY = "GC_EXTRA_IN_ANALYSIS_ACTIVITY";
     /**
      * Internal use only.
      *
      * @suppress
      */
     public static final String EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY =
-            "GV_EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY";
+            "GC_EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY";
     /**
      * Internal use only.
      *
      * @suppress
      */
-    public static final String EXTRA_OUT_DOCUMENT = "GV_EXTRA_OUT_DOCUMENT";
+    public static final String EXTRA_OUT_DOCUMENT = "GC_EXTRA_OUT_DOCUMENT";
     /**
      * Internal use only.
      *
      * @suppress
      */
-    public static final String EXTRA_OUT_ERROR = "GV_EXTRA_OUT_ERROR";
+    public static final String EXTRA_OUT_ERROR = "GC_EXTRA_OUT_ERROR";
 
     /**
      * Internal use only.
@@ -234,7 +234,7 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gv_activity_review);
+        setContentView(R.layout.gc_activity_review);
         readExtras();
         if (savedInstanceState == null) {
             initFragment();
@@ -329,7 +329,7 @@ public class ReviewActivity extends AppCompatActivity implements ReviewFragmentL
     private void showFragment() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.gv_fragment_review_document, mFragment, REVIEW_FRAGMENT)
+                .add(R.id.gc_fragment_review_document, mFragment, REVIEW_FRAGMENT)
                 .commit();
     }
 

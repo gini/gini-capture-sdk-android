@@ -13,10 +13,10 @@ import androidx.annotation.VisibleForTesting;
  * @suppress
  */
 public enum DefaultPagesPhone {
-    FLAT(new OnboardingPage(R.string.gv_onboarding_flat, R.drawable.gv_onboarding_flat)),
+    FLAT(new OnboardingPage(R.string.gc_onboarding_flat, R.drawable.gc_onboarding_flat)),
     PARALLEL(
-            new OnboardingPage(R.string.gv_onboarding_parallel, R.drawable.gv_onboarding_parallel)),
-    ALIGN(new OnboardingPage(R.string.gv_onboarding_align, R.drawable.gv_onboarding_align));
+            new OnboardingPage(R.string.gc_onboarding_parallel, R.drawable.gc_onboarding_parallel)),
+    ALIGN(new OnboardingPage(R.string.gc_onboarding_align, R.drawable.gc_onboarding_align));
 
     private final OnboardingPage mOnboardingPage;
 

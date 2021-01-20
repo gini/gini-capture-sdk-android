@@ -45,22 +45,22 @@ import androidx.core.content.ContextCompat;
  *     The following items are customizable:
  *     <ul>
  *         <li>
- *             <b>Background color:</b> via the color resource named {@code gv_file_import_activity_background}.
+ *             <b>Background color:</b> via the color resource named {@code gc_file_import_activity_background}.
  *         </li>
  *         <li>
- *             <b>Header text:</b> via overriding the string resource named {@code gv_file_import_header}
+ *             <b>Header text:</b> via overriding the string resource named {@code gc_file_import_header}
  *         </li>
  *         <li>
  *             <b>Header text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.FileImport.Header.TextStyle}
  *         </li>
  *         <li>
- *             <b>Separator line color:</b> via the color resource named {@code gv_file_import_separator}
+ *             <b>Separator line color:</b> via the color resource named {@code gc_file_import_separator}
  *         </li>
  *         <li>
- *             <b>Section numbers' background circle color:</b> via the color resource named {@code gv_file_import_section_number_background}
+ *             <b>Section numbers' background circle color:</b> via the color resource named {@code gc_file_import_section_number_background}
  *         </li>
  *         <li>
- *             <b>Section numbers' text color:</b>  via the color resource named {@code gv_file_import_section_number}
+ *             <b>Section numbers' text color:</b>  via the color resource named {@code gc_file_import_section_number}
  *         </li>
  *         <li>
  *             <b>Section title text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle}
@@ -69,34 +69,34 @@ import androidx.core.content.ContextCompat;
  *             <b>Section body text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle}
  *         </li>
  *         <li>
- *             <b>Section 1 title:</b> via overriding the string resource named {@code gv_file_import_section_1_title}
+ *             <b>Section 1 title:</b> via overriding the string resource named {@code gc_file_import_section_1_title}
  *         </li>
  *         <li>
- *             <b>Section 1 body:</b> via overriding the string resource named {@code gv_file_import_section_1_body}
+ *             <b>Section 1 body:</b> via overriding the string resource named {@code gc_file_import_section_1_body}
  *         </li>
  *         <li>
  *             <b>Section 1 illustration image:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
- *             named {@code gv_file_import_section_1_illustration.png}. For creating your custom illustration you may use <a href="https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_1.pdf" target="_blank">this template</a> from the <a href="https://github.com/gini/gini-vision-lib-assets" target="_blank">Gini Capture SDK UI Assets</a> repository.
+ *             named {@code gc_file_import_section_1_illustration.png}. For creating your custom illustration you may use <a href="https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_1.pdf" target="_blank">this template</a> from the <a href="https://github.com/gini/gini-vision-lib-assets" target="_blank">Gini Capture SDK UI Assets</a> repository.
  *         </li>
  *         <li>
- *             <b>Section 2 title:</b> via overriding the string resource named {@code gv_file_import_section_2_title}
+ *             <b>Section 2 title:</b> via overriding the string resource named {@code gc_file_import_section_2_title}
  *         </li>
  *         <li>
- *             <b>Section 2 body:</b> via overriding the string resource named {@code gv_file_import_section_2_body}
+ *             <b>Section 2 body:</b> via overriding the string resource named {@code gc_file_import_section_2_body}
  *         </li>
  *         <li>
  *             <b>Section 2 illustration image:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
- *             named {@code gv_file_import_section_2_illustration.png}. For creating your custom illustration you may use <a href="https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_2.pdf" target="_blank">this template</a> from the <a href="https://github.com/gini/gini-vision-lib-assets" target="_blank">Gini Capture SDK UI Assets</a> repository.
+ *             named {@code gc_file_import_section_2_illustration.png}. For creating your custom illustration you may use <a href="https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_2.pdf" target="_blank">this template</a> from the <a href="https://github.com/gini/gini-vision-lib-assets" target="_blank">Gini Capture SDK UI Assets</a> repository.
  *         </li>
  *         <li>
- *             <b>Section 3 title:</b> via overriding the string resource named {@code gv_file_import_section_3_title}
+ *             <b>Section 3 title:</b> via overriding the string resource named {@code gc_file_import_section_3_title}
  *         </li>
  *         <li>
- *             <b>Section 3 body:</b> via overriding the string resource named {@code gv_file_import_section_3_body}
+ *             <b>Section 3 body:</b> via overriding the string resource named {@code gc_file_import_section_3_body}
  *         </li>
  *         <li>
  *             <b>Section 3 illustration image:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
- *             named {@code gv_file_import_section_3_illustration.png}
+ *             named {@code gc_file_import_section_3_illustration.png}
  *         </li>
  *     </ul>
  * </p>
@@ -116,17 +116,17 @@ import androidx.core.content.ContextCompat;
  * The following items are customizable:
  * <ul>
  * <li>
- * <b>Background color:</b> via the color resource named {@code gv_action_bar} (highly recommended
- * for Android 5+: customize the status bar color via {@code gv_status_bar})
+ * <b>Background color:</b> via the color resource named {@code gc_action_bar} (highly recommended
+ * for Android 5+: customize the status bar color via {@code gc_status_bar})
  * </li>
  * <li>
- * <b>Title:</b> via the string resource name {@code gv_title_file_import}
+ * <b>Title:</b> via the string resource name {@code gc_title_file_import}
  * </li>
  * <li>
- * <b>Title color:</b> via the color resource named {@code gv_action_bar_title}
+ * <b>Title color:</b> via the color resource named {@code gc_action_bar_title}
  * </li>
  * <li> <b>Back button:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
- * {@code gv_action_bar_back}
+ * {@code gc_action_bar_back}
  * </li>
  * </ul>
  * </p>
@@ -136,14 +136,14 @@ public class FileImportActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gv_activity_file_import);
+        setContentView(R.layout.gc_activity_file_import);
         forcePortraitOrientationOnPhones(this);
 
         // Show illustration for the first section only if available (height > 0)
         final Drawable section1Illustration = ContextCompat.getDrawable(this,
-                R.drawable.gv_file_import_section_1_illustration);
+                R.drawable.gc_file_import_section_1_illustration);
         if (section1Illustration.getMinimumHeight() > 0) {
-            final ImageView section1ImageView = findViewById(R.id.gv_section_1_illustration);
+            final ImageView section1ImageView = findViewById(R.id.gc_section_1_illustration);
             section1ImageView.setVisibility(View.VISIBLE);
             section1ImageView.setImageDrawable(section1Illustration);
         }

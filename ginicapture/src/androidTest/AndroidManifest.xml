@@ -11,7 +11,7 @@
         android:largeHeap="true">
         <activity
             android:name="net.gini.android.vision.review.ReviewActivityTestSpy"
-            android:label="@string/gv_title_review"
+            android:label="@string/gc_title_review"
             android:theme="@style/GiniCaptureTheme" />
         <activity
             android:name="net.gini.android.vision.analysis.AnalysisActivityTestSpy"

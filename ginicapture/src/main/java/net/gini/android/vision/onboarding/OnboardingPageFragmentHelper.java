@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 
 final class OnboardingPageFragmentHelper {
 
-    private static final String ARGS_PAGE = "GV_PAGE";
+    private static final String ARGS_PAGE = "GC_PAGE";
 
     static Bundle createArguments(@NonNull final OnboardingPage page) {
         final Bundle arguments = new Bundle();

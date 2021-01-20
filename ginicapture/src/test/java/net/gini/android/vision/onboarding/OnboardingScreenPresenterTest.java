@@ -69,7 +69,7 @@ public class OnboardingScreenPresenterTest {
     @NonNull
     private OnboardingScreenPresenter createPresenter(final boolean isTablet) {
         final Resources resources = mock(Resources.class);
-        when(resources.getBoolean(R.bool.gv_is_tablet)).thenReturn(isTablet);
+        when(resources.getBoolean(R.bool.gc_is_tablet)).thenReturn(isTablet);
         when(mActivity.getResources()).thenReturn(resources);
 
         return new OnboardingScreenPresenter(mActivity, mView);
@@ -94,8 +94,8 @@ public class OnboardingScreenPresenterTest {
         presenter.addEmptyLastPage();
 
         final List<OnboardingPage> customPages = Lists.newArrayList(
-                new OnboardingPage(R.string.gv_title_camera, R.drawable.gv_camera_trigger),
-                new OnboardingPage(R.string.gv_title_review, R.drawable.gv_review_button_rotate)
+                new OnboardingPage(R.string.gc_title_camera, R.drawable.gc_camera_trigger),
+                new OnboardingPage(R.string.gc_title_review, R.drawable.gc_review_button_rotate)
         );
         presenter.setCustomPages(customPages);
 
@@ -118,8 +118,8 @@ public class OnboardingScreenPresenterTest {
 
         // When
         final List<OnboardingPage> customPages = Lists.newArrayList(
-                new OnboardingPage(R.string.gv_title_camera, R.drawable.gv_camera_trigger),
-                new OnboardingPage(R.string.gv_title_review, R.drawable.gv_review_button_rotate)
+                new OnboardingPage(R.string.gc_title_camera, R.drawable.gc_camera_trigger),
+                new OnboardingPage(R.string.gc_title_review, R.drawable.gc_review_button_rotate)
         );
         presenter.setCustomPages(customPages);
 
@@ -138,8 +138,8 @@ public class OnboardingScreenPresenterTest {
 
         // When
         final List<OnboardingPage> customPages = Lists.newArrayList(
-                new OnboardingPage(R.string.gv_title_camera, R.drawable.gv_camera_trigger),
-                new OnboardingPage(R.string.gv_title_review, R.drawable.gv_review_button_rotate)
+                new OnboardingPage(R.string.gc_title_camera, R.drawable.gc_camera_trigger),
+                new OnboardingPage(R.string.gc_title_review, R.drawable.gc_review_button_rotate)
         );
         presenter.setCustomPages(customPages);
 
@@ -160,8 +160,8 @@ public class OnboardingScreenPresenterTest {
 
         // When
         final List<OnboardingPage> customPages = Lists.newArrayList(
-                new OnboardingPage(R.string.gv_title_camera, R.drawable.gv_camera_trigger),
-                new OnboardingPage(R.string.gv_title_review, R.drawable.gv_review_button_rotate)
+                new OnboardingPage(R.string.gc_title_camera, R.drawable.gc_camera_trigger),
+                new OnboardingPage(R.string.gc_title_review, R.drawable.gc_review_button_rotate)
         );
         presenter.setCustomPages(customPages);
 
@@ -179,8 +179,8 @@ public class OnboardingScreenPresenterTest {
 
         // When
         final List<OnboardingPage> customPages = Lists.newArrayList(
-                new OnboardingPage(R.string.gv_title_camera, R.drawable.gv_camera_trigger),
-                new OnboardingPage(R.string.gv_title_review, R.drawable.gv_review_button_rotate)
+                new OnboardingPage(R.string.gc_title_camera, R.drawable.gc_camera_trigger),
+                new OnboardingPage(R.string.gc_title_review, R.drawable.gc_review_button_rotate)
         );
         presenter.setCustomPages(customPages);
 
@@ -203,8 +203,8 @@ public class OnboardingScreenPresenterTest {
 
         // When
         final List<OnboardingPage> customPages = Lists.newArrayList(
-                new OnboardingPage(R.string.gv_title_camera, R.drawable.gv_camera_trigger),
-                new OnboardingPage(R.string.gv_title_review, R.drawable.gv_review_button_rotate)
+                new OnboardingPage(R.string.gc_title_camera, R.drawable.gc_camera_trigger),
+                new OnboardingPage(R.string.gc_title_review, R.drawable.gc_review_button_rotate)
         );
         presenter.setCustomPages(customPages);
         presenter.addEmptyLastPage();

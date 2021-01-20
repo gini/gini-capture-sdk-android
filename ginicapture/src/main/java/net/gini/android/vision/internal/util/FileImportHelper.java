@@ -40,16 +40,16 @@ public final class FileImportHelper {
             final String fileType = fileTypeForMimeType(activity.getApplication(),
                     document.getMimeType());
             showAlertCallback.showAlertDialog(
-                    activity.getString(R.string.gv_file_import_default_app_dialog_message,
+                    activity.getString(R.string.gc_file_import_default_app_dialog_message,
                             fileType),
-                    activity.getString(R.string.gv_file_import_default_app_dialog_positive_button),
+                    activity.getString(R.string.gc_file_import_default_app_dialog_positive_button),
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(final DialogInterface dialog, final int which) {
                             startApplicationDetailsSettings(activity);
                         }
                     },
-                    activity.getString(R.string.gv_file_import_default_app_dialog_negative_button),
+                    activity.getString(R.string.gc_file_import_default_app_dialog_negative_button),
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(final DialogInterface dialog, final int which) {
@@ -86,11 +86,11 @@ public final class FileImportHelper {
     private static String fileTypeForMimeType(@NonNull final Application app,
             @NonNull final String mimeType) {
         if (mimeType.equals(MimeType.APPLICATION_PDF.asString())) {
-            return app.getString(R.string.gv_file_import_default_app_dialog_pdf_file_type);
+            return app.getString(R.string.gc_file_import_default_app_dialog_pdf_file_type);
         } else if (mimeType.startsWith(MimeType.IMAGE_PREFIX.asString())) {
-            return app.getString(R.string.gv_file_import_default_app_dialog_image_file_type);
+            return app.getString(R.string.gc_file_import_default_app_dialog_image_file_type);
         }
-        return app.getString(R.string.gv_file_import_default_app_dialog_document_file_type);
+        return app.getString(R.string.gc_file_import_default_app_dialog_document_file_type);
     }
 
     private FileImportHelper() {

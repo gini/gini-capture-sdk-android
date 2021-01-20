@@ -52,13 +52,13 @@ public class ImageStack extends RelativeLayout {
 
     private void init(@NonNull final Context context) {
         final LayoutInflater inflater = LayoutInflater.from(context);
-        inflater.inflate(R.layout.gv_image_stack_default, this);
+        inflater.inflate(R.layout.gc_image_stack_default, this);
 
-        stackItem1 = findViewById(R.id.gv_stack_item_1);
-        stackItem2 = findViewById(R.id.gv_stack_item_2);
-        stackItem3 = findViewById(R.id.gv_stack_item_3);
-        badge = findViewById(R.id.gv_badge);
-        subtitle = findViewById(R.id.gv_stack_subtitle);
+        stackItem1 = findViewById(R.id.gc_stack_item_1);
+        stackItem2 = findViewById(R.id.gc_stack_item_2);
+        stackItem3 = findViewById(R.id.gc_stack_item_3);
+        badge = findViewById(R.id.gc_badge);
+        subtitle = findViewById(R.id.gc_stack_subtitle);
         if (!isInEditMode()) {
             badge.setVisibility(INVISIBLE);
             subtitle.setVisibility(INVISIBLE);
@@ -120,7 +120,7 @@ public class ImageStack extends RelativeLayout {
         imageCount++;
 
         final Scene imageAddedScene = Scene.getSceneForLayout(ImageStack.this,
-                R.layout.gv_image_stack_image_added, getContext());
+                R.layout.gc_image_stack_image_added, getContext());
 
         // Show the current images in the image added scene
         final AddImageTransitionListener addImageTransitionListener =
@@ -147,13 +147,13 @@ public class ImageStack extends RelativeLayout {
         // Bottom stack item has to fade out because the stack is pushed down
         // when a new image is added
         final Fade fadeOut = new Fade(Fade.OUT);
-        fadeOut.addTarget(R.id.gv_stack_item_3);
+        fadeOut.addTarget(R.id.gc_stack_item_3);
         addImageTransitions.addTransition(fadeOut);
 
         // Badge and subtitle have to be faded in
         final Fade fadeIn = new Fade(Fade.IN);
-        fadeIn.addTarget(R.id.gv_badge);
-        fadeIn.addTarget(R.id.gv_stack_subtitle);
+        fadeIn.addTarget(R.id.gc_badge);
+        fadeIn.addTarget(R.id.gc_stack_subtitle);
         fadeIn.setDuration(BADGE_TRANSITION_DURATION_MS);
         addImageTransitions.addTransition(fadeIn);
 
@@ -344,12 +344,12 @@ public class ImageStack extends RelativeLayout {
         @Override
         public void onTransitionStart(@NonNull final Transition transition) {
             final ViewGroup sceneRoot = imageAddedScene.getSceneRoot();
-            final ImageView stackItem1View = sceneRoot.findViewById(R.id.gv_stack_item_1);
-            final ImageView stackItem2View = sceneRoot.findViewById(R.id.gv_stack_item_2);
-            final ImageView stackItem3View = sceneRoot.findViewById(R.id.gv_stack_item_3);
-            final ImageView newImageView = sceneRoot.findViewById(R.id.gv_new_photo);
-            final TextView badge = sceneRoot.findViewById(R.id.gv_badge);
-            final TextView subtitle = sceneRoot.findViewById(R.id.gv_stack_subtitle);
+            final ImageView stackItem1View = sceneRoot.findViewById(R.id.gc_stack_item_1);
+            final ImageView stackItem2View = sceneRoot.findViewById(R.id.gc_stack_item_2);
+            final ImageView stackItem3View = sceneRoot.findViewById(R.id.gc_stack_item_3);
+            final ImageView newImageView = sceneRoot.findViewById(R.id.gc_new_photo);
+            final TextView badge = sceneRoot.findViewById(R.id.gc_badge);
+            final TextView subtitle = sceneRoot.findViewById(R.id.gc_stack_subtitle);
 
             // Show the current images and badge in the image added scene
             // Image count was already increased so when we have at least two images it means
@@ -401,7 +401,7 @@ public class ImageStack extends RelativeLayout {
         public void onTransitionEnd(@NonNull final Transition transition) {
             // Return to the default scene
             final Scene defaultScene = Scene.getSceneForLayout(imageStack,
-                    R.layout.gv_image_stack_default, imageStack.getContext());
+                    R.layout.gc_image_stack_default, imageStack.getContext());
 
             // Pass the new image and the previous top 2 images to the final state
             final CleanupTransitionListener cleanupTransitionListener =
@@ -485,11 +485,11 @@ public class ImageStack extends RelativeLayout {
             // The default scene will be the new view layout so we have to reset our
             // view fields to point to the new views (also allows the previous default layout to be
             // garbage collected)
-            imageStack.stackItem1 = sceneRoot.findViewById(R.id.gv_stack_item_1);
-            imageStack.stackItem2 = sceneRoot.findViewById(R.id.gv_stack_item_2);
-            imageStack.stackItem3 = sceneRoot.findViewById(R.id.gv_stack_item_3);
-            imageStack.badge = sceneRoot.findViewById(R.id.gv_badge);
-            imageStack.subtitle = sceneRoot.findViewById(R.id.gv_stack_subtitle);
+            imageStack.stackItem1 = sceneRoot.findViewById(R.id.gc_stack_item_1);
+            imageStack.stackItem2 = sceneRoot.findViewById(R.id.gc_stack_item_2);
+            imageStack.stackItem3 = sceneRoot.findViewById(R.id.gc_stack_item_3);
+            imageStack.badge = sceneRoot.findViewById(R.id.gc_badge);
+            imageStack.subtitle = sceneRoot.findViewById(R.id.gc_stack_subtitle);
 
             // Push the images to the left (remove last image and show image on top)
             // Image count was already increased so when we have at least 3 images it means

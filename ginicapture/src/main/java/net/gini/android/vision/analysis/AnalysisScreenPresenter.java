@@ -439,7 +439,7 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
                 public void onSuccess(final Integer result) {
                     if (result > 0) {
                         final String pageCount = getActivity().getResources().getQuantityString(
-                                R.plurals.gv_analysis_pdf_pages, result, result);
+                                R.plurals.gc_analysis_pdf_pages, result, result);
                         getView().showPdfPageCount(pageCount);
                     } else {
                         getView().hidePdfPageCount();
@@ -490,7 +490,7 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
             trackAnalysisScreenEvent(AnalysisScreenEvent.ERROR, errorDetails);
             showError(mDocumentAnalysisErrorMessage,
                     getActivity().getString(
-                            R.string.gv_document_analysis_error_retry),
+                            R.string.gc_document_analysis_error_retry),
                     new View.OnClickListener() {
                         @Override
                         public void onClick(final View v) {
@@ -508,8 +508,8 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
         errorDetails.put(ERROR_DETAILS_MAP_KEY.MESSAGE, throwable.getMessage());
         errorDetails.put(ERROR_DETAILS_MAP_KEY.ERROR_OBJECT, throwable);
         trackAnalysisScreenEvent(AnalysisScreenEvent.ERROR, errorDetails);
-        showError(getActivity().getString(R.string.gv_document_analysis_error),
-                getActivity().getString(R.string.gv_document_analysis_error_retry),
+        showError(getActivity().getString(R.string.gc_document_analysis_error),
+                getActivity().getString(R.string.gc_document_analysis_error_retry),
                 new View.OnClickListener() {
                     @Override
                     public void onClick(final View v) {

@@ -40,7 +40,7 @@ public class ErrorSnackbar extends RelativeLayout {
 
     @VisibleForTesting
     static final int ANIM_DURATION = 250;
-    private static final String TAG_SNACKBAR_ERROR = "GV_SNACKBAR_ERROR";
+    private static final String TAG_SNACKBAR_ERROR = "GC_SNACKBAR_ERROR";
     private Position mPosition;
 
     private enum State {
@@ -123,14 +123,14 @@ public class ErrorSnackbar extends RelativeLayout {
     }
 
     private void init() {
-        inflate(getContext(), R.layout.gv_layout_snackbar_error, this);
+        inflate(getContext(), R.layout.gc_layout_snackbar_error, this);
         setTag(TAG_SNACKBAR_ERROR);
         bindViews();
     }
 
     private void bindViews() {
-        mTextView = (TextView) findViewById(R.id.gv_text_error);
-        mButton = (Button) findViewById(R.id.gv_button_error);
+        mTextView = (TextView) findViewById(R.id.gc_text_error);
+        mButton = (Button) findViewById(R.id.gc_button_error);
     }
 
     @Override

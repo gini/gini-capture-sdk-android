@@ -26,8 +26,8 @@ public class OnboardingFragmentHostActivityNotListener extends
     @Override
     protected OnboardingFragmentCompat createFragment() {
         final ArrayList<OnboardingPage> pages = new ArrayList<>();
-        pages.add(new OnboardingPage(R.string.gv_onboarding_flat,
-                R.drawable.gv_onboarding_flat));
+        pages.add(new OnboardingPage(R.string.gc_onboarding_flat,
+                R.drawable.gc_onboarding_flat));
         return OnboardingFragmentCompat.createInstanceWithoutEmptyLastPage(pages);
     }
 

@@ -12,14 +12,14 @@ public final class PageIndicatorsHelper {
             final int pageNr) {
         assertAbout(pageIndicatorImageView()).that(
                 pageIndicators.getPageIndicatorImageViews().get(pageNr)).showsDrawable(
-                R.drawable.gv_onboarding_indicator_active);
+                R.drawable.gc_onboarding_indicator_active);
     }
 
     public static void isPageInactive(final OnboardingFragmentImpl.PageIndicators pageIndicators,
             final int pageNr) {
         assertAbout(pageIndicatorImageView()).that(
                 pageIndicators.getPageIndicatorImageViews().get(pageNr)).showsDrawable(
-                R.drawable.gv_onboarding_indicator_inactive);
+                R.drawable.gc_onboarding_indicator_inactive);
     }
 
     private PageIndicatorsHelper() {

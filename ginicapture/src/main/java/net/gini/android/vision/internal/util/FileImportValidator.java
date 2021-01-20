@@ -45,11 +45,11 @@ public class FileImportValidator {
      * File validation errors.
      */
     public enum Error {
-        TYPE_NOT_SUPPORTED(R.string.gv_document_import_error_type_not_supported),
-        SIZE_TOO_LARGE(R.string.gv_document_import_error_size_too_large),
-        TOO_MANY_PDF_PAGES(R.string.gv_document_import_error_too_many_pdf_pages),
-        PASSWORD_PROTECTED_PDF(R.string.gv_document_import_error_password_protected_pdf),
-        TOO_MANY_DOCUMENT_PAGES(R.string.gv_document_error_too_many_pages);
+        TYPE_NOT_SUPPORTED(R.string.gc_document_import_error_type_not_supported),
+        SIZE_TOO_LARGE(R.string.gc_document_import_error_size_too_large),
+        TOO_MANY_PDF_PAGES(R.string.gc_document_import_error_too_many_pdf_pages),
+        PASSWORD_PROTECTED_PDF(R.string.gc_document_import_error_password_protected_pdf),
+        TOO_MANY_DOCUMENT_PAGES(R.string.gc_document_error_too_many_pages);
 
         public int getTextResource() {
             return mTextResource;

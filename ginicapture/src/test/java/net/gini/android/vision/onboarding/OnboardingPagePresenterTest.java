@@ -57,7 +57,7 @@ public class OnboardingPagePresenterTest {
     private OnboardingPagePresenter createPresenter(@NonNull final OnboardingPage page,
             final Boolean isPortrait) throws Exception {
         final Resources resources = mock(Resources.class);
-        when(resources.getBoolean(R.bool.gv_is_portrait)).thenReturn(isPortrait);
+        when(resources.getBoolean(R.bool.gc_is_portrait)).thenReturn(isPortrait);
         when(mActivity.getResources()).thenReturn(resources);
 
         final OnboardingPagePresenter presenter = new OnboardingPagePresenter(mActivity, mView);
@@ -69,7 +69,7 @@ public class OnboardingPagePresenterTest {
     @Test
     public void should_notShowImage_whenNotAvailable() throws Exception {
         // Given
-        final OnboardingPage page = new OnboardingPage(R.string.gv_onboarding_align, 0);
+        final OnboardingPage page = new OnboardingPage(R.string.gc_onboarding_align, 0);
 
         final OnboardingPagePresenter presenter = createPresenter(page);
 
@@ -83,8 +83,8 @@ public class OnboardingPagePresenterTest {
     @Test
     public void should_showRotatedImage_inLandscape_whenRequested() throws Exception {
         // Given
-        final OnboardingPage page = new OnboardingPage(R.string.gv_onboarding_align,
-                R.drawable.gv_onboarding_align, true, true);
+        final OnboardingPage page = new OnboardingPage(R.string.gc_onboarding_align,
+                R.drawable.gc_onboarding_align, true, true);
 
         final OnboardingPagePresenter presenter = createPresenter(page, false);
 
@@ -112,7 +112,7 @@ public class OnboardingPagePresenterTest {
     @Test
     public void should_notShowText_whenNotAvailable() throws Exception {
         // Given
-        final OnboardingPage page = new OnboardingPage(0, R.drawable.gv_onboarding_align);
+        final OnboardingPage page = new OnboardingPage(0, R.drawable.gc_onboarding_align);
 
         final OnboardingPagePresenter presenter = createPresenter(page);
 
@@ -126,7 +126,7 @@ public class OnboardingPagePresenterTest {
     @Test
     public void should_showTransparentBackground_whenRequested() throws Exception {
         // Given
-        final OnboardingPage page = new OnboardingPage(R.string.gv_onboarding_align, R.drawable.gv_onboarding_align,true);
+        final OnboardingPage page = new OnboardingPage(R.string.gc_onboarding_align, R.drawable.gc_onboarding_align,true);
 
         final OnboardingPagePresenter presenter = createPresenter(page);
 
@@ -140,7 +140,7 @@ public class OnboardingPagePresenterTest {
     @Test
     public void should_notShowTransparentBackground_whenNotRequested() throws Exception {
         // Given
-        final OnboardingPage page = new OnboardingPage(R.string.gv_onboarding_align, R.drawable.gv_onboarding_align,false);
+        final OnboardingPage page = new OnboardingPage(R.string.gc_onboarding_align, R.drawable.gc_onboarding_align,false);
 
         final OnboardingPagePresenter presenter = createPresenter(page);
 

@@ -112,16 +112,16 @@ class OnboardingPageFragmentImpl extends OnboardingPageContract.View {
 
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.gv_fragment_onboarding_page, container, false);
+        final View view = inflater.inflate(R.layout.gc_fragment_onboarding_page, container, false);
         bindViews(view);
         getPresenter().start();
         return view;
     }
 
     private void bindViews(@NonNull final View view) {
-        mImageOnboarding = (ImageView) view.findViewById(R.id.gv_image_onboarding);
-        mTextMessage = (TextView) view.findViewById(R.id.gv_text_message);
-        mBackground = view.findViewById(R.id.gv_background);
+        mImageOnboarding = (ImageView) view.findViewById(R.id.gc_image_onboarding);
+        mTextMessage = (TextView) view.findViewById(R.id.gc_text_message);
+        mBackground = view.findViewById(R.id.gc_background);
     }
 
 

@@ -100,7 +100,7 @@ class AnalysisHintsAnimator {
     }
 
     private void showHeadlineText() {
-        mHintHeadlineTextView.setText(R.string.gv_analysis_hint_headline);
+        mHintHeadlineTextView.setText(R.string.gc_analysis_hint_headline);
     }
 
     private ViewPropertyAnimatorCompat getHintHeadlineSlideUpAnimation() {

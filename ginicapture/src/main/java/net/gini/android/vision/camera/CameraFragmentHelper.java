@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 class CameraFragmentHelper {
 
-    private static final String ARGS_GINI_CAPTURE_FEATURES = "GV_ARGS_GINI_CAPTURE_FEATURES";
+    private static final String ARGS_GINI_CAPTURE_FEATURES = "GC_ARGS_GINI_CAPTURE_FEATURES";
 
     public static Bundle createArguments(
             @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {

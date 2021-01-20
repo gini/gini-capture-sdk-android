@@ -77,13 +77,13 @@ class SupportedFormatsAdapter extends
 
     private FormatItemViewHolder createHeaderItemViewHolder(final ViewGroup parent) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.gv_item_format_header, parent, false);
+                R.layout.gc_item_format_header, parent, false);
         return new HeaderItemViewHolder(view);
     }
 
     private FormatItemViewHolder createFormatInfoItemViewHolder(final ViewGroup parent) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.gv_item_format_info, parent, false);
+                R.layout.gc_item_format_info, parent, false);
         return new FormatInfoItemViewHolder(view);
     }
 
@@ -132,8 +132,8 @@ class SupportedFormatsAdapter extends
     }
 
     private enum SectionHeader {
-        SUPPORTED_FORMATS(R.string.gv_supported_format_section_header),
-        UNSUPPORTED_FORMATS(R.string.gv_unsupported_format_section_header);
+        SUPPORTED_FORMATS(R.string.gc_supported_format_section_header),
+        UNSUPPORTED_FORMATS(R.string.gc_unsupported_format_section_header);
 
         @StringRes
         final int title;
@@ -144,9 +144,9 @@ class SupportedFormatsAdapter extends
     }
 
     private enum SupportedFormat implements FormatInfo {
-        PRINTED_INVOICES(R.string.gv_supported_format_printed_invoices),
-        SINGLE_PAGE_AS_JPEG_PNG_GIF(R.string.gv_supported_format_single_page_as_jpeg_png_gif),
-        PDF(R.string.gv_supported_format_pdf);
+        PRINTED_INVOICES(R.string.gc_supported_format_printed_invoices),
+        SINGLE_PAGE_AS_JPEG_PNG_GIF(R.string.gc_supported_format_single_page_as_jpeg_png_gif),
+        PDF(R.string.gc_supported_format_pdf);
 
         @DrawableRes
         private final int mIconBackground;
@@ -159,10 +159,10 @@ class SupportedFormatsAdapter extends
 
         SupportedFormat(@StringRes final int label) {
             mLabel = label;
-            mIconBackground = R.drawable.gv_format_info_supported_icon_background;
-            mIconForeground = R.drawable.gv_format_info_supported_icon_foreground;
+            mIconBackground = R.drawable.gc_format_info_supported_icon_background;
+            mIconForeground = R.drawable.gc_format_info_supported_icon_foreground;
             mIconForegroundTint =
-                    R.color.gv_supported_formats_item_supported_icon_foreground;
+                    R.color.gc_supported_formats_item_supported_icon_foreground;
         }
 
         @Override
@@ -190,8 +190,8 @@ class SupportedFormatsAdapter extends
     }
 
     private enum UnsupportedFormat implements FormatInfo {
-        HANDWRITING(R.string.gv_unsupported_format_handwriting),
-        PHOTOS_OF_SCREENS(R.string.gv_unsupported_format_photos_of_screens);
+        HANDWRITING(R.string.gc_unsupported_format_handwriting),
+        PHOTOS_OF_SCREENS(R.string.gc_unsupported_format_photos_of_screens);
 
         @DrawableRes
         private final int mIconBackground;
@@ -204,10 +204,10 @@ class SupportedFormatsAdapter extends
 
         UnsupportedFormat(@StringRes final int label) {
             mLabel = label;
-            mIconBackground = R.drawable.gv_format_info_unsupported_icon_background;
-            mIconForeground = R.drawable.gv_format_info_unsupported_icon_foreground;
+            mIconBackground = R.drawable.gc_format_info_unsupported_icon_background;
+            mIconForeground = R.drawable.gc_format_info_unsupported_icon_foreground;
             mIconForegroundTint =
-                    R.color.gv_supported_formats_item_unsupported_icon_foreground;
+                    R.color.gc_supported_formats_item_unsupported_icon_foreground;
         }
 
         @Override
@@ -243,9 +243,9 @@ class SupportedFormatsAdapter extends
 
         FormatInfoItemViewHolder(final View itemView) {
             super(itemView);
-            label = itemView.findViewById(R.id.gv_format_info_item_label);
-            backgroundIcon = itemView.findViewById(R.id.gv_format_info_item_icon_background);
-            foregroundIcon = itemView.findViewById(R.id.gv_format_info_item_icon_foreground);
+            label = itemView.findViewById(R.id.gc_format_info_item_label);
+            backgroundIcon = itemView.findViewById(R.id.gc_format_info_item_icon_background);
+            foregroundIcon = itemView.findViewById(R.id.gc_format_info_item_icon_foreground);
         }
     }
 
@@ -262,7 +262,7 @@ class SupportedFormatsAdapter extends
 
         HeaderItemViewHolder(final View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.gv_supported_formats_item_header);
+            title = itemView.findViewById(R.id.gc_supported_formats_item_header);
         }
     }
 

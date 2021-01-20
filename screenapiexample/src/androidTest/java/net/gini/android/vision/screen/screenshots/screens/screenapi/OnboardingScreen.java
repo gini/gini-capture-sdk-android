@@ -12,11 +12,11 @@ import androidx.test.uiautomator.UiSelector;
 public class OnboardingScreen implements Screen {
 
     private static final String NEXT_BUTTON_RES_ID =
-            "net.gini.android.vision.screenapiexample:id/gv_button_next";
+            "net.gini.android.vision.screenapiexample:id/gc_button_next";
     private static final String IMAGE_RES_ID =
-            "net.gini.android.vision.screenapiexample:id/gv_image_onboarding";
+            "net.gini.android.vision.screenapiexample:id/gc_image_onboarding";
     private static final String TEXT_RES_ID =
-            "net.gini.android.vision.screenapiexample:id/gv_text_message";
+            "net.gini.android.vision.screenapiexample:id/gc_text_message";
 
     private final UiDevice mUiDevice;
 

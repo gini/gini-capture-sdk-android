@@ -228,7 +228,7 @@ public class OnboardingFragmentImplTest {
             }
         });
 
-        onView(withId(R.id.gv_onboarding_viewpager)).perform(ViewActions.swipeLeft());
+        onView(withId(R.id.gc_onboarding_viewpager)).perform(ViewActions.swipeLeft());
 
         // Then
         onView(withText(pages.get(1).getTextResId())).check(matches(isCompletelyDisplayed()));
@@ -280,8 +280,8 @@ public class OnboardingFragmentImplTest {
                 new AtomicReference<>();
 
         final ArrayList<OnboardingPage> pages = Lists.newArrayList(
-                new OnboardingPage(R.string.gv_title_camera, R.drawable.gv_camera_trigger),
-                new OnboardingPage(R.string.gv_title_review, R.drawable.gv_review_button_rotate)
+                new OnboardingPage(R.string.gc_title_camera, R.drawable.gc_camera_trigger),
+                new OnboardingPage(R.string.gc_title_review, R.drawable.gc_review_button_rotate)
         );
 
         final ActivityScenario<OnboardingFragmentHostActivity>
@@ -318,7 +318,7 @@ public class OnboardingFragmentImplTest {
         launchHostActivity(presenter, onboardingFragmentImplRef, false, pages);
 
         // When
-        onView(withId(R.id.gv_button_next)).perform(ViewActions.click());
+        onView(withId(R.id.gc_button_next)).perform(ViewActions.click());
 
         // Then
         verify(presenter).showNextPage();

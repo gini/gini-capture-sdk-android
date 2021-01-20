@@ -56,7 +56,7 @@ class HelpItemsAdapter extends RecyclerView.Adapter<HelpItemsAdapter.HelpItemsVi
 
     @Override
     public HelpItemsViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gv_item_help,
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gc_item_help,
                 parent, false);
         return new HelpItemsViewHolder(view);
     }
@@ -85,7 +85,7 @@ class HelpItemsAdapter extends RecyclerView.Adapter<HelpItemsAdapter.HelpItemsVi
 
         HelpItemsViewHolder(final View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.gv_help_item_title);
+            title = itemView.findViewById(R.id.gc_help_item_title);
         }
     }
 

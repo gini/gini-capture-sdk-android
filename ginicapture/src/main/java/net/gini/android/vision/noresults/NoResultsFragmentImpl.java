@@ -51,8 +51,8 @@ class NoResultsFragmentImpl {
 
     View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.gv_fragment_noresults, container, false);
-        final View backButton = view.findViewById(R.id.gv_button_no_results_back);
+        final View view = inflater.inflate(R.layout.gc_fragment_noresults, container, false);
+        final View backButton = view.findViewById(R.id.gc_button_no_results_back);
         if (isDocumentFromCameraScreen()) {
             backButton.setOnClickListener(new View.OnClickListener() {
                 @Override

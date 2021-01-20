@@ -36,7 +36,7 @@ import androidx.appcompat.app.AppCompatActivity;
  *     The following items are customizable:
  *     <ul>
  *         <li>
- *             <b>Background color:</b> via the color resource named {@code gv_photo_tips_activity_background}.
+ *             <b>Background color:</b> via the color resource named {@code gc_photo_tips_activity_background}.
  *         </li>
  *         <li>
  *             <b>Header text style:</b> via overriding the style named {@code GiniCaptureTheme.Help.PhotoTips.Header.TextStyle}
@@ -47,26 +47,26 @@ import androidx.appcompat.app.AppCompatActivity;
  *         <li>
  *             <b>Tip image - Good lighting:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
  *             named
- *             {@code gv_photo_tip_lighting.png}
+ *             {@code gc_photo_tip_lighting.png}
  *         </li>
  *         <li>
  *             <b>Tip image - Document should be flat:</b> via images for mdpi, hdpi, xhdpi, xxhdpi,
  *             xxxhdpi
- *             named {@code gv_photo_tip_flat.png}
+ *             named {@code gc_photo_tip_flat.png}
  *         </li>
  *         <li>
  *             <b>Tip image - Device should be parallel to document:</b> via images for mdpi, hdpi,
- *             xhdpi,xxhdpi, xxxhdpi named {@code gv_photo_tip_parallel.png}
+ *             xhdpi,xxhdpi, xxxhdpi named {@code gc_photo_tip_parallel.png}
  *         </li>
  *         <li>
  *             <b>Tip image - Document should be aligned with corner guides:</b> via
- *             images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named {@code gv_photo_tip_align.png}
+ *             images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named {@code gc_photo_tip_align.png}
  *         </li>
  *         <li>
- *             <b>Button color:</b> via the color resource named {@code gv_photo_tips_button}
+ *             <b>Button color:</b> via the color resource named {@code gc_photo_tips_button}
  *         </li>
  *         <li>
- *             <b>Button text color:</b> via the color resource named {@code gv_photo_tips_button_text}
+ *             <b>Button text color:</b> via the color resource named {@code gc_photo_tips_button_text}
  *         </li>
  *     </ul>
  * </p>
@@ -86,17 +86,17 @@ import androidx.appcompat.app.AppCompatActivity;
  * The following items are customizable:
  * <ul>
  * <li>
- * <b>Background color:</b> via the color resource named {@code gv_action_bar} (highly recommended
- * for Android 5+: customize the status bar color via {@code gv_status_bar})
+ * <b>Background color:</b> via the color resource named {@code gc_action_bar} (highly recommended
+ * for Android 5+: customize the status bar color via {@code gc_status_bar})
  * </li>
  * <li>
- * <b>Title:</b> via the string resource name {@code gv_title_photo_tips}
+ * <b>Title:</b> via the string resource name {@code gc_title_photo_tips}
  * </li>
  * <li>
- * <b>Title color:</b> via the color resource named {@code gv_action_bar_title}
+ * <b>Title color:</b> via the color resource named {@code gc_action_bar_title}
  * </li>
  * <li><b>Back button:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
- * {@code gv_action_bar_back}
+ * {@code gc_action_bar_back}
  * </li>
  * </ul>
  * </p>
@@ -109,11 +109,11 @@ public class PhotoTipsActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (FeatureConfiguration.isMultiPageEnabled()) {
-            setContentView(R.layout.gv_activity_photo_tips_with_multipage);
+            setContentView(R.layout.gc_activity_photo_tips_with_multipage);
         } else {
-            setContentView(R.layout.gv_activity_photo_tips);
+            setContentView(R.layout.gc_activity_photo_tips);
         }
-        findViewById(R.id.gv_button_photo_tips_camera).setOnClickListener(
+        findViewById(R.id.gc_button_photo_tips_camera).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(final View view) {

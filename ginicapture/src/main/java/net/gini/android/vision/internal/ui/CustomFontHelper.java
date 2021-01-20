@@ -34,7 +34,7 @@ final class CustomFontHelper {
                 R.styleable.CustomFont, defStyleAttr, 0);
         String fontFamily = null;
         try {
-            fontFamily = giniTypedArray.getString(R.styleable.CustomFont_gvCustomFont);
+            fontFamily = giniTypedArray.getString(R.styleable.CustomFont_gcCustomFont);
         } finally {
             giniTypedArray.recycle();
         }

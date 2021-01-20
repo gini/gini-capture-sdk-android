@@ -32,15 +32,15 @@ import androidx.appcompat.app.AppCompatActivity;
  *     <ul>
  *         <li>
  *             <b>Header icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
- *             {@code gv_alert_icon.png}
+ *             {@code gc_alert_icon.png}
  *         </li>
  *         <li>
  *             <b>Header text color:</b> via the color resource named {@code
- *             gv_noresults_header}
+ *             gc_noresults_header}
  *         </li>
  *         <li>
  *             <b>Header text font:</b> via overriding the style named {@code GiniCaptureTheme
- *             .NoResults.Header.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your {@code assets} folder
+ *             .NoResults.Header.TextStyle} and setting an item named {@code gcCustomFont} with the path to the font file in your {@code assets} folder
  *         </li>
  *         <li>
  *             <b>Header text style:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Header.TextStyle} and setting an item named {@code android:textStyle} to {@code normal}, {@code bold} or {@code italic}
@@ -49,10 +49,10 @@ import androidx.appcompat.app.AppCompatActivity;
  *             <b>Header text size:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Header.TextStyle} and setting an item named {@code android:textSize} to the desired {@code sp} size
  *         </li>
  *         <li>
- *             <b>Headline text color:</b> via the color resource named {@code gv_noresults_headline}
+ *             <b>Headline text color:</b> via the color resource named {@code gc_noresults_headline}
  *         </li>
  *         <li>
- *             <b>Headline text font:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Headline.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your {@code assets} folder
+ *             <b>Headline text font:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Headline.TextStyle} and setting an item named {@code gcCustomFont} with the path to the font file in your {@code assets} folder
  *         </li>
  *         <li>
  *             <b>Headline text style:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Headline.TextStyle} and setting an item named {@code android:textStyle} to {@code normal}, {@code bold} or {@code italic}
@@ -61,10 +61,10 @@ import androidx.appcompat.app.AppCompatActivity;
  *             <b>Headline text size:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Headline.TextStyle} and setting an item named {@code android:textSize} to the desired {@code sp} size
  *         </li>
  *         <li>
- *             <b>Tip text color:</b> via the color resource named {@code gv_noresults_tip}
+ *             <b>Tip text color:</b> via the color resource named {@code gc_noresults_tip}
  *         </li>
  *         <li>
- *             <b>Tip text font:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Tip.TextStyle} and setting an item named {@code gvCustomFont} with the path to the font file in your {@code assets} folder
+ *             <b>Tip text font:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Tip.TextStyle} and setting an item named {@code gcCustomFont} with the path to the font file in your {@code assets} folder
  *         </li>
  *         <li>
  *             <b>Tip text style:</b> via overriding the style named {@code GiniCaptureTheme.NoResults.Tip.TextStyle} and setting an item named {@code android:textStyle} to {@code normal}, {@code bold} or {@code italic}
@@ -75,29 +75,29 @@ import androidx.appcompat.app.AppCompatActivity;
  *         <li>
  *             <b>Tip image - Good lighting:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi
  *             named
- *             {@code gv_photo_tip_lighting.png}
+ *             {@code gc_photo_tip_lighting.png}
  *         </li>
  *         <li>
  *             <b>Tip image - Document should be flat:</b> via images for mdpi, hdpi, xhdpi, xxhdpi,
  *             xxxhdpi
- *             named {@code gv_photo_tip_flat.png}
+ *             named {@code gc_photo_tip_flat.png}
  *         </li>
  *         <li>
  *             <b>Tip image - Device should be parallel to document:</b> via images for mdpi, hdpi,
- *             xhdpi,xxhdpi, xxxhdpi named {@code gv_photo_tip_parallel.png}
+ *             xhdpi,xxhdpi, xxxhdpi named {@code gc_photo_tip_parallel.png}
  *         </li>
  *         <li>
  *             <b>Tip image - Document should be aligned with corner guides:</b> via
- *             images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named {@code gv_photo_tip_align.png}
+ *             images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named {@code gc_photo_tip_align.png}
  *         </li>
  *         <li>
- *             <b>Button color:</b> via the color resource named {@code gv_noresults_button}
+ *             <b>Button color:</b> via the color resource named {@code gc_noresults_button}
  *         </li>
  *         <li>
- *             <b>Button text color:</b> via the color resource named {@code gv_noresults_button_text}
+ *             <b>Button text color:</b> via the color resource named {@code gc_noresults_button_text}
  *         </li>
  *         <li>
- *             <b>Background color:</b> via the color resource named {@code gv_noresults_background}.
+ *             <b>Background color:</b> via the color resource named {@code gc_noresults_background}.
  *         </li>
  *     </ul>
  * </p>
@@ -117,8 +117,8 @@ import androidx.appcompat.app.AppCompatActivity;
  * The following items are customizable:
  * <ul>
  * <li>
- * <b>Background color:</b> via the color resource named {@code gv_action_bar} (highly recommended
- * for Android 5+: customize the status bar color via {@code gv_status_bar})
+ * <b>Background color:</b> via the color resource named {@code gc_action_bar} (highly recommended
+ * for Android 5+: customize the status bar color via {@code gc_status_bar})
  * </li>
  * </ul>
  * </p>
@@ -130,7 +130,7 @@ public class NoResultsActivity extends AppCompatActivity implements NoResultsFra
      *
      * @suppress
      */
-    public static final String EXTRA_IN_DOCUMENT = "GV_EXTRA_IN_DOCUMENT";
+    public static final String EXTRA_IN_DOCUMENT = "GC_EXTRA_IN_DOCUMENT";
 
     private Document mDocument;
 
@@ -142,7 +142,7 @@ public class NoResultsActivity extends AppCompatActivity implements NoResultsFra
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gv_activity_noresults);
+        setContentView(R.layout.gc_activity_noresults);
         setTitle("");
         readExtras();
         final ActionBar supportActionBar = getSupportActionBar();
@@ -175,7 +175,7 @@ public class NoResultsActivity extends AppCompatActivity implements NoResultsFra
                 mDocument);
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.gv_fragment_noresults, noResultsFragment)
+                .add(R.id.gc_fragment_noresults, noResultsFragment)
                 .commit();
     }
 

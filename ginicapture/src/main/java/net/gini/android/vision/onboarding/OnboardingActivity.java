@@ -49,18 +49,18 @@ import androidx.appcompat.app.AppCompatActivity;
  * <ul>
  *
  * <li> <b>Next button icon:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_onboarding_fab_next.png}
+ * gc_onboarding_fab_next.png}
  *
- * <li> <b>Next button color:</b> via the color resources named {@code gv_onboarding_fab} and {@code
- * gv_onboarding_fab_pressed}
+ * <li> <b>Next button color:</b> via the color resources named {@code gc_onboarding_fab} and {@code
+ * gc_onboarding_fab_pressed}
  *
  * <li> <b>Page indicators:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_onboarding_indicator_active.png} and {@code gv_onboarding_indicator_inactive.png}
+ * gc_onboarding_indicator_active.png} and {@code gc_onboarding_indicator_inactive.png}
  *
- * <li> <b>Onboarding message color:</b> via the color resource named {@code gv_onboarding_message}
+ * <li> <b>Onboarding message color:</b> via the color resource named {@code gc_onboarding_message}
  *
  * <li> <b>Onboarding message font:</b> via overriding the style named {@code
- * GiniCaptureTheme.Onboarding.Message.TextStyle} and setting an item named {@code gvCustomFont} with
+ * GiniCaptureTheme.Onboarding.Message.TextStyle} and setting an item named {@code gcCustomFont} with
  * the path to the font file in your {@code assets} folder
  *
  * <li> <b>Onboarding message text style:</b> via overriding the style named {@code
@@ -76,24 +76,24 @@ import androidx.appcompat.app.AppCompatActivity;
  * <ul>
  *
  * <li> <b>First page image</b> via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi,
- * sw600dp-xxhdpi, sw600dp-xxxhdpi named {@code gv_onboarding_lighting.png}
+ * sw600dp-xxhdpi, sw600dp-xxxhdpi named {@code gc_onboarding_lighting.png}
  *
- * <li> <b>First page text:</b> via the string resource named {@code gv_onboarding_ligthing}
+ * <li> <b>First page text:</b> via the string resource named {@code gc_onboarding_ligthing}
  *
  * <li> <b>Second page image</b> via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi,
- * sw600dp-xxhdpi, sw600dp-xxxhdpi named {@code gv_onboarding_flat.png}
+ * sw600dp-xxhdpi, sw600dp-xxxhdpi named {@code gc_onboarding_flat.png}
  *
- * <li> <b>Second page text:</b> via the string resource named {@code gv_onboarding_flat}
+ * <li> <b>Second page text:</b> via the string resource named {@code gc_onboarding_flat}
  *
  * <li> <b>Third page image:</b> via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi,
- * sw600dp-xxhdpi, sw600dp-xxxhdpi named {@code gv_onboarding_parallel.png}
+ * sw600dp-xxhdpi, sw600dp-xxxhdpi named {@code gc_onboarding_parallel.png}
  *
- * <li> <b>Third page text:</b> via the string resource named {@code gv_onboarding_parallel}
+ * <li> <b>Third page text:</b> via the string resource named {@code gc_onboarding_parallel}
  *
  * <li> <b>Fourth page image:</b> via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi,
- * sw600dp-xxhdpi, sw600dp-xxxhdpi named {@code gv_onboarding_align.png}
+ * sw600dp-xxhdpi, sw600dp-xxxhdpi named {@code gc_onboarding_align.png}
  *
- * <li> <b>Fourth page text:</b> via the string resource named {@code gv_onboarding_align}
+ * <li> <b>Fourth page text:</b> via the string resource named {@code gc_onboarding_align}
  *
  * </ul>
  *
@@ -102,26 +102,26 @@ import androidx.appcompat.app.AppCompatActivity;
  * <ul>
  *
  * <li> <b>First page image:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_onboarding_flat.png}
+ * gc_onboarding_flat.png}
  *
- * <li> <b>First page text:</b> via the string resource named {@code gv_onboarding_flat}
+ * <li> <b>First page text:</b> via the string resource named {@code gc_onboarding_flat}
  *
  * <li> <b>Second page image:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_onboarding_parallel.png}
+ * gc_onboarding_parallel.png}
  *
- * <li> <b>Second page text:</b> via the string resource named {@code gv_onboarding_parallel}
+ * <li> <b>Second page text:</b> via the string resource named {@code gc_onboarding_parallel}
  *
  * <li> <b>Third page image:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named {@code
- * gv_onboarding_align.png}
+ * gc_onboarding_align.png}
  *
- * <li> <b>Third page text:</b> via the string resource named {@code gv_onboarding_align}
+ * <li> <b>Third page text:</b> via the string resource named {@code gc_onboarding_align}
  *
  * </ul>
  *
  * <li> <b>Background transparency:</b> via the string resource named {@code
- * gv_onboarding_page_fragment_background_alpha} which must contain a real number between [0,1].
+ * gc_onboarding_page_fragment_background_alpha} which must contain a real number between [0,1].
  *
- * <li> <b>Background color:</b> via the color resource named {@code gv_background}. <b>Note:</b>
+ * <li> <b>Background color:</b> via the color resource named {@code gc_background}. <b>Note:</b>
  * this color resource is global to all Activities ({@link CameraActivity}, {@link
  * OnboardingActivity}, {@link ReviewActivity}, {@link AnalysisActivity})
  *
@@ -143,15 +143,15 @@ import androidx.appcompat.app.AppCompatActivity;
  *
  * <ul>
  *
- * <li> <b>Background color:</b> via the color resource named {@code gv_action_bar} (highly
- * recommended for Android 5+: customize the status bar color via {@code gv_status_bar})
+ * <li> <b>Background color:</b> via the color resource named {@code gc_action_bar} (highly
+ * recommended for Android 5+: customize the status bar color via {@code gc_status_bar})
  *
- * <li> <b>Title:</b> via the string resource named {@code gv_title_onboarding}
+ * <li> <b>Title:</b> via the string resource named {@code gc_title_onboarding}
  *
- * <li> <b>Title color:</b> via the color resource named {@code gv_action_bar_title}
+ * <li> <b>Title color:</b> via the color resource named {@code gc_action_bar_title}
  *
  * <li> <b>Back button:</b> via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
- * {@code gv_action_bar_back}
+ * {@code gc_action_bar_back}
  *
  * </ul>
  */
@@ -162,7 +162,7 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
      * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
      * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
      */
-    public static final String EXTRA_ONBOARDING_PAGES = "GV_EXTRA_PAGES";
+    public static final String EXTRA_ONBOARDING_PAGES = "GC_EXTRA_PAGES";
 
     private static final String ONBOARDING_FRAGMENT = "ONBOARDING_FRAGMENT";
 
@@ -172,7 +172,7 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gv_activity_onboarding);
+        setContentView(R.layout.gc_activity_onboarding);
         readExtras();
         initFragment();
         setupHomeButton();
@@ -231,7 +231,7 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
     private void showFragment() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.gv_fragment_onboarding, mOnboardingFragment, ONBOARDING_FRAGMENT)
+                .add(R.id.gc_fragment_onboarding, mOnboardingFragment, ONBOARDING_FRAGMENT)
                 .commit();
     }
 
