@@ -13,7 +13,7 @@ document to the Gini API for analysis.
 Communication with the Gini API is not part of the Gini Capture SDK in order to allow clients the
 freedom to use a networking implementation of their own choosing. The quickest way to add networking
 is to use the [Gini Capture Network
-Library](https://github.com/gini/gini-capture-sdk-android/tree/master/ginicapturee-network). You may
+Library](https://github.com/gini/gini-capture-sdk-android/tree/master/ginicapture-network). You may
 also use the [Gini API SDK](https://github.com/gini/gini-sdk-android) for Android or implement
 communication with the Gini API yourself.
 

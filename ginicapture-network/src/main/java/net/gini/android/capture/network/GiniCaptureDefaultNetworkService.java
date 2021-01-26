@@ -262,7 +262,7 @@ public class GiniCaptureDefaultNetworkService implements GiniCaptureNetworkServi
                                     mAnalyzedGiniApiDocument = compositeDocument.get();
                                     final Map<String, GiniCaptureSpecificExtraction> extractions =
                                             SpecificExtractionMapper.mapToGiniCapture(task.getResult().getSpecificExtractions());
-                                    LOG.debug("Document analysis success for documents {}: extractions = {}; compoundExtractions = {}; returnReasons = {}",
+                                    LOG.debug("Document analysis success for documents {}: extractions = {}",
                                             giniApiDocumentIdRotationMap, extractions);
                                     callback.success(
                                             new AnalysisResult(compositeDocument.get().getId(),
