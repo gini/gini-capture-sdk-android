@@ -3,7 +3,7 @@ Screen API Example App
 
 This example app provides you with a sample usage of the Gini Capture SDK's Screen API.
 
-The Gini API SDK is used for analyzing documents and sending feedback.
+The Gini Pay API lib is used for analyzing documents and sending feedback.
 
 The `ReviewActivity` and `AnalysisActivity` extend the activities with the same name from the Gini Capture SDK.
 
@@ -54,10 +54,10 @@ SingleDocumentAnalyzer
 Is not used, because when configuring and creating a `GiniCapture` instance we use the default networking plugin which takes care of
 communicating with the Gini API.
 
-Gini API SDK
+Gini Pay API lib
 ============
 
-The Gini API SDK is not used directly. The default networking plugin, which was used when configuring and creating a `GiniCapture` instance,
+The Gini Pay API lib is not used directly. The default networking plugin, which was used when configuring and creating a `GiniCapture` instance,
 takes care of communicating with the Gini API.
 
 Customization

@@ -14,7 +14,7 @@ Communication with the Gini API is not part of the Gini Capture SDK in order to 
 freedom to use a networking implementation of their own choosing. The quickest way to add networking
 is to use the [Gini Capture Network
 Library](https://github.com/gini/gini-capture-sdk-android/tree/master/ginicapture-network). You may
-also use the [Gini API SDK](https://github.com/gini/gini-sdk-android) for Android or implement
+also use the [Gini Pay API lib](https://github.com/gini/gini-pay-api-lib-android) for Android or implement
 communication with the Gini API yourself.
 
 The Gini Capture SDK can be integrated in two ways, either by using the *Screen API* or the

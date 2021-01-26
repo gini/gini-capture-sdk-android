@@ -21,7 +21,7 @@ import androidx.multidex.MultiDexApplication;
 
 /**
  * <p>
- *     Facilitates the application wide usage of the Gini API SDK's {@link Gini} instance and a helper
+ *     Facilitates the application wide usage of the Gini Pay API lib's {@link Gini} instance and a helper
  *     {@link SingleDocumentAnalyzer} instance.
  * </p>
  * <p>

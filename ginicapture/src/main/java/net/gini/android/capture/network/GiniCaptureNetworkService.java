@@ -28,7 +28,7 @@ import androidx.annotation.NonNull;
  *
  * <p> You can also create your own implementation and communicate directly with the Gini API or
  * pass requests through your backend. For direct communication with the Gini API we recommend using
- * the Gini API SDK.
+ * the Gini Pay API lib.
  *
  * <p> In order for the Gini Capture SDK to use your implementation pass an instance of it to
  * {@link GiniCapture.Builder#setGiniCaptureNetworkService(GiniCaptureNetworkService)} when creating a

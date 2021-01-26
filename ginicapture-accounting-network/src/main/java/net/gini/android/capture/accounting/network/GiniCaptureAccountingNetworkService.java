@@ -53,7 +53,7 @@ import bolts.Task;
  * Implementation using the Gini Accounting API of the network related tasks required by the
  * Gini Capture SDK.
  *
- * <p> Relies on the <a href="http://developer.gini.net/gini-sdk-android/">Gini API SDK</a> for
+ * <p> Relies on the <a href="http://developer.gini.net/gini-pay-api-lib-android/">Gini Pay API lib</a> for
  * executing the requests, which implements communication with the Gini Accounting API using generated
  * anonymous Gini users.
  *
@@ -469,7 +469,7 @@ public class GiniCaptureAccountingNetworkService implements GiniCaptureNetworkSe
         }
 
         /**
-         * Set the credentials store which is used by the Gini API SDK to store user credentials. If
+         * Set the credentials store which is used by the Gini Pay API lib to store user credentials. If
          * no credentials store is set, the {@link EncryptedCredentialsStore} from the Gini
          * API SDK is used by default.
          *

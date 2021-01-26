@@ -15,16 +15,16 @@ import androidx.annotation.NonNull;
  */
 
 /**
- * Helper class to map the {@link SpecificExtraction} from the Gini API SDK to the Gini Capture
+ * Helper class to map the {@link SpecificExtraction} from the Gini Pay API lib to the Gini Capture
  * SDK's {@link GiniCaptureSpecificExtraction} and vice versa.
  */
 public final class SpecificExtractionMapper {
 
     /**
-     * Convert a map of {@link SpecificExtraction}s from the Gini API SDK to a map of Gini Capture
+     * Convert a map of {@link SpecificExtraction}s from the Gini Pay API lib to a map of Gini Capture
      * SDK {@link GiniCaptureSpecificExtraction}s.
      *
-     * @param sourceMap map of Gini API SDK {@link SpecificExtraction}s
+     * @param sourceMap map of Gini Pay API lib {@link SpecificExtraction}s
      *
      * @return map of Gini Capture SDK {@link GiniCaptureSpecificExtraction}s
      */
@@ -39,10 +39,10 @@ public final class SpecificExtractionMapper {
     }
 
     /**
-     * Map a {@link SpecificExtraction} from the Gini API SDK to the Gini Capture SDK's {@link
+     * Map a {@link SpecificExtraction} from the Gini Pay API lib to the Gini Capture SDK's {@link
      * GiniCaptureSpecificExtraction}.
      *
-     * @param source Gini API SDK {@link SpecificExtraction}
+     * @param source Gini Pay API lib {@link SpecificExtraction}
      *
      * @return a Gini Capture SDK {@link GiniCaptureSpecificExtraction}
      */
@@ -57,11 +57,11 @@ public final class SpecificExtractionMapper {
 
     /**
      * Convert a map of {@link GiniCaptureSpecificExtraction}s from the Gini Capture SDK to a map
-     * of Gini API SDK {@link SpecificExtraction}s.
+     * of Gini Pay API lib {@link SpecificExtraction}s.
      *
      * @param sourceMap map of Gini Capture SDK {@link GiniCaptureSpecificExtraction}s
      *
-     * @return map of Gini API SDK {@link SpecificExtraction}s
+     * @return map of Gini Pay API lib {@link SpecificExtraction}s
      */
     @NonNull
     public static Map<String, SpecificExtraction> mapToApiSdk(
@@ -74,12 +74,12 @@ public final class SpecificExtractionMapper {
     }
 
     /**
-     * Map a {@link GiniCaptureSpecificExtraction} from the Gini Capture SDK to the Gini API SDK's
+     * Map a {@link GiniCaptureSpecificExtraction} from the Gini Capture SDK to the Gini Pay API lib's
      * {@link SpecificExtraction}.
      *
      * @param source Gini Capture SDK {@link GiniCaptureSpecificExtraction}
      *
-     * @return Gini API SDK {@link SpecificExtraction}
+     * @return Gini Pay API lib {@link SpecificExtraction}
      */
     @NonNull
     public static SpecificExtraction map(

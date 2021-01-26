@@ -66,7 +66,7 @@ public class GiniCaptureAccountingNetworkApi implements GiniCaptureNetworkApi {
                 .getDocumentTaskManager();
         final net.gini.android.models.Document document =
                 mAccountingNetworkService.getAnalyzedGiniApiDocument();
-        // We require the Gini API SDK's net.gini.android.models.Document for sending the feedback
+        // We require the Gini Pay API lib's net.gini.android.models.Document for sending the feedback
         if (document != null) {
             LOG.debug("Send feedback for api document {} using extractions {}", document.getId(),
                     extractions);

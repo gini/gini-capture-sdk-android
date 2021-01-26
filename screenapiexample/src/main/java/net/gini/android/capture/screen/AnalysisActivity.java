@@ -23,7 +23,7 @@ import androidx.annotation.NonNull;
 
 /**
  * Implements callbacks required by the Gini Capture SDK's {@link net.gini.android.capture.analysis.AnalysisActivity}
- * to perform document analysis using the Gini API SDK.
+ * to perform document analysis using the Gini Pay API lib.
  */
 public class AnalysisActivity extends net.gini.android.capture.analysis.AnalysisActivity {
 

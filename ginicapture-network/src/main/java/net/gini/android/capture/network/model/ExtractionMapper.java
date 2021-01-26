@@ -14,16 +14,16 @@ import androidx.annotation.NonNull;
  */
 
 /**
- * Helper class to map the {@link Extraction} from the Gini API SDK to the Gini Capture SDK's
+ * Helper class to map the {@link Extraction} from the Gini Pay API lib to the Gini Capture SDK's
  * {@link GiniCaptureExtraction} and vice versa.
  */
 public final class ExtractionMapper {
 
     /**
-     * Map a list of {@link Extraction}s from the Gini API SDK to a list of Gini Capture SDK
+     * Map a list of {@link Extraction}s from the Gini Pay API lib to a list of Gini Capture SDK
      * {@link GiniCaptureExtraction}s.
      *
-     * @param sourceList list of Gini API SDK {@link Extraction}s
+     * @param sourceList list of Gini Pay API lib {@link Extraction}s
      *
      * @return list of Gini Capture SDK {@link GiniCaptureExtraction}s
      */
@@ -38,10 +38,10 @@ public final class ExtractionMapper {
     }
 
     /**
-     * Map an {@link Extraction} from the Gini API SDK to the Gini Capture SDK's {@link
+     * Map an {@link Extraction} from the Gini Pay API lib to the Gini Capture SDK's {@link
      * GiniCaptureExtraction}.
      *
-     * @param source Gini API SDK {@link Extraction}
+     * @param source Gini Pay API lib {@link Extraction}
      *
      * @return a Gini Capture SDK {@link GiniCaptureExtraction}
      */
@@ -61,7 +61,7 @@ public final class ExtractionMapper {
      *
      * @param sourceList list of Gini Capture SDK {@link GiniCaptureExtraction}s
      *
-     * @return list of Gini API SDK {@link Extraction}s
+     * @return list of Gini Pay API lib {@link Extraction}s
      */
     @NonNull
     public static List<Extraction> mapListToApiSdk(
@@ -74,12 +74,12 @@ public final class ExtractionMapper {
     }
 
     /**
-     * Map a {@link GiniCaptureExtraction} from the Gini Capture SDK to the Gini API SDK's {@link
+     * Map a {@link GiniCaptureExtraction} from the Gini Capture SDK to the Gini Pay API lib's {@link
      * Extraction}.
      *
      * @param source Gini Capture SDK {@link GiniCaptureExtraction}
      *
-     * @return Gini API SDK {@link Extraction}
+     * @return Gini Pay API lib {@link Extraction}
      */
     @NonNull
     public static Extraction map(@NonNull final GiniCaptureExtraction source) {

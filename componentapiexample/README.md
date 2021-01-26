@@ -6,7 +6,7 @@ This example app provides you with a sample usage of the Gini Capture SDK's Comp
 The Gini Capture SDK supports both standard Activities and Fragments and AndroidX ones. Activities without `AppCompat` in
 their name use standard Activities and Fragments while the other ones use Androidx.
 
-The Gini API SDK is used for analyzing documents and sending feedback.
+The Gini Pay API lib is used for analyzing documents and sending feedback.
 
 Before analyzing documents with the Component API example app, you need to set your Gini API Client Id and Secret by creating a
 `local.properties` file in this folder containing a `clientId` and a `clientSecret` property.
@@ -121,12 +121,12 @@ Feedback should be sent only for the user visible fields. Other fields should be
 SingleDocumentAnalyzer
 ----------------------
 
-Helps with managing the document analysis using our Gini API SDK.
+Helps with managing the document analysis using our Gini Pay API lib.
 
-Gini API SDK
+Gini Pay API lib
 ============
 
-The Gini API SDK is created in and accessed using the `ComponentApiApp`. The `SingleDocumentAnalyzer` helps with managing document analysis.
+The Gini Pay API lib is created in and accessed using the `ComponentApiApp`. The `SingleDocumentAnalyzer` helps with managing document analysis.
 
 Customization
 =============

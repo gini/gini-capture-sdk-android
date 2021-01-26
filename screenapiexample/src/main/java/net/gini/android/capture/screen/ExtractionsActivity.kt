@@ -243,7 +243,7 @@ class ExtractionsActivity : AppCompatActivity() {
         mExtractionsAdapter!!.notifyDataSetChanged()
         val document = (application as BaseExampleApp).singleDocumentAnalyzer
                 .giniApiDocument
-        // We require the Gini API SDK's net.gini.android.models.Document for sending the feedback
+        // We require the Gini Pay API lib's net.gini.android.models.Document for sending the feedback
         if (document != null) {
             try {
                 showProgressIndicator(binding)

@@ -9,7 +9,7 @@ By integrating this library in your application you can allow your users to easi
 implementing the necessary callbacks - upload the document to the Gini API for analysis.
 
 Communication with the Gini API is not part of the Gini Capture SDK to allow clients the freedom of using a networking implementation of
-choosing. The quickest way to add networking is to use the Gini Capture Network Library. You may also use the Gini API SDK for Android
+choosing. The quickest way to add networking is to use the Gini Capture Network Library. You may also use the Gini Pay API lib for Android
 or implement communication with the Gini API yourself.
 
 The Gini Capture SDK for Android can be integrated in two ways, either by using the Screen API or the Component API. The Screen API

@@ -154,7 +154,7 @@ Documentation
 
 - Android: https://developer.android.com/training/sharing/receive.html
 - Gini API: http://developer.gini.net/gini-api/html/documents.html#submitting-files
-- Gini API SDK: http://developer.gini.net/gini-sdk-android/guides/common-tasks.html#upload-a-document
+- Gini Pay API lib: http://developer.gini.net/gini-pay-api-lib-android/guides/common-tasks.html#upload-a-document
 
 Showing a preview of the PDF’s first page
 -----------------------------------------

@@ -12,15 +12,15 @@ import androidx.annotation.Nullable;
  */
 
 /**
- * Helper class to map the {@link Box} from the Gini API SDK to the Gini Capture SDK's {@link
+ * Helper class to map the {@link Box} from the Gini Pay API lib to the Gini Capture SDK's {@link
  * GiniCaptureBox} and vice versa.
  */
 public final class BoxMapper {
 
     /**
-     * Map a {@link Box} from the Gini API SDK to the Gini Capture SDK's {@link GiniCaptureBox}.
+     * Map a {@link Box} from the Gini Pay API lib to the Gini Capture SDK's {@link GiniCaptureBox}.
      *
-     * @param source Gini API SDK {@link Box}
+     * @param source Gini Pay API lib {@link Box}
      *
      * @return a Gini Capture SDK {@link GiniCaptureBox}
      */
@@ -34,11 +34,11 @@ public final class BoxMapper {
     }
 
     /**
-     * Map a {@link GiniCaptureBox} from the Gini Capture SDK to the Gini API SDK's {@link Box}.
+     * Map a {@link GiniCaptureBox} from the Gini Capture SDK to the Gini Pay API lib's {@link Box}.
      *
      * @param source Gini Capture SDK {@link GiniCaptureBox}
      *
-     * @return Gini API SDK {@link Box}
+     * @return Gini Pay API lib {@link Box}
      */
     @Nullable
     public static Box map(@Nullable final GiniCaptureBox source) {
