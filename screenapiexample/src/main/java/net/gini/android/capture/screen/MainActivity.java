@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bindViews();
         addInputHandlers();
-        setGiniCaptureLibDebugging();
+        setGiniCaptureSdkDebugging();
         showVersions();
         createRuntimePermissionsHandler();
         mRestoredInstance = savedInstanceState != null;
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         if (!mRestoredInstance) {
             final Intent intent = getIntent();
             if (isIntentActionViewOrSend(intent)) {
-                startGiniCaptureLibraryForImportedFile(intent);
+                startGiniCaptureSdkForImportedFile(intent);
             }
         }
     }
@@ -120,15 +120,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(final Intent intent) {
         super.onNewIntent(intent);
         if (isIntentActionViewOrSend(intent)) {
-            startGiniCaptureLibraryForImportedFile(intent);
+            startGiniCaptureSdkForImportedFile(intent);
         }
     }
 
-    private void startGiniCaptureLibraryForImportedFile(final Intent importedFileIntent) {
+    private void startGiniCaptureSdkForImportedFile(final Intent importedFileIntent) {
         mRuntimePermissionHandler.requestStoragePermission(new RuntimePermissionHandler.Listener() {
             @Override
             public void permissionGranted() {
-                doStartGiniCaptureLibraryForImportedFile(importedFileIntent);
+                doStartGiniCaptureSdkForImportedFile(importedFileIntent);
             }
 
             @Override
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void doStartGiniCaptureLibraryForImportedFile(final Intent importedFileIntent) {
+    private void doStartGiniCaptureSdkForImportedFile(final Intent importedFileIntent) {
         // Configure the Gini Capture SDK
         configureGiniCapture();
         if (GiniCapture.hasInstance() && GiniCapture.getInstance().isMultiPageEnabled()) {
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         mTextAppVersion.setText("v" + BuildConfig.VERSION_NAME);
     }
 
-    private void setGiniCaptureLibDebugging() {
+    private void setGiniCaptureSdkDebugging() {
         if (BuildConfig.DEBUG) {
             GiniCaptureDebug.enable();
             configureLogging();
@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonStartScanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                startGiniCaptureLibrary();
+                startGiniCaptureSdk();
             }
         });
         mGiniApiTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -239,11 +239,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void startGiniCaptureLibrary() {
+    private void startGiniCaptureSdk() {
         mRuntimePermissionHandler.requestCameraPermission(new RuntimePermissionHandler.Listener() {
             @Override
             public void permissionGranted() {
-                doStartGiniCaptureLibrary();
+                doStartGiniCaptureSdk();
             }
 
             @Override
@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void doStartGiniCaptureLibrary() {
+    private void doStartGiniCaptureSdk() {
         // NOTE: on Android 6.0 and later the camera permission is required before checking the requirements
         final RequirementsReport report = GiniCaptureRequirements.checkRequirements(this);
         if (!report.isFulfilled()) {
@@ -435,7 +435,7 @@ public class MainActivity extends AppCompatActivity {
             // The NoExtractionsActivity has a button for taking another picture which causes the activity to finish
             // and return the result code seen below
             if (resultCode == NoExtractionsActivity.RESULT_START_GINI_CAPTURE) {
-                startGiniCaptureLibrary();
+                startGiniCaptureSdk();
             }
         }
     }

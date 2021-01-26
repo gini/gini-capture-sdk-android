@@ -253,7 +253,7 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         if (savedInstanceState == null) {
             final Intent intent = mActivity.getIntent();
             if (isIntentActionViewOrSend(intent)) {
-                startGiniCaptureLibraryForImportedFile(intent);
+                startGiniCaptureSdkForImportedFile(intent);
             } else {
                 showCamera();
             }
@@ -326,7 +326,7 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
 
     protected abstract void setTitlesForOnboarding();
 
-    private void startGiniCaptureLibraryForImportedFile(@NonNull final Intent importedFileIntent) {
+    private void startGiniCaptureSdkForImportedFile(@NonNull final Intent importedFileIntent) {
         getSingleDocumentAnalyzer().cancelAnalysis();
         if (GiniCapture.hasInstance() && GiniCapture.getInstance().isMultiPageEnabled()) {
             mFileImportCancellationToken = GiniCapture.getInstance().createDocumentForImportedFiles(
@@ -401,7 +401,7 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
 
     public void onNewIntent(final Intent intent) {
         if (isIntentActionViewOrSend(intent)) {
-            startGiniCaptureLibraryForImportedFile(intent);
+            startGiniCaptureSdkForImportedFile(intent);
         }
     }
 

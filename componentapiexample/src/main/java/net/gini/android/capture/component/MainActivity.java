@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean mRestoredInstance;
     private RuntimePermissionHandler mRuntimePermissionHandler;
     private TextView mTextAppVersion;
-    private TextView mTextGiniCaptureLibVersion;
+    private TextView mTextGiniCaptureSdkVersion;
     private Spinner mGiniApiTypeSpinner;
     private GiniApiType mGiniApiType = GiniApiType.DEFAULT;
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bindViews();
         addInputHandlers();
-        setGiniCaptureLibDebugging();
+        setGiniCaptureSdkDebugging();
         showVersions();
         createRuntimePermissionsHandler();
         mRestoredInstance = savedInstanceState != null;
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         if (!mRestoredInstance) {
             final Intent intent = getIntent();
             if (isIntentActionViewOrSend(intent)) {
-                startGiniCaptureLibraryForImportedFile(intent);
+                startGiniCaptureSdkForImportedFile(intent);
             }
         }
     }
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(final Intent intent) {
         super.onNewIntent(intent);
         if (isIntentActionViewOrSend(intent)) {
-            startGiniCaptureLibraryForImportedFile(intent);
+            startGiniCaptureSdkForImportedFile(intent);
         }
     }
 
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         return pages;
     }
 
-    private void startGiniCaptureLibraryForImportedFile(final Intent importedFileIntent) {
+    private void startGiniCaptureSdkForImportedFile(final Intent importedFileIntent) {
         initGiniCapture();
         new AlertDialog.Builder(this)
                 .setMessage(R.string.open_file_standard_or_compat)
@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonStartGiniCaptureStandard = (Button) findViewById(
                 R.id.button_start_gini_capture_standard);
         mButtonStartGiniCaptureCompat = (Button) findViewById(R.id.button_start_gini_capture_compat);
-        mTextGiniCaptureLibVersion = (TextView) findViewById(R.id.text_gini_capture_version);
+        mTextGiniCaptureSdkVersion = (TextView) findViewById(R.id.text_gini_capture_version);
         mTextAppVersion = (TextView) findViewById(R.id.text_app_version);
         mGiniApiTypeSpinner = findViewById(R.id.gini_api_type_spinner);
     }
@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
     }
 
-    private void setGiniCaptureLibDebugging() {
+    private void setGiniCaptureSdkDebugging() {
         if (BuildConfig.DEBUG) {
             GiniCaptureDebug.enable();
         }
@@ -297,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void showVersions() {
-        mTextGiniCaptureLibVersion.setText(
+        mTextGiniCaptureSdkVersion.setText(
                 "Gini Capture SDK v" + net.gini.android.capture.BuildConfig.VERSION_NAME);
         mTextAppVersion.setText("v" + BuildConfig.VERSION_NAME);
     }
