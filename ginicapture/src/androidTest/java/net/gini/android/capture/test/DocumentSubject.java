@@ -8,6 +8,7 @@ import com.google.common.truth.Subject;
 import com.google.common.truth.SubjectFactory;
 
 import net.gini.android.capture.Document;
+import net.gini.android.capture.document.ImageDocument;
 import net.gini.android.capture.internal.camera.photo.JpegByteArraySubject;
 
 import androidx.annotation.Nullable;
@@ -31,7 +32,7 @@ public class DocumentSubject extends Subject<DocumentSubject, Document> {
         super(failureStrategy, subject);
         isNotNull();
         //noinspection ConstantConditions
-        mJpegByteArraySubject = new JpegByteArraySubject(failureStrategy, subject.getJpeg());
+        mJpegByteArraySubject = new JpegByteArraySubject(failureStrategy, subject.getData());
     }
 
     public void isEqualToDocument(final Document other) {
@@ -44,16 +45,20 @@ public class DocumentSubject extends Subject<DocumentSubject, Document> {
         }
 
         //noinspection ConstantConditions - null check done above
-        final Bitmap bitmap = BitmapFactory.decodeByteArray(document.getJpeg(), 0,
-                document.getJpeg().length);
+        final Bitmap bitmap = BitmapFactory.decodeByteArray(document.getData(), 0,
+                document.getData().length);
         //noinspection ConstantConditions - null check done above
-        final Bitmap otherBitmap = BitmapFactory.decodeByteArray(other.getJpeg(), 0,
-                other.getJpeg().length);
+        final Bitmap otherBitmap = BitmapFactory.decodeByteArray(other.getData(), 0,
+                other.getData().length);
 
         if (!bitmap.sameAs(otherBitmap)) {
             fail("is equal to Document " + other + " - contain different bitmaps");
-        } else if (document.getRotationForDisplay() != other.getRotationForDisplay()) {
-            fail("is equal to Document " + other + " - have different rotation");
+        } else {
+            if (document instanceof ImageDocument && other instanceof ImageDocument) {
+                if (((ImageDocument) document).getRotationForDisplay() != ((ImageDocument) other).getRotationForDisplay()) {
+                    fail("is equal to Document " + other + " - have different rotation");
+                }
+            }
         }
     }
 
@@ -66,7 +71,7 @@ public class DocumentSubject extends Subject<DocumentSubject, Document> {
             return;
         }
 
-        mJpegByteArraySubject.hasSameContentIdInUserCommentAs(other.getJpeg());
+        mJpegByteArraySubject.hasSameContentIdInUserCommentAs(other.getData());
     }
 
     public void hasRotationDeltaInUserComment(final int rotationDelta) {

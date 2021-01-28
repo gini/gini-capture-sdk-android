@@ -195,7 +195,7 @@ public class ReviewScreenTest {
         Thread.sleep(PAUSE_DURATION_LONG);
 
         assertThat(documentToAnalyze.get()).isNotNull();
-        assertThat(documentToAnalyze.get().getJpeg().length).isLessThan(TEST_JPEG.length);
+        assertThat(documentToAnalyze.get().getData().length).isLessThan(TEST_JPEG.length);
     }
 
     @Test
@@ -216,7 +216,7 @@ public class ReviewScreenTest {
         Thread.sleep(PAUSE_DURATION_LONG);
 
         assertThat(documentToAnalyze.get()).isNotNull();
-        assertThat(documentToAnalyze.get().getJpeg().length).isEqualTo(TEST_JPEG.length);
+        assertThat(documentToAnalyze.get().getData().length).isEqualTo(TEST_JPEG.length);
     }
 
     @Test
@@ -651,7 +651,7 @@ public class ReviewScreenTest {
 
         assertAbout(document()).that(
                 documentToAnalyzeAfterOrientationChange.get()).hasRotationDeltaInUserComment(180);
-        assertThat(documentToAnalyzeAfterOrientationChange.get().getRotationForDisplay()).isEqualTo(
+        assertThat(((ImageDocument) documentToAnalyzeAfterOrientationChange.get()).getRotationForDisplay()).isEqualTo(
                 270);
         assertThat(
                 activity.getFragment().getFragmentImpl().getImageDocument().getRotation()).isWithin(

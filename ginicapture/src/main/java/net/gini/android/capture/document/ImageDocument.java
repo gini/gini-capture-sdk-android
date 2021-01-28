@@ -231,7 +231,6 @@ public class ImageDocument extends GiniCaptureDocument {
      *
      * @return degrees by which the image should be rotated clockwise before displaying
      */
-    @Override
     public int getRotationForDisplay() {
         return mRotationForDisplay;
     }

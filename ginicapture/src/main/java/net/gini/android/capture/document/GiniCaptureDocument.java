@@ -156,20 +156,6 @@ public class GiniCaptureDocument implements Document {
         dest.writeString(mParcelableMemoryCacheTag);
     }
 
-    @Deprecated
-    @NonNull
-    @Override
-    public byte[] getJpeg() {
-        final byte[] data = getData();
-        return data != null ? data : new byte[]{};
-    }
-
-    @Deprecated
-    @Override
-    public int getRotationForDisplay() {
-        return 0;
-    }
-
     @Override
     public Type getType() {
         return mType;
