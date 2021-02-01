@@ -1,12 +1,12 @@
-package net.gini.android.capture.component.review.compat;
+package net.gini.android.capture.component.review;
 
 import android.app.Activity;
 import android.content.Intent;
 
 import net.gini.android.capture.Document;
 import net.gini.android.capture.component.R;
-import net.gini.android.capture.component.analysis.compat.AnalysisExampleAppCompatActivity;
-import net.gini.android.capture.component.noresults.compat.NoResultsExampleAppCompatActivity;
+import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
+import net.gini.android.capture.component.noresults.NoResultsExampleAppCompatActivity;
 import net.gini.android.capture.component.review.BaseReviewScreenHandler;
 import net.gini.android.capture.review.ReviewFragmentCompat;
 import net.gini.android.capture.review.ReviewFragmentInterface;

@@ -34,7 +34,7 @@ final class AnalysisFragmentHelper {
             return new AnalysisFragmentImpl(fragment, document, analysisErrorMessage);
         } else {
             throw new IllegalStateException(
-                    "AnalysisFragmentCompat and AnalysisFragmentStandard require a Document. Use the createInstance() method of these classes for instantiating.");
+                    "AnalysisFragmentCompat requires a Document. Use the createInstance() method of these classes for instantiating.");
         }
     }
 
@@ -47,7 +47,7 @@ final class AnalysisFragmentHelper {
         } else {
             throw new IllegalStateException(
                     "AnalysisFragmentListener not set. "
-                            + "You can set it with AnalysisFragment[Compat,Standard]#setListener() or "
+                            + "You can set it with AnalysisFragmentCompat#setListener() or "
                             + "by making the host activity implement the AnalysisFragmentListener.");
         }
     }

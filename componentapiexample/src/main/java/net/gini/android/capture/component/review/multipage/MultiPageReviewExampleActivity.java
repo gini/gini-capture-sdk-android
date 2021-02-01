@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import net.gini.android.capture.component.R;
-import net.gini.android.capture.component.analysis.compat.AnalysisExampleAppCompatActivity;
+import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
 import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
 import net.gini.android.capture.review.multipage.MultiPageReviewFragment;
 import net.gini.android.capture.review.multipage.MultiPageReviewFragmentListener;

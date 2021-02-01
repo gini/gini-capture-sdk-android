@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Component API Example</string>
 
-    <string name="start_gini_capture_sdk_standard">Start Gini Capture Capture SDK</string>
-    <string name="start_gini_capture_sdk_compat">Start Gini Capture SDK Compat</string>
+    <string name="start_gini_capture_sdk">Start Gini Capture Capture SDK</string>
 
     <string name="title_camera">Camera Screen</string>
     <string name="title_onboarding">Onboarding Screen</string>
@@ -28,8 +27,6 @@
     <string name="feedback_error_no_gini_api_document">Feedback not set: no Gini Api Document available</string>
     <string name="unknown_error">unknown</string>
     <string name="unfulfilled_requirements">Requirements not fulfilled: %1$s</string>
-    <string name="open_file_standard_or_compat">Open file with standard or compat Gini Capture SDK?</string>
-    <string name="component_api_min_sdk_level_error">Component API Standard requires API Level 17 or higher</string>
     <string name="analysis_failed">Analysis failed: %1$s</string>
     <string name="gini_capture_error">Error: %1$s - %2$s</string>
     <string name="one_moment_please">Einen Moment bitte …</string>

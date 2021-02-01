@@ -3,9 +3,6 @@ Component API Example App
 
 This example app provides you with a sample usage of the Gini Capture SDK's Component API.
 
-The Gini Capture SDK supports both standard Activities and Fragments and AndroidX ones. Activities without `AppCompat` in
-their name use standard Activities and Fragments while the other ones use Androidx.
-
 The Gini Pay API lib is used for analyzing documents and sending feedback.
 
 Before analyzing documents with the Component API example app, you need to set your Gini API Client Id and Secret by creating a
@@ -17,20 +14,8 @@ make sure, that there is enough memory for image handling.
 Overview
 ========
 
-The entry point of the app is the `MainActivity`. It starts the `CameraExampleActivity` or the `CameraExampleAppCompatActivity`. The
+The entry point of the app is the `MainActivity`. It starts the `CameraExampleAppCompatActivity`. The
 `MainActivity` also requests storage and camera permissions when required.
-
-Screen Handlers
----------------
-
-For most of the screens a base handler implements the screen's logic. This class is abstract and code related to standard or support library logic
-is implemented by concrete handlers in the `standard` and `compat` sub-packages for each screen.
-
-Activities
-----------
-
-For most of the screens there are two Activities. The one without `AppCompat` in their name use standard Activities and Fragments while the other
-ones use the Android Support Library.
 
 GiniCaptureCoordinator
 ---------------------
@@ -41,9 +26,6 @@ The `GiniCaptureCoordinator` is used to show the onboarding on the first run. Af
 
 Camera Screen
 -------------
-
-The `BaseCameraScreenHandler` contains the main logic. The `compat` and `standard` sub-packages provide the implementations for the Support
-Library components and standard components, respectively. They contain an Activity and a concrete handler.
 
 It starts by showing the `CameraFragment`. When a picture was taken or file was imported using the document import button the
 `CameraFragmentListener#onDocumentAvailable()` is called where either the Review Screen or the Analysis Screen is shown.
@@ -72,9 +54,6 @@ documented in the `HelpActivity`'s javadoc.
 Review Screen
 --------------
 
-The `BaseReviewScreenHandler` contains the main logic. The `compat` and `standard` sub-packages provide the implementations for the Support
-Library components and standard components, respectively. They contain an Activity and a concrete handler.
-
 You should create a `GiniCapture` instance first. If you have done that, then analysis is executed internally
 by the networking service implementation you have configured. When the user clicks the next button then
 `ReviewFragmentListener#onProceedToAnalysisScreen()` is called.
@@ -89,9 +68,6 @@ to the Camera Screen to add more pages the `MultiPageReviewFragmentListener#onRe
 Analysis Screen
 ----------------
 
-The `BaseAnalysisScreenHandler` contains the main logic. The `compat` and `standard` sub-packages provide the implementations for the
-Support Library components and standard components, respectively. They contain an Activity and a concrete handler.
-
 You should create a `GiniCapture` instance first. If you have done that, then analysis is executed internally
 by the networking service implementation you have configured. When the `AnalysisFragment` receives the extractions the
 `AnalysisFragmentListener#onExtractionsAvailable()` is called and you may proceed with the extractions as desired.
@@ -100,9 +76,6 @@ If there were no extractions, then the `AnalysisFragment` calls the `AnalysisFra
 
 No Results Screen
 -----------------
-
-The `BaseNoResultsScreenHandler` contains the main logic. The `compat` and `standard` sub-packages provide the implementations for the
-Support Library components and standard components, respectively. They contain an Activity and a concrete handler.
 
 This screen is not shown for PDFs as it shows tips for taking better pictures of documents.
 

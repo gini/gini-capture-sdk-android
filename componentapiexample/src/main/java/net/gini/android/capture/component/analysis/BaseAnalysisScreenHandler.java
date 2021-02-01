@@ -2,8 +2,8 @@ package net.gini.android.capture.component.analysis;
 
 import static android.app.Activity.RESULT_OK;
 
-import static net.gini.android.capture.component.analysis.compat.AnalysisExampleAppCompatActivity.EXTRA_IN_DOCUMENT;
-import static net.gini.android.capture.component.analysis.compat.AnalysisExampleAppCompatActivity.EXTRA_IN_ERROR_MESSAGE;
+import static net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity.EXTRA_IN_DOCUMENT;
+import static net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity.EXTRA_IN_ERROR_MESSAGE;
 import static net.gini.android.capture.example.shared.ExampleUtil.getExtractionsBundle;
 import static net.gini.android.capture.example.shared.ExampleUtil.getLegacyExtractionsBundle;
 import static net.gini.android.capture.example.shared.ExampleUtil.hasNoPay5Extractions;
@@ -43,9 +43,6 @@ import androidx.annotation.NonNull;
 
 /**
  * Contains the logic for the Analysis Screen.
- * <p>
- * Code that differs between the standard and the compatibility library is abstracted away and is
- * implemented in the {@code standard} and {@code compat} packages.
  */
 public abstract class BaseAnalysisScreenHandler implements AnalysisFragmentListener {
 

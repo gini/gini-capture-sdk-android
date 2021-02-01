@@ -1,6 +1,6 @@
 package net.gini.android.capture.component.noresults;
 
-import static net.gini.android.capture.component.noresults.compat.NoResultsExampleAppCompatActivity.EXTRA_IN_DOCUMENT;
+import static net.gini.android.capture.component.noresults.NoResultsExampleAppCompatActivity.EXTRA_IN_DOCUMENT;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,9 +17,6 @@ import net.gini.android.capture.noresults.NoResultsFragmentListener;
 
 /**
  * Contains the logic for the No Results Screen.
- * <p>
- * Code that differs between the standard and the compatibility library is abstracted away and is
- * implemented in the {@code standard} and {@code compat} packages.
  */
 public abstract class BaseNoResultsScreenHandler implements NoResultsFragmentListener {
 

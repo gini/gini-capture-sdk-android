@@ -6,7 +6,6 @@ import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.network.GiniCaptureNetworkService;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.noresults.NoResultsFragmentCompat;
-import net.gini.android.capture.noresults.NoResultsFragmentStandard;
 
 import java.util.Map;
 
@@ -14,7 +13,7 @@ import androidx.annotation.NonNull;
 
 /**
  * <p>
- * Interface used by {@link AnalysisFragmentStandard} and {@link AnalysisFragmentCompat} to dispatch events to the hosting Activity.
+ * Interface used by {@link AnalysisFragmentCompat} to dispatch events to the hosting Activity.
  * </p>
  */
 public interface AnalysisFragmentListener {
@@ -50,7 +49,7 @@ public interface AnalysisFragmentListener {
     /**
      * Called when the document has been analyzed and no extractions were received.
      * <p>
-     * You should show the {@link NoResultsFragmentStandard} or {@link NoResultsFragmentCompat}.
+     * You should show the {@link NoResultsFragmentCompat}.
      *
      * @param document contains the reviewed document
      */

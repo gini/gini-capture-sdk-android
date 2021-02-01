@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 
 import net.gini.android.capture.camera.CameraFragmentCompat;
-import net.gini.android.capture.camera.CameraFragmentStandard;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,7 +103,7 @@ public class GiniCaptureCoordinator {
 
     /**
      * <p>
-     *     Call this method when the {@link CameraFragmentStandard} or {@link CameraFragmentCompat} has started.
+     *     Call this method when the {@link CameraFragmentCompat} has started.
      * </p>
      * <p>
      *     Can be called in your Acitivity's {@link Activity#onStart()} method, which hosts the Camera Fragment.

@@ -1,10 +1,10 @@
-package net.gini.android.capture.component.noresults.compat;
+package net.gini.android.capture.component.noresults;
 
 import android.app.Activity;
 import android.content.Intent;
 
 import net.gini.android.capture.component.R;
-import net.gini.android.capture.component.camera.compat.CameraExampleAppCompatActivity;
+import net.gini.android.capture.component.camera.CameraExampleAppCompatActivity;
 import net.gini.android.capture.component.noresults.BaseNoResultsScreenHandler;
 import net.gini.android.capture.noresults.NoResultsFragmentCompat;
 

@@ -31,7 +31,7 @@ final class ReviewFragmentHelper {
             return new ReviewFragmentImpl(fragment, document);
         } else {
             throw new IllegalStateException(
-                    "ReviewFragmentCompat and ReviewFragmentStandard require a Document. Use the createInstance() method of these classes for instantiating.");
+                    "ReviewFragmentCompat requires a Document. Use the createInstance() method of these classes for instantiating.");
         }
     }
 
@@ -44,7 +44,7 @@ final class ReviewFragmentHelper {
         } else {
             throw new IllegalStateException(
                     "ReviewFragmentListener not set. "
-                            + "You can set it with ReviewFragment[Compat,Standard]#setListener() or "
+                            + "You can set it with ReviewFragmentCompat#setListener() or "
                             + "by making the host activity implement the ReviewFragmentListener.");
         }
     }

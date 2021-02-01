@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 /**
  * <p>
- *     Methods which both Camera Fragments must implement.
+ *     Methods which Camera Fragment must implement.
  * </p>
  */
 public interface CameraFragmentInterface {

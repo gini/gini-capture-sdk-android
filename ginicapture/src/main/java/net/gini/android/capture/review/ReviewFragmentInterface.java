@@ -5,7 +5,6 @@ import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.analysis.AnalysisActivity;
 import net.gini.android.capture.analysis.AnalysisFragmentCompat;
 import net.gini.android.capture.analysis.AnalysisFragmentListener;
-import net.gini.android.capture.analysis.AnalysisFragmentStandard;
 import net.gini.android.capture.network.GiniCaptureNetworkService;
 
 import java.util.Map;
@@ -13,7 +12,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 
 /**
- * Methods which both Review Fragments must implement.
+ * Methods which Review Fragment must implement.
  */
 public interface ReviewFragmentInterface {
 
@@ -25,8 +24,8 @@ public interface ReviewFragmentInterface {
      *
      * <p> If the document has already been analyzed and the image wasn't changed when the user
      * tapped the Next button, {@link ReviewFragmentListener#onDocumentReviewedAndAnalyzed(Document)}
-     * is called and there is no need to show an {@link AnalysisActivity} or {@link
-     * AnalysisFragmentStandard} or {@link AnalysisFragmentCompat}.
+     * is called and there is no need to show an {@link AnalysisActivity} or an
+     * {@link AnalysisFragmentCompat}.
      *
      * <p> If the document wasn't analyzed or the image was changed when the user tapped the Next
      * button, {@link ReviewFragmentListener#onProceedToAnalysisScreen(Document)} is called.

@@ -1,4 +1,4 @@
-package net.gini.android.capture.component.analysis.compat;
+package net.gini.android.capture.component.analysis;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,8 +7,7 @@ import net.gini.android.capture.Document;
 import net.gini.android.capture.analysis.AnalysisFragmentCompat;
 import net.gini.android.capture.analysis.AnalysisFragmentInterface;
 import net.gini.android.capture.component.R;
-import net.gini.android.capture.component.analysis.BaseAnalysisScreenHandler;
-import net.gini.android.capture.component.noresults.compat.NoResultsExampleAppCompatActivity;
+import net.gini.android.capture.component.noresults.NoResultsExampleAppCompatActivity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;

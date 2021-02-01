@@ -13,6 +13,6 @@ a [net.gini.android.capture.network.GiniCaptureNetworkApi] implementation.
 
 ## Component API
 
-To use the Component API you have to include the [net.gini.android.capture.analysis.AnalysisFragmentStandard] or the
-[net.gini.android.capture.analysis.AnalysisFragmentCompat] in an Activity in your app (a dedicated Activity is recommended). To receive
-events from the Fragments your Activity must implement the [net.gini.android.capture.analysis.AnalysisFragmentListener] interface.
+To use the Component API you have to include the [net.gini.android.capture.analysis.AnalysisFragmentCompat] 
+in an Activity in your app (a dedicated Activity is recommended). To receive events from the Fragments 
+your Activity must implement the [net.gini.android.capture.analysis.AnalysisFragmentListener] interface.

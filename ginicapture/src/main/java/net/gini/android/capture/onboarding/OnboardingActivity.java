@@ -36,8 +36,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * GiniCapture} instance with {@link GiniCapture.Builder#setCustomOnboardingPages(ArrayList)}. If you
  * don't use {@link GiniCapture} yet you can also provide the list using the extra {@link
  * CameraActivity#EXTRA_IN_ONBOARDING_PAGES} for the Screen API and {@link
- * OnboardingFragmentCompat#createInstance(ArrayList)} or {@link OnboardingFragmentStandard#createInstance(ArrayList)}
- * for the Component API.
+ * OnboardingFragmentCompat#createInstance(ArrayList)} for the Component API.
  *
  * <h3>Customizing the Onboarding Screen</h3>
  *

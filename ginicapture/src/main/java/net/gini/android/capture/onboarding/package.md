@@ -11,9 +11,9 @@ with an [java.util.ArrayList] of [net.gini.android.capture.onboarding.Onboarding
 
 ## Component API
 
-To use the Component API you have to include the [net.gini.android.capture.onboarding.OnboardingFragmentStandard] or the
-[net.gini.android.capture.onboarding.OnboardingFragmentCompat] in an Activity in your app (a dedicated Activity is recommended). To receive
-events from the Fragments your Activity must implement the [net.gini.android.capture.onboarding.OnboardingFragmentListener] interface.
+To use the Component API you have to include the [net.gini.android.capture.onboarding.OnboardingFragmentCompat] 
+in an Activity in your app (a dedicated Activity is recommended). To receive events from the Fragments 
+your Activity must implement the [net.gini.android.capture.onboarding.OnboardingFragmentListener] interface.
 
 The Onboarding Screen was designed as a semi-transparent overlay for the camera preview. Your Activity should be configured to be
 transparent and the Camera Fragment should not stop the camera when the onboarding is shown.

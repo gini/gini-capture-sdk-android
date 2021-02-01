@@ -1,4 +1,4 @@
-package net.gini.android.capture.component.noresults.compat;
+package net.gini.android.capture.component.noresults;
 
 import android.content.Context;
 import android.content.Intent;

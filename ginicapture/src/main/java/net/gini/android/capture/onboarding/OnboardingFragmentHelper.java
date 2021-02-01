@@ -51,7 +51,7 @@ final class OnboardingFragmentHelper {
         } else {
             throw new IllegalStateException(
                     "OnboardingFragmentListener not set. "
-                            + "You can set it with OnboardingFragment[Compat,Standard]#setListener() or "
+                            + "You can set it with OnboardingFragmentCompat#setListener() or "
                             + "by making the host activity implement the OnboardingFragmentListener.");
         }
     }

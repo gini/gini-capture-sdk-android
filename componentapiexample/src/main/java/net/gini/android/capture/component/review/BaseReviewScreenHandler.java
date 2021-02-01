@@ -2,7 +2,7 @@ package net.gini.android.capture.component.review;
 
 import static android.app.Activity.RESULT_OK;
 
-import static net.gini.android.capture.component.review.compat.ReviewExampleAppCompatActivity.EXTRA_IN_DOCUMENT;
+import static net.gini.android.capture.component.review.ReviewExampleAppCompatActivity.EXTRA_IN_DOCUMENT;
 import static net.gini.android.capture.example.shared.ExampleUtil.getExtractionsBundle;
 import static net.gini.android.capture.example.shared.ExampleUtil.getLegacyExtractionsBundle;
 import static net.gini.android.capture.example.shared.ExampleUtil.hasNoPay5Extractions;
@@ -42,9 +42,6 @@ import androidx.annotation.Nullable;
 
 /**
  * Contains the logic for the Review Screen.
- * <p>
- * Code that differs between the standard and the compatibility library is abstracted away and is
- * implemented in the {@code standard} and {@code compat} packages.
  */
 public abstract class BaseReviewScreenHandler implements ReviewFragmentListener {
 

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 
 /**
  * <p>
- *     Methods which both Onboarding Fragments must implement.
+ *     Methods which Onboarding Fragment must implement.
  * </p>
  */
 public interface OnboardingFragmentInterface {

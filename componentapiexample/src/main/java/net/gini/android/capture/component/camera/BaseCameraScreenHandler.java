@@ -53,9 +53,6 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 
 /**
  * Contains the logic for the Camera Screen.
- * <p>
- * Code that differs between the standard and the compatibility library is abstracted away and is
- * implemented in the {@code standard} and {@code compat} packages.
  */
 public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         OnboardingFragmentListener {

@@ -1,4 +1,4 @@
-package net.gini.android.capture.component.camera.compat;
+package net.gini.android.capture.component.camera;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,9 +7,8 @@ import net.gini.android.capture.Document;
 import net.gini.android.capture.camera.CameraFragmentCompat;
 import net.gini.android.capture.camera.CameraFragmentInterface;
 import net.gini.android.capture.component.R;
-import net.gini.android.capture.component.analysis.standard.AnalysisExampleActivity;
-import net.gini.android.capture.component.camera.BaseCameraScreenHandler;
-import net.gini.android.capture.component.review.compat.ReviewExampleAppCompatActivity;
+import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
+import net.gini.android.capture.component.review.ReviewExampleAppCompatActivity;
 import net.gini.android.capture.onboarding.OnboardingFragmentCompat;
 
 import androidx.appcompat.app.ActionBar;
@@ -65,7 +64,7 @@ public class CameraScreenHandlerAppCompat extends BaseCameraScreenHandler {
 
     @Override
     protected Intent getAnalysisActivityIntent(final Document document) {
-        return AnalysisExampleActivity.newInstance(document, null, mAppCompatActivity);
+        return AnalysisExampleAppCompatActivity.newInstance(document, null, mAppCompatActivity);
     }
 
     @Override

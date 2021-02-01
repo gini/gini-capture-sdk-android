@@ -8,9 +8,7 @@ import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.analysis.AnalysisActivity;
 import net.gini.android.capture.analysis.AnalysisFragmentCompat;
-import net.gini.android.capture.analysis.AnalysisFragmentStandard;
 import net.gini.android.capture.camera.CameraFragmentCompat;
-import net.gini.android.capture.camera.CameraFragmentStandard;
 import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
 
 import androidx.annotation.NonNull;
@@ -33,10 +31,9 @@ public interface MultiPageReviewFragmentListener {
      * <p> If you use the Screen API you should start the {@link AnalysisActivity} and set the
      * document as the {@link AnalysisActivity#EXTRA_IN_DOCUMENT} extra.
      *
-     * <p> If you use the Component API you should start the {@link AnalysisFragmentCompat} (or the
-     * {@link AnalysisFragmentStandard}) and pass the document when creating it with {@link
-     * AnalysisFragmentCompat#createInstance(Document, String)} (or {@link
-     * AnalysisFragmentStandard#createInstance(Document, String)}).
+     * <p> If you use the Component API you should start the {@link AnalysisFragmentCompat}
+     * and pass the document when creating it with {@link
+     * AnalysisFragmentCompat#createInstance(Document, String)}.
      *
      * @param document contains the reviewed image (can be the original one or a modified image)
      */
@@ -51,7 +48,7 @@ public interface MultiPageReviewFragmentListener {
      * simply finish the Activity.
      *
      * <p> If you use one Activity to host all the Gini Capture fragments, then you should display the
-     * {@link CameraFragmentCompat} (or the {@link CameraFragmentStandard}) again.
+     * {@link CameraFragmentCompat} again.
      */
     void onReturnToCameraScreen();
 

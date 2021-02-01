@@ -66,32 +66,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="net.gini.android.capture.component.camera.compat.CameraExampleAppCompatActivity"
+            android:name="net.gini.android.capture.component.camera.CameraExampleAppCompatActivity"
             android:theme="@style/AppThemeCompat.NoActionBar" />
         <activity
-            android:name="net.gini.android.capture.component.camera.standard.CameraExampleActivity"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="net.gini.android.capture.component.review.compat.ReviewExampleAppCompatActivity"
+            android:name="net.gini.android.capture.component.review.ReviewExampleAppCompatActivity"
             android:theme="@style/AppThemeCompat.NoActionBar" />
-        <activity
-            android:name="net.gini.android.capture.component.review.standard.ReviewExampleActivity"
-            android:theme="@style/AppTheme" />
         <activity
             android:name="net.gini.android.capture.component.review.multipage.MultiPageReviewExampleActivity"
             android:theme="@style/AppThemeCompat.NoActionBar" />
         <activity
-            android:name="net.gini.android.capture.component.analysis.compat.AnalysisExampleAppCompatActivity"
+            android:name="net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity"
             android:theme="@style/AppThemeCompat.NoActionBar" />
         <activity
-            android:name="net.gini.android.capture.component.analysis.standard.AnalysisExampleActivity"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="net.gini.android.capture.component.noresults.compat.NoResultsExampleAppCompatActivity"
+            android:name="net.gini.android.capture.component.noresults.NoResultsExampleAppCompatActivity"
             android:theme="@style/AppThemeCompat.NoActionBar" />
-        <activity
-            android:name="net.gini.android.capture.component.noresults.standard.NoResultsExampleActivity"
-            android:theme="@style/AppTheme" />
         <activity
             android:name="net.gini.android.capture.component.ExtractionsActivity"
             android:theme="@style/AppThemeCompat" />

@@ -229,8 +229,7 @@ All Action Bar customizations except the title are global to all Activities.
   
   If you don't use ``GiniCapture`` yet you can also provide the list using the extra
   ``CameraActivity.EXTRA_IN_ONBOARDING_PAGES`` for the Screen API and
-  ``OnboardingFragmentCompat.createInstance(ArrayList<OnboardingPage>)`` or
-  ``OnboardingFragmentStandard.createInstance(ArrayList<OnboardingPage>)`` for the Component API.
+  ``OnboardingFragmentCompat.createInstance(ArrayList<OnboardingPage>)`` for the Component API.
 
   :ref:`Back to screenshot. <onboarding>`
 

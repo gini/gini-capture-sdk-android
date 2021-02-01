@@ -55,7 +55,7 @@ class CameraFragmentHelper {
         } else {
             throw new IllegalStateException(
                     "CameraFragmentListener not set. "
-                            + "You can set it with CameraFragment[Compat,Standard]#setListener() or "
+                            + "You can set it with CameraFragmentCompat#setListener() or "
                             + "by making the host activity implement the CameraFragmentListener.");
         }
     }

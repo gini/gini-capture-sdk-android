@@ -8,7 +8,6 @@ import net.gini.android.capture.analysis.AnalysisFragmentListener;
 import net.gini.android.capture.network.GiniCaptureNetworkService;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.noresults.NoResultsFragmentCompat;
-import net.gini.android.capture.noresults.NoResultsFragmentStandard;
 
 import java.util.Map;
 
@@ -16,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * Interface used by {@link ReviewFragmentStandard} and {@link ReviewFragmentCompat} to dispatch
+ * Interface used by {@link ReviewFragmentCompat} to dispatch
  * events to the hosting Activity.
  */
 public interface ReviewFragmentListener {
@@ -28,9 +27,8 @@ public interface ReviewFragmentListener {
      * <p> We assume that in most cases the photo is good enough and this way we are able to provide
      * analysis results quicker.
      *
-     * <p> <b>Note:</b> Call {@link ReviewFragmentStandard#onDocumentAnalyzed()} or {@link
-     * ReviewFragmentCompat#onDocumentAnalyzed()} when the analysis is done and your Activity wasn't
-     * stopped.
+     * <p> <b>Note:</b> Call {@link ReviewFragmentCompat#onDocumentAnalyzed()} when the analysis is
+     * done and your Activity wasn't stopped.
      *
      * @param document contains the original image taken by the camera
      *
@@ -43,7 +41,7 @@ public interface ReviewFragmentListener {
     void onShouldAnalyzeDocument(@NonNull Document document);
 
     /**
-     * Called if you didn't call {@link ReviewFragmentStandard#onDocumentAnalyzed()} or {@link
+     * Called if you didn't call {@link
      * ReviewFragmentCompat#onDocumentAnalyzed()} (or the image was changed) and the user tapped on
      * the Next button.
      *
@@ -59,7 +57,7 @@ public interface ReviewFragmentListener {
     void onProceedToAnalysisScreen(@NonNull Document document);
 
     /**
-     * Called if you called {@link ReviewFragmentStandard#onDocumentAnalyzed()} or {@link
+     * Called if you called {@link
      * ReviewFragmentCompat#onDocumentAnalyzed()} and the image wasn't changed and the user tapped
      * on the Next button.
      *
@@ -117,8 +115,7 @@ public interface ReviewFragmentListener {
     /**
      * Called when the document has been analyzed and no extractions were received.
      *
-     * <p> You should show the {@link NoResultsFragmentStandard} or {@link
-     * NoResultsFragmentCompat}.
+     * <p> You should show the {@link NoResultsFragmentCompat}.
      *
      * @param document contains the reviewed document
      *

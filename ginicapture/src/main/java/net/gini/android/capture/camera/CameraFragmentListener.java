@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 
 /**
  * <p>
- * Interface used by {@link CameraFragmentStandard} and {@link CameraFragmentCompat} to dispatch events to the hosting Activity.
+ * Interface used by {@link CameraFragmentCompat} to dispatch events to the hosting Activity.
  * </p>
  */
 public interface CameraFragmentListener {
