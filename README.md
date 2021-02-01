@@ -77,11 +77,9 @@ The Gini Capture SDK consists of four main screens:
 
 ### Screen API
 
-The Screen API provides a main Activity with which to start the Gini Capture SDK. In previous
-versions two abstract Activities which had to be overriden to react to events coming from the Gini
-Capture SDK. This has been changed and now only the implementations of the
-`GiniCaptureNetworkService` and `GiniCaptureNetworkApi` have to be provided with the help of the
-`GiniCapture` class.
+The Screen API provides a main Activity with which to start the Gini Capture SDK. Only the 
+implementations of the `GiniCaptureNetworkService` and `GiniCaptureNetworkApi` have to be provided 
+with the help of the `GiniCapture` class.
 
 ### Component API
 

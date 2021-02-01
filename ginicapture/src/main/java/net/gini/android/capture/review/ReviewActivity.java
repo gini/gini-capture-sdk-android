@@ -37,57 +37,12 @@ import androidx.appcompat.app.AppCompatActivity;
  * image and allows the user to review it by checking the sharpness, quality and orientation of
  * the image. The user can correct the orientation by rotating the image.
  *
- * <p> Extending the {@code ReviewActivity} in your application has been deprecated. The preferred
- * way of adding network calls to the Gini Capture SDK is by creating a {@link GiniCapture}
- * instance with a {@link GiniCaptureNetworkService} and a {@link GiniCaptureNetworkApi}
- * implementation.
- *
- * <p> <b>Note:</b> When declaring your {@code ReviewActivity} subclass in the {@code
- * AndroidManifest.xml} you should set the theme to the {@code GiniCaptureTheme} and the title to the
- * string resource named {@code gc_title_review}. If you would like to use your own theme please
- * consider that {@code ReviewActivity} extends {@link AppCompatActivity} and requires an AppCompat
- * Theme.
+ * <p> The preferred way of adding network calls to the Gini Capture SDK is by creating a
+ * {@link GiniCapture} instance with a {@link GiniCaptureNetworkService} and a
+ * {@link GiniCaptureNetworkApi} implementation.
  *
  * <p> The {@code ReviewActivity} is started by the {@link CameraActivity} after the user has taken
  * a photo or imported an image of a document.
- *
- * <p> If you didn't create {@link GiniCapture} instance you have to implement the following methods
- * in your {@code ReviewActivity} subclass:
- *
- * <ul>
- *
- * <li>{@link ReviewActivity#onShouldAnalyzeDocument(Document)} - you should start analyzing the
- * original document by sending it to the Gini API. We assume that in most cases the photo is good
- * enough and this way we are able to provide analysis results quicker.<br/><b>Note:</b> Call {@link
- * ReviewActivity#onDocumentAnalyzed()} when the analysis is done and the Activity wasn't stopped.
- *
- * <li>{@link ReviewActivity#onAddDataToResult(Intent)} - you can add the results of the analysis to
- * the Intent as extras and retrieve them once the {@link CameraActivity} returns.<br/>This is
- * called only if you called {@link ReviewActivity#onDocumentAnalyzed()} and the image wasn't
- * changed before the user tapped on the Next button.<br/>When this is called, your {@link
- * AnalysisActivity} subclass is not launched, instead control is returned to your Activity which
- * started the {@link CameraActivity} and you can extract the results of the analysis.
- *
- * </ul>
- *
- * You can also override the following methods, if you didn't create a {@link GiniCapture} instance:
- *
- * <ul>
- *
- * <li>{@link ReviewActivity#onDocumentWasRotated(Document, int, int)} - you should cancel the
- * analysis started in {@link ReviewActivity#onShouldAnalyzeDocument(Document)} because the document
- * was rotated and analysing the original is not necessary anymore. The Gini Capture SDK will
- * proceed to the Analysis Screen where the reviewed document can be analyzed.
- *
- * <li>{@link ReviewActivity#onProceedToAnalysisScreen(Document)} - called when the Gini Capture
- * Sdk will continue to the Analysis Screen. For example you can unsubscribe your analysis
- * listener, if you want to continue the analysis in your {@link AnalysisActivity} subclass in case
- * the document wasn't modified.
- *
- * <li>{@link ReviewActivity#onBackPressed()} - called when the back or the up button was clicked.
- * You should cancel the analysis started in {@link ReviewActivity#onShouldAnalyzeDocument(Document)}.
- *
- * </ul>
  *
  * <h3>Customizing the Review Screen</h3>
  *

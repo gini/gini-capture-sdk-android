@@ -42,13 +42,8 @@ import androidx.appcompat.app.AppCompatActivity;
  * the PDF's filename and number of pages above the page. On Android KitKat and older only the PDF's filename is shown with the preview area
  * left empty.
  *
- * <p> Extending the {@code AnalysisActivity} in your application has been deprecated. The preferred
- * way of adding network calls to the Gini Capture SDK is by creating a {@link GiniCapture} instance with a {@link
+ * <p> The preferred way of adding network calls to the Gini Capture SDK is by creating a {@link GiniCapture} instance with a {@link
  * GiniCaptureNetworkService} and a {@link GiniCaptureNetworkApi} implementation.
- *
- * <p> <b>Note:</b> When declaring your {@code AnalysisActivity} subclass in the {@code
- * AndroidManifest.xml} you should set the theme to the {@code GiniCaptureTheme}. If you would like to use your own theme please consider
- * that {@code AnalysisActivity} extends {@link AppCompatActivity} and requires an AppCompat Theme.
  *
  * <p> The {@code AnalysisActivity} is started by the {@link CameraActivity} after the user has
  * reviewed the document and either made no changes to the document and it hasn't been analyzed before tapping the Next button, or the user
@@ -56,33 +51,6 @@ import androidx.appcompat.app.AppCompatActivity;
  *
  * <p> For imported documents that cannot be reviewed, like PDFs, the {@link CameraActivity} starts
  * the {@code AnalysisActivity} directly.
- *
- * <p> If you didn't create {@link GiniCapture} instance you have to implement the following methods
- * in your {@code AnalysisActivity} subclass:
- *
- * <ul>
- *
- * <li> {@link AnalysisActivity#onAnalyzeDocument(Document)} - start analyzing the document by
- * sending it to the Gini API.<br/><b>Note:</b> Call {@link AnalysisActivity#onDocumentAnalyzed()} when the analysis is done and the
- * Activity hasn't been stopped.<br/><b>Note:</b> If an analysis error message was set in the Review Screen with {@link
- * ReviewActivity#onDocumentAnalysisError(String)} this method won't be called until the user clicks the retry button next to the error
- * message.
- *
- * <li>{@link AnalysisActivity#onAddDataToResult(Intent)} - you should add the results of the
- * analysis to the Intent as extras and retrieve them once the {@link CameraActivity} returns.<br/>This is called only if you called {@link
- * AnalysisActivity#onDocumentAnalyzed()} before.<br/>When this is called, control is returned to your Activity which started the {@link
- * CameraActivity} and you can extract the results of the analysis.
- *
- * </ul>
- *
- * <p> You can also override the following method:
- *
- * <ul>
- *
- * <li>{@link AnalysisActivity#onBackPressed()} - called when the back or the up button was
- * clicked.
- *
- * </ul>
  *
  * <h3>Customizing the Analysis Screen</h3>
  *

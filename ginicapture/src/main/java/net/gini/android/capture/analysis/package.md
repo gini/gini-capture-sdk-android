@@ -4,12 +4,9 @@ Contains the Activity and Fragments used for the Analysis Screen.
 
 ## Screen API
 
-Extending the `AnalysisActivity` in your application has been deprecated. The preferred way of adding network calls to the Gini Capture
+The preferred way of adding network calls to the Gini Capture
 SDK is by creating a [net.gini.android.capture.GiniCapture] instance with a [net.gini.android.capture.network.GiniCaptureNetworkService] and
 a [net.gini.android.capture.network.GiniCaptureNetworkApi] implementation.
-
-**Note:** [net.gini.android.capture.analysis.AnalysisActivity] extends [androidx.appcompat.app.AppCompatActivity], therefore you have to use
-*an `AppCompat` theme for your [net.gini.android.capture.analysis.AnalysisActivity] subclass.
 
 ## Component API
 

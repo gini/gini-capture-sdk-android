@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 
 /**
  * <p>
- * Methods which both Analysis Fragments must implement.
+ * Methods which Analysis Fragment must implement.
  * </p>
  */
 public interface AnalysisFragmentInterface {
