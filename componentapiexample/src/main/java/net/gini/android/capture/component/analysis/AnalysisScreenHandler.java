@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import net.gini.android.capture.analysis.AnalysisFragmentCompat;
+import net.gini.android.capture.component.noresults.NoResultsExampleAppCompatActivity;
 import net.gini.android.models.SpecificExtraction;
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCaptureCoordinator;
@@ -34,6 +36,10 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by Alpar Szotyori on 04.12.2017.
@@ -44,17 +50,17 @@ import androidx.annotation.NonNull;
 /**
  * Contains the logic for the Analysis Screen.
  */
-public abstract class BaseAnalysisScreenHandler implements AnalysisFragmentListener {
+public class AnalysisScreenHandler implements AnalysisFragmentListener {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BaseAnalysisScreenHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AnalysisScreenHandler.class);
 
-    private final Activity mActivity;
+    private final AppCompatActivity mActivity;
     private AnalysisFragmentInterface mAnalysisFragmentInterface;
     private Document mDocument;
     private String mErrorMessageFromReviewScreen;
     private SingleDocumentAnalyzer mSingleDocumentAnalyzer;
 
-    protected BaseAnalysisScreenHandler(final Activity activity) {
+    protected AnalysisScreenHandler(final AppCompatActivity activity) {
         mActivity = activity;
     }
 
@@ -144,7 +150,9 @@ public abstract class BaseAnalysisScreenHandler implements AnalysisFragmentListe
         mActivity.finish();
     }
 
-    protected abstract Intent getNoResultsActivityIntent(final Document document);
+    private Intent getNoResultsActivityIntent(final Document document) {
+        return NoResultsExampleAppCompatActivity.newInstance(document, mActivity);
+    }
 
     @Override
     public void onError(@NonNull final GiniCaptureError error) {
@@ -177,11 +185,24 @@ public abstract class BaseAnalysisScreenHandler implements AnalysisFragmentListe
         }
     }
 
-    protected abstract AnalysisFragmentInterface retrieveAnalysisFragment();
+    private AnalysisFragmentInterface retrieveAnalysisFragment() {
+        mAnalysisFragmentInterface =
+                (AnalysisFragmentCompat) mActivity.getSupportFragmentManager()
+                        .findFragmentById(R.id.analysis_screen_container);
+        return mAnalysisFragmentInterface;
+    }
 
-    protected abstract void showAnalysisFragment();
+    private void showAnalysisFragment() {
+        mActivity.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.analysis_screen_container, (Fragment) mAnalysisFragmentInterface)
+                .commit();
+    }
 
-    protected abstract AnalysisFragmentInterface createAnalysisFragment();
+    private AnalysisFragmentInterface createAnalysisFragment() {
+        mAnalysisFragmentInterface = AnalysisFragmentCompat.createInstance(getDocument(),
+                getErrorMessageFromReviewScreen());
+        return mAnalysisFragmentInterface;
+    }
 
     private void readExtras() {
         mDocument = mActivity.getIntent().getParcelableExtra(EXTRA_IN_DOCUMENT);
@@ -189,9 +210,19 @@ public abstract class BaseAnalysisScreenHandler implements AnalysisFragmentListe
                 EXTRA_IN_ERROR_MESSAGE);
     }
 
-    protected abstract void setTitles();
+    private void setTitles() {
+        final ActionBar actionBar = mActivity.getSupportActionBar();
+        if (actionBar == null) {
+            return;
+        }
+        actionBar.setTitle("");
+        actionBar.setSubtitle(mActivity.getString(R.string.one_moment_please));
+    }
 
-    protected abstract void setUpActionBar();
+    private void setUpActionBar() {
+        mActivity.setSupportActionBar(
+                (Toolbar) mActivity.findViewById(R.id.toolbar));
+    }
 
     @Override
     public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {

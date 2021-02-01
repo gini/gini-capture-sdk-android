@@ -24,7 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 
 /**
- * AppCompatActivity using the {@link AnalysisScreenHandlerAppCompat} to host the
+ * AppCompatActivity using the {@link AnalysisScreenHandler} to host the
  * {@link AnalysisFragmentCompat} and to start the {@link ExtractionsActivity} or the
  * {@link NoResultsExampleAppCompatActivity}.
  */
@@ -33,7 +33,7 @@ public class AnalysisExampleAppCompatActivity extends AppCompatActivity implemen
 
     public static final String EXTRA_IN_DOCUMENT = "EXTRA_IN_DOCUMENT";
     public static final String EXTRA_IN_ERROR_MESSAGE = "EXTRA_IN_ERROR_MESSAGE";
-    private AnalysisScreenHandlerAppCompat mAnalysisScreenHandler;
+    private AnalysisScreenHandler mAnalysisScreenHandler;
 
     @Override
     public void onAnalyzeDocument(@NonNull final Document document) {
@@ -64,7 +64,7 @@ public class AnalysisExampleAppCompatActivity extends AppCompatActivity implemen
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis_compat);
-        mAnalysisScreenHandler = new AnalysisScreenHandlerAppCompat(this);
+        mAnalysisScreenHandler = new AnalysisScreenHandler(this);
         mAnalysisScreenHandler.onCreate(savedInstanceState);
     }
 

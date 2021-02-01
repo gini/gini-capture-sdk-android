@@ -31,7 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 
 /**
- * AppCompatActivity using the {@link CameraScreenHandlerAppCompat} to host the
+ * AppCompatActivity using the {@link CameraScreenHandler} to host the
  * {@link CameraFragmentCompat} and the {@link OnboardingFragmentCompat} and to start the
  * {@link ReviewExampleAppCompatActivity}, the {@link AnalysisExampleAppCompatActivity} or the {@link HelpActivity}.
  */
@@ -39,7 +39,7 @@ public class CameraExampleAppCompatActivity extends AppCompatActivity implements
         CameraFragmentListener,
         OnboardingFragmentListener {
 
-    private CameraScreenHandlerAppCompat mCameraScreenHandler;
+    private CameraScreenHandler mCameraScreenHandler;
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode,
@@ -71,7 +71,7 @@ public class CameraExampleAppCompatActivity extends AppCompatActivity implements
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_compat);
-        mCameraScreenHandler = new CameraScreenHandlerAppCompat(this);
+        mCameraScreenHandler = new CameraScreenHandler(this);
         mCameraScreenHandler.onCreate(savedInstanceState);
     }
 

@@ -12,6 +12,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
+import net.gini.android.capture.component.noresults.NoResultsExampleAppCompatActivity;
+import net.gini.android.capture.review.ReviewFragmentCompat;
 import net.gini.android.models.SpecificExtraction;
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCaptureCoordinator;
@@ -33,6 +36,10 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by Alpar Szotyori on 04.12.2017.
@@ -43,18 +50,18 @@ import androidx.annotation.Nullable;
 /**
  * Contains the logic for the Review Screen.
  */
-public abstract class BaseReviewScreenHandler implements ReviewFragmentListener {
+public class ReviewScreenHandler implements ReviewFragmentListener {
 
     private static final int ANALYSIS_REQUEST = 1;
-    private static final Logger LOG = LoggerFactory.getLogger(BaseReviewScreenHandler.class);
-    private final Activity mActivity;
+    private static final Logger LOG = LoggerFactory.getLogger(ReviewScreenHandler.class);
+    private final AppCompatActivity mActivity;
     private Document mDocument;
     private String mDocumentAnalysisErrorMessage;
     private Map<String, SpecificExtraction> mExtractions;
     private ReviewFragmentInterface mReviewFragmentInterface;
     private SingleDocumentAnalyzer mSingleDocumentAnalyzer;
 
-    protected BaseReviewScreenHandler(final Activity activity) {
+    protected ReviewScreenHandler(final AppCompatActivity activity) {
         mActivity = activity;
     }
 
@@ -123,8 +130,9 @@ public abstract class BaseReviewScreenHandler implements ReviewFragmentListener 
         mActivity.startActivityForResult(intent, ANALYSIS_REQUEST);
     }
 
-    protected abstract Intent getAnalysisActivityIntent(final Document document,
-            final String errorMessage);
+    private Intent getAnalysisActivityIntent(final Document document, final String errorMessage) {
+        return AnalysisExampleAppCompatActivity.newInstance(document, errorMessage, mActivity);
+    }
 
     @Override
     public void onDocumentReviewedAndAnalyzed(@NonNull final Document document) {
@@ -167,7 +175,9 @@ public abstract class BaseReviewScreenHandler implements ReviewFragmentListener 
         mActivity.finish();
     }
 
-    protected abstract Intent getNoResultsActivityIntent(final Document document);
+    private Intent getNoResultsActivityIntent(final Document document) {
+        return NoResultsExampleAppCompatActivity.newInstance(document, mActivity);
+    }
 
     @Override
     public void onDocumentWasRotated(@NonNull final Document document, final int oldRotation,
@@ -217,15 +227,37 @@ public abstract class BaseReviewScreenHandler implements ReviewFragmentListener 
         mDocument = mActivity.getIntent().getParcelableExtra(EXTRA_IN_DOCUMENT);
     }
 
-    protected abstract ReviewFragmentInterface createReviewFragment();
+    private ReviewFragmentInterface createReviewFragment() {
+        mReviewFragmentInterface = ReviewFragmentCompat.createInstance(getDocument());
+        return mReviewFragmentInterface;
+    }
 
-    protected abstract void showReviewFragment();
+    private void showReviewFragment() {
+        mActivity.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.review_screen_container, (Fragment) mReviewFragmentInterface)
+                .commit();
+    }
 
-    protected abstract ReviewFragmentInterface retrieveReviewFragment();
+    private ReviewFragmentInterface retrieveReviewFragment() {
+        mReviewFragmentInterface =
+                (ReviewFragmentCompat) mActivity.getSupportFragmentManager()
+                        .findFragmentById(R.id.review_screen_container);
+        return mReviewFragmentInterface;
+    }
 
-    protected abstract void setTitles();
+    private void setTitles() {
+        final ActionBar actionBar = mActivity.getSupportActionBar();
+        if (actionBar == null) {
+            return;
+        }
+        actionBar.setTitle(R.string.review_screen_title);
+        actionBar.setSubtitle(mActivity.getString(R.string.review_screen_subtitle));
+    }
 
-    protected abstract void setUpActionBar();
+    private void setUpActionBar() {
+        mActivity.setSupportActionBar(
+                (Toolbar) mActivity.findViewById(R.id.toolbar));
+    }
 
     @Override
     public void onExtractionsAvailable(

@@ -27,7 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 
 /**
- * AppCompatActivity using the {@link ReviewScreenHandlerAppCompat} to host the
+ * AppCompatActivity using the {@link ReviewScreenHandler} to host the
  * {@link ReviewFragmentCompat} and to start the {@link AnalysisExampleAppCompatActivity}, the
  * {@link NoResultsExampleAppCompatActivity} or the {@link ExtractionsActivity}.
  */
@@ -38,7 +38,7 @@ public class ReviewExampleAppCompatActivity extends AppCompatActivity implements
     public static final int RESULT_ADD_MORE_PAGES = RESULT_FIRST_USER + 3001;
     public static final String EXTRA_OUT_MULTI_PAGE_FIRST_PAGE = "EXTRA_OUT_MULTI_PAGE_FIRST_PAGE";
 
-    private ReviewScreenHandlerAppCompat mReviewScreenHandler;
+    private ReviewScreenHandler mReviewScreenHandler;
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode,
@@ -51,7 +51,7 @@ public class ReviewExampleAppCompatActivity extends AppCompatActivity implements
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_compat);
-        mReviewScreenHandler = new ReviewScreenHandlerAppCompat(this);
+        mReviewScreenHandler = new ReviewScreenHandler(this);
         mReviewScreenHandler.onCreate(savedInstanceState);
     }
 

@@ -16,6 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import net.gini.android.capture.camera.CameraFragmentCompat;
+import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
+import net.gini.android.capture.component.review.ReviewExampleAppCompatActivity;
+import net.gini.android.capture.onboarding.OnboardingFragmentCompat;
 import net.gini.android.models.SpecificExtraction;
 import net.gini.android.capture.AsyncCallback;
 import net.gini.android.capture.Document;
@@ -46,7 +50,12 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.android.LogcatAppender;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
@@ -54,23 +63,23 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 /**
  * Contains the logic for the Camera Screen.
  */
-public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
+public class CameraScreenHandler implements CameraFragmentListener,
         OnboardingFragmentListener {
 
     // Set to true to allow execution of the custom code check
     private static final boolean DO_CUSTOM_DOCUMENT_CHECK = false;
-    private static final Logger LOG = LoggerFactory.getLogger(BaseCameraScreenHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CameraScreenHandler.class);
     private static final int REVIEW_REQUEST = 1;
     private static final int MULTI_PAGE_REVIEW_REQUEST = 2;
     private static final int ANALYSIS_REQUEST = 3;
-    private final Activity mActivity;
+    private final AppCompatActivity mActivity;
     private CameraFragmentInterface mCameraFragmentInterface;
     private GiniCaptureCoordinator mGiniCaptureCoordinator;
     private Menu mMenu;
     private SingleDocumentAnalyzer mSingleDocumentAnalyzer;
     private CancellationToken mFileImportCancellationToken;
 
-    protected BaseCameraScreenHandler(final Activity activity) {
+    protected CameraScreenHandler(final AppCompatActivity activity) {
         mActivity = activity;
     }
 
@@ -89,9 +98,25 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         removeOnboardingFragment();
     }
 
-    protected abstract void removeOnboardingFragment();
+    private void removeOnboardingFragment() {
+        final Fragment fragment = mActivity.getSupportFragmentManager().findFragmentById(
+                R.id.onboarding_container);
+        if (fragment != null) {
+            mActivity.getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                    .remove(fragment)
+                    .commitAllowingStateLoss();
+        }
+    }
 
-    protected abstract void setTitlesForCamera();
+    private void setTitlesForCamera() {
+        final ActionBar actionBar = mActivity.getSupportActionBar();
+        if (actionBar == null) {
+            return;
+        }
+        actionBar.setTitle(R.string.camera_screen_title);
+        actionBar.setSubtitle(mActivity.getString(R.string.camera_screen_subtitle));
+    }
 
     @Override
     public void onDocumentAvailable(@NonNull final Document document) {
@@ -191,14 +216,18 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         mActivity.startActivityForResult(intent, REVIEW_REQUEST);
     }
 
-    protected abstract Intent getReviewActivityIntent(final Document document);
+    private Intent getReviewActivityIntent(final Document document) {
+        return ReviewExampleAppCompatActivity.newInstance(document, mActivity);
+    }
 
     private void launchAnalysisScreen(final Document document) {
         final Intent intent = getAnalysisActivityIntent(document);
         mActivity.startActivityForResult(intent, ANALYSIS_REQUEST);
     }
 
-    protected abstract Intent getAnalysisActivityIntent(final Document document);
+    private Intent getAnalysisActivityIntent(final Document document) {
+        return AnalysisExampleAppCompatActivity.newInstance(document, null, mActivity);
+    }
 
     protected Activity getActivity() {
         return mActivity;
@@ -228,7 +257,10 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         return false;
     }
 
-    protected abstract boolean isOnboardingVisible();
+    private boolean isOnboardingVisible() {
+        return mActivity.getSupportFragmentManager().findFragmentById(
+                R.id.onboarding_container) != null;
+    }
 
     public void onCreate(final Bundle savedInstanceState) {
         setUpActionBar();
@@ -259,7 +291,10 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         }
     }
 
-    protected abstract void setUpActionBar();
+    private void setUpActionBar() {
+        mActivity.setSupportActionBar(
+                (Toolbar) mActivity.findViewById(R.id.toolbar));
+    }
 
     private void showCamera() {
         LOG.debug("Show the Camera Screen");
@@ -274,11 +309,23 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         });
     }
 
-    protected abstract CameraFragmentInterface createCameraFragment();
+    private CameraFragmentInterface createCameraFragment() {
+        mCameraFragmentInterface = CameraFragmentCompat.createInstance();
+        return mCameraFragmentInterface;
+    }
 
-    protected abstract void showCameraFragment();
+    private void showCameraFragment() {
+        mActivity.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.camera_container, (Fragment) mCameraFragmentInterface)
+                .commit();
+    }
 
-    protected abstract CameraFragmentInterface retrieveCameraFragment();
+    private CameraFragmentInterface retrieveCameraFragment() {
+        mCameraFragmentInterface =
+                (CameraFragmentCompat) mActivity.getSupportFragmentManager()
+                        .findFragmentById(R.id.camera_container);
+        return mCameraFragmentInterface;
+    }
 
     private void configureLogging() {
         final LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
@@ -319,9 +366,21 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         showOnboardingFragment();
     }
 
-    protected abstract void showOnboardingFragment();
+    private void showOnboardingFragment() {
+        mActivity.getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .replace(R.id.onboarding_container, new OnboardingFragmentCompat())
+                .commit();
+    }
 
-    protected abstract void setTitlesForOnboarding();
+    private void setTitlesForOnboarding() {
+        final ActionBar actionBar = mActivity.getSupportActionBar();
+        if (actionBar == null) {
+            return;
+        }
+        actionBar.setTitle("");
+        actionBar.setSubtitle("");
+    }
 
     private void startGiniCaptureSdkForImportedFile(@NonNull final Intent importedFileIntent) {
         getSingleDocumentAnalyzer().cancelAnalysis();
