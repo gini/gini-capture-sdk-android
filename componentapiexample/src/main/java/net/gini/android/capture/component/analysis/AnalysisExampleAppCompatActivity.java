@@ -36,11 +36,6 @@ public class AnalysisExampleAppCompatActivity extends AppCompatActivity implemen
     private AnalysisScreenHandler mAnalysisScreenHandler;
 
     @Override
-    public void onAnalyzeDocument(@NonNull final Document document) {
-        mAnalysisScreenHandler.onAnalyzeDocument(document);
-    }
-
-    @Override
     public void onError(@NonNull final GiniCaptureError error) {
         mAnalysisScreenHandler.onError(error);
     }

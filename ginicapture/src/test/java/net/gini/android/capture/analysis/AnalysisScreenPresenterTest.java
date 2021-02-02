@@ -272,45 +272,6 @@ public class AnalysisScreenPresenterTest {
     }
 
     @Test
-    public void should_startScanAnimation() throws Exception {
-        // Given
-        final AnalysisScreenPresenter presenter = createPresenterWithEmptyImageDocument();
-
-        // When
-        presenter.startScanAnimation();
-
-        // Then
-        verify(mView).showScanAnimation();
-    }
-
-    @Test
-    public void should_stopScanAnimation() throws Exception {
-        // Given
-        final AnalysisScreenPresenter presenter = createPresenterWithEmptyImageDocument();
-
-        // When
-        presenter.stopScanAnimation();
-
-        // Then
-        verify(mView).hideScanAnimation();
-    }
-
-    @Test
-    public void should_clearImagesFromDisk_onDocumentAnalyzed() throws Exception {
-        // Given
-        final AnalysisScreenPresenter presenter = spy(createPresenterWithEmptyImageDocument());
-        final File filesDir = spy(new File("file:///gc-images/12343.jpg"));
-        when(filesDir.exists()).thenReturn(true);
-        when(mActivity.getFilesDir()).thenReturn(filesDir);
-
-        // When
-        presenter.onDocumentAnalyzed();
-
-        // Then
-        verify(presenter).clearSavedImages();
-    }
-
-    @Test
     public void should_clearParcelableMemoryCache_whenStarted() throws Exception {
         // Given
         final AnalysisScreenPresenter presenter = spy(createPresenterWithEmptyImageDocument());
@@ -678,31 +639,6 @@ public class AnalysisScreenPresenterTest {
 
         // Then
         verify(listener).onExtractionsAvailable(extractions);
-    }
-
-    @Test
-    public void should_requestDocumentAnalysis_whenNoNetworkService_wasSet() throws Exception {
-        // Given
-        when(mActivity.getString(anyInt())).thenReturn("A String");
-
-        final ImageDocument imageDocument = new ImageDocumentFake();
-
-        final CompletableFuture<AnalysisInteractor.ResultHolder> analysisFuture =
-                new CompletableFuture<>();
-        analysisFuture.complete(
-                new AnalysisInteractor.ResultHolder(AnalysisInteractor.Result.NO_NETWORK_SERVICE));
-
-        final AnalysisScreenPresenter presenter = createPresenterWithAnalysisFuture(imageDocument,
-                analysisFuture);
-
-        final AnalysisFragmentListener listener = mock(AnalysisFragmentListener.class);
-        presenter.setListener(listener);
-
-        // When
-        presenter.start();
-
-        // Then
-        verify(listener).onAnalyzeDocument(imageDocument);
     }
 
     @Test

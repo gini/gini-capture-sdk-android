@@ -69,7 +69,6 @@ public class OnboardingScreenTest {
                 new OnboardingPage(R.string.gc_title_review, R.drawable.gc_review_button_rotate));
 
         final Intent intent = getOnboardingActivityIntent();
-        intent.putExtra(OnboardingActivity.EXTRA_ONBOARDING_PAGES, customPages);
         final OnboardingActivity activity = startOnboardingActivity(intent);
 
         // Give some time for the activity to start

@@ -72,11 +72,6 @@ public class AnalysisFragmentCompat extends Fragment implements FragmentImplCall
         mFragmentImpl.hideError();
     }
 
-    @Override
-    public void onNoExtractionsFound() {
-        mFragmentImpl.onNoExtractionsFound();
-    }
-
     /**
      * Internal use only.
      *
@@ -120,11 +115,6 @@ public class AnalysisFragmentCompat extends Fragment implements FragmentImplCall
         mFragmentImpl.onDestroy();
     }
 
-    @Override
-    public void onDocumentAnalyzed() {
-        mFragmentImpl.onDocumentAnalyzed();
-    }
-
     /**
      * Internal use only.
      *
@@ -156,16 +146,6 @@ public class AnalysisFragmentCompat extends Fragment implements FragmentImplCall
     @Override
     public void showError(@NonNull final String message, final int duration) {
         mFragmentImpl.showError(message, duration);
-    }
-
-    @Override
-    public void startScanAnimation() {
-        mFragmentImpl.startScanAnimation();
-    }
-
-    @Override
-    public void stopScanAnimation() {
-        mFragmentImpl.stopScanAnimation();
     }
 
     @Override

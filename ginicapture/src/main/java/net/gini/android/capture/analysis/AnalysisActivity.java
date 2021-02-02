@@ -1,12 +1,13 @@
 package net.gini.android.capture.analysis;
 
-import static net.gini.android.capture.internal.util.ActivityHelper.enableHomeAsUp;
-import static net.gini.android.capture.tracking.EventTrackingHelper.trackAnalysisScreenEvent;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCapture;
@@ -24,9 +25,8 @@ import net.gini.android.capture.tracking.AnalysisScreenEvent;
 
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AppCompatActivity;
+import static net.gini.android.capture.internal.util.ActivityHelper.enableHomeAsUp;
+import static net.gini.android.capture.tracking.EventTrackingHelper.trackAnalysisScreenEvent;
 
 /**
  * <h3>Screen API</h3>
@@ -53,7 +53,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * the {@code AnalysisActivity} directly.
  *
  * <h3>Customizing the Analysis Screen</h3>
- *
+ * <p>
  * Customizing the look of the Analysis Screen is done via overriding of app resources.
  *
  * <p> The following items are customizable:
@@ -215,46 +215,6 @@ public class AnalysisActivity extends AppCompatActivity implements
         mFragment.hideError();
     }
 
-    /**
-     * <p> You should call this method after you've received the analysis results from the Gini API
-     * without the required extractions. </p> <p> It will launch the {@link NoResultsActivity}, if the {@link Document}'s type is {@link
-     * Document.Type#IMAGE}. For other types it will just finish the {@code AnalysisActivity} with {@code RESULT_OK}. </p>
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed internally by using the configured {@link
-     * GiniCaptureNetworkService} implementation.
-     */
-    @Deprecated
-    @Override
-    public void onNoExtractionsFound() {
-        if (GiniCaptureCoordinator.shouldShowGiniCaptureNoResultsScreen(mDocument)) {
-            final Intent noResultsActivity = new Intent(this, NoResultsActivity.class);
-            noResultsActivity.putExtra(NoResultsActivity.EXTRA_IN_DOCUMENT, mDocument);
-            noResultsActivity.setExtrasClassLoader(AnalysisActivity.class.getClassLoader());
-            startActivity(noResultsActivity);
-            setResult(RESULT_NO_EXTRACTIONS);
-        } else {
-            final Intent result = new Intent();
-            setResult(RESULT_OK, result);
-        }
-        finish();
-    }
-
-    /**
-     * <p> <b>Screen API:</b> If an analysis error message was set in the Review Screen with {@link
-     * ReviewActivity#onDocumentAnalysisError(String)} this method won't be called until the user clicks the retry button next to the error
-     * message. </p>
-     *
-     * @param document contains the image taken by the camera (original or modified)
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed internally by using the configured {@link
-     * GiniCaptureNetworkService} implementation. The extractions will be returned in the extra called {@link
-     * CameraActivity#EXTRA_OUT_EXTRACTIONS} of the {@link CameraActivity}'s result Intent.
-     */
-    @Deprecated
-    @Override
-    public void onAnalyzeDocument(@NonNull final Document document) {
-    }
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -273,21 +233,6 @@ public class AnalysisActivity extends AppCompatActivity implements
     protected void onDestroy() {
         super.onDestroy();
         clearMemory();
-    }
-
-    /**
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed internally by using the configured {@link
-     * GiniCaptureNetworkService} implementation. The extractions will be returned in the extra called {@link
-     * CameraActivity#EXTRA_OUT_EXTRACTIONS} of the {@link CameraActivity}'s result Intent.
-     */
-    @Deprecated
-    @Override
-    public void onDocumentAnalyzed() {
-        mFragment.onDocumentAnalyzed();
-        final Intent result = new Intent();
-        onAddDataToResult(result);
-        setResult(RESULT_OK, result);
-        finish();
     }
 
     @Override
@@ -315,51 +260,13 @@ public class AnalysisActivity extends AppCompatActivity implements
 
     @Override
     public void showError(@NonNull final String message, @NonNull final String buttonTitle,
-            @NonNull final View.OnClickListener onClickListener) {
+                          @NonNull final View.OnClickListener onClickListener) {
         mFragment.showError(message, buttonTitle, onClickListener);
     }
 
     @Override
     public void showError(@NonNull final String message, final int duration) {
         mFragment.showError(message, duration);
-    }
-
-    /**
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed internally by using the configured {@link
-     * GiniCaptureNetworkService} implementation. The extractions will be returned in the extra called {@link
-     * CameraActivity#EXTRA_OUT_EXTRACTIONS} of the {@link CameraActivity}'s result Intent.
-     */
-    @Deprecated
-    @Override
-    public void startScanAnimation() {
-        mFragment.startScanAnimation();
-    }
-
-    /**
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed internally by using the configured {@link
-     * GiniCaptureNetworkService} implementation. The extractions will be returned in the extra called {@link
-     * CameraActivity#EXTRA_OUT_EXTRACTIONS} of the {@link CameraActivity}'s result Intent.
-     */
-    @Deprecated
-    @Override
-    public void stopScanAnimation() {
-        mFragment.stopScanAnimation();
-    }
-
-    /**
-     * <p> Callback for adding your own data to the Activity's result. </p> <p> Called when the
-     * document was analyzed. </p> <p> You should add the results of the analysis as extras and retrieve them when the {@link
-     * CameraActivity} returned. </p> <p> <b>Note:</b> you must call {@link AnalysisActivity#onDocumentAnalyzed()} after you received the
-     * analysis results from the Gini API, otherwise this method won't be invoked. </p>
-     *
-     * @param result the {@link Intent} which will be returned as the result data.
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed internally by using the configured {@link
-     * GiniCaptureNetworkService} implementation. The extractions will be returned in the extra called {@link
-     * CameraActivity#EXTRA_OUT_EXTRACTIONS} of the {@link CameraActivity}'s result Intent.
-     */
-    @Deprecated
-    public void onAddDataToResult(final Intent result) {
     }
 
     @VisibleForTesting

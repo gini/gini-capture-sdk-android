@@ -1,10 +1,5 @@
 package net.gini.android.capture.review;
 
-import static net.gini.android.capture.internal.network.NetworkRequestsManager.isCancellation;
-import static net.gini.android.capture.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
-import static net.gini.android.capture.internal.util.FileImportHelper.showAlertIfOpenWithDocumentAndAppIsDefault;
-import static net.gini.android.capture.tracking.EventTrackingHelper.trackReviewScreenEvent;
-
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
@@ -18,6 +13,10 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.ortiz.touch.TouchImageView;
 
@@ -38,18 +37,17 @@ import net.gini.android.capture.internal.network.NetworkRequestResult;
 import net.gini.android.capture.internal.network.NetworkRequestsManager;
 import net.gini.android.capture.internal.ui.FragmentImplCallback;
 import net.gini.android.capture.internal.util.FileImportHelper;
-import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.tracking.ReviewScreenEvent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 import jersey.repackaged.jsr166e.CompletableFuture;
+
+import static net.gini.android.capture.internal.network.NetworkRequestsManager.isCancellation;
+import static net.gini.android.capture.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
+import static net.gini.android.capture.internal.util.FileImportHelper.showAlertIfOpenWithDocumentAndAppIsDefault;
+import static net.gini.android.capture.tracking.EventTrackingHelper.trackReviewScreenEvent;
 
 /**
  * Internal use only.
@@ -65,35 +63,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
 
     private static final ReviewFragmentListener NO_OP_LISTENER = new ReviewFragmentListener() {
         @Override
-        public void onShouldAnalyzeDocument(@NonNull final Document document) {
-        }
-
-        @Override
-        public void onProceedToAnalysisScreen(@NonNull final Document document) {
-        }
-
-        @Override
-        public void onDocumentReviewedAndAnalyzed(@NonNull final Document document) {
-        }
-
-        @Override
-        public void onDocumentWasRotated(@NonNull final Document document, final int oldRotation,
-                final int newRotation) {
-        }
-
-        @Override
         public void onError(@NonNull final GiniCaptureError error) {
-        }
-
-        @Override
-        public void onExtractionsAvailable(
-                @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
-
-        }
-
-        @Override
-        public void onProceedToNoExtractionsScreen(@NonNull final Document document) {
-
         }
 
         @Override
@@ -116,7 +86,6 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
     private ImageDocument mDocument;
     private ReviewFragmentListener mListener = NO_OP_LISTENER;
     private boolean mDocumentWasUploaded;
-    private boolean mDocumentWasModified;
     private int mCurrentRotation;
     private boolean mNextClicked;
     private boolean mStopped;
@@ -148,16 +117,6 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
     @Override
     public void setListener(@NonNull final ReviewFragmentListener listener) {
         mListener = listener;
-    }
-
-    @Override
-    public void onDocumentAnalyzed() {
-        LOG.info("Document was analyzed");
-        mDocumentWasUploaded = true;
-    }
-
-    @Override
-    public void onNoExtractionsFound() {
     }
 
     public void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -274,11 +233,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                                 return null;
                             }
                         });
-            } else {
-                mListener.onShouldAnalyzeDocument(document);
             }
-        } else {
-            mListener.onShouldAnalyzeDocument(document);
         }
     }
 
@@ -558,7 +513,6 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
     }
 
     private void onRotateClicked() {
-        final int oldRotation = mCurrentRotation;
         mCurrentRotation += 90;
         rotateImageView(mCurrentRotation, true);
         if (GiniCapture.hasInstance()
@@ -568,35 +522,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
             mDocument.updateRotationDeltaBy(90);
             mPhoto.setRotationForDisplay(mCurrentRotation);
             mPhoto.updateRotationDeltaBy(90);
-            return;
         }
-        mDocumentWasModified = true;
-        applyRotationToPhoto(new PhotoEdit.PhotoEditCallback() {
-            @Override
-            public void onDone(@NonNull final Photo photo) {
-                if (mStopped) {
-                    return;
-                }
-                mDocument.setRotationForDisplay(mCurrentRotation);
-                mDocument.updateRotationDeltaBy(90);
-                final GiniCaptureDocument document =
-                        DocumentFactory.newImageDocumentFromPhotoAndDocument(
-                                photo, mDocument);
-                mListener.onDocumentWasRotated(
-                        document,
-                        oldRotation, mCurrentRotation);
-            }
-
-            @Override
-            public void onFailed() {
-                if (mStopped) {
-                    return;
-                }
-                LOG.error("Failed to rotate the jpeg");
-                mListener.onError(new GiniCaptureError(GiniCaptureError.ErrorCode.REVIEW,
-                        "An error occurred while applying rotation to the jpeg."));
-            }
-        });
     }
 
     private void deleteUploadedDocument() {
@@ -618,39 +544,16 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
     void onNextClicked() {
         trackReviewScreenEvent(ReviewScreenEvent.NEXT);
         mNextClicked = true;
-        if (!mDocumentWasModified) {
-            LOG.debug("Document wasn't modified");
-            if (!mDocumentWasUploaded || !TextUtils.isEmpty(mDocumentAnalysisErrorMessage)) {
-                LOG.debug("Document wasn't analyzed");
-                proceedToAnalysisScreen();
-            } else {
-                LOG.debug("Document was analyzed");
-                LOG.info("Document reviewed and analyzed");
-                // Photo was not modified and has been analyzed, client should show extraction
-                // results
-                documentReviewedAndUploaded();
-            }
+        LOG.debug("Document wasn't modified");
+        if (!mDocumentWasUploaded || !TextUtils.isEmpty(mDocumentAnalysisErrorMessage)) {
+            LOG.debug("Document wasn't analyzed");
+            proceedToAnalysisScreen();
         } else {
-            LOG.debug("Document was modified");
-            applyRotationToPhoto(new PhotoEdit.PhotoEditCallback() {
-                @Override
-                public void onDone(@NonNull final Photo photo) {
-                    if (mStopped) {
-                        return;
-                    }
-                    proceedToAnalysisScreen();
-                }
-
-                @Override
-                public void onFailed() {
-                    if (mStopped) {
-                        return;
-                    }
-                    LOG.error("Failed to rotate the jpeg");
-                    mListener.onError(new GiniCaptureError(GiniCaptureError.ErrorCode.REVIEW,
-                            "An error occurred while applying rotation to the jpeg."));
-                }
-            });
+            LOG.debug("Document was analyzed");
+            LOG.info("Document reviewed and analyzed");
+            // Photo was not modified and has been analyzed, client should show extraction
+            // results
+            documentReviewedAndUploaded();
         }
     }
 
@@ -667,11 +570,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                     GiniCapture.getInstance().internal().getNetworkRequestsManager();
             if (networkRequestsManager != null) {
                 mListener.onProceedToAnalysisScreen(document, mDocumentAnalysisErrorMessage);
-            } else {
-                mListener.onDocumentReviewedAndAnalyzed(document);
             }
-        } else {
-            mListener.onDocumentReviewedAndAnalyzed(document);
         }
     }
 
@@ -682,19 +581,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                 mDocument);
         if (GiniCapture.hasInstance()) {
             mListener.onProceedToAnalysisScreen(document, mDocumentAnalysisErrorMessage);
-        } else {
-            mListener.onProceedToAnalysisScreen(document);
         }
-    }
-
-    private void applyRotationToPhoto(@NonNull final PhotoEdit.PhotoEditCallback callback) {
-        if (mPhoto == null) {
-            return;
-        }
-        LOG.debug("Rotating the Photo {} degrees", mCurrentRotation);
-        mPhoto.edit()
-                .rotateTo(mCurrentRotation)
-                .applyAsync(callback);
     }
 
     private void rotateImageView(final int degrees, final boolean animated) {

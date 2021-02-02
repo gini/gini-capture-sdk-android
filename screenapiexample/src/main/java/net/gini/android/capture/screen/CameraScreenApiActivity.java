@@ -1,7 +1,5 @@
 package net.gini.android.capture.screen;
 
-import static net.gini.android.capture.example.shared.ExampleUtil.getLegacyExtractionsBundle;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,16 +7,13 @@ import android.graphics.Rect;
 import android.graphics.pdf.PdfRenderer;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 
-import net.gini.android.models.SpecificExtraction;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
 import net.gini.android.capture.Document;
 import net.gini.android.capture.camera.CameraActivity;
-import net.gini.android.capture.document.QRCodeDocument;
-import net.gini.android.capture.example.shared.BaseExampleApp;
-import net.gini.android.capture.example.shared.DocumentAnalyzer;
-import net.gini.android.capture.example.shared.SingleDocumentAnalyzer;
 import net.gini.android.capture.util.IntentHelper;
 import net.gini.android.capture.util.UriHelper;
 
@@ -28,10 +23,6 @@ import org.slf4j.LoggerFactory;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 /**
  * Implements callbacks for the Gini Capture SDK's {@link CameraActivity}. For example to perform
@@ -43,14 +34,6 @@ public class CameraScreenApiActivity extends CameraActivity {
 
     // Set to true to allow execution of the custom code check
     private static final boolean DO_CUSTOM_DOCUMENT_CHECK = false;
-
-    private SingleDocumentAnalyzer mSingleDocumentAnalyzer;
-
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mSingleDocumentAnalyzer = ((BaseExampleApp) getApplication()).getSingleDocumentAnalyzer();
-    }
 
     @Override
     public void onCheckImportedDocument(@NonNull final Document document,
@@ -176,30 +159,5 @@ public class CameraScreenApiActivity extends CameraActivity {
             LOG.error("Could not read pdf", e);
         }
         return false;
-    }
-
-    @Override
-    public void onQRCodeAvailable(@NonNull final QRCodeDocument qrCodeDocument) {
-        showActivityIndicatorAndDisableInteraction();
-        mSingleDocumentAnalyzer.cancelAnalysis();
-        mSingleDocumentAnalyzer.analyzeDocument(qrCodeDocument,
-                new DocumentAnalyzer.Listener() {
-                    @Override
-                    public void onException(final Exception exception) {
-                        hideActivityIndicatorAndEnableInteraction();
-                        showError(getString(R.string.qrcode_error), 4000);
-                    }
-
-                    @Override
-                    public void onExtractionsReceived(
-                            final Map<String, SpecificExtraction> extractions) {
-                        hideActivityIndicatorAndEnableInteraction();
-                        final Intent result = new Intent();
-                        final Bundle extractionsBundle = getLegacyExtractionsBundle(extractions);
-                        result.putExtra(MainActivity.EXTRA_OUT_EXTRACTIONS, extractionsBundle);
-                        setResult(RESULT_OK, result);
-                        finish();
-                    }
-                });
     }
 }

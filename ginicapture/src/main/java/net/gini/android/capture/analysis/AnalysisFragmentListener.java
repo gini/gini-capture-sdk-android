@@ -1,15 +1,13 @@
 package net.gini.android.capture.analysis;
 
+import androidx.annotation.NonNull;
+
 import net.gini.android.capture.Document;
-import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.GiniCaptureError;
-import net.gini.android.capture.network.GiniCaptureNetworkService;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.noresults.NoResultsFragmentCompat;
 
 import java.util.Map;
-
-import androidx.annotation.NonNull;
 
 /**
  * <p>
@@ -17,19 +15,6 @@ import androidx.annotation.NonNull;
  * </p>
  */
 public interface AnalysisFragmentListener {
-    /**
-     * <p>
-     *     Called when the Analyze Document Fragment is started and the document can be analyzed.
-     * </p>
-     * @param document contains the image taken by the camera (original or modified)
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document
-     * is analyzed internally by using the configured {@link GiniCaptureNetworkService}
-     * implementation. The extractions will be returned in {@link AnalysisFragmentListener#onExtractionsAvailable(Map, Map)}.
-     */
-    @Deprecated
-    void onAnalyzeDocument(@NonNull Document document);
-
     /**
      * <p>
      * Called when an error occurred.

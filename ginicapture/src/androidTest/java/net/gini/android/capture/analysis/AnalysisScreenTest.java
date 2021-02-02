@@ -101,20 +101,6 @@ public class AnalysisScreenTest {
     }
 
     @Test
-    public void should_invokeAddDataToResult_andFinish_whenDocumentAnalyzed_hasBeenCalled()
-            throws InterruptedException {
-        final AnalysisActivityTestSpy activity = startAnalysisActivity(TEST_JPEG, 0);
-
-        // Allow the activity to run a little for listeners to be invoked
-        Thread.sleep(TEST_PAUSE_DURATION);
-
-        activity.onDocumentAnalyzed();
-
-        assertThat(activity.addDataToResultIntent).isNotNull();
-        assertThat(activity.finishWasCalled).isTrue();
-    }
-
-    @Test
     public void should_notInvokeAddDataToResult_whenFinished_withoutDocumentAnalyzed_beingCalled()
             throws InterruptedException {
         final AnalysisActivityTestSpy activity = startAnalysisActivity(TEST_JPEG, 0);
@@ -214,10 +200,6 @@ public class AnalysisScreenTest {
         // Given
         final AtomicBoolean analysisRequested = new AtomicBoolean();
         AnalysisFragmentHostActivityNotListener.sListener = new AnalysisFragmentListener() {
-            @Override
-            public void onAnalyzeDocument(@NonNull final Document document) {
-                analysisRequested.set(true);
-            }
 
             @Override
             public void onError(@NonNull final GiniCaptureError error) {
@@ -247,19 +229,6 @@ public class AnalysisScreenTest {
         InstrumentationRegistry.getInstrumentation().waitForIdleSync();
         // Then
         assertThat(analysisRequested.get()).isTrue();
-    }
-
-    @Test
-    public void should_useActivity_asListener_whenAvailable() throws Exception {
-        // Given
-        final Intent intent = new Intent(ApplicationProvider.getApplicationContext(),
-                AnalysisFragmentHostActivity.class);
-        final AnalysisFragmentHostActivity activity =
-                mAnalysisFragmentHostActivityTR.launchActivity(intent);
-        // When
-        InstrumentationRegistry.getInstrumentation().waitForIdleSync();
-        // Then
-        assertThat(activity.isAnalysisRequested()).isTrue();
     }
 
 }

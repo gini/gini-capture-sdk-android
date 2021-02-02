@@ -96,25 +96,17 @@ public class AnalysisFragmentImplTest {
                             final AnalysisFragmentImpl analysisFragment =
                                     analysisFragmentImplRef.get();
                             analysisFragment.hideError();
-                            analysisFragment.onNoExtractionsFound();
-                            analysisFragment.onDocumentAnalyzed();
                             analysisFragment.showError("Message", 1000);
                             analysisFragment.showError("Message", "ButtonTitle",
                                     mock(View.OnClickListener.class));
-                            analysisFragment.startScanAnimation();
-                            analysisFragment.stopScanAnimation();
                             analysisFragment.setListener(mock(AnalysisFragmentListener.class));
                         }
                     });
 
             // Then
             verify(presenter).hideError();
-            verify(presenter).onNoExtractionsFound();
-            verify(presenter).onDocumentAnalyzed();
             verify(presenter).showError(anyString(), anyInt());
             verify(presenter).showError(anyString(), anyString(), any(View.OnClickListener.class));
-            verify(presenter).startScanAnimation();
-            verify(presenter).stopScanAnimation();
             verify(presenter).setListener(any(AnalysisFragmentListener.class));
         }
     }

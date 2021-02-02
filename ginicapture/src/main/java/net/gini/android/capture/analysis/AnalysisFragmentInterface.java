@@ -2,11 +2,6 @@ package net.gini.android.capture.analysis;
 
 import android.view.View;
 
-import net.gini.android.capture.GiniCapture;
-import net.gini.android.capture.network.GiniCaptureNetworkService;
-
-import java.util.Map;
-
 import androidx.annotation.NonNull;
 
 /**
@@ -24,31 +19,6 @@ public interface AnalysisFragmentInterface {
      * </p>
      */
     void hideError();
-
-    /**
-     * <p>
-     * You should call this method after you've received the analysis results from the Gini API
-     * without the required extractions.
-     * </p>
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document
-     * is analyzed internally by using the configured {@link GiniCaptureNetworkService}
-     * implementation.
-     */
-    @Deprecated
-    void onNoExtractionsFound();
-
-    /**
-     * <p>
-     * You should call this method after you've received the analysis results from the Gini API.
-     * </p>
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document
-     * is analyzed internally by using the configured {@link GiniCaptureNetworkService}
-     * implementation. The extractions will be returned in {@link AnalysisFragmentListener#onExtractionsAvailable(Map)}.
-     */
-    @Deprecated
-    void onDocumentAnalyzed();
 
     /**
      * <p>
@@ -73,29 +43,6 @@ public interface AnalysisFragmentInterface {
      */
     void showError(@NonNull String message, @NonNull String buttonTitle,
             @NonNull View.OnClickListener onClickListener);
-
-    /**
-     * <p>
-     * You should call this method when you start the document analysis using the Gini API.
-     * </p>
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document
-     * is analyzed internally by using the configured {@link GiniCaptureNetworkService}
-     * implementation. The extractions will be returned in {@link AnalysisFragmentListener#onExtractionsAvailable(Map)}.
-     */
-    @Deprecated
-    void startScanAnimation();
-
-    /**
-     * <p>
-     * You should call this method when the document analysis has finished.
-     * </p>
-     * @Deprecated When a {@link GiniCapture} instance is available the document
-     * is analyzed internally by using the configured {@link GiniCaptureNetworkService}
-     * implementation. The extractions will be returned in {@link AnalysisFragmentListener#onExtractionsAvailable(Map)}.
-     */
-    @Deprecated
-    void stopScanAnimation();
 
     /**
      * <p>

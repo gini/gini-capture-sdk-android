@@ -10,15 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.gini.android.capture.GiniCapture;
-import net.gini.android.capture.GiniCaptureFeatureConfiguration;
 import net.gini.android.capture.R;
 import net.gini.android.capture.analysis.AnalysisActivity;
 import net.gini.android.capture.camera.CameraActivity;
 import net.gini.android.capture.noresults.NoResultsActivity;
 import net.gini.android.capture.review.ReviewActivity;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static net.gini.android.capture.internal.util.ActivityHelper.enableHomeAsUp;
 import static net.gini.android.capture.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
@@ -27,26 +23,19 @@ import static net.gini.android.capture.internal.util.ActivityHelper.forcePortrai
  * <h3>Screen API and Component API</h3>
  *
  * <p>
- *     On the Help Screen users can get information about how to best use the Gini Capture SDK.
+ * On the Help Screen users can get information about how to best use the Gini Capture SDK.
  * </p>
  * <p>
- *     This Activity can be used for both Screen and Component APIs.
- * </p>
- *
- * <p>
- *     For the Component API you need to pass in the following extra:
- * <ul>
- *     <li>{@link HelpActivity#EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION} - Must contain a {@link GiniCaptureFeatureConfiguration} instance</li>
- * </ul>
+ * This Activity can be used for both Screen and Component APIs.
  * </p>
  *
  * <h3>Customizing the Help Screen</h3>
  *
  * <p>
- *     Customizing the look of the Help Screen is done via overriding of app resources.
+ * Customizing the look of the Help Screen is done via overriding of app resources.
  * </p>
  * <p>
- *     The following items are customizable:
+ * The following items are customizable:
  * <ul>
  *     <li>
  *         <b>Background color:</b> via the color resource named {@code gc_help_activity_background}
@@ -96,23 +85,12 @@ import static net.gini.android.capture.internal.util.ActivityHelper.forcePortrai
  */
 public class HelpActivity extends AppCompatActivity {
 
-    /**
-     * Optional extra which must contain a {@link GiniCaptureFeatureConfiguration} instance.
-     *
-     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
-     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
-     */
-    public static final String EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION =
-            "GC_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
-
-    private static final Logger LOG = LoggerFactory.getLogger(HelpActivity.class);
     private static final int PHOTO_TIPS_REQUEST = 1;
-    private GiniCaptureFeatureConfiguration mGiniCaptureFeatureConfiguration;
     private RecyclerView mRecyclerView;
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode,
-            final Intent data) {
+                                    final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PHOTO_TIPS_REQUEST
                 && resultCode == PhotoTipsActivity.RESULT_SHOW_CAMERA_SCREEN) {
@@ -124,7 +102,6 @@ public class HelpActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gc_activity_help);
-        readExtras();
         setUpHelpItems();
         forcePortraitOrientationOnPhones(this);
         if (hasOnlyOneHelpItem()) {
@@ -140,18 +117,6 @@ public class HelpActivity extends AppCompatActivity {
         }
     }
 
-    private void readExtras() {
-        final Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            mGiniCaptureFeatureConfiguration = extras.getParcelable(
-                    EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION);
-            if (mGiniCaptureFeatureConfiguration == null) {
-                LOG.warn("No GiniCaptureFeatureConfiguration instance available. "
-                        + "Please make sure you have created and configured a GiniCapture instance.");
-            }
-        }
-    }
-
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -164,7 +129,7 @@ public class HelpActivity extends AppCompatActivity {
     private void setUpHelpItems() {
         mRecyclerView = findViewById(R.id.gc_help_items);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new HelpItemsAdapter(mGiniCaptureFeatureConfiguration,
+        mRecyclerView.setAdapter(new HelpItemsAdapter(
                 new HelpItemsAdapter.HelpItemSelectedListener() {
                     @Override
                     public void onItemSelected(@NonNull final HelpItem helpItem) {
@@ -205,8 +170,6 @@ public class HelpActivity extends AppCompatActivity {
 
     private void launchSupportedFormats() {
         final Intent intent = new Intent(this, SupportedFormatsActivity.class);
-        intent.putExtra(SupportedFormatsActivity.EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION,
-                mGiniCaptureFeatureConfiguration);
         startActivity(intent);
     }
 }

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.gini.android.capture.GiniCaptureFeatureConfiguration;
 import net.gini.android.capture.internal.ui.FragmentImplCallback;
 import net.gini.android.capture.internal.util.AlertDialogHelperCompat;
 
@@ -73,26 +72,7 @@ public class CameraFragmentCompat extends Fragment implements CameraFragmentInte
     private CameraFragmentListener mListener;
 
     public static CameraFragmentCompat createInstance() {
-        final CameraFragmentCompat fragment = new CameraFragmentCompat();
-        return fragment;
-    }
-
-    /**
-     * <p>
-     * Factory method for creating a new instance of the Fragment with document import enabled for
-     * the specified file types.
-     * </p>
-     *
-     * @param giniCaptureFeatureConfiguration feature configuration
-     *
-     * @return a new instance of the Fragment
-     */
-    public static CameraFragmentCompat createInstance(
-            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
-        final CameraFragmentCompat fragment = new CameraFragmentCompat();
-        fragment.setArguments(
-                CameraFragmentHelper.createArguments(giniCaptureFeatureConfiguration));
-        return fragment;
+        return new CameraFragmentCompat();
     }
 
     private CameraFragmentImpl mFragmentImpl;
@@ -111,7 +91,7 @@ public class CameraFragmentCompat extends Fragment implements CameraFragmentInte
     }
 
     protected CameraFragmentImpl createFragmentImpl() {
-        return new CameraFragmentHelper().createFragmentImpl(this, getArguments());
+        return new CameraFragmentHelper().createFragmentImpl(this);
     }
 
     /**
@@ -195,42 +175,6 @@ public class CameraFragmentCompat extends Fragment implements CameraFragmentInte
             mFragmentImpl.setListener(listener);
         }
         mListener = listener;
-    }
-
-    @Deprecated
-    @Override
-    public void showDocumentCornerGuides() {
-        if (mFragmentImpl == null) {
-            return;
-        }
-        mFragmentImpl.showDocumentCornerGuides();
-    }
-
-    @Deprecated
-    @Override
-    public void hideDocumentCornerGuides() {
-        if (mFragmentImpl == null) {
-            return;
-        }
-        mFragmentImpl.hideDocumentCornerGuides();
-    }
-
-    @Deprecated
-    @Override
-    public void showCameraTriggerButton() {
-        if (mFragmentImpl == null) {
-            return;
-        }
-        mFragmentImpl.showCameraTriggerButton();
-    }
-
-    @Deprecated
-    @Override
-    public void hideCameraTriggerButton() {
-        if (mFragmentImpl == null) {
-            return;
-        }
-        mFragmentImpl.hideCameraTriggerButton();
     }
 
     @Override

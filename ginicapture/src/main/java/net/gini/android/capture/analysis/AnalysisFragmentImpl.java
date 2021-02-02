@@ -72,16 +72,6 @@ class AnalysisFragmentImpl extends AnalysisScreenContract.View {
     }
 
     @Override
-    public void onNoExtractionsFound() {
-        getPresenter().onNoExtractionsFound();
-    }
-
-    @Override
-    public void onDocumentAnalyzed() {
-        getPresenter().onDocumentAnalyzed();
-    }
-
-    @Override
     public void showError(@NonNull final String message, final int duration) {
         getPresenter().showError(message, duration);
     }
@@ -90,16 +80,6 @@ class AnalysisFragmentImpl extends AnalysisScreenContract.View {
     public void showError(@NonNull final String message, @NonNull final String buttonTitle,
             @NonNull final View.OnClickListener onClickListener) {
         getPresenter().showError(message, buttonTitle, onClickListener);
-    }
-
-    @Override
-    public void startScanAnimation() {
-        getPresenter().startScanAnimation();
-    }
-
-    @Override
-    public void stopScanAnimation() {
-        getPresenter().stopScanAnimation();
     }
 
     @Override

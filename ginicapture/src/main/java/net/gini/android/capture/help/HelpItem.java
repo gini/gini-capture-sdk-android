@@ -2,7 +2,6 @@ package net.gini.android.capture.help;
 
 import androidx.annotation.StringRes;
 
-import net.gini.android.capture.GiniCaptureFeatureConfiguration;
 import net.gini.android.capture.R;
 
 /**
@@ -23,9 +22,6 @@ public enum HelpItem {
     /**
      * <p>
      *     Shows a guide for importing files from other apps via "open with".
-     * </p>
-     * <p>
-     *     <b>Important:</b> This item is shown only if file import was enabled with the {@link GiniCaptureFeatureConfiguration}.
      * </p>
      * <p>
      *     Item label customizable by overriding the string resource named {@code gc_help_item_file_import_guide_title}

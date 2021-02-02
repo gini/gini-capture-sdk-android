@@ -27,16 +27,11 @@ import androidx.appcompat.app.AppCompatActivity;
  * <p>The {@code OnboardingActivity} is started by the {@link CameraActivity} when the latter is
  * launched for the first time. You may disable this behavior - we highly recommend keeping it - by
  * passing {@code false} to {@link GiniCapture.Builder#setShouldShowOnboardingAtFirstRun(boolean)}
- * when creating a {@link GiniCapture} instance. If you don't use {@link GiniCapture} yet you can also
- * use the extra {@link CameraActivity#EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN} with {@code false}
- * when starting the {@link CameraActivity}.
+ * when creating a {@link GiniCapture} instance.
  *
  * <p> You can change the number of displayed pages and their content (image and short text) by
  * setting an {@code ArrayList} containing {@link OnboardingPage} objects when building a {@link
- * GiniCapture} instance with {@link GiniCapture.Builder#setCustomOnboardingPages(ArrayList)}. If you
- * don't use {@link GiniCapture} yet you can also provide the list using the extra {@link
- * CameraActivity#EXTRA_IN_ONBOARDING_PAGES} for the Screen API and {@link
- * OnboardingFragmentCompat#createInstance(ArrayList)} for the Component API.
+ * GiniCapture} instance with {@link GiniCapture.Builder#setCustomOnboardingPages(ArrayList)}.
  *
  * <h3>Customizing the Onboarding Screen</h3>
  *
@@ -156,23 +151,14 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class OnboardingActivity extends AppCompatActivity implements OnboardingFragmentListener {
 
-    /**
-     * @suppress
-     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
-     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
-     */
-    public static final String EXTRA_ONBOARDING_PAGES = "GC_EXTRA_PAGES";
-
     private static final String ONBOARDING_FRAGMENT = "ONBOARDING_FRAGMENT";
 
-    private ArrayList<OnboardingPage> mPages; // NOPMD - ArrayList required (Bundle)
     private OnboardingFragmentCompat mOnboardingFragment;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gc_activity_onboarding);
-        readExtras();
         initFragment();
         setupHomeButton();
     }
@@ -192,13 +178,6 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
         return super.onOptionsItemSelected(item);
     }
 
-    private void readExtras() {
-        final Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            mPages = extras.getParcelableArrayList(EXTRA_ONBOARDING_PAGES);
-        }
-    }
-
     private void initFragment() {
         if (!isFragmentShown()) {
             createFragment();
@@ -211,10 +190,6 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
     }
 
     private void createFragment() {
-        if (mPages != null) {
-            mOnboardingFragment = OnboardingFragmentCompat.createInstance(mPages);
-            return;
-        }
         if (GiniCapture.hasInstance()) {
             final ArrayList<OnboardingPage> onboardingPages =
                     GiniCapture.getInstance().getCustomOnboardingPages();

@@ -39,7 +39,6 @@
     <string name="review_screen_subtitle">Vollständig, scharf und in Leserichtung?</string>
     <string name="multi_page_review_screen_title">Seiten überprüfen</string>
     <string name="multi_page_review_screen_subtitle">Vollständig und Seiten geordnet?</string>
-    <string name="qrcode_error">Could not use the QR Code. Try again or take a picture of your document.</string>
     <string name="additional_onboarding_page">This is a custom page example.</string>
 
     <string name="gini_api_type_label">Gini API Type</string>

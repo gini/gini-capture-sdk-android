@@ -1,38 +1,8 @@
 package net.gini.android.capture.component.review;
 
-import static android.app.Activity.RESULT_OK;
-
-import static net.gini.android.capture.component.review.ReviewExampleAppCompatActivity.EXTRA_IN_DOCUMENT;
-import static net.gini.android.capture.example.shared.ExampleUtil.getExtractionsBundle;
-import static net.gini.android.capture.example.shared.ExampleUtil.getLegacyExtractionsBundle;
-import static net.gini.android.capture.example.shared.ExampleUtil.hasNoPay5Extractions;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-
-import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
-import net.gini.android.capture.component.noresults.NoResultsExampleAppCompatActivity;
-import net.gini.android.capture.review.ReviewFragmentCompat;
-import net.gini.android.models.SpecificExtraction;
-import net.gini.android.capture.Document;
-import net.gini.android.capture.GiniCaptureCoordinator;
-import net.gini.android.capture.GiniCaptureDebug;
-import net.gini.android.capture.GiniCaptureError;
-import net.gini.android.capture.component.ExtractionsActivity;
-import net.gini.android.capture.component.R;
-import net.gini.android.capture.example.shared.BaseExampleApp;
-import net.gini.android.capture.example.shared.DocumentAnalyzer;
-import net.gini.android.capture.example.shared.SingleDocumentAnalyzer;
-import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
-import net.gini.android.capture.review.ReviewFragmentInterface;
-import net.gini.android.capture.review.ReviewFragmentListener;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +10,17 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+
+import net.gini.android.capture.Document;
+import net.gini.android.capture.GiniCaptureError;
+import net.gini.android.capture.component.R;
+import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
+import net.gini.android.capture.review.ReviewFragmentCompat;
+import net.gini.android.capture.review.ReviewFragmentInterface;
+import net.gini.android.capture.review.ReviewFragmentListener;
+
+import static android.app.Activity.RESULT_OK;
+import static net.gini.android.capture.component.review.ReviewExampleAppCompatActivity.EXTRA_IN_DOCUMENT;
 
 /**
  * Created by Alpar Szotyori on 04.12.2017.
@@ -53,74 +34,12 @@ import androidx.fragment.app.Fragment;
 public class ReviewScreenHandler implements ReviewFragmentListener {
 
     private static final int ANALYSIS_REQUEST = 1;
-    private static final Logger LOG = LoggerFactory.getLogger(ReviewScreenHandler.class);
     private final AppCompatActivity mActivity;
     private Document mDocument;
-    private String mDocumentAnalysisErrorMessage;
-    private Map<String, SpecificExtraction> mExtractions;
     private ReviewFragmentInterface mReviewFragmentInterface;
-    private SingleDocumentAnalyzer mSingleDocumentAnalyzer;
 
     protected ReviewScreenHandler(final AppCompatActivity activity) {
         mActivity = activity;
-    }
-
-    @Override
-    public void onShouldAnalyzeDocument(@NonNull final Document document) {
-        LOG.debug("Should analyze document in the Review Screen {}", document);
-        GiniCaptureDebug.writeDocumentToFile(mActivity, document, "_for_review");
-
-        // We should start analyzing the document by sending it to the Gini API.
-        // If the user did not modify the image we can get the analysis results earlier.
-        // The Gini Capture SDK will not request you to proceed to the Analysis Screen, if the
-        // results were
-        // received in the Review Screen.
-        // If the user modified the image or the analysis didn't complete or it failed the Gini
-        // Capture Sdk
-        // will request you to proceed to the Analysis Screen.
-        getSingleDocumentAnalyzer().analyzeDocument(document,
-                new DocumentAnalyzer.Listener() {
-                    @Override
-                    public void onException(final Exception exception) {
-                        String message = mActivity.getString(R.string.unknown_error);
-                        if (exception.getMessage() != null) {
-                            message = exception.getMessage();
-                        }
-                        // Don't show the error message here, but forward it to the Analysis
-                        // Fragment, where it will be
-                        // shown in a Snackbar
-                        mDocumentAnalysisErrorMessage = mActivity.getString(
-                                R.string.analysis_failed, message);
-                        LOG.error("Analysis failed in the Review Screen", exception);
-                    }
-
-                    @Override
-                    public void onExtractionsReceived(
-                            final Map<String, SpecificExtraction> extractions) {
-                        LOG.debug("Document analyzed in the Review Screen");
-                        // Cache the extractions until the user clicks the next button and
-                        // onDocumentReviewedAndAnalyzed()
-                        // will have been called
-                        mExtractions = extractions;
-                        // Calling onDocumentAnalyzed() is important to notify the Review
-                        // Fragment that the
-                        // analysis has completed successfully
-                        mReviewFragmentInterface.onDocumentAnalyzed();
-                    }
-                });
-    }
-
-    private SingleDocumentAnalyzer getSingleDocumentAnalyzer() {
-        if (mSingleDocumentAnalyzer == null) {
-            mSingleDocumentAnalyzer =
-                    ((BaseExampleApp) mActivity.getApplication()).getSingleDocumentAnalyzer();
-        }
-        return mSingleDocumentAnalyzer;
-    }
-
-    @Override
-    public void onProceedToAnalysisScreen(@NonNull final Document document) {
-        onProceedToAnalysisScreen(document, null);
     }
 
     @Override
@@ -135,64 +54,9 @@ public class ReviewScreenHandler implements ReviewFragmentListener {
     }
 
     @Override
-    public void onDocumentReviewedAndAnalyzed(@NonNull final Document document) {
-        LOG.debug("Reviewed and analyzed document {}", document);
-        // If we have received the extractions while in the Review Screen we don't need to go to
-        // the Analysis Screen,
-        // we can show the extractions
-        if (mExtractions != null) {
-            // If we have no Pay 5 extractions we query the Gini Capture SDK
-            // whether we should show the Gini Capture No Results Screen
-            if (hasNoPay5Extractions(mExtractions.keySet())
-                    && GiniCaptureCoordinator.shouldShowGiniCaptureNoResultsScreen(document)) {
-                // Show a special screen, if no Pay5 extractions were found to give the user some
-                // hints and tips
-                // for using the Gini Capture Library
-                showNoResultsScreen(document);
-            } else {
-                showExtractions(getSingleDocumentAnalyzer().getGiniApiDocument(),
-                        getLegacyExtractionsBundle(mExtractions));
-
-            }
-            mExtractions = null;
-        }
-    }
-
-    private void showExtractions(final net.gini.android.models.Document giniApiDocument,
-            final Bundle extractionsBundle) {
-        LOG.debug("Show extractions");
-        final Intent intent = new Intent(mActivity, ExtractionsActivity.class);
-        intent.putExtra(ExtractionsActivity.EXTRA_IN_EXTRACTIONS, extractionsBundle);
-        mActivity.startActivity(intent);
-        mActivity.setResult(RESULT_OK);
-        mActivity.finish();
-    }
-
-    private void showNoResultsScreen(final Document document) {
-        final Intent intent = getNoResultsActivityIntent(document);
-        mActivity.startActivity(intent);
-        mActivity.setResult(RESULT_OK);
-        mActivity.finish();
-    }
-
-    private Intent getNoResultsActivityIntent(final Document document) {
-        return NoResultsExampleAppCompatActivity.newInstance(document, mActivity);
-    }
-
-    @Override
-    public void onDocumentWasRotated(@NonNull final Document document, final int oldRotation,
-            final int newRotation) {
-        getSingleDocumentAnalyzer().cancelAnalysis();
-    }
-
-    @Override
     public void onError(@NonNull final GiniCaptureError error) {
         Toast.makeText(mActivity, mActivity.getString(R.string.gini_capture_error,
                 error.getErrorCode(), error.getMessage()), Toast.LENGTH_LONG).show();
-    }
-
-    public Activity getActivity() {
-        return mActivity;
     }
 
     public Document getDocument() {
@@ -257,16 +121,5 @@ public class ReviewScreenHandler implements ReviewFragmentListener {
     private void setUpActionBar() {
         mActivity.setSupportActionBar(
                 (Toolbar) mActivity.findViewById(R.id.toolbar));
-    }
-
-    @Override
-    public void onExtractionsAvailable(
-            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
-        showExtractions(null, getExtractionsBundle(extractions));
-    }
-
-    @Override
-    public void onProceedToNoExtractionsScreen(@NonNull final Document document) {
-        showNoResultsScreen(document);
     }
 }

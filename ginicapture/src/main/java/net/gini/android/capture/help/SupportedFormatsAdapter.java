@@ -1,10 +1,5 @@
 package net.gini.android.capture.help;
 
-import static net.gini.android.capture.help.SupportedFormatsAdapter.ItemType.FORMAT_INFO;
-import static net.gini.android.capture.help.SupportedFormatsAdapter.ItemType.HEADER;
-import static net.gini.android.capture.internal.util.FeatureConfiguration.getDocumentImportEnabledFileTypes;
-import static net.gini.android.capture.internal.util.FeatureConfiguration.isFileImportEnabled;
-
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,20 +7,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.gini.android.capture.DocumentImportEnabledFileTypes;
-import net.gini.android.capture.GiniCaptureFeatureConfiguration;
 import net.gini.android.capture.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
+import static net.gini.android.capture.help.SupportedFormatsAdapter.ItemType.FORMAT_INFO;
+import static net.gini.android.capture.help.SupportedFormatsAdapter.ItemType.HEADER;
+import static net.gini.android.capture.internal.util.FeatureConfiguration.getDocumentImportEnabledFileTypes;
+import static net.gini.android.capture.internal.util.FeatureConfiguration.isFileImportEnabled;
 
 /**
  * Internal use only.
@@ -37,22 +35,20 @@ class SupportedFormatsAdapter extends
 
     private final List<Enum> mItems;
 
-    SupportedFormatsAdapter(
-            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
-        mItems = setUpItems(giniCaptureFeatureConfiguration);
+    SupportedFormatsAdapter() {
+        mItems = setUpItems();
     }
 
-    private List<Enum> setUpItems(
-            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
+    private List<Enum> setUpItems() {
         final ArrayList<Enum> items = new ArrayList<>();
         items.add(SectionHeader.SUPPORTED_FORMATS);
         items.add(SupportedFormat.PRINTED_INVOICES);
-        if (isFileImportEnabled(giniCaptureFeatureConfiguration)
-                || getDocumentImportEnabledFileTypes(giniCaptureFeatureConfiguration)
+        if (isFileImportEnabled()
+                || getDocumentImportEnabledFileTypes()
                 == DocumentImportEnabledFileTypes.PDF_AND_IMAGES) {
             items.add(SupportedFormat.SINGLE_PAGE_AS_JPEG_PNG_GIF);
             items.add(SupportedFormat.PDF);
-        } else if (getDocumentImportEnabledFileTypes(giniCaptureFeatureConfiguration)
+        } else if (getDocumentImportEnabledFileTypes()
                 == DocumentImportEnabledFileTypes.PDF) {
             items.add(SupportedFormat.PDF);
         }

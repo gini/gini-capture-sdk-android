@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import net.gini.android.capture.GiniCapture;
-import net.gini.android.capture.GiniCaptureFeatureConfiguration;
 import net.gini.android.capture.R;
 import net.gini.android.capture.analysis.AnalysisActivity;
 import net.gini.android.capture.camera.CameraActivity;
@@ -26,9 +25,6 @@ import androidx.recyclerview.widget.RecyclerView;
  * </p>
  * <p>
  *     This Activity is launched by the {@link HelpActivity} for both Screen and Component APIs.
- * </p>
- * <p>
- *     The contents of this screen are modified according to the features you configured with the {@link GiniCaptureFeatureConfiguration}.
  * </p>
  *
  * <h3>Customizing the File Import Screen</h3>
@@ -98,22 +94,10 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class SupportedFormatsActivity extends AppCompatActivity {
 
-    /**
-     * @suppress
-     *
-     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
-     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
-     */
-    public static final String EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION =
-            "GC_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
-
-    private GiniCaptureFeatureConfiguration mGiniCaptureFeatureConfiguration;
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gc_activity_supported_formats);
-        readExtras();
         setUpFormatsList();
         forcePortraitOrientationOnPhones(this);
         setupHomeButton();
@@ -125,22 +109,10 @@ public class SupportedFormatsActivity extends AppCompatActivity {
         }
     }
 
-    private void readExtras() {
-        final Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            mGiniCaptureFeatureConfiguration = extras.getParcelable(
-                    EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION);
-            if (mGiniCaptureFeatureConfiguration == null) {
-                mGiniCaptureFeatureConfiguration =
-                        GiniCaptureFeatureConfiguration.buildNewConfiguration().build();
-            }
-        }
-    }
-
     private void setUpFormatsList() {
         final RecyclerView recyclerView = findViewById(R.id.gc_formats_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new SupportedFormatsAdapter(mGiniCaptureFeatureConfiguration));
+        recyclerView.setAdapter(new SupportedFormatsAdapter());
     }
 
     @Override

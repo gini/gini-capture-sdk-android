@@ -1,44 +1,37 @@
 package net.gini.android.capture.camera;
 
-import static net.gini.android.capture.internal.util.ActivityHelper.enableHomeAsUp;
-import static net.gini.android.capture.internal.util.FeatureConfiguration.shouldShowOnboarding;
-import static net.gini.android.capture.internal.util.FeatureConfiguration.shouldShowOnboardingAtFirstRun;
-import static net.gini.android.capture.tracking.EventTrackingHelper.trackCameraScreenEvent;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.gini.android.capture.Document;
 import net.gini.android.capture.DocumentImportEnabledFileTypes;
 import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.GiniCaptureCoordinator;
 import net.gini.android.capture.GiniCaptureError;
-import net.gini.android.capture.GiniCaptureFeatureConfiguration;
 import net.gini.android.capture.R;
 import net.gini.android.capture.analysis.AnalysisActivity;
 import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
-import net.gini.android.capture.document.QRCodeDocument;
 import net.gini.android.capture.help.HelpActivity;
-import net.gini.android.capture.internal.util.ActivityHelper;
-import net.gini.android.capture.network.GiniCaptureNetworkService;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.onboarding.OnboardingActivity;
-import net.gini.android.capture.onboarding.OnboardingPage;
 import net.gini.android.capture.review.ReviewActivity;
 import net.gini.android.capture.review.multipage.MultiPageReviewActivity;
 import net.gini.android.capture.tracking.CameraScreenEvent;
 
-import java.util.ArrayList;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AppCompatActivity;
+import static net.gini.android.capture.internal.util.ActivityHelper.enableHomeAsUp;
+import static net.gini.android.capture.internal.util.FeatureConfiguration.shouldShowOnboarding;
+import static net.gini.android.capture.internal.util.FeatureConfiguration.shouldShowOnboardingAtFirstRun;
+import static net.gini.android.capture.tracking.EventTrackingHelper.trackCameraScreenEvent;
 
 /**
  * <h3>Screen API</h3>
@@ -66,45 +59,6 @@ import androidx.appcompat.app.AppCompatActivity;
  * <p> Start the {@code CameraActivity} with {@link android.app.Activity#startActivityForResult(Intent,
  * int)} to receive the extractions or a {@link GiniCaptureError} in case there was an error.
  *
- * <p> These formerly mandatory extras have been deprecated. Still required if {@link GiniCapture} is
- * not used:
- *
- * <ul>
- *
- * <li>{@link CameraActivity#EXTRA_IN_REVIEW_ACTIVITY} - use the {@link
- * CameraActivity#setReviewActivityExtra(Intent, Context, Class)} helper to set it. Must contain an
- * explicit Intent to the {@link ReviewActivity} subclass from your application
- *
- * <li>{@link CameraActivity#EXTRA_IN_ANALYSIS_ACTIVITY} - use the {@link
- * CameraActivity#setAnalysisActivityExtra(Intent, Context, Class)} helper to set it. Must contain
- * an explicit Intent to the {@link AnalysisActivity} subclass from your application
- *
- * </ul>
- *
- * <p> These optional extras have been deprecated. Should be set only if {@link GiniCapture} is not
- * used:
- *
- * <ul>
- *
- * <li>{@link CameraActivity#EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN} - the Onboarding Screen is shown
- * by default the first time the Gini Capture SDK is started. You may disable it by setting this
- * extra to {@code false} - we highly recommend keeping the default behavior
- *
- * <li>{@link CameraActivity#EXTRA_IN_SHOW_ONBOARDING} - if set to {@code true} the Onboarding
- * Screen is shown when the Gini Capture SDK is started
- *
- * <li>{@link CameraActivity#EXTRA_IN_ONBOARDING_PAGES} - custom pages for the Onboarding Screen as
- * an {@link ArrayList} containing {@link OnboardingPage} objects
- *
- * <li><b>Deprecated</b> {@link CameraActivity#EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY} - if set
- * to {@code true} the back button closes the Gini Capture SDK from any of its activities with
- * result code {@link CameraActivity#RESULT_CANCELED}
- *
- * <li>{@link CameraActivity#EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION} - must contain a {@link
- * GiniCaptureFeatureConfiguration} instance to apply the feature configuration
- *
- * </ul>
- *
  * <p> The following result codes need to be handled:
  *
  * <ul>
@@ -131,9 +85,6 @@ import androidx.appcompat.app.AppCompatActivity;
  * wrong
  *
  * </ul>
- *
- * <p> <b>Note:</b> For returning the extractions from the Gini API you can add your own extras in
- * {@link ReviewActivity#onAddDataToResult(Intent)} or {@link AnalysisActivity#onAddDataToResult(Intent)}.
  *
  * <p> If the camera could not be opened due to missing permissions, the content of the Camera
  * Screen is replaced with a no-camera icon, a short message and an optional button. The button is
@@ -350,74 +301,6 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
         CameraFragmentInterface {
 
     /**
-     * <p> Mandatory extra which must contain an explicit Intent to the {@link ReviewActivity}
-     * subclass from your application. </p> <p> Use the {@link CameraActivity#setReviewActivityExtra(Intent,
-     * Context, Class)} helper to set it. </p>
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
-     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
-     * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
-     * of the {@link CameraActivity}'s result Intent.
-     */
-    public static final String EXTRA_IN_REVIEW_ACTIVITY = "GC_EXTRA_IN_REVIEW_ACTIVITY";
-    /**
-     * <p> Mandatory extra which must contain an explicit Intent to the {@link AnalysisActivity}
-     * subclass from your application. </p> <p> Use the {@link CameraActivity#setAnalysisActivityExtra(Intent,
-     * Context, Class)} helper to set it. </p>
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
-     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
-     * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
-     * of the {@link CameraActivity}'s result Intent.
-     */
-    public static final String EXTRA_IN_ANALYSIS_ACTIVITY = "GC_EXTRA_IN_ANALYSIS_ACTIVITY";
-    /**
-     * Optional extra which must contain an {@code ArrayList} with {@link OnboardingPage} objects.
-     *
-     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
-     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
-     */
-    public static final String EXTRA_IN_ONBOARDING_PAGES = "GC_EXTRA_IN_ONBOARDING_PAGES";
-    /**
-     * <p> Optional extra which must contain a boolean and indicates whether the Onboarding Screen
-     * should be shown when the Gini Capture SDK is started for the first time. </p> <p> Default
-     * value is {@code true}. </p>
-     *
-     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
-     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
-     */
-    public static final String EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN =
-            "GC_EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN";
-    /**
-     * <p> Optional extra which must contain a boolean and indicates whether the Onboarding Screen
-     * should be shown when the Gini Capture SDK is started. </p> <p> Default value is {@code
-     * false}. </p>
-     *
-     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
-     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
-     */
-    public static final String EXTRA_IN_SHOW_ONBOARDING = "GC_EXTRA_IN_SHOW_ONBOARDING";
-
-    /**
-     * <p> Optional extra wich must contain a boolean and indicates whether the back button should
-     * close the Gini Capture SDK. </p> <p> Default value is {@code false}. </p>
-     *
-     * @Deprecated The option to close the library with the back button from any screen will be
-     * removed in a future version.
-     */
-    public static final String EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY =
-            "GC_EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY";
-
-    /**
-     * Optional extra which must contain a {@link GiniCaptureFeatureConfiguration} instance.
-     *
-     * @Deprecated Configuration should be applied by creating a {@link GiniCapture} instance using
-     * {@link GiniCapture#newInstance()} and the returned {@link GiniCapture.Builder}.
-     */
-    public static final String EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION =
-            "GC_EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION";
-
-    /**
      * <p> Returned when the result code is {@link CameraActivity#RESULT_ERROR} and contains a
      * {@link GiniCaptureError} object detailing what went wrong. </p>
      */
@@ -443,70 +326,16 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     private static final String CAMERA_FRAGMENT = "CAMERA_FRAGMENT";
     private static final String ONBOARDING_SHOWN_KEY = "ONBOARDING_SHOWN_KEY";
 
-    private ArrayList<OnboardingPage> mOnboardingPages; // NOPMD
-    private Intent mReviewDocumentActivityIntent;
-    private Intent mAnalyzeDocumentActivityIntent;
-    private boolean mShowOnboarding;
-    private boolean mShowOnboardingAtFirstRun = true;
     private boolean mOnboardingShown;
-    private boolean mBackButtonShouldCloseLibrary;
     private GiniCaptureCoordinator mGiniCaptureCoordinator;
     private Document mDocument;
-    private GiniCaptureFeatureConfiguration mGiniCaptureFeatureConfiguration;
 
     private CameraFragmentCompat mFragment;
-
-    /**
-     * <p> Helper for setting the {@link CameraActivity#EXTRA_IN_REVIEW_ACTIVITY}. </p>
-     *
-     * @param target              your explicit {@link Intent} used to start the {@link
-     *                            CameraActivity}
-     * @param context             {@link Context} used to create the explicit {@link Intent} for
-     *                            your {@link ReviewActivity} subclass
-     * @param reviewActivityClass class of your {@link ReviewActivity} subclass
-     * @param <T>                 type of your {@link ReviewActivity} subclass
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
-     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
-     * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
-     * of the {@link CameraActivity}'s result Intent.
-     */
-    @Deprecated
-    public static <T extends ReviewActivity> void setReviewActivityExtra(final Intent target,
-            final Context context,
-            final Class<T> reviewActivityClass) {
-        ActivityHelper.setActivityExtra(target, EXTRA_IN_REVIEW_ACTIVITY, context,
-                reviewActivityClass);
-    }
-
-    /**
-     * <p> Helper for setting the {@link CameraActivity#EXTRA_IN_ANALYSIS_ACTIVITY}. </p>
-     *
-     * @param target                your explicit {@link Intent} used to start the {@link
-     *                              CameraActivity}
-     * @param context               {@link Context} used to create the explicit {@link Intent} for
-     *                              your {@link AnalysisActivity} subclass
-     * @param analysisActivityClass class of your {@link AnalysisActivity} subclass
-     * @param <T>                   type of your {@link AnalysisActivity} subclass
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
-     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
-     * extractions will be returned in the extra called {@link CameraActivity#EXTRA_OUT_EXTRACTIONS}
-     * of the {@link CameraActivity}'s result Intent.
-     */
-    @Deprecated
-    public static <T extends AnalysisActivity> void setAnalysisActivityExtra(final Intent target,
-            final Context context,
-            final Class<T> analysisActivityClass) {
-        ActivityHelper.setActivityExtra(target, EXTRA_IN_ANALYSIS_ACTIVITY, context,
-                analysisActivityClass);
-    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gc_activity_camera);
-        readExtras();
         createGiniCaptureCoordinator();
         if (savedInstanceState == null) {
             initFragment();
@@ -538,20 +367,11 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     }
 
     private void createFragment() {
-        if (mGiniCaptureFeatureConfiguration != null) {
-            mFragment = createCameraFragmentCompat(mGiniCaptureFeatureConfiguration);
-        } else {
-            mFragment = createCameraFragmentCompat();
-        }
+        mFragment = createCameraFragmentCompat();
     }
 
     protected CameraFragmentCompat createCameraFragmentCompat() {
         return CameraFragmentCompat.createInstance();
-    }
-
-    protected CameraFragmentCompat createCameraFragmentCompat(
-            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
-        return CameraFragmentCompat.createInstance(giniCaptureFeatureConfiguration);
     }
 
     private void initFragment() {
@@ -578,7 +398,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     }
 
     private void showOnboardingIfRequested() {
-        if (shouldShowOnboarding(mShowOnboarding)) {
+        if (shouldShowOnboarding()) {
             startOnboardingActivity();
         }
     }
@@ -598,38 +418,10 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
         clearMemory();
     }
 
-    @VisibleForTesting
-    void readExtras() {
-        final Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            mOnboardingPages = extras.getParcelableArrayList(EXTRA_IN_ONBOARDING_PAGES);
-            mReviewDocumentActivityIntent = extras.getParcelable(EXTRA_IN_REVIEW_ACTIVITY);
-            mAnalyzeDocumentActivityIntent = extras.getParcelable(EXTRA_IN_ANALYSIS_ACTIVITY);
-            mShowOnboarding = extras.getBoolean(EXTRA_IN_SHOW_ONBOARDING, false);
-            mShowOnboardingAtFirstRun = extras.getBoolean(EXTRA_IN_SHOW_ONBOARDING_AT_FIRST_RUN,
-                    true);
-            mBackButtonShouldCloseLibrary = extras.getBoolean(
-                    EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY, false);
-            mGiniCaptureFeatureConfiguration =
-                    extras.getParcelable(EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION);
-        }
-        checkRequiredExtras();
-    }
-
-    private void checkRequiredExtras() {
-        if (mReviewDocumentActivityIntent == null) {
-            mReviewDocumentActivityIntent = new Intent(this, ReviewActivity.class);
-        }
-        if (mAnalyzeDocumentActivityIntent == null) {
-            mAnalyzeDocumentActivityIntent = new Intent(this, AnalysisActivity.class);
-        }
-    }
-
     private void createGiniCaptureCoordinator() {
         mGiniCaptureCoordinator = GiniCaptureCoordinator.createInstance(this);
         mGiniCaptureCoordinator
-                .setShowOnboardingAtFirstRun(
-                        shouldShowOnboardingAtFirstRun(mShowOnboardingAtFirstRun))
+                .setShowOnboardingAtFirstRun(shouldShowOnboardingAtFirstRun())
                 .setListener(new GiniCaptureCoordinator.Listener() {
                     @Override
                     public void onShowOnboarding() {
@@ -674,8 +466,6 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
 
     private void startHelpActivity() {
         final Intent intent = new Intent(this, HelpActivity.class);
-        intent.putExtra(HelpActivity.EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION,
-                mGiniCaptureFeatureConfiguration);
         startActivity(intent);
         trackCameraScreenEvent(CameraScreenEvent.HELP);
     }
@@ -686,10 +476,6 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
             return;
         }
         final Intent intent = new Intent(this, OnboardingActivity.class);
-        if (mOnboardingPages != null) {
-            intent.putParcelableArrayListExtra(OnboardingActivity.EXTRA_ONBOARDING_PAGES,
-                    mOnboardingPages);
-        }
         hideInterface();
         startActivityForResult(intent, ONBOARDING_REQUEST);
         mOnboardingShown = true;
@@ -717,29 +503,20 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     }
 
     @Override
-    public void onQRCodeAvailable(@NonNull final QRCodeDocument qrCodeDocument) {
-    }
-
-    @Override
     public void onCheckImportedDocument(@NonNull final Document document,
             @NonNull final DocumentCheckResultCallback callback) {
         callback.documentAccepted();
     }
 
     private void startReviewActivity(@NonNull final Document document) {
-        final Intent reviewIntent = new Intent(mReviewDocumentActivityIntent);
+        final Intent reviewIntent = new Intent();
         reviewIntent.putExtra(ReviewActivity.EXTRA_IN_DOCUMENT, document);
-        reviewIntent.putExtra(EXTRA_IN_ANALYSIS_ACTIVITY,
-                mAnalyzeDocumentActivityIntent);
-        reviewIntent.putExtra(
-                ReviewActivity.EXTRA_IN_BACK_BUTTON_SHOULD_CLOSE_LIBRARY,
-                mBackButtonShouldCloseLibrary);
         reviewIntent.setExtrasClassLoader(CameraActivity.class.getClassLoader());
         startActivityForResult(reviewIntent, REVIEW_DOCUMENT_REQUEST);
     }
 
     private void startAnalysisActivity(@NonNull final Document document) {
-        final Intent analysisIntent = new Intent(mAnalyzeDocumentActivityIntent);
+        final Intent analysisIntent = new Intent();
         analysisIntent.putExtra(AnalysisActivity.EXTRA_IN_DOCUMENT, document);
         analysisIntent.setExtrasClassLoader(CameraActivity.class.getClassLoader());
         startActivityForResult(analysisIntent, ANALYSE_DOCUMENT_REQUEST);
@@ -773,10 +550,9 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
         switch (requestCode) {
             case REVIEW_DOCUMENT_REQUEST:
             case ANALYSE_DOCUMENT_REQUEST:
-                if (mBackButtonShouldCloseLibrary
-                        || (resultCode != Activity.RESULT_CANCELED
+                if (resultCode != Activity.RESULT_CANCELED
                         && resultCode != AnalysisActivity.RESULT_NO_EXTRACTIONS
-                        && resultCode != ReviewActivity.RESULT_NO_EXTRACTIONS)) {
+                        && resultCode != ReviewActivity.RESULT_NO_EXTRACTIONS) {
                     setResult(resultCode, data);
                     finish();
                     clearMemory();
@@ -804,26 +580,6 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
         throw new IllegalStateException("CameraFragmentListener must not be altered in the "
                 + "CameraActivity. Override listener methods in a CameraActivity subclass "
                 + "instead.");
-    }
-
-    @Override
-    public void showDocumentCornerGuides() {
-        mFragment.showDocumentCornerGuides();
-    }
-
-    @Override
-    public void hideDocumentCornerGuides() {
-        mFragment.hideDocumentCornerGuides();
-    }
-
-    @Override
-    public void showCameraTriggerButton() {
-        mFragment.showCameraTriggerButton();
-    }
-
-    @Override
-    public void hideCameraTriggerButton() {
-        mFragment.hideCameraTriggerButton();
     }
 
     @Override

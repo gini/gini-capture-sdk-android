@@ -1,18 +1,11 @@
 package net.gini.android.capture.review;
 
-import net.gini.android.capture.Document;
-import net.gini.android.capture.GiniCapture;
-import net.gini.android.capture.GiniCaptureError;
-import net.gini.android.capture.analysis.AnalysisActivity;
-import net.gini.android.capture.analysis.AnalysisFragmentListener;
-import net.gini.android.capture.network.GiniCaptureNetworkService;
-import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
-import net.gini.android.capture.noresults.NoResultsFragmentCompat;
-
-import java.util.Map;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import net.gini.android.capture.Document;
+import net.gini.android.capture.GiniCaptureError;
+import net.gini.android.capture.analysis.AnalysisActivity;
 
 /**
  * Interface used by {@link ReviewFragmentCompat} to dispatch
@@ -21,111 +14,11 @@ import androidx.annotation.Nullable;
 public interface ReviewFragmentListener {
 
     /**
-     * Called when the Review Fragment was started and you should start analyzing the original
-     * document by sending it to the Gini API.
-     *
-     * <p> We assume that in most cases the photo is good enough and this way we are able to provide
-     * analysis results quicker.
-     *
-     * <p> <b>Note:</b> Call {@link ReviewFragmentCompat#onDocumentAnalyzed()} when the analysis is
-     * done and your Activity wasn't stopped.
-     *
-     * @param document contains the original image taken by the camera
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
-     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
-     * extractions will be returned in the Analysis Screen in
-     * {@link AnalysisFragmentListener#onExtractionsAvailable(Map, Map)}.
-     */
-    @Deprecated
-    void onShouldAnalyzeDocument(@NonNull Document document);
-
-    /**
-     * Called if you didn't call {@link
-     * ReviewFragmentCompat#onDocumentAnalyzed()} (or the image was changed) and the user tapped on
-     * the Next button.
-     *
-     * <p> You should start your Activity extending {@link AnalysisActivity} and set the document as
-     * the {@link AnalysisActivity#EXTRA_IN_DOCUMENT} extra.
-     *
-     * @param document contains the reviewed image (can be the original one or a modified image)
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available {@link ReviewFragmentListener#onProceedToAnalysisScreen(Document,
-     * String)} is invoked instead.
-     */
-    @Deprecated
-    void onProceedToAnalysisScreen(@NonNull Document document);
-
-    /**
-     * Called if you called {@link
-     * ReviewFragmentCompat#onDocumentAnalyzed()} and the image wasn't changed and the user tapped
-     * on the Next button.
-     *
-     * <p> You should finish your Activity and proceed to handling the results of the analysis.
-     *
-     * @param document contains the reviewed image (can be the original one or a modified image)
-     *
-     * @Deprecated When a {@link GiniCapture} instance is available the document is analyzed
-     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
-     * extractions will be returned in the Analysis Screen in
-     * {@link AnalysisFragmentListener#onExtractionsAvailable(Map, Map)}.
-     */
-    @Deprecated
-    void onDocumentReviewedAndAnalyzed(@NonNull Document document);
-
-    /**
-     * <p> Called when the user rotated the image.
-     *
-     * <p> In case you started the document analysis in {@link ReviewFragmentListener#onShouldAnalyzeDocument(Document)}
-     * you should cancel it here as the original image is not valid anymore.
-     *
-     * @param document    contains the modified image
-     * @param oldRotation the previous rotation in degrees
-     * @param newRotation the new rotation in degrees
-     *
-     * @Deprecated When a {@link GiniCapture} and a {@link GiniCaptureNetworkService} instance is
-     * available rotation is handled internally. The document is analyzed by using the configured
-     * {@link GiniCaptureNetworkService} implementation. The extractions will be returned in the
-     * Analysis Screen in {@link AnalysisFragmentListener#onExtractionsAvailable(Map, Map)}.
-     */
-    @Deprecated
-    void onDocumentWasRotated(@NonNull Document document, int oldRotation, int newRotation);
-
-    /**
      * Called when an error occurred.
      *
      * @param error details about what went wrong
      */
     void onError(@NonNull GiniCaptureError error);
-
-    /**
-     * Called when the document has been analyzed and extractions are available.
-     *
-     * @param extractions a map of the extractions with the extraction labels as keys
-     *
-     * @deprecated When a {@link GiniCapture} instance is available the document is analyzed
-     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
-     * extractions will be returned in the Analysis Screen in
-     * {@link AnalysisFragmentListener#onExtractionsAvailable(Map, Map)}.
-     */
-    @Deprecated
-    void onExtractionsAvailable(
-            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions);
-
-    /**
-     * Called when the document has been analyzed and no extractions were received.
-     *
-     * <p> You should show the {@link NoResultsFragmentCompat}.
-     *
-     * @param document contains the reviewed document
-     *
-     * @deprecated When a {@link GiniCapture} instance is available the document is analyzed
-     * internally by using the configured {@link GiniCaptureNetworkService} implementation. The
-     * extractions will be returned in the Analysis Screen in
-     * {@link AnalysisFragmentListener#onExtractionsAvailable(Map, Map)}.
-     */
-    @Deprecated
-    void onProceedToNoExtractionsScreen(@NonNull final Document document);
 
     /**
      * Called when the user tapped on the Next button and one of the following conditions apply:

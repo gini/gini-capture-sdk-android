@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.camera.CameraFragmentCompat;
@@ -13,16 +16,12 @@ import net.gini.android.capture.component.R;
 import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
 import net.gini.android.capture.component.review.ReviewExampleAppCompatActivity;
 import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
-import net.gini.android.capture.document.QRCodeDocument;
 import net.gini.android.capture.help.HelpActivity;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.onboarding.OnboardingFragmentCompat;
 import net.gini.android.capture.onboarding.OnboardingFragmentListener;
 
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Created by Alpar Szotyori on 04.12.2017.
@@ -97,11 +96,6 @@ public class CameraExampleAppCompatActivity extends AppCompatActivity implements
     public void onProceedToMultiPageReviewScreen(
             @NonNull final GiniCaptureMultiPageDocument multiPageDocument) {
         mCameraScreenHandler.onProceedToMultiPageReviewScreen(multiPageDocument);
-    }
-
-    @Override
-    public void onQRCodeAvailable(@NonNull final QRCodeDocument qrCodeDocument) {
-        mCameraScreenHandler.onQRCodeAvailable(qrCodeDocument);
     }
 
     @Override

@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.gini.android.capture.GiniCapture;
-import net.gini.android.capture.GiniCaptureFeatureConfiguration;
 import net.gini.android.capture.R;
 
 import java.util.ArrayList;
@@ -28,18 +27,16 @@ class HelpItemsAdapter extends RecyclerView.Adapter<HelpItemsAdapter.HelpItemsVi
     private final HelpItemSelectedListener mItemSelectedListener;
     private final List<HelpItem> mItems;
 
-    HelpItemsAdapter(@NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration,
-            @NonNull final HelpItemSelectedListener itemSelectedListener) {
+    HelpItemsAdapter(@NonNull final HelpItemSelectedListener itemSelectedListener) {
         mItemSelectedListener = itemSelectedListener;
-        mItems = setUpItems(giniCaptureFeatureConfiguration);
+        mItems = setUpItems();
     }
 
     @NonNull
-    private List<HelpItem> setUpItems(
-            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
+    private List<HelpItem> setUpItems() {
         final ArrayList<HelpItem> items = new ArrayList<>();
         items.add(HelpItem.PHOTO_TIPS);
-        if (isFileImportEnabled(giniCaptureFeatureConfiguration)) {
+        if (isFileImportEnabled()) {
             items.add(HelpItem.FILE_IMPORT_GUIDE);
         }
         if (GiniCapture.hasInstance()

@@ -40,56 +40,6 @@ public class ReviewActivityTestSpy extends ReviewActivity {
         }
     }
 
-    @Override
-    public void onShouldAnalyzeDocument(@NonNull final Document document) {
-        if (mListenerHook != null) {
-            mListenerHook.onShouldAnalyzeDocument(document);
-        } else {
-            mShouldAnalyzeDocument = document;
-        }
-    }
-
-    @Override
-    public void onAddDataToResult(@NonNull final Intent result) {
-        if (mListenerHook != null) {
-            mListenerHook.onAddDataToResult(result);
-        } else {
-            mAddDataToResultIntent = result;
-        }
-    }
-
-    @Override
-    public void onProceedToAnalysisScreen(@NonNull final Document document) {
-        super.onProceedToAnalysisScreen(document);
-        if (mListenerHook != null) {
-            mListenerHook.onProceedToAnalysisScreen(document);
-        } else {
-            mProceedToAnalysisDocument = document;
-        }
-    }
-
-    @Override
-    public void onDocumentReviewedAndAnalyzed(@NonNull final Document document) {
-        super.onDocumentReviewedAndAnalyzed(document);
-        if (mListenerHook != null) {
-            mListenerHook.onDocumentReviewedAndAnalyzed(document);
-        } else {
-            mDocumentReviewedAndAnalyzedDocument = document;
-        }
-    }
-
-    @Override
-    public void onDocumentWasRotated(@NonNull final Document document, final int oldRotation, final int newRotation) {
-        super.onDocumentWasRotated(document, oldRotation, newRotation);
-        if (mListenerHook != null) {
-            mListenerHook.onDocumentWasRotated(document, oldRotation, newRotation);
-        } else {
-            mDocumentWasRotatedDocument = document;
-            mDocumentWasRotatedDegreesOld = oldRotation;
-            mDocumentWasRotatedDegreesNew = newRotation;
-        }
-    }
-
     public static abstract class ListenerHook {
 
         public void onShouldAnalyzeDocument(@NonNull final Document document) {

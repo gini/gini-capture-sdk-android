@@ -1,11 +1,5 @@
 package net.gini.android.capture.component.camera;
 
-import static android.app.Activity.RESULT_OK;
-
-import static net.gini.android.capture.example.shared.ExampleUtil.getExtractionsBundle;
-import static net.gini.android.capture.example.shared.ExampleUtil.getLegacyExtractionsBundle;
-import static net.gini.android.capture.example.shared.ExampleUtil.isIntentActionViewOrSend;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,29 +10,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import net.gini.android.capture.camera.CameraFragmentCompat;
-import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
-import net.gini.android.capture.component.review.ReviewExampleAppCompatActivity;
-import net.gini.android.capture.onboarding.OnboardingFragmentCompat;
-import net.gini.android.models.SpecificExtraction;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
 import net.gini.android.capture.AsyncCallback;
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.GiniCaptureCoordinator;
 import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.ImportedFileValidationException;
+import net.gini.android.capture.camera.CameraFragmentCompat;
 import net.gini.android.capture.camera.CameraFragmentInterface;
 import net.gini.android.capture.camera.CameraFragmentListener;
 import net.gini.android.capture.component.ExtractionsActivity;
 import net.gini.android.capture.component.R;
+import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
+import net.gini.android.capture.component.review.ReviewExampleAppCompatActivity;
 import net.gini.android.capture.component.review.multipage.MultiPageReviewExampleActivity;
 import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
-import net.gini.android.capture.document.QRCodeDocument;
 import net.gini.android.capture.example.shared.BaseExampleApp;
-import net.gini.android.capture.example.shared.DocumentAnalyzer;
 import net.gini.android.capture.example.shared.SingleDocumentAnalyzer;
 import net.gini.android.capture.help.HelpActivity;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
+import net.gini.android.capture.onboarding.OnboardingFragmentCompat;
 import net.gini.android.capture.onboarding.OnboardingFragmentListener;
 import net.gini.android.capture.util.CancellationToken;
 import net.gini.android.capture.util.IntentHelper;
@@ -49,16 +47,13 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.android.LogcatAppender;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+
+import static android.app.Activity.RESULT_OK;
+import static net.gini.android.capture.example.shared.ExampleUtil.getExtractionsBundle;
+import static net.gini.android.capture.example.shared.ExampleUtil.isIntentActionViewOrSend;
 
 /**
  * Contains the logic for the Camera Screen.
@@ -137,33 +132,6 @@ public class CameraScreenHandler implements CameraFragmentListener,
                     ((BaseExampleApp) mActivity.getApplication()).getSingleDocumentAnalyzer();
         }
         return mSingleDocumentAnalyzer;
-    }
-
-    @Override
-    public void onQRCodeAvailable(@NonNull final QRCodeDocument qrCodeDocument) {
-        mCameraFragmentInterface.showActivityIndicatorAndDisableInteraction();
-        getSingleDocumentAnalyzer().cancelAnalysis();
-        getSingleDocumentAnalyzer().analyzeDocument(qrCodeDocument,
-                new DocumentAnalyzer.Listener() {
-                    @Override
-                    public void onException(final Exception exception) {
-                        mCameraFragmentInterface.hideActivityIndicatorAndEnableInteraction();
-                        mCameraFragmentInterface.showError(
-                                mActivity.getString(R.string.qrcode_error), 4000);
-                    }
-
-                    @Override
-                    public void onExtractionsReceived(
-                            final Map<String, SpecificExtraction> extractions) {
-                        mCameraFragmentInterface.hideActivityIndicatorAndEnableInteraction();
-                        final Intent intent = new Intent(mActivity, ExtractionsActivity.class);
-                        intent.putExtra(ExtractionsActivity.EXTRA_IN_EXTRACTIONS,
-                                getLegacyExtractionsBundle(extractions));
-                        mActivity.startActivity(intent);
-                        mActivity.setResult(Activity.RESULT_OK);
-                        mActivity.finish();
-                    }
-                });
     }
 
     @Override
