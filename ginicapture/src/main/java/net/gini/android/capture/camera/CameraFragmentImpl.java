@@ -1,21 +1,5 @@
 package net.gini.android.capture.camera;
 
-import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
-
-import static net.gini.android.capture.camera.Util.cameraExceptionToGiniCaptureError;
-import static net.gini.android.capture.document.ImageDocument.ImportMethod;
-import static net.gini.android.capture.internal.camera.view.FlashButtonHelper.getFlashButtonPosition;
-import static net.gini.android.capture.internal.network.NetworkRequestsManager.isCancellation;
-import static net.gini.android.capture.internal.qrcode.EPSPaymentParser.EXTRACTION_ENTITY_NAME;
-import static net.gini.android.capture.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
-import static net.gini.android.capture.internal.util.AndroidHelper.isMarshmallowOrLater;
-import static net.gini.android.capture.internal.util.ContextHelper.isTablet;
-import static net.gini.android.capture.internal.util.FeatureConfiguration.getDocumentImportEnabledFileTypes;
-import static net.gini.android.capture.internal.util.FeatureConfiguration.isMultiPageEnabled;
-import static net.gini.android.capture.internal.util.FeatureConfiguration.isQRCodeScanningEnabled;
-import static net.gini.android.capture.tracking.EventTrackingHelper.trackCameraScreenEvent;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -39,12 +23,23 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorCompat;
+import androidx.core.view.ViewPropertyAnimatorListener;
+import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
+import androidx.transition.Transition;
+import androidx.transition.TransitionListenerAdapter;
+
 import net.gini.android.capture.AsyncCallback;
 import net.gini.android.capture.Document;
 import net.gini.android.capture.DocumentImportEnabledFileTypes;
 import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.GiniCaptureError;
-import net.gini.android.capture.GiniCaptureFeatureConfiguration;
 import net.gini.android.capture.ImportedFileValidationException;
 import net.gini.android.capture.R;
 import net.gini.android.capture.document.DocumentFactory;
@@ -94,18 +89,22 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
-import androidx.annotation.VisibleForTesting;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.ViewPropertyAnimatorCompat;
-import androidx.core.view.ViewPropertyAnimatorListener;
-import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
-import androidx.transition.Transition;
-import androidx.transition.TransitionListenerAdapter;
 import jersey.repackaged.jsr166e.CompletableFuture;
+
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+import static net.gini.android.capture.camera.Util.cameraExceptionToGiniCaptureError;
+import static net.gini.android.capture.document.ImageDocument.ImportMethod;
+import static net.gini.android.capture.internal.camera.view.FlashButtonHelper.getFlashButtonPosition;
+import static net.gini.android.capture.internal.network.NetworkRequestsManager.isCancellation;
+import static net.gini.android.capture.internal.qrcode.EPSPaymentParser.EXTRACTION_ENTITY_NAME;
+import static net.gini.android.capture.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
+import static net.gini.android.capture.internal.util.AndroidHelper.isMarshmallowOrLater;
+import static net.gini.android.capture.internal.util.ContextHelper.isTablet;
+import static net.gini.android.capture.internal.util.FeatureConfiguration.getDocumentImportEnabledFileTypes;
+import static net.gini.android.capture.internal.util.FeatureConfiguration.isMultiPageEnabled;
+import static net.gini.android.capture.internal.util.FeatureConfiguration.isQRCodeScanningEnabled;
+import static net.gini.android.capture.tracking.EventTrackingHelper.trackCameraScreenEvent;
 
 class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader.Listener {
 
@@ -124,11 +123,6 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         @Override
         public void onProceedToMultiPageReviewScreen(
                 @NonNull final GiniCaptureMultiPageDocument multiPageDocument) {
-        }
-
-        @Override
-        public void onQRCodeAvailable(@NonNull final QRCodeDocument qrCodeDocument) {
-
         }
 
         @Override
@@ -154,7 +148,6 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
     private static final String IS_FLASH_ENABLED_KEY = "IS_FLASH_ENABLED_KEY";
 
     private final FragmentImplCallback mFragment;
-    private final GiniCaptureFeatureConfiguration mGiniCaptureFeatureConfiguration;
     private HideQRCodeDetectedRunnable mHideQRCodeDetectedPopupRunnable;
 
     private View mImageCorners;
@@ -203,13 +196,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
     private boolean mInstanceStateSaved;
 
     CameraFragmentImpl(@NonNull final FragmentImplCallback fragment) {
-        this(fragment, GiniCaptureFeatureConfiguration.buildNewConfiguration().build());
-    }
-
-    CameraFragmentImpl(@NonNull final FragmentImplCallback fragment,
-            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
         mFragment = fragment;
-        mGiniCaptureFeatureConfiguration = giniCaptureFeatureConfiguration;
     }
 
     @Override
@@ -367,7 +354,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         mProceededToMultiPageReview = false;
         initViews();
         initCameraController(activity);
-        if (isQRCodeScanningEnabled(mGiniCaptureFeatureConfiguration)) {
+        if (isQRCodeScanningEnabled()) {
             mHideQRCodeDetectedPopupRunnable = new HideQRCodeDetectedRunnable();
             initQRCodeReader(activity);
         }
@@ -817,7 +804,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
     }
 
     private boolean isDocumentImportEnabled(@NonNull final Activity activity) {
-        return getDocumentImportEnabledFileTypes(mGiniCaptureFeatureConfiguration)
+        return getDocumentImportEnabledFileTypes()
                 != DocumentImportEnabledFileTypes.NONE
                 && FileChooserActivity.canChooseFiles(activity);
     }
@@ -1012,11 +999,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
                                 return null;
                             }
                         });
-            } else {
-                mListener.onQRCodeAvailable(qrCodeDocument);
             }
-        } else {
-            mListener.onQRCodeAvailable(qrCodeDocument);
         }
     }
 
@@ -1091,7 +1074,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         if (mInMultiPageState) {
             enabledFileTypes = DocumentImportEnabledFileTypes.IMAGES;
         } else {
-            enabledFileTypes = getDocumentImportEnabledFileTypes(mGiniCaptureFeatureConfiguration);
+            enabledFileTypes = getDocumentImportEnabledFileTypes();
         }
         fileChooserIntent.putExtra(FileChooserActivity.EXTRA_IN_DOCUMENT_IMPORT_FILE_TYPES,
                 enabledFileTypes);
@@ -1615,52 +1598,16 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         });
     }
 
-    @Deprecated
-    @Override
-    public void showDocumentCornerGuides() {
-        if (isNoPermissionViewVisible()) {
-            return;
-        }
-        showDocumentCornerGuidesAnimated();
-    }
-
     private void showDocumentCornerGuidesAnimated() {
         mImageCorners.animate().alpha(1.0f);
-    }
-
-    @Deprecated
-    @Override
-    public void hideDocumentCornerGuides() {
-        if (isNoPermissionViewVisible()) {
-            return;
-        }
-        hideDocumentCornerGuidesAnimated();
     }
 
     private void hideDocumentCornerGuidesAnimated() {
         mImageCorners.animate().alpha(0.0f);
     }
 
-    @Deprecated
-    @Override
-    public void showCameraTriggerButton() {
-        if (isNoPermissionViewVisible()) {
-            return;
-        }
-        showCameraTriggerButtonAnimated();
-    }
-
     private void showCameraTriggerButtonAnimated() {
         enableCameraTriggerButtonAnimated();
-    }
-
-    @Deprecated
-    @Override
-    public void hideCameraTriggerButton() {
-        if (isNoPermissionViewVisible()) {
-            return;
-        }
-        hideCameraTriggerButtonAnimated();
     }
 
     private void hideCameraTriggerButtonAnimated() {
@@ -1835,7 +1782,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
             LOG.debug("CameraController created");
             mCameraController = createCameraController(activity);
         }
-        if (isQRCodeScanningEnabled(mGiniCaptureFeatureConfiguration)) {
+        if (isQRCodeScanningEnabled()) {
             final int rotation = mCameraController.getCameraRotation();
             mCameraController.setPreviewCallback(new Camera.PreviewCallback() {
                 @Override

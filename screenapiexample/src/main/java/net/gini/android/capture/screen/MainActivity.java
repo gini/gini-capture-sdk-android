@@ -169,8 +169,8 @@ public class MainActivity extends AppCompatActivity {
                         GiniCapture.createIntentForImportedFile(
                                 importedFileIntent,
                                 this,
-                                ReviewActivity.class,
-                                AnalysisActivity.class);
+                                null,
+                                null);
                 startActivityForResult(giniCaptureIntent, REQUEST_SCAN);
 
             } catch (final ImportedFileValidationException e) {
@@ -297,12 +297,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //        intent.putExtra(CameraActivity.EXTRA_IN_GINI_CAPTURE_FEATURE_CONFIGURATION,
 //                giniVisionFeatureConfiguration);
-
-        // Set your ReviewActivity subclass
-        CameraActivity.setReviewActivityExtra(intent, this, ReviewActivity.class);
-
-        // Set your AnalysisActivity subclass
-        CameraActivity.setAnalysisActivityExtra(intent, this, AnalysisActivity.class);
 
         // Start for result in order to receive the error result, in case something went wrong, or the extractions
         // To receive the extractions add it to the result Intent in ReviewActivity#onAddDataToResult(Intent) or

@@ -57,10 +57,6 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
     private static final Logger LOG = LoggerFactory.getLogger(AnalysisScreenPresenter.class);
     private static final AnalysisFragmentListener NO_OP_LISTENER = new AnalysisFragmentListener() {
         @Override
-        public void onAnalyzeDocument(@NonNull final Document document) {
-        }
-
-        @Override
         public void onError(@NonNull final GiniCaptureError error) {
         }
 
@@ -160,21 +156,6 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
     }
 
     @Override
-    public void onNoExtractionsFound() {
-        // Nothing to do here. We don't need to update the UI or do anything else here.
-        // The client has to decide what to do when there are no extractions
-        // when using the Component API.
-        // For the Screen API there is an implementation of this interface method in the
-        // AnalysisActivity.
-    }
-
-    @Override
-    public void onDocumentAnalyzed() {
-        mAnalysisCompleted = true;
-        clearSavedImages();
-    }
-
-    @Override
     public void showError(@NonNull final String message, final int duration) {
         getView().showErrorSnackbar(message, duration, null, null);
     }
@@ -186,13 +167,11 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
                 onClickListener);
     }
 
-    @Override
-    public void startScanAnimation() {
+    private void startScanAnimation() {
         getView().showScanAnimation();
     }
 
-    @Override
-    public void stopScanAnimation() {
+    private void stopScanAnimation() {
         getView().hideScanAnimation();
     }
 
@@ -351,8 +330,6 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
                                             .onExtractionsAvailable(getMapOrEmpty(resultHolder.getExtractions()));
 
                             case NO_NETWORK_SERVICE:
-                                getAnalysisFragmentListenerOrNoOp().onAnalyzeDocument(
-                                        getFirstDocument());
                                 break;
                             default:
                                 throw new UnsupportedOperationException(

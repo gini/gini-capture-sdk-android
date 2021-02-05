@@ -25,7 +25,7 @@ final class NoResultsFragmentHelper {
             return new NoResultsFragmentImpl(fragment, document);
         } else {
             throw new IllegalStateException(
-                    "NoResultsFragmentCompat and NoResultsFragmentStandard require a Document. Use the createInstance() method of these classes for instantiating.");
+                    "NoResultsFragmentCompat requires a Document. Use the createInstance() method of these classes for instantiating.");
         }
     }
 

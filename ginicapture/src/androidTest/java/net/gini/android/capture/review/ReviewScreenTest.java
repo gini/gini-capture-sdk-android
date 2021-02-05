@@ -1,47 +1,8 @@
 package net.gini.android.capture.review;
 
-import static com.google.common.truth.Truth.assertAbout;
-import static com.google.common.truth.Truth.assertThat;
-
-import static net.gini.android.capture.test.DocumentSubject.document;
-import static net.gini.android.capture.test.Helpers.createDocument;
-import static net.gini.android.capture.test.Helpers.getTestJpeg;
-import static net.gini.android.capture.test.Helpers.isTablet;
-import static net.gini.android.capture.test.Helpers.prepareLooper;
-import static net.gini.android.capture.test.Helpers.resetDeviceOrientation;
-import static net.gini.android.capture.test.Helpers.waitForWindowUpdate;
-
-import static org.junit.Assume.assumeTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Surface;
-
-import net.gini.android.capture.Document;
-import net.gini.android.capture.GiniCaptureError;
-import net.gini.android.capture.R;
-import net.gini.android.capture.analysis.AnalysisActivityTestSpy;
-import net.gini.android.capture.document.ImageDocument;
-import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
-import net.gini.android.capture.test.CurrentActivityTestRule;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-
-import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,6 +15,41 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.SdkSuppress;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.uiautomator.UiDevice;
+
+import net.gini.android.capture.Document;
+import net.gini.android.capture.GiniCaptureError;
+import net.gini.android.capture.R;
+import net.gini.android.capture.analysis.AnalysisActivityTestSpy;
+import net.gini.android.capture.document.ImageDocument;
+import net.gini.android.capture.test.CurrentActivityTestRule;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+
+import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static com.google.common.truth.Truth.assertAbout;
+import static com.google.common.truth.Truth.assertThat;
+import static net.gini.android.capture.test.DocumentSubject.document;
+import static net.gini.android.capture.test.Helpers.createDocument;
+import static net.gini.android.capture.test.Helpers.getTestJpeg;
+import static net.gini.android.capture.test.Helpers.isTablet;
+import static net.gini.android.capture.test.Helpers.prepareLooper;
+import static net.gini.android.capture.test.Helpers.resetDeviceOrientation;
+import static net.gini.android.capture.test.Helpers.waitForWindowUpdate;
+import static org.junit.Assume.assumeTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 @RunWith(AndroidJUnit4.class)
 public class ReviewScreenTest {
@@ -195,7 +191,7 @@ public class ReviewScreenTest {
         Thread.sleep(PAUSE_DURATION_LONG);
 
         assertThat(documentToAnalyze.get()).isNotNull();
-        assertThat(documentToAnalyze.get().getJpeg().length).isLessThan(TEST_JPEG.length);
+        assertThat(documentToAnalyze.get().getData().length).isLessThan(TEST_JPEG.length);
     }
 
     @Test
@@ -216,7 +212,7 @@ public class ReviewScreenTest {
         Thread.sleep(PAUSE_DURATION_LONG);
 
         assertThat(documentToAnalyze.get()).isNotNull();
-        assertThat(documentToAnalyze.get().getJpeg().length).isEqualTo(TEST_JPEG.length);
+        assertThat(documentToAnalyze.get().getData().length).isEqualTo(TEST_JPEG.length);
     }
 
     @Test
@@ -275,7 +271,7 @@ public class ReviewScreenTest {
             @Override
             public void onShouldAnalyzeDocument(@NonNull final Document document) {
                 // Notify that document was analyzed
-                activity.onDocumentAnalyzed();
+
             }
 
             @Override
@@ -343,7 +339,6 @@ public class ReviewScreenTest {
             @Override
             public void onShouldAnalyzeDocument(@NonNull final Document document) {
                 // Notify that document was analyzed
-                activity.onDocumentAnalyzed();
             }
 
             @Override
@@ -651,7 +646,7 @@ public class ReviewScreenTest {
 
         assertAbout(document()).that(
                 documentToAnalyzeAfterOrientationChange.get()).hasRotationDeltaInUserComment(180);
-        assertThat(documentToAnalyzeAfterOrientationChange.get().getRotationForDisplay()).isEqualTo(
+        assertThat(((ImageDocument) documentToAnalyzeAfterOrientationChange.get()).getRotationForDisplay()).isEqualTo(
                 270);
         assertThat(
                 activity.getFragment().getFragmentImpl().getImageDocument().getRotation()).isWithin(
@@ -695,38 +690,7 @@ public class ReviewScreenTest {
         final AtomicBoolean shouldAnalyzeDoc = new AtomicBoolean();
         ReviewFragmentHostActivityNotListener.sListener = new ReviewFragmentListener() {
             @Override
-            public void onShouldAnalyzeDocument(@NonNull final Document document) {
-                shouldAnalyzeDoc.set(true);
-            }
-
-            @Override
-            public void onProceedToAnalysisScreen(@NonNull final Document document) {
-
-            }
-
-            @Override
-            public void onDocumentReviewedAndAnalyzed(@NonNull final Document document) {
-
-            }
-
-            @Override
-            public void onDocumentWasRotated(@NonNull final Document document,
-                    final int oldRotation, final int newRotation) {
-            }
-
-            @Override
             public void onError(@NonNull final GiniCaptureError error) {
-
-            }
-
-            @Override
-            public void onExtractionsAvailable(
-                    @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
-
-            }
-
-            @Override
-            public void onProceedToNoExtractionsScreen(@NonNull final Document document) {
 
             }
 
@@ -744,26 +708,5 @@ public class ReviewScreenTest {
         InstrumentationRegistry.getInstrumentation().waitForIdleSync();
         // Then
         assertThat(shouldAnalyzeDoc.get()).isTrue();
-    }
-
-    @Test
-    public void should_useActivity_asListener_whenAvailable() throws Exception {
-        // Given
-        final Intent intent = new Intent(ApplicationProvider.getApplicationContext(),
-                ReviewFragmentHostActivity.class);
-        final ReviewFragmentHostActivity activity =
-                mReviewFragmentHostActivityTR.launchActivity(intent);
-        // When
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activity.getFragment().mFragmentImpl.mButtonRotate.performClick();
-            }
-        });
-        // Give some time for the rotation animation to finish
-        Thread.sleep(PAUSE_DURATION);
-        InstrumentationRegistry.getInstrumentation().waitForIdleSync();
-        // Then
-        assertThat(activity.shouldAnalyzeDocument()).isTrue();
     }
 }

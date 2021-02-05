@@ -5,8 +5,6 @@ This example app provides you with a sample usage of the Gini Capture SDK's Scre
 
 The Gini Pay API lib is used for analyzing documents and sending feedback.
 
-The `ReviewActivity` and `AnalysisActivity` extend the activities with the same name from the Gini Capture SDK.
-
 Before analyzing documents with the Component API example app, you need to set your Gini API Client Id and Secret in the
 `src/main/res/values/gini_api_credentials.xml`.
 
@@ -20,18 +18,6 @@ The entry point of the app is the `MainActivity`. It starts the Gini Capture SDK
 
 You only need to configure and create a `GiniCapture` instance and start the 
 `CameraActivity` for result.
-
-ReviewActivity
---------------
-
-You only need to configure and create a `GiniCapture` instance before launching
-the `CameraActivity` for result.
-
-AnalysisActivity
-----------------
-
-You only need to configure and create a `GiniCapture` instance before
-launching the `CameraActivity` for result.
 
 ExtractionsActivity
 -------------------

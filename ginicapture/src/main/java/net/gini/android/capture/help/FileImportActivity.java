@@ -1,24 +1,23 @@
 package net.gini.android.capture.help;
 
-import static net.gini.android.capture.internal.util.ActivityHelper.enableHomeAsUp;
-import static net.gini.android.capture.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
-
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import net.gini.android.capture.GiniCapture;
-import net.gini.android.capture.GiniCaptureFeatureConfiguration;
 import net.gini.android.capture.R;
 import net.gini.android.capture.analysis.AnalysisActivity;
 import net.gini.android.capture.camera.CameraActivity;
 import net.gini.android.capture.noresults.NoResultsActivity;
 import net.gini.android.capture.review.ReviewActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import static net.gini.android.capture.internal.util.ActivityHelper.enableHomeAsUp;
+import static net.gini.android.capture.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
 
 /**
  * <h3>Screen API and Component API</h3>
@@ -28,9 +27,6 @@ import androidx.core.content.ContextCompat;
  * </p>
  * <p>
  *     This Activity is launched by the {@link HelpActivity} for both Screen and Component APIs.
- * </p>
- * <p>
- *     <b>Important:</b> The File Import Screen is only shown only if file import was enabled with the {@link GiniCaptureFeatureConfiguration}.
  * </p>
  * <p>
  *     The contents of this screen need to be customized to insert your App's name or label for the "open with" functionality into the texts and illustrations.

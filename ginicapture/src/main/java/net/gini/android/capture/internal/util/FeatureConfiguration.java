@@ -2,9 +2,6 @@ package net.gini.android.capture.internal.util;
 
 import net.gini.android.capture.DocumentImportEnabledFileTypes;
 import net.gini.android.capture.GiniCapture;
-import net.gini.android.capture.GiniCaptureFeatureConfiguration;
-
-import androidx.annotation.NonNull;
 
 /**
  * Created by Alpar Szotyori on 05.03.2018.
@@ -19,39 +16,26 @@ import androidx.annotation.NonNull;
  */
 public final class FeatureConfiguration {
 
-    public static DocumentImportEnabledFileTypes getDocumentImportEnabledFileTypes(
-            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
+    public static DocumentImportEnabledFileTypes getDocumentImportEnabledFileTypes() {
         return GiniCapture.hasInstance()
                 ? GiniCapture.getInstance().getDocumentImportEnabledFileTypes()
-                : giniCaptureFeatureConfiguration.getDocumentImportEnabledFileTypes();
+                : DocumentImportEnabledFileTypes.NONE;
     }
 
-    public static boolean isFileImportEnabled(
-            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
-        return GiniCapture.hasInstance()
-                ? GiniCapture.getInstance().isFileImportEnabled()
-                : giniCaptureFeatureConfiguration.isFileImportEnabled();
+    public static boolean isFileImportEnabled() {
+        return GiniCapture.hasInstance() && GiniCapture.getInstance().isFileImportEnabled();
     }
 
-    public static boolean isQRCodeScanningEnabled(
-            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
-        return GiniCapture.hasInstance()
-                ? GiniCapture.getInstance().isQRCodeScanningEnabled()
-                : giniCaptureFeatureConfiguration.isQRCodeScanningEnabled();
+    public static boolean isQRCodeScanningEnabled() {
+        return GiniCapture.hasInstance() && GiniCapture.getInstance().isQRCodeScanningEnabled();
     }
 
-    public static boolean shouldShowOnboardingAtFirstRun(
-            final boolean showOnboardingAtFirstRun) {
-        return GiniCapture.hasInstance()
-                ? GiniCapture.getInstance().shouldShowOnboardingAtFirstRun()
-                : showOnboardingAtFirstRun;
+    public static boolean shouldShowOnboardingAtFirstRun() {
+        return GiniCapture.hasInstance() && GiniCapture.getInstance().shouldShowOnboardingAtFirstRun();
     }
 
-    public static boolean shouldShowOnboarding(
-            final boolean showOnboarding) {
-        return GiniCapture.hasInstance()
-                ? GiniCapture.getInstance().shouldShowOnboarding()
-                : showOnboarding;
+    public static boolean shouldShowOnboarding() {
+        return GiniCapture.hasInstance() && GiniCapture.getInstance().shouldShowOnboarding();
     }
 
     public static boolean isMultiPageEnabled() {

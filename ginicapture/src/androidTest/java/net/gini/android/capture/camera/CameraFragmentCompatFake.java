@@ -1,9 +1,6 @@
 package net.gini.android.capture.camera;
 
-import net.gini.android.capture.GiniCaptureFeatureConfiguration;
 import net.gini.android.capture.internal.camera.api.CameraControllerFake;
-
-import androidx.annotation.NonNull;
 
 /**
  * Created by Alpar Szotyori on 15.12.2017.
@@ -19,19 +16,11 @@ public class CameraFragmentCompatFake extends CameraFragmentCompat {
         return new CameraFragmentCompatFake();
     }
 
-    public static CameraFragmentCompatFake createInstance(
-            @NonNull final GiniCaptureFeatureConfiguration giniCaptureFeatureConfiguration) {
-        final CameraFragmentCompatFake fragment = new CameraFragmentCompatFake();
-        fragment.setArguments(
-                CameraFragmentHelper.createArguments(giniCaptureFeatureConfiguration));
-        return fragment;
-    }
-
     @Override
     protected CameraFragmentImpl createFragmentImpl() {
         final CameraFragmentHelperFake cameraFragmentHelperFake = new CameraFragmentHelperFake();
         final CameraFragmentImpl cameraFragmentImpl = cameraFragmentHelperFake.createFragmentImpl(
-                this, getArguments());
+                this);
         mCameraFragmentImplFake = cameraFragmentHelperFake.getCameraFragmentImplFake();
         return cameraFragmentImpl;
     }

@@ -1,4 +1,4 @@
-package net.gini.android.capture.component.noresults.compat;
+package net.gini.android.capture.component.noresults;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,14 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 
 /**
- * AppCompatActivity using the {@link NoResultsScreenHandlerAppCompat} to host the
+ * AppCompatActivity using the {@link NoResultsScreenHandler} to host the
  * {@link NoResultsFragmentCompat}.
  */
 public class NoResultsExampleAppCompatActivity extends AppCompatActivity implements
         NoResultsFragmentListener {
 
     public static final String EXTRA_IN_DOCUMENT = "EXTRA_IN_DOCUMENT";
-    private NoResultsScreenHandlerAppCompat mNoResultsScreenHandler;
+    private NoResultsScreenHandler mNoResultsScreenHandler;
 
     public static Intent newInstance(final Document document, final Context context) {
         final Intent intent = new Intent(context, NoResultsExampleAppCompatActivity.class);
@@ -37,7 +37,7 @@ public class NoResultsExampleAppCompatActivity extends AppCompatActivity impleme
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_no_results_compat);
-        mNoResultsScreenHandler = new NoResultsScreenHandlerAppCompat(this);
+        mNoResultsScreenHandler = new NoResultsScreenHandler(this);
         mNoResultsScreenHandler.onCreate(savedInstanceState);
     }
 

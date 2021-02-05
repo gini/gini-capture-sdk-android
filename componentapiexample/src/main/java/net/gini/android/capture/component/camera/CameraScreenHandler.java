@@ -1,11 +1,5 @@
 package net.gini.android.capture.component.camera;
 
-import static android.app.Activity.RESULT_OK;
-
-import static net.gini.android.capture.example.shared.ExampleUtil.getExtractionsBundle;
-import static net.gini.android.capture.example.shared.ExampleUtil.getLegacyExtractionsBundle;
-import static net.gini.android.capture.example.shared.ExampleUtil.isIntentActionViewOrSend;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,25 +10,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import net.gini.android.models.SpecificExtraction;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
 import net.gini.android.capture.AsyncCallback;
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.GiniCaptureCoordinator;
 import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.ImportedFileValidationException;
+import net.gini.android.capture.camera.CameraFragmentCompat;
 import net.gini.android.capture.camera.CameraFragmentInterface;
 import net.gini.android.capture.camera.CameraFragmentListener;
 import net.gini.android.capture.component.ExtractionsActivity;
 import net.gini.android.capture.component.R;
+import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
+import net.gini.android.capture.component.review.ReviewExampleAppCompatActivity;
 import net.gini.android.capture.component.review.multipage.MultiPageReviewExampleActivity;
 import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
-import net.gini.android.capture.document.QRCodeDocument;
 import net.gini.android.capture.example.shared.BaseExampleApp;
-import net.gini.android.capture.example.shared.DocumentAnalyzer;
 import net.gini.android.capture.example.shared.SingleDocumentAnalyzer;
 import net.gini.android.capture.help.HelpActivity;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
+import net.gini.android.capture.onboarding.OnboardingFragmentCompat;
 import net.gini.android.capture.onboarding.OnboardingFragmentListener;
 import net.gini.android.capture.util.CancellationToken;
 import net.gini.android.capture.util.IntentHelper;
@@ -45,35 +47,34 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.android.LogcatAppender;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 
+import static android.app.Activity.RESULT_OK;
+import static net.gini.android.capture.example.shared.ExampleUtil.getExtractionsBundle;
+import static net.gini.android.capture.example.shared.ExampleUtil.isIntentActionViewOrSend;
+
 /**
  * Contains the logic for the Camera Screen.
- * <p>
- * Code that differs between the standard and the compatibility library is abstracted away and is
- * implemented in the {@code standard} and {@code compat} packages.
  */
-public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
+public class CameraScreenHandler implements CameraFragmentListener,
         OnboardingFragmentListener {
 
     // Set to true to allow execution of the custom code check
     private static final boolean DO_CUSTOM_DOCUMENT_CHECK = false;
-    private static final Logger LOG = LoggerFactory.getLogger(BaseCameraScreenHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CameraScreenHandler.class);
     private static final int REVIEW_REQUEST = 1;
     private static final int MULTI_PAGE_REVIEW_REQUEST = 2;
     private static final int ANALYSIS_REQUEST = 3;
-    private final Activity mActivity;
+    private final AppCompatActivity mActivity;
     private CameraFragmentInterface mCameraFragmentInterface;
     private GiniCaptureCoordinator mGiniCaptureCoordinator;
     private Menu mMenu;
     private SingleDocumentAnalyzer mSingleDocumentAnalyzer;
     private CancellationToken mFileImportCancellationToken;
 
-    protected BaseCameraScreenHandler(final Activity activity) {
+    protected CameraScreenHandler(final AppCompatActivity activity) {
         mActivity = activity;
     }
 
@@ -92,9 +93,25 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         removeOnboardingFragment();
     }
 
-    protected abstract void removeOnboardingFragment();
+    private void removeOnboardingFragment() {
+        final Fragment fragment = mActivity.getSupportFragmentManager().findFragmentById(
+                R.id.onboarding_container);
+        if (fragment != null) {
+            mActivity.getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                    .remove(fragment)
+                    .commitAllowingStateLoss();
+        }
+    }
 
-    protected abstract void setTitlesForCamera();
+    private void setTitlesForCamera() {
+        final ActionBar actionBar = mActivity.getSupportActionBar();
+        if (actionBar == null) {
+            return;
+        }
+        actionBar.setTitle(R.string.camera_screen_title);
+        actionBar.setSubtitle(mActivity.getString(R.string.camera_screen_subtitle));
+    }
 
     @Override
     public void onDocumentAvailable(@NonNull final Document document) {
@@ -115,33 +132,6 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
                     ((BaseExampleApp) mActivity.getApplication()).getSingleDocumentAnalyzer();
         }
         return mSingleDocumentAnalyzer;
-    }
-
-    @Override
-    public void onQRCodeAvailable(@NonNull final QRCodeDocument qrCodeDocument) {
-        mCameraFragmentInterface.showActivityIndicatorAndDisableInteraction();
-        getSingleDocumentAnalyzer().cancelAnalysis();
-        getSingleDocumentAnalyzer().analyzeDocument(qrCodeDocument,
-                new DocumentAnalyzer.Listener() {
-                    @Override
-                    public void onException(final Exception exception) {
-                        mCameraFragmentInterface.hideActivityIndicatorAndEnableInteraction();
-                        mCameraFragmentInterface.showError(
-                                mActivity.getString(R.string.qrcode_error), 4000);
-                    }
-
-                    @Override
-                    public void onExtractionsReceived(
-                            final Map<String, SpecificExtraction> extractions) {
-                        mCameraFragmentInterface.hideActivityIndicatorAndEnableInteraction();
-                        final Intent intent = new Intent(mActivity, ExtractionsActivity.class);
-                        intent.putExtra(ExtractionsActivity.EXTRA_IN_EXTRACTIONS,
-                                getLegacyExtractionsBundle(extractions));
-                        mActivity.startActivity(intent);
-                        mActivity.setResult(Activity.RESULT_OK);
-                        mActivity.finish();
-                    }
-                });
     }
 
     @Override
@@ -194,14 +184,18 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         mActivity.startActivityForResult(intent, REVIEW_REQUEST);
     }
 
-    protected abstract Intent getReviewActivityIntent(final Document document);
+    private Intent getReviewActivityIntent(final Document document) {
+        return ReviewExampleAppCompatActivity.newInstance(document, mActivity);
+    }
 
     private void launchAnalysisScreen(final Document document) {
         final Intent intent = getAnalysisActivityIntent(document);
         mActivity.startActivityForResult(intent, ANALYSIS_REQUEST);
     }
 
-    protected abstract Intent getAnalysisActivityIntent(final Document document);
+    private Intent getAnalysisActivityIntent(final Document document) {
+        return AnalysisExampleAppCompatActivity.newInstance(document, null, mActivity);
+    }
 
     protected Activity getActivity() {
         return mActivity;
@@ -231,7 +225,10 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         return false;
     }
 
-    protected abstract boolean isOnboardingVisible();
+    private boolean isOnboardingVisible() {
+        return mActivity.getSupportFragmentManager().findFragmentById(
+                R.id.onboarding_container) != null;
+    }
 
     public void onCreate(final Bundle savedInstanceState) {
         setUpActionBar();
@@ -262,7 +259,10 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         }
     }
 
-    protected abstract void setUpActionBar();
+    private void setUpActionBar() {
+        mActivity.setSupportActionBar(
+                (Toolbar) mActivity.findViewById(R.id.toolbar));
+    }
 
     private void showCamera() {
         LOG.debug("Show the Camera Screen");
@@ -277,11 +277,23 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         });
     }
 
-    protected abstract CameraFragmentInterface createCameraFragment();
+    private CameraFragmentInterface createCameraFragment() {
+        mCameraFragmentInterface = CameraFragmentCompat.createInstance();
+        return mCameraFragmentInterface;
+    }
 
-    protected abstract void showCameraFragment();
+    private void showCameraFragment() {
+        mActivity.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.camera_container, (Fragment) mCameraFragmentInterface)
+                .commit();
+    }
 
-    protected abstract CameraFragmentInterface retrieveCameraFragment();
+    private CameraFragmentInterface retrieveCameraFragment() {
+        mCameraFragmentInterface =
+                (CameraFragmentCompat) mActivity.getSupportFragmentManager()
+                        .findFragmentById(R.id.camera_container);
+        return mCameraFragmentInterface;
+    }
 
     private void configureLogging() {
         final LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
@@ -322,9 +334,21 @@ public abstract class BaseCameraScreenHandler implements CameraFragmentListener,
         showOnboardingFragment();
     }
 
-    protected abstract void showOnboardingFragment();
+    private void showOnboardingFragment() {
+        mActivity.getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .replace(R.id.onboarding_container, new OnboardingFragmentCompat())
+                .commit();
+    }
 
-    protected abstract void setTitlesForOnboarding();
+    private void setTitlesForOnboarding() {
+        final ActionBar actionBar = mActivity.getSupportActionBar();
+        if (actionBar == null) {
+            return;
+        }
+        actionBar.setTitle("");
+        actionBar.setSubtitle("");
+    }
 
     private void startGiniCaptureSdkForImportedFile(@NonNull final Intent importedFileIntent) {
         getSingleDocumentAnalyzer().cancelAnalysis();

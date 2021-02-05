@@ -368,7 +368,7 @@ public class GiniCapture {
      *
      * <p> If you have enabled the multi-page feature and your application receives one or multiple
      * files from another application you can use this method to create a Document for launching the
-     * Gini Capture SDK's {@link MultiPageReviewFragment} or one of the Analysis Fragments.
+     * Gini Capture SDK's {@link MultiPageReviewFragment} or the Analysis Fragment.
      *
      * <p> Importing the files is executed on a secondary thread as it can take several seconds for
      * the process to complete. The callback methods are invoked on the main thread.
@@ -376,9 +376,8 @@ public class GiniCapture {
      * <p> If the Document can be reviewed ({@link Document#isReviewable()}) launch the {@link
      * MultiPageReviewFragment}.
      *
-     * <p> If the Document cannot be reviewed you must launch one of the Analysis Fragments ({@link
-     * net.gini.android.capture.analysis.AnalysisFragmentCompat} or {@link
-     * net.gini.android.capture.analysis.AnalysisFragmentStandard}).
+     * <p> If the Document cannot be reviewed you must launch the Analysis Fragment ({@link
+     * net.gini.android.capture.analysis.AnalysisFragmentCompat}).
      *
      * @param intent   the Intent your app received
      * @param context  Android context
@@ -429,22 +428,20 @@ public class GiniCapture {
      * Component API
      *
      * <p> When your application receives a file from another application you can use this method to
-     * create a Document for launching one of the Gini Capture SDK's Review Fragments or Analysis
-     * Fragments.
+     * create a Document for launching the Gini Capture SDK's Review Fragment or Analysis
+     * Fragment.
      *
-     * <p> If the Document can be reviewed ({@link Document#isReviewable()}) launch one of the
-     * Review Fragments ({@link net.gini.android.capture.review.ReviewFragmentCompat} or {@link
-     * net.gini.android.capture.review.ReviewFragmentStandard}).
+     * <p> If the Document can be reviewed ({@link Document#isReviewable()}) launch the
+     * Review Fragment ({@link net.gini.android.capture.review.ReviewFragmentCompat}).
      *
-     * <p> If the Document cannot be reviewed you must launch one of the Analysis Fragments ({@link
-     * net.gini.android.capture.analysis.AnalysisFragmentCompat} or {@link
-     * net.gini.android.capture.analysis.AnalysisFragmentStandard}).
+     * <p> If the Document cannot be reviewed you must launch the Analysis Fragment ({@link
+     * net.gini.android.capture.analysis.AnalysisFragmentCompat}).
      *
      * @param intent  the Intent your app received
      * @param context Android context
      *
-     * @return a Document for launching one of the Gini Capture SDK's Review Fragments or
-     * Analysis Fragments
+     * @return a Document for launching the Gini Capture SDK's Review Fragment or
+     * Analysis Fragment
      *
      * @throws ImportedFileValidationException if the file didn't pass validation
      */

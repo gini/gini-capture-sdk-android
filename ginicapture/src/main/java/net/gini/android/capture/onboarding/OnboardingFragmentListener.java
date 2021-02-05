@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 /**
  * <p>
- * Interface used by {@link OnboardingFragmentStandard} and {@link OnboardingFragmentCompat} to dispatch events to the hosting Activity.
+ * Interface used by {@link OnboardingFragmentCompat} to dispatch events to the hosting Activity.
  * </p>
  */
 public interface OnboardingFragmentListener {

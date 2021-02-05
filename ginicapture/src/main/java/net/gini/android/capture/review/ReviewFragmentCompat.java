@@ -154,19 +154,6 @@ public class ReviewFragmentCompat extends Fragment implements FragmentImplCallba
     }
 
     @Override
-    public void onDocumentAnalyzed() {
-        if (mFragmentImpl == null) {
-            return;
-        }
-        mFragmentImpl.onDocumentAnalyzed();
-    }
-
-    @Override
-    public void onNoExtractionsFound() {
-        mFragmentImpl.onNoExtractionsFound();
-    }
-
-    @Override
     public void setListener(@NonNull final ReviewFragmentListener listener) {
         if (mFragmentImpl != null) {
             mFragmentImpl.setListener(listener);

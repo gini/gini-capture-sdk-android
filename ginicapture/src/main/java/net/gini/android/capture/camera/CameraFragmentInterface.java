@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 /**
  * <p>
- *     Methods which both Camera Fragments must implement.
+ *     Methods which Camera Fragment must implement.
  * </p>
  */
 public interface CameraFragmentInterface {
@@ -25,58 +25,6 @@ public interface CameraFragmentInterface {
      * @param listener the {@link CameraFragmentListener} instance
      */
     void setListener(@NonNull final CameraFragmentListener listener);
-
-    /**
-     * <p>
-     *     Call this method to show the document corner guides.
-     * </p>
-     * <p>
-     *     <b>Note:</b> the document corner guides are shown by default.
-     * </p>
-     *
-     * @Deprecated Use {@link CameraFragmentInterface#showInterface()} instead.
-     */
-    @Deprecated
-    void showDocumentCornerGuides();
-
-    /**
-     * <p>
-     *     Call this method to hide the document corner guides.
-     * </p>
-     * <p>
-     *     <b>Note:</b> the document corner guides are shown by default.
-     * </p>
-     *
-     * @Deprecated Use {@link CameraFragmentInterface#hideInterface()} instead.
-     */
-    @Deprecated
-    void hideDocumentCornerGuides();
-
-    /**
-     * <p>
-     *     Call this method to show the camera trigger button.
-     * </p>
-     * <p>
-     *     <b>Note:</b> the camera trigger button is shown by default.
-     * </p>
-     *
-     * @Deprecated Use {@link CameraFragmentInterface#showInterface()} instead.
-     */
-    @Deprecated
-    void showCameraTriggerButton();
-
-    /**
-     * <p>
-     *     Call this method to hide the camera trigger button.
-     * </p>
-     * <p>
-     *     <b>Note:</b> the camera trigger button is shown by default.
-     * </p>
-     *
-     * @Deprecated Use {@link CameraFragmentInterface#hideInterface()} instead.
-     */
-    @Deprecated
-    void hideCameraTriggerButton();
 
     /**
      * <p>

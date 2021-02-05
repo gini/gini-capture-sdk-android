@@ -77,26 +77,15 @@ The Gini Capture SDK consists of four main screens:
 
 ### Screen API
 
-The Screen API provides a main Activity with which to start the Gini Capture SDK. In previous
-versions two abstract Activities which had to be overriden to react to events coming from the Gini
-Capture SDK. This has been changed and now only the implementations of the
-`GiniCaptureNetworkService` and `GiniCaptureNetworkApi` have to be provided with the help of the
-`GiniCapture` class.
-
-In order to support the widest variety of Android versions while keeping the look and feel
-consistent, we use the Android Support Library and provide only Activities subclassing the
-AppCompatActivity.
+The Screen API provides a main Activity with which to start the Gini Capture SDK. Only the 
+implementations of the `GiniCaptureNetworkService` and `GiniCaptureNetworkApi` have to be provided 
+with the help of the `GiniCapture` class.
 
 ### Component API
 
 The Component API provides Fragments which you can include into your own layouts. This allows you
 more freedom to customize the Gini Capture SDK, without being restricted to AppCompatActivities
 and the Gini Capture SDK Theme.
-
-To allow usage even if you aren't using the Android Support Library, we have been providing a
-Standard and a Compat version of Fragments in previous versions. We still provide them for backwards
-compatibility, but for new Fragments we will only provide versions using the Android Support
-Library. 
 
 Example
 -------

@@ -17,17 +17,6 @@ import androidx.annotation.NonNull;
 public class AnalysisFragmentHostActivity extends
         AnalysisFragmentHostActivityNotListener implements AnalysisFragmentListener {
 
-    private boolean analysisRequested;
-
-    public boolean isAnalysisRequested() {
-        return analysisRequested;
-    }
-
-    @Override
-    public void onAnalyzeDocument(@NonNull final Document document) {
-        analysisRequested = true;
-    }
-
     @Override
     public void onError(@NonNull final GiniCaptureError error) {
 

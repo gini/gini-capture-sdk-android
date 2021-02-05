@@ -2,7 +2,7 @@ package net.gini.android.capture.noresults;
 
 /**
  * <p>
- * Interface used by {@link NoResultsFragmentStandard} and {@link NoResultsFragmentCompat} to dispatch events to the hosting Activity.
+ * Interface used by {@link NoResultsFragmentCompat} to dispatch events to the hosting Activity.
  * </p>
  */
 public interface NoResultsFragmentListener {

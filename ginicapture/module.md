@@ -56,5 +56,3 @@ and provide only Activities subclassing the AppCompatActivity.
 
 The Component API provides Fragments which you can include in your own layouts. This allows you more freedom to customize the Gini
 Capture SDK, without being restricted to AppCompatActivities and the Gini Capture SDK Theme.
-
-To allow usage even if you aren't using AndroidX, we provide a Standard and a Compat version of each Fragment.
