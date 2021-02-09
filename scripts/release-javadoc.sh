@@ -29,7 +29,7 @@ mkdir -p gh-pages/javadoc
 mkdir -p gh-pages/network
 mkdir -p gh-pages/accounting/network
 cp -a ginicapture/build/dokka/ gh-pages
-mv gh-pages/ginicapture gh-pages/javadoc
+mv gh-pages/ginicapture/* gh-pages/javadoc
 cp -a ginicapture-network/build/docs/javadoc gh-pages/network/
 cp -a ginicapture-accounting-network/build/docs/javadoc gh-pages/accounting/network/
 cd gh-pages
