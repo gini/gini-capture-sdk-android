@@ -48,8 +48,8 @@ app/build.gradle:
 
 ```
 dependencies {
-    implementation 'net.gini:gini-capture-sdk:1.0.0-beta01'
-    implementation 'net.gini:gini-capture-network-lib:1.0.0-beta01'
+    implementation 'net.gini:gini-capture-sdk:1.0.0-beta02'
+    implementation 'net.gini:gini-capture-network-lib:1.0.0-beta02'
 }
 ```
 
