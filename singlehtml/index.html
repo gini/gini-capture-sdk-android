@@ -1,0 +1,2583 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Gini Capture SDK for Android 2.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic,600italic|Source+Code+Pro|Roboto+Slab:400,700" rel="stylesheet" type="text/css" />
+
+  
+  
+
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:'./',
+        VERSION:'2.0',
+        COLLAPSE_INDEX:false,
+        FILE_SUFFIX:'.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+    <script type="text/javascript">
+        jQuery(function () {
+            SphinxRtdTheme.StickyNav.enable();
+        });
+    </script>
+  
+
+  
+    <link rel="top" title="None" href="index.html#document-index"/> 
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html#document-index" id="gini-logo">gini API</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference external" href="http://developer.gini.net/gini-capture-sdk-android/javadoc/index.html">Gini Capture Javadoc</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://developer.gini.net/gini-capture-sdk-android/network/javadoc/index.html">Network Library Javadoc</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://developer.gini.net/gini-capture-sdk-android/accounting/network/javadoc/index.html">Accounting Network Library Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-customization-guide">Customization Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-customization-guide#onboarding-screen">Onboarding Screen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#action-bar">1. Action Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#next-button">2. Next Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#page-indicators">3. Page Indicators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#onboarding-message">4. Onboarding Message</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#onboarding-pages">5. Onboarding Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-customization-guide#camera-screen">Camera Screen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#camera-1">1. Action Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#document-corner-guides">2. Document Corner Guides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#camera-trigger-button">3. Camera Trigger Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#tap-to-focus-indicator">4. Tap to Focus Indicator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#help-menu-item">5. Help Menu Item</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#background">6. Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#document-import-button">7. Document Import Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#document-import-hint">8. Document Import Hint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#images-stack">9. Images Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#qrcode-detected-popup">10. QRCode Detected Popup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#read-storage-permission-dialogs">11. Read Storage Permission Dialogs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#no-camera-permission">12. No Camera Permission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#multi-page-limit-alert">13. Multi-Page Limit Alert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#flash-toggle-button">14. Flash Toggle Button</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-customization-guide#review-screen">Review Screen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#review-1">1. Action Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#review-2">2. Next Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#rotate-button">3. Rotate Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#advice">4. Advice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#review-5">5. Background</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-customization-guide#analysis-screen">Analysis Screen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#analysis-1">1. Action Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#activity-indicator">2. Activity Indicator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#pdf-info-panel">3. PDF Info Panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#error-snackbar">4. Error Snackbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#analysis-5">5. Background</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-customization-guide#multi-page-review-screen">Multi-Page Review Screen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#multi-page-review-1">1. Action Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#multi-page-review-2">2. Page Indicators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#multi-page-review-3">3. Next Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#thumbnails-panel">4. Thumbnails Panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#thumbnail-card">5. Thumbnail Card</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#add-pages-card">6. Add Pages Card</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#reorder-pages-tip">7. Reorder Pages Tip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#bottom-toolbar">8. Bottom Toolbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#image-error">9. Image Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#imported-image-delete-last-page-dialog">10. Imported Image Delete Last Page Dialog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-customization-guide#help-screen">Help Screen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#help-screen-1">1. Action Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#help-screen-2">2. Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#help-list-item">3. Help List Item</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-customization-guide#photo-tips-screen">Photo Tips Screen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#photo-tips-1">1. Action Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#photo-tips-2">2. Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#header">3. Header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#tip">4. Tip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#back-to-camera-button">5. Back To Camera Button</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-customization-guide#supported-formats-screen">Supported Formats Screen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#supported-formats-1">1. Action Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#supported-formats-2">2. Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#supported-formats-3">3. Header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#format-info-list-item">4. Format Info List Item</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-customization-guide#file-import-screen">File Import Screen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#file-import-1">1. Action Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#file-import-2">2. Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#file-import-3">3. Header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#separator-line">4. Separator Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#section">5. Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#sections">6. Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-customization-guide#clear-defaults-dialog">Clear Defaults Dialog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-customization-guide#message">1. Message</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-event-tracking">Event Tracking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-event-tracking#events">Events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-guide-for-open-with">How to Upload PDFs and Images (pre-2.4.0)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-guide-for-open-with#general-considerations">General considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-guide-for-open-with#registering-pdf-and-image-file-types">Registering PDF and image file types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-guide-for-open-with#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-guide-for-open-with#reading-files-from-external-storage">Reading files from external storage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-guide-for-open-with#id1">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-guide-for-open-with#handling-incoming-pdfs-and-images">Handling incoming PDFs and images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-guide-for-open-with#id4">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-guide-for-open-with#showing-a-preview-of-the-pdfs-first-page">Showing a preview of the PDF’s first page</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-guide-for-open-with#id5">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-license">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-license#licenses-and-acknowledgements-for-incorporated-software">Licenses and Acknowledgements for Incorporated Software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-license#apache-commons-sanselan">Apache Commons Sanselan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-license#touchimageview">TouchImageView</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#document-license#gini-android-sdk">Gini Android SDK</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html#document-index">Gini Capture SDK for Android</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html#document-index">Docs</a> &raquo;</li>
+      
+    <li>Gini Capture SDK for Android 2.0 documentation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="gini-capture-sdk-for-android">
+<h1>Gini Capture SDK for Android<a class="headerlink" href="#gini-capture-sdk-for-android" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Gini provides an information extraction system for analyzing documents (e. g. invoices or
+contracts), specifically information such as the document sender or the amount to pay in an invoice.</p>
+<p>The Gini Capture SDK for Android provides functionality to capture documents with mobile phones.
+The captured images can be reviewed and rotated to the correct orientation by the user and are optimized on the device
+to provide the best results when used with the Gini API.</p>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<span id="document-customization-guide"></span><div class="section" id="customization-guide">
+<h3>Customization Guide<a class="headerlink" href="#customization-guide" title="Permalink to this headline">¶</a></h3>
+<p>Customization of the Views is provided mostly via overriding of app resources: dimensions, strings,
+colors, texts, etc. Onboarding can also be customized to show your own pages, each consisting of an
+image and a short text.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#onboarding-screen" id="id26">Onboarding Screen</a></li>
+<li><a class="reference internal" href="#camera-screen" id="id27">Camera Screen</a></li>
+<li><a class="reference internal" href="#review-screen" id="id28">Review Screen</a></li>
+<li><a class="reference internal" href="#analysis-screen" id="id29">Analysis Screen</a></li>
+<li><a class="reference internal" href="#multi-page-review-screen" id="id30">Multi-Page Review Screen</a></li>
+<li><a class="reference internal" href="#help-screen" id="id31">Help Screen</a></li>
+<li><a class="reference internal" href="#photo-tips-screen" id="id32">Photo Tips Screen</a></li>
+<li><a class="reference internal" href="#supported-formats-screen" id="id33">Supported Formats Screen</a></li>
+<li><a class="reference internal" href="#file-import-screen" id="id34">File Import Screen</a></li>
+<li><a class="reference internal" href="#clear-defaults-dialog" id="id35">Clear Defaults Dialog</a></li>
+</ul>
+</div>
+<div class="section" id="onboarding-screen">
+<span id="onboarding"></span><h4><a class="toc-backref" href="#id26">Onboarding Screen</a><a class="headerlink" href="#onboarding-screen" title="Permalink to this headline">¶</a></h4>
+<img src="_static/customization/Onboarding.png" usemap="#onboarding-map" width="324" height="576">
+
+<map id="onboarding-map" name="onboarding-map">
+    <area shape="rect" alt="" title="Action Bar" coords="132,24,164,57" href="customization-guide.html#onboarding-1" target="" />
+    <area shape="rect" alt="" title="Next Button" coords="282,462,311,494" href="customization-guide.html#onboarding-2" target="" />
+    <area shape="rect" alt="" title="Page Indicators" coords="105,485,134,515" href="customization-guide.html#onboarding-3" target="" />
+    <area shape="rect" alt="" title="Onboarding Message" coords="15,326,44,356" href="customization-guide.html#onboarding-4" target="" />
+    <area shape="rect" alt="" title="Onboarding Pages" coords="141,130,173,162" href="customization-guide.html#onboarding-5" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><div class="section" id="action-bar">
+<span id="onboarding-1"></span><h5>1. Action Bar<a class="headerlink" href="#action-bar" title="Permalink to this headline">¶</a></h5>
+<p>All Action Bar customizations except the title are global to all Activities.</p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_title_onboarding</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Title Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Back Button Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_action_bar_back</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Status Bar Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_status_bar</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#onboarding"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="next-button">
+<span id="onboarding-2"></span><h5>2. Next Button<a class="headerlink" href="#next-button" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_onboarding_fab_next.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resources named <tt class="docutils literal"><span class="pre">gc_onboarding_fab</span></tt> and <tt class="docutils literal"><span class="pre">gc_onboarding_fab_pressed</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#onboarding"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="page-indicators">
+<span id="onboarding-3"></span><h5>3. Page Indicators<a class="headerlink" href="#page-indicators" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Active</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_onboarding_indicator_active.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Inactive</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_onboarding_indicator_inactive.png</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#onboarding"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="onboarding-message">
+<span id="onboarding-4"></span><h5>4. Onboarding Message<a class="headerlink" href="#onboarding-message" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_onboarding_message</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Onboarding.Message.TextStyle</span></tt> (with parent style
+<tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Onboarding.Message.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Onboarding.Message.TextStyle</span></tt> (with parent style
+<tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Onboarding.Message.TextStyle</span></tt>) and setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt>
+with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#onboarding"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="onboarding-pages">
+<span id="onboarding-5"></span><h5>5. Onboarding Pages<a class="headerlink" href="#onboarding-pages" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Default Pages</strong></p>
+<ul>
+<li><p class="first"><strong>Phone</strong></p>
+<ul>
+<li><p class="first"><strong>First Page</strong></p>
+<ul>
+<li><p class="first"><strong>Image</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_onboarding_flat.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_onboarding_flat</span></tt>.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Second Page</strong></p>
+<ul>
+<li><p class="first"><strong>Image</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_onboarding_parallel.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_onboarding_parallel</span></tt>.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Third Page</strong></p>
+<ul>
+<li><p class="first"><strong>Image</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_onboarding_align.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_onboarding_align</span></tt>.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Fourth Page</strong></p>
+<p>Visible only if the multi-page feature has been enabled.</p>
+<ul>
+<li><p class="first"><strong>Image</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_onboarding_multipage.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_onboarding_multipage</span></tt>.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#onboarding"><em>Back to screenshot.</em></a></p>
+</li>
+<li><p class="first"><strong>Tablet</strong></p>
+<ul>
+<li><p class="first"><strong>First Page</strong></p>
+<ul>
+<li><p class="first"><strong>Image</strong></p>
+<p>Via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi, sw600dp-xxhdpi, sw600dp-xxxhdpi
+named <tt class="docutils literal"><span class="pre">gc_onboarding_lighting.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_onboarding_ligthing</span></tt>.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Second Page</strong></p>
+<ul>
+<li><p class="first"><strong>Image</strong></p>
+<p>Via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi, sw600dp-xxhdpi, sw600dp-xxxhdpi
+named <tt class="docutils literal"><span class="pre">gc_onboarding_flat.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_onboarding_flat</span></tt>.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Third Page</strong></p>
+<ul>
+<li><p class="first"><strong>Image</strong></p>
+<p>Via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi, sw600dp-xxhdpi, sw600dp-xxxhdpi
+named <tt class="docutils literal"><span class="pre">gc_onboarding_parallel.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_onboarding_parallel</span></tt>.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Fourth Page</strong></p>
+<ul>
+<li><p class="first"><strong>Image</strong></p>
+<p>Via images for sw600dp-mdpi, sw600dp-hdpi, sw600dp-xhdpi, sw600dp-xxhdpi, sw600dp-xxxhdpi
+named <tt class="docutils literal"><span class="pre">gc_onboarding_align.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_onboarding_align</span></tt>.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Fifth Page</strong></p>
+<p>Visible only if the multi-page feature has been enabled.</p>
+<ul>
+<li><p class="first"><strong>Image</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_onboarding_multipage.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_onboarding_multipage</span></tt>.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#onboarding"><em>Back to screenshot.</em></a></p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Custom Pages</strong></p>
+<p>You can change the number of displayed pages and their content (image and short text) by setting
+an <tt class="docutils literal"><span class="pre">ArrayList</span></tt> containing <tt class="docutils literal"><span class="pre">OnboardingPage</span></tt> objects when building a <tt class="docutils literal"><span class="pre">GiniCapture</span></tt> instance
+with <tt class="docutils literal"><span class="pre">setCustomOnboardingPages()</span></tt>.</p>
+<p>If you don&#8217;t use <tt class="docutils literal"><span class="pre">GiniCapture</span></tt> yet you can also provide the list using the extra
+<tt class="docutils literal"><span class="pre">CameraActivity.EXTRA_IN_ONBOARDING_PAGES</span></tt> for the Screen API and
+<tt class="docutils literal"><span class="pre">OnboardingFragmentCompat.createInstance(ArrayList&lt;OnboardingPage&gt;)</span></tt> for the Component API.</p>
+<p><a class="reference internal" href="index.html#onboarding"><em>Back to screenshot.</em></a></p>
+</li>
+<li><p class="first"><strong>Background</strong></p>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_background</span></tt>. <strong>Note</strong>: this color resource is global to all
+Activities.</p>
+</li>
+<li><p class="first"><strong>Transparency</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_onboarding_page_fragment_background_alpha</span></tt> which must
+contain a real number between <tt class="docutils literal"><span class="pre">[0,1]</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#onboarding"><em>Back to screenshot.</em></a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="camera-screen">
+<span id="camera"></span><h4><a class="toc-backref" href="#id27">Camera Screen</a><a class="headerlink" href="#camera-screen" title="Permalink to this headline">¶</a></h4>
+<img src="_static/customization/Camera.png" usemap="#camera-map-1" width="324" height="576">
+
+<map id="camera-map-1" name="camera-map-1">
+    <area shape="rect" alt="" title="Action Bar" coords="229,26,257,56" href="customization-guide.html#camera-1" target="" />
+    <area shape="rect" alt="" title="Document Corner Guides" coords="32,103,60,132" href="customization-guide.html#camera-2" target="" />
+    <area shape="rect" alt="" title="Camera Trigger Button" coords="175,431,201,460" href="customization-guide.html#camera-3" target="" />
+    <area shape="rect" alt="" title="Tap to Focus Indicator" coords="96,215,127,244" href="customization-guide.html#camera-4" target="" />
+    <area shape="rect" alt="" title="Help Menu Item" coords="262,26,291,55" href="customization-guide.html#camera-5" target="" />
+    <area shape="rect" alt="" title="Background" coords="199,507,227,536" href="customization-guide.html#camera-6" target="" />
+    <area shape="rect" alt="" title="Document Import Button" coords="65,434,93,463" href="customization-guide.html#camera-7" target="" />
+    <area shape="rect" alt="" title="Document Import Hint" coords="148,349,177,379" href="customization-guide.html#camera-8" target="" />
+    <area shape="rect" alt="" title="Image Stack" coords="237,433,265,460" href="customization-guide.html#camera-9" target="" />
+    <area shape="rect" alt="" title="Flash Toggle Button" coords="94,481,125,515" href="customization-guide.html#camera-14" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><img src="_static/customization/Camera QRCode.png" usemap="#camera-map-2" width="324" height="576">
+
+<map id="camera-map-2" name="camera-map-2">
+    <area shape="rect" alt="" title="QRCode Detected Popup" coords="148,385,178,416" href="customization-guide.html#camera-10" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><img src="_static/customization/Camera Permission Dialog.png" usemap="#camera-map-3" width="324" height="576">
+
+<map id="camera-map-3" name="camera-map-3">
+    <area shape="rect" alt="" title="Read Storage Permission Dialogs" coords="146,212,176,242" href="customization-guide.html#camera-11" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><img src="_static/customization/Camera Permission.png" usemap="#camera-map-4" width="324" height="576">
+
+<map id="camera-map-4" name="camera-map-4">
+   <area shape="rect" alt="" title="No Camera Permission" coords="48,293,77,323" href="customization-guide.html#camera-12" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><img src="_static/customization/Camera Multi-Page Limit Alert.png" usemap="#camera-map-5" width="324" height="576">
+
+  <map id="camera-map-5" name="camera-map-5">
+    <area shape="rect" alt="" title="Multi-Page Limit Alert" coords="10,266,38,295" href="customization-guide.html#camera-13" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+  </map><div class="section" id="camera-1">
+<span id="id1"></span><h5>1. Action Bar<a class="headerlink" href="#camera-1" title="Permalink to this headline">¶</a></h5>
+<p>All Action Bar customizations except the title are global to all Activities.</p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_title_camera</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Title Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Back Button Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_action_bar_back</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Status Bar Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_status_bar</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="document-corner-guides">
+<span id="camera-2"></span><h5>2. Document Corner Guides<a class="headerlink" href="#document-corner-guides" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_camera_preview_corners</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="camera-trigger-button">
+<span id="camera-3"></span><h5>3. Camera Trigger Button<a class="headerlink" href="#camera-trigger-button" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Normal</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_camera_trigger_default.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Pressed</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_camera_trigger_pressed.png</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="tap-to-focus-indicator">
+<span id="camera-4"></span><h5>4. Tap to Focus Indicator<a class="headerlink" href="#tap-to-focus-indicator" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_camera_focus_indicator.png</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="help-menu-item">
+<span id="camera-5"></span><h5>5. Help Menu Item<a class="headerlink" href="#help-menu-item" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_help_icon.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_show_onboarding</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="background">
+<span id="camera-6"></span><h5>6. Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_background</span></tt>. <strong>Note</strong>: this color resource is global to all
+Activities.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="document-import-button">
+<span id="camera-7"></span><h5>7. Document Import Button<a class="headerlink" href="#document-import-button" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_document_import_icon.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Subtitle</strong></p>
+<ul>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_camera_document_import_subtitle</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="document-import-hint">
+<span id="camera-8"></span><h5>8. Document Import Hint<a class="headerlink" href="#document-import-hint" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_document_import_hint_background</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Close Icon Color</strong></p>
+<p>Via the color resource name <tt class="docutils literal"><span class="pre">gc_hint_close</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Message</strong></p>
+<ul>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_document_import_hint_text</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.DocumentImportHint.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.DocumentImportHint.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.DocumentImportHint.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.DocumentImportHint.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="images-stack">
+<span id="camera-9"></span><h5>9. Images Stack<a class="headerlink" href="#images-stack" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Badge</strong></p>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.ImageStackBadge.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.ImageStackBadge.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.ImageStackBadge.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.ImageStackBadge.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resources named <tt class="docutils literal"><span class="pre">gc_camera_image_stack_badge_background</span></tt> and
+<tt class="docutils literal"><span class="pre">gc_camera_image_stack_badge_background_border</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Background Size</strong></p>
+<p>Via the dimension resource named <tt class="docutils literal"><span class="pre">gc_camera_image_stack_badge_size</span></tt>.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Subtitle</strong></p>
+<ul>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_camera_image_stack_subtitle</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.ImageStackSubtitle.TextStyle</span></tt>) and setting an item
+named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="qrcode-detected-popup">
+<span id="camera-10"></span><h5>10. QRCode Detected Popup<a class="headerlink" href="#qrcode-detected-popup" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_qrcode_detected_popup_background</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Message</strong></p>
+<ul>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resources named <tt class="docutils literal"><span class="pre">gc_qrcode_detected_popup_message_1</span></tt> and
+<tt class="docutils literal"><span class="pre">gc_qrcode_detected_popup_message_2</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the styles named
+<tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle</span></tt> (with parent style
+<tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle</span></tt>) and
+<tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle</span></tt> (with parent style
+<tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the styles named
+<tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle</span></tt> (with parent style
+<tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle</span></tt>) and
+<tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle</span></tt> (with parent style
+<tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle</span></tt>). and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="read-storage-permission-dialogs">
+<span id="camera-11"></span><h5>11. Read Storage Permission Dialogs<a class="headerlink" href="#read-storage-permission-dialogs" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Permission Rationale Dialog</strong></p>
+<ul>
+<li><p class="first"><strong>Message</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_storage_permission_rationale</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Positive Button Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_storage_permission_rationale_positive_button</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Negative Button Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_storage_permission_rationale_negative_button</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Button Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_accent</span></tt>. <strong>Note</strong>: this color resource is global.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Permission Denied Dialog</strong></p>
+<ul>
+<li><p class="first"><strong>Message</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_storage_permission_denied</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Positive Button Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_storage_permission_denied_positive_button</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Negative Button Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_storage_permission_denied_negative_button</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Button Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_accent</span></tt>. <strong>Note</strong>: this color resource is global.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="no-camera-permission">
+<span id="camera-12"></span><h5>12. No Camera Permission<a class="headerlink" href="#no-camera-permission" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_no_camera.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Message</strong></p>
+<ul>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_camera_error_no_permission</span></tt>.</p>
+</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Text Style</strong></li>
+</ul>
+<blockquote>
+<div><p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.Error.NoPermission.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.Error.NoPermission.TextStyle</span></tt>).</p>
+</div></blockquote>
+</div></blockquote>
+<ul>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.Error.NoPermission.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.Error.NoPermission.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Button</strong></p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_camera_error_no_permission_button_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Camera.Error.NoPermission.Button.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="multi-page-limit-alert">
+<span id="camera-13"></span><h5>13. Multi-Page Limit Alert<a class="headerlink" href="#multi-page-limit-alert" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Message</strong></p>
+<blockquote>
+<div><p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_document_error_too_many_pages</span></tt>.</p>
+</div></blockquote>
+</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Positive Button Text</strong></li>
+</ul>
+<blockquote>
+<div><p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_document_error_multi_page_limit_review_pages_button</span></tt>.</p>
+<ul class="simple">
+<li><strong>Negative Button Text</strong></li>
+</ul>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_document_error_multi_page_limit_cancel_button</span></tt>.</p>
+<ul class="simple">
+<li><strong>Button Color</strong></li>
+</ul>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_accent</span></tt>. <strong>Note</strong>: this color resource is global.</p>
+</div></blockquote>
+</div></blockquote>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="flash-toggle-button">
+<span id="camera-14"></span><h5>14. Flash Toggle Button<a class="headerlink" href="#flash-toggle-button" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_camera_flash_on.png</span></tt> and <tt class="docutils literal"><span class="pre">gc_camera_flash_off.png</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#camera"><em>Back to screenshots.</em></a></p>
+</div>
+</div>
+<div class="section" id="review-screen">
+<span id="review"></span><h4><a class="toc-backref" href="#id28">Review Screen</a><a class="headerlink" href="#review-screen" title="Permalink to this headline">¶</a></h4>
+<img src="_static/customization/Review Screen.png" usemap="#review-map" width="324" height="576">
+
+<map id="review-map" name="review-map">
+    <area shape="rect" alt="" title="Action Bar" coords="189,26,220,54" href="customization-guide.html#review-1" target="" />
+    <area shape="rect" alt="" title="Next Button" coords="241,408,272,438" href="customization-guide.html#review-2" target="" />
+    <area shape="rect" alt="" title="Rotate Button" coords="244,352,275,385" href="customization-guide.html#review-3" target="" />
+    <area shape="rect" alt="" title="Advice" coords="231,490,264,520" href="customization-guide.html#review-4" target="" />
+    <area shape="rect" alt="" title="Background" coords="2,288,29,319" href="customization-guide.html#review-5" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><div class="section" id="review-1">
+<span id="id2"></span><h5>1. Action Bar<a class="headerlink" href="#review-1" title="Permalink to this headline">¶</a></h5>
+<p>All Action Bar customizations except the title are global to all Activities.</p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_title_review</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Title Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Back Button Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_action_bar_back</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Status Bar Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_status_bar</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#review"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="review-2">
+<span id="id3"></span><h5>2. Next Button<a class="headerlink" href="#review-2" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_review_fab_next.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resources named <tt class="docutils literal"><span class="pre">gc_review_fab</span></tt> and <tt class="docutils literal"><span class="pre">gc_review_fab_pressed</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#review"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="rotate-button">
+<span id="review-3"></span><h5>3. Rotate Button<a class="headerlink" href="#rotate-button" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_review_button_rotate.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resources named <tt class="docutils literal"><span class="pre">gc_review_fab_mini</span></tt> and <tt class="docutils literal"><span class="pre">gc_review_fab_mini_pressed</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#review"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="advice">
+<span id="review-4"></span><h5>4. Advice<a class="headerlink" href="#advice" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_review_bottom_panel_text</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Review.BottomPanel.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Review.BottomPanel.TextStyle</span></tt>).</p>
+<ul class="simple">
+<li><strong>Font</strong></li>
+</ul>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Review.BottomPanel.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Review.BottomPanel.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_review_bottom_panel_background</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#review"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="review-5">
+<span id="id4"></span><h5>5. Background<a class="headerlink" href="#review-5" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_background</span></tt>. <strong>Note</strong>: this color resource is global to all Activities.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#review"><em>Back to screenshot.</em></a></p>
+</div>
+</div>
+<div class="section" id="analysis-screen">
+<span id="analysis"></span><h4><a class="toc-backref" href="#id29">Analysis Screen</a><a class="headerlink" href="#analysis-screen" title="Permalink to this headline">¶</a></h4>
+<img src="_static/customization/Analysis Screen.png" usemap="#analysis-map-1" width="324" height="576">
+
+<map id="analysis-map-1" name="analysis-map-1">
+    <area shape="rect" alt="" title="Action Bar" coords="189,24,222,55" href="customization-guide.html#analysis-1" target="" />
+    <area shape="rect" alt="" title="Activity Indicator" coords="105,283,132,310" href="customization-guide.html#analysis-2" target="" />
+    <area shape="rect" alt="" title="Error Snackbar" coords="190,500,219,530" href="customization-guide.html#analysis-4" target="" />
+    <area shape="rect" alt="" title="Background" title" coords="74,61,105,93" href="customization-guide.html#analysis-5" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><img src="_static/customization/Analysis Screen PDF.png" usemap="#analysis-map-2" width="324" height="576">
+
+<map id="analysis-map-2" name="analysis-map-2">
+    <area shape="rect" alt="" title="PDF Info Panel" coords="60,78,90,106" href="customization-guide.html#analysis-3" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><div class="section" id="analysis-1">
+<span id="id5"></span><h5>1. Action Bar<a class="headerlink" href="#analysis-1" title="Permalink to this headline">¶</a></h5>
+<p>All Action Bar customizations except the title are global to all Activities.</p>
+<ul>
+<li><p class="first"><strong>Back Button Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_action_bar_back</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Status Bar Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_status_bar</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#analysis"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="activity-indicator">
+<span id="analysis-2"></span><h5>2. Activity Indicator<a class="headerlink" href="#activity-indicator" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_analysis_activity_indicator</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Message</strong></p>
+<ul>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_analysis_activity_indicator_message</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Analysis.AnalysingMessage.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#analysis"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="pdf-info-panel">
+<span id="analysis-3"></span><h5>3. PDF Info Panel<a class="headerlink" href="#pdf-info-panel" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_analysis_pdf_info_background</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Filename</strong></p>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Analysis.PdfFilename.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Analysis.PdfFilename.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Analysis.PdfFilename.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Analysis.PdfFilename.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Page Count</strong></p>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Analysis.PdfPageCount.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Analysis.PdfPageCount.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Analysis.PdfPageCount.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Analysis.PdfPageCount.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#analysis"><em>Back to screenshots.</em></a></p>
+</li>
+</ul>
+</div>
+<div class="section" id="error-snackbar">
+<span id="analysis-4"></span><h5>4. Error Snackbar<a class="headerlink" href="#error-snackbar" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Message</strong></p>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Snackbar.Error.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Snackbar.Error.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Snackbar.Error.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Snackbar.Error.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Button</strong></p>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Snackbar.Error.Button.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Snackbar.Error.Button.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Snackbar.Error.Button.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Snackbar.Error.Button.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+<li><p class="first"><strong>Retry Button Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_document_analysis_error_retry</span></tt>.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_snackbar_error_background</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#analysis"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="analysis-5">
+<span id="id6"></span><h5>5. Background<a class="headerlink" href="#analysis-5" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_background</span></tt>. <strong>Note</strong>: this color resource is global to all Activities.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#analysis"><em>Back to screenshots.</em></a></p>
+</div>
+</div>
+<div class="section" id="multi-page-review-screen">
+<span id="multi-page-review"></span><h4><a class="toc-backref" href="#id30">Multi-Page Review Screen</a><a class="headerlink" href="#multi-page-review-screen" title="Permalink to this headline">¶</a></h4>
+<img src="_static/customization/Multi-Page Review.png" usemap="#multi-page-review-map-1" width="324" height="576">
+
+<map id="multi-page-review-map-1" name="multi-page-review-map-1">
+    <area shape="rect" alt="" title="Action Bar" coords="189,23,220,54" href="customization-guide.html#multi-page-review-1" target="" />
+    <area shape="rect" alt="" title="Page Indicators" coords="174,284,207,316" href="customization-guide.html#multi-page-review-2" target="" />
+    <area shape="rect" alt="" title="Next Button" coords="273,259,302,288" href="customization-guide.html#multi-page-review-3" target="" />
+    <area shape="rect" alt="" title="Thumbnails Panel" coords="296,341,323,371" href="customization-guide.html#multi-page-review-4" target="" />
+    <area shape="rect" alt="" title="Add Pages Card" coords="213,345,243,376" href="customization-guide.html#multi-page-review-6" target="" />
+    <area shape="rect" alt="" title="Reorder Pages Tip" coords="2,478,28,508" href="customization-guide.html#multi-page-review-7" target="" />
+    <area shape="rect" alt="" title="Bottom Toolbar" coords="150,502,177,532" href="customization-guide.html#multi-page-review-8" target="" />
+    <area shape="rect" alt="" title="Image Error" coords="178,67,212,97" href="customization-guide.html#multi-page-review-9" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><img src="_static/customization/Multi-Page Review Upload Indicators.png" usemap="#multi-page-review-map-2" width="324" height="576">
+
+<map id="multi-page-review-map-2" name="multi-page-review-map-2">
+    <area shape="rect" alt="" title="Thumbnail Card" coords="12,345,41,375" href="customization-guide.html#multi-page-review-5" target="" />
+    <area shape="rect" alt="" title="Badge" coords="131,440,152,463" href="customization-guide.html#multi-page-review-5-1" target="" />
+    <area shape="rect" alt="" title="Drag Indicator Bumps" coords="276,435,299,457" href="customization-guide.html#multi-page-review-5-2" target="" />
+    <area shape="rect" alt="" title="Highlight Strip" coords="10,464,31,488" href="customization-guide.html#multi-page-review-5-3" target="" />
+    <area shape="rect" alt="" title="Activity Indicator" coords="263,367,285,390" href="customization-guide.html#multi-page-review-5-4" target="" />
+    <area shape="rect" alt="" title="Upload Success Icon" coords="59,369,84,393" href="customization-guide.html#multi-page-review-5-5" target="" />
+    <area shape="rect" alt="" title="Upload Failure Icon" coords="161,371,182,394" href="customization-guide.html#multi-page-review-5-6" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><img src="_static/customization/Multi-Page Review Delete Last Page.png" usemap="#multi-page-review-map-3" width="324" height="576">
+
+<map id="multi-page-review-map-3" name="multi-page-review-map-3">
+    <area shape="rect" alt="" title="Imported Image Delete Last Page Dialog" coords="146,213,176,249" href="customization-guide.html#multi-page-review-10" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><div class="section" id="multi-page-review-1">
+<span id="id7"></span><h5>1. Action Bar<a class="headerlink" href="#multi-page-review-1" title="Permalink to this headline">¶</a></h5>
+<p>All Action Bar customizations except the title are global to all Activities.</p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_title_multi_page_review</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Title Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Back Button Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_action_bar_back</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Status Bar Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_status_bar</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="multi-page-review-2">
+<span id="id8"></span><h5>2. Page Indicators<a class="headerlink" href="#multi-page-review-2" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_multi_page_review_page_indicator_background</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="multi-page-review-3">
+<span id="id9"></span><h5>3. Next Button<a class="headerlink" href="#multi-page-review-3" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_review_fab_checkmark.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resources named <tt class="docutils literal"><span class="pre">gc_review_fab</span></tt> and <tt class="docutils literal"><span class="pre">gc_review_fab_pressed</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="thumbnails-panel">
+<span id="multi-page-review-4"></span><h5>4. Thumbnails Panel<a class="headerlink" href="#thumbnails-panel" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_multi_page_review_thumbnails_panel_background</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="thumbnail-card">
+<span id="multi-page-review-5"></span><h5>5. Thumbnail Card<a class="headerlink" href="#thumbnail-card" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_multi_page_review_thumbnail_card_background</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+<div class="section" id="badge">
+<span id="multi-page-review-5-1"></span><h6>5.1 Badge<a class="headerlink" href="#badge" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Review.MultiPage.ThumbnailBadge.TextStyle</span></tt>) and setting an
+item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+<li><p class="first"><strong>Background Border Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_multi_page_thumbnail_badge_background_border</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="drag-indicator-bumps">
+<span id="multi-page-review-5-2"></span><h6>5.2 Drag Indicator Bumps<a class="headerlink" href="#drag-indicator-bumps" title="Permalink to this headline">¶</a></h6>
+<ul class="simple">
+<li><strong>Icon</strong></li>
+</ul>
+<blockquote>
+<div>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_bumps_icon.png</span></tt>.</div></blockquote>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="highlight-strip">
+<span id="multi-page-review-5-3"></span><h6>5.3 Highlight Strip<a class="headerlink" href="#highlight-strip" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_multi_page_thumbnail_highlight_strip</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="multi-page-review-5-4">
+<span id="id10"></span><h6>5.4 Activity Indicator<a class="headerlink" href="#multi-page-review-5-4" title="Permalink to this headline">¶</a></h6>
+<ul class="simple">
+<li><strong>Color</strong></li>
+</ul>
+<blockquote>
+<div>Via the color resource named <tt class="docutils literal"><span class="pre">gc_analysis_activity_indicator</span></tt>.</div></blockquote>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="upload-success-icon">
+<span id="multi-page-review-5-5"></span><h6>5.5 Upload Success Icon<a class="headerlink" href="#upload-success-icon" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_multi_page_thumbnail_upload_success_icon_background</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Tick Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_multi_page_thumbnail_upload_success_icon_foreground</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="upload-failure-icon">
+<span id="multi-page-review-5-6"></span><h6>5.6 Upload Failure Icon<a class="headerlink" href="#upload-failure-icon" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_multi_page_thumbnail_upload_failure_icon_background</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Cross Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_multi_page_thumbnail_upload_failure_icon_foreground</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+</div>
+<div class="section" id="add-pages-card">
+<span id="multi-page-review-6"></span><h5>6. Add Pages Card<a class="headerlink" href="#add-pages-card" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_multi_page_add_page_icon.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Subtitle</strong></p>
+<ul>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_multi_page_review_add_pages_subtitle</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+</li>
+</ul>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle</span></tt>).</p>
+<ul>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Review.MultiPage.AddPagesSubtitle.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</li>
+</ul>
+</div>
+<div class="section" id="reorder-pages-tip">
+<span id="multi-page-review-7"></span><h5>7. Reorder Pages Tip<a class="headerlink" href="#reorder-pages-tip" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_multi_page_review_reorder_pages_tip</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Review.MultiPage.ReorderPagesTip.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="bottom-toolbar">
+<span id="multi-page-review-8"></span><h5>8. Bottom Toolbar<a class="headerlink" href="#bottom-toolbar" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Rotate Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_rotate_icon.png</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Delete Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_delete_icon.png</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="image-error">
+<span id="multi-page-review-9"></span><h5>9. Image Error<a class="headerlink" href="#image-error" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_snackbar_error_background</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Message</strong></p>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Snackbar.Error.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Snackbar.Error.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Snackbar.Error.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Snackbar.Error.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Button</strong></p>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Snackbar.Error.Button.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Snackbar.Error.Button.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Snackbar.Error.Button.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Snackbar.Error.Button.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+<li><p class="first"><strong>Retry Text (Analysis)</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_document_analysis_error_retry</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Delete Text (Imported Image)</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_multi_page_review_delete_invalid_document</span></tt>.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+<div class="section" id="imported-image-delete-last-page-dialog">
+<span id="multi-page-review-10"></span><h5>10. Imported Image Delete Last Page Dialog<a class="headerlink" href="#imported-image-delete-last-page-dialog" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Message</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_multi_page_review_file_import_delete_last_page_dialog_message</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Positive Button Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_multi_page_review_file_import_delete_last_page_dialog_positive_button</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Negative Button Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_multi_page_review_file_import_delete_last_page_dialog_negative_button</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Button Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_accent</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#multi-page-review"><em>Back to screenshots.</em></a></p>
+</div>
+</div>
+<div class="section" id="help-screen">
+<span id="id11"></span><h4><a class="toc-backref" href="#id31">Help Screen</a><a class="headerlink" href="#help-screen" title="Permalink to this headline">¶</a></h4>
+<img src="_static/customization/Help Screen.png" usemap="#help-screen-map" width="324" height="576">
+
+<map id="help-screen-map" name="help-screen-map">
+    <area shape="rect" alt="" title="Action Bar" coords="97,23,135,56" href="customization-guide.html#help-screen-1" target="" />
+    <area shape="rect" alt="" title="Background" coords="136,346,168,379" href="customization-guide.html#help-screen-2" target="" />
+    <area shape="rect" alt="" title="Help List Item" coords="217,74,246,104" href="customization-guide.html#help-screen-3" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><div class="section" id="help-screen-1">
+<span id="id12"></span><h5>1. Action Bar<a class="headerlink" href="#help-screen-1" title="Permalink to this headline">¶</a></h5>
+<p>All Action Bar customizations except the title are global to all Activities.</p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_title_help</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Title Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Back Button Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_action_bar_back</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Status Bar Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_status_bar</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#help-screen"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="help-screen-2">
+<span id="id13"></span><h5>2. Background<a class="headerlink" href="#help-screen-2" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_help_activity_background</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#help-screen"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="help-list-item">
+<span id="help-screen-3"></span><h5>3. Help List Item<a class="headerlink" href="#help-list-item" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource name <tt class="docutils literal"><span class="pre">gc_help_item_background</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+<blockquote>
+<div><p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.Item.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.Item.TextStyle</span></tt>).</p>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.Item.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.Item.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#help-screen"><em>Back to screenshot.</em></a></p>
+</div>
+</div>
+<div class="section" id="photo-tips-screen">
+<span id="photo-tips"></span><h4><a class="toc-backref" href="#id32">Photo Tips Screen</a><a class="headerlink" href="#photo-tips-screen" title="Permalink to this headline">¶</a></h4>
+<img src="_static/customization/Photo Tips Screen.png" usemap="#photo-tips-map" width="324" height="576">
+
+<map id="photo-tips-map" name="photo-tips-map">
+    <area shape="rect" alt="" title="Action Bar" coords="173,25,203,56" href="customization-guide.html#photo-tips-1" target="" />
+    <area shape="rect" alt="" title="Background" coords="275,251,306,281" href="customization-guide.html#photo-tips-2" target="" />
+    <area shape="rect" alt="" title="Header" coords="277,71,308,103" href="customization-guide.html#photo-tips-3" target="" />
+    <area shape="rect" alt="" title="Tip" coords="227,138,257,171" href="customization-guide.html#photo-tips-4" target="" />
+    <area shape="rect" alt="" title="Good Lighting" coords="5,124,29,145" href="customization-guide.html#photo-tips-4-1" target="" />
+    <area shape="rect" alt="" title="Document Should be Flat" coords="4,198,27,220" href="customization-guide.html#photo-tips-4-2" target="" />
+    <area shape="rect" alt="" title="Device Parallel to Document" coords="2,269,26,292" href="customization-guide.html#photo-tips-4-3" target="" />
+    <area shape="rect" alt="" title="Document Aligned with Corner Guides" coords="5,344,28,367" href="customization-guide.html#photo-tips-4-4" target="" />
+    <area shape="rect" alt="" title="Document with Multiple Pages" coords="5,420,29,441" href="customization-guide.html#photo-tips-4-5" target="" />
+    <area shape="rect" alt="" title="Back To Camera Button" coords="81,489,116,520" href="customization-guide.html#photo-tips-5" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map>
+
+<map id="imgmap201874183930" name="imgmap201874183930">
+<area shape="rect" alt="" title="" coords="275,251,306,281" href="" target="" />
+<area shape="rect" alt="" title="" coords="5,420,29,441" href="" target="" />
+<!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) --></map><div class="section" id="photo-tips-1">
+<span id="id14"></span><h5>1. Action Bar<a class="headerlink" href="#photo-tips-1" title="Permalink to this headline">¶</a></h5>
+<p>All Action Bar customizations except the title are global to all Activities.</p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_title_photo_tips</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Title Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Back Button Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_action_bar_back</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Status Bar Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_status_bar</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#photo-tips"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="photo-tips-2">
+<span id="id15"></span><h5>2. Background<a class="headerlink" href="#photo-tips-2" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_photo_tips_activity_background</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#photo-tips"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="header">
+<span id="photo-tips-3"></span><h5>3. Header<a class="headerlink" href="#header" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<blockquote>
+<div><p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.PhotoTips.Header.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.PhotoTips.Header.TextStyle</span></tt>).</p>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.PhotoTips.Header.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.PhotoTips.Header.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#photo-tips"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="tip">
+<span id="photo-tips-4"></span><h5>4. Tip<a class="headerlink" href="#tip" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<blockquote>
+<div><p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle</span></tt>).</p>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.PhotoTips.Tip.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#photo-tips"><em>Back to screenshot.</em></a></p>
+<div class="section" id="good-lighting">
+<span id="photo-tips-4-1"></span><h6>4.1 Good Lighting<a class="headerlink" href="#good-lighting" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_photo_tip_lighting.png</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#photo-tips"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="document-should-be-flat">
+<span id="photo-tips-4-2"></span><h6>4.2 Document Should be Flat<a class="headerlink" href="#document-should-be-flat" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_photo_tip_flat.png</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#photo-tips"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="device-parallel-to-document">
+<span id="photo-tips-4-3"></span><h6>4.3 Device Parallel to Document<a class="headerlink" href="#device-parallel-to-document" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_photo_tip_parallel.png</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#photo-tips"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="document-aligned-with-corner-guides">
+<span id="photo-tips-4-4"></span><h6>4.4 Document Aligned with Corner Guides<a class="headerlink" href="#document-aligned-with-corner-guides" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_photo_tip_align.png</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#photo-tips"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="document-with-multiple-pages">
+<span id="photo-tips-4-5"></span><h6>4.5 Document with Multiple Pages<a class="headerlink" href="#document-with-multiple-pages" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi,xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_photo_tip_multipage.png</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#photo-tips"><em>Back to screenshot.</em></a></p>
+</div>
+</div>
+<div class="section" id="back-to-camera-button">
+<span id="photo-tips-5"></span><h5>5. Back To Camera Button<a class="headerlink" href="#back-to-camera-button" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_photo_tips_button</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_photo_tips_button_text</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#photo-tips"><em>Back to screenshot.</em></a></p>
+</div>
+</div>
+<div class="section" id="supported-formats-screen">
+<span id="supported-formats"></span><h4><a class="toc-backref" href="#id33">Supported Formats Screen</a><a class="headerlink" href="#supported-formats-screen" title="Permalink to this headline">¶</a></h4>
+<img src="_static/customization/Supported Formats Screen.png" usemap="#supported-formats-map" width="324" height="576">
+
+<map id="supported-formats-map" name="supported-formats-map">
+    <area shape="rect" alt="" title="Action Bar" coords="215,24,246,54" href="customization-guide.html#supported-formats-1" target="" />
+    <area shape="rect" alt="" title="Background" coords="144,483,178,518" href="customization-guide.html#supported-formats-2" target="" />
+    <area shape="rect" alt="" title="Header" coords="239,74,269,106" href="customization-guide.html#supported-formats-3" target="" />
+    <area shape="rect" alt="" title="Format Info List Item" coords="278,128,307,160" href="customization-guide.html#supported-formats-4" target="" />
+    <area shape="rect" alt="" title="Supported Format Icon" coords="3,117,26,138" href="customization-guide.html#supported-formats-4-1" target="" />
+    <area shape="rect" alt="" title="Unsupported Format Icon" coords="2,343,27,365" href="customization-guide.html#supported-formats-4-2" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><div class="section" id="supported-formats-1">
+<span id="id16"></span><h5>1. Action Bar<a class="headerlink" href="#supported-formats-1" title="Permalink to this headline">¶</a></h5>
+<p>All Action Bar customizations except the title are global to all Activities.</p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_title_supported_formats</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Title Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Back Button Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_action_bar_back</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Status Bar Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_status_bar</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#supported-formats"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="supported-formats-2">
+<span id="id17"></span><h5>2. Background<a class="headerlink" href="#supported-formats-2" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_supported_formats_activity_background</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#supported-formats"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="supported-formats-3">
+<span id="id18"></span><h5>3. Header<a class="headerlink" href="#supported-formats-3" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.SupportedFormats.Item.Header.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#supported-formats"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="format-info-list-item">
+<span id="supported-formats-4"></span><h5>4. Format Info List Item<a class="headerlink" href="#format-info-list-item" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.SupportedFormats.Item.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">gc_supported_formats_item_background</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#supported-formats"><em>Back to screenshot.</em></a></p>
+<div class="section" id="supported-format-icon">
+<span id="supported-formats-4-1"></span><h6>4.1 Supported Format Icon<a class="headerlink" href="#supported-format-icon" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_supported_formats_item_supported_icon_background</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Tick Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_supported_formats_item_supported_icon_foreground</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#supported-formats"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="unsupported-format-icon">
+<span id="supported-formats-4-2"></span><h6>4.2 Unsupported Format Icon<a class="headerlink" href="#unsupported-format-icon" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_supported_formats_item_unsupported_icon_background</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Cross Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_supported_formats_item_unsupported_icon_foreground</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#supported-formats"><em>Back to screenshot.</em></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="file-import-screen">
+<span id="file-import"></span><h4><a class="toc-backref" href="#id34">File Import Screen</a><a class="headerlink" href="#file-import-screen" title="Permalink to this headline">¶</a></h4>
+<img src="_static/customization/File Import Screen.png" usemap="#file-import-map" width="324" height="576">
+
+<map id="file-import-map" name="file-import-map">
+    <area shape="rect" alt="" title="Action Bar" coords="288,22,317,54" href="customization-guide.html#file-import-1" target="" />
+    <area shape="rect" alt="" title="Background" coords="283,157,313,190" href="customization-guide.html#file-import-2" target="" />
+    <area shape="rect" alt="" title="Header" coords="284,82,315,117" href="customization-guide.html#file-import-3" target="" />
+    <area shape="rect" alt="" title="Separator Line" coords="147,143,181,178" href="customization-guide.html#file-import-4" target="" />
+    <area shape="rect" alt="" title="Section" coords="259,218,292,254" href="customization-guide.html#file-import-5" target="" />
+    <area shape="rect" alt="" title="Section Number" coords="38,163,62,187" href="customization-guide.html#file-import-5-1" target="" />
+    <area shape="rect" alt="" title="Section Title" coords="188,209,214,235" href="customization-guide.html#file-import-5-2" target="" />
+    <area shape="rect" alt="" title="Section Body" coords="13,235,33,256" href="customization-guide.html#file-import-5-3" target="" />
+    <area shape="rect" alt="" title="Section Illustration" coords="83,368,110,395" href="customization-guide.html#file-import-5-4" target="" />
+    <area shape="rect" alt="" title="Sections" coords="274,380,303,412" href="customization-guide.html#file-import-6" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><div class="section" id="file-import-1">
+<span id="id19"></span><h5>1. Action Bar<a class="headerlink" href="#file-import-1" title="Permalink to this headline">¶</a></h5>
+<p>All Action Bar customizations except the title are global to all Activities.</p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_title_file_import</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Title Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Back Button Icon</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named <tt class="docutils literal"><span class="pre">gc_action_bar_back</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_action_bar</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Status Bar Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_status_bar</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#file-import"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="file-import-2">
+<span id="id20"></span><h5>2. Background<a class="headerlink" href="#file-import-2" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_file_import_activity_background</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#file-import"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="file-import-3">
+<span id="id21"></span><h5>3. Header<a class="headerlink" href="#file-import-3" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Text</strong></p>
+<p>Via overriding the string resource named <tt class="docutils literal"><span class="pre">gc_file_import_header</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.FileImport.Header.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.FileImport.Header.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.FileImport.Header.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.FileImport.Header.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#file-import"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="separator-line">
+<span id="file-import-4"></span><h5>4. Separator Line<a class="headerlink" href="#separator-line" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_file_import_separator</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#file-import"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="section">
+<span id="file-import-5"></span><h5>5. Section<a class="headerlink" href="#section" title="Permalink to this headline">¶</a></h5>
+<div class="section" id="number">
+<span id="file-import-5-1"></span><h6>5.1 Number<a class="headerlink" href="#number" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Background Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_file_import_section_number_background</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Text Color</strong></p>
+<p>Via the color resource named <tt class="docutils literal"><span class="pre">gc_file_import_section_number</span></tt>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#file-import"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="title">
+<span id="file-import-5-2"></span><h6>5.2 Title<a class="headerlink" href="#title" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.FileImport.Section.Title.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#file-import"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="body">
+<span id="file-import-5-3"></span><h6>5.3 Body<a class="headerlink" href="#body" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>Text Style</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle</span></tt> (with
+parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle</span></tt>).</p>
+</li>
+<li><p class="first"><strong>Font</strong></p>
+<p>Via overriding the style named <tt class="docutils literal"><span class="pre">GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle</span></tt>
+(with parent style <tt class="docutils literal"><span class="pre">Root.GiniCaptureTheme.Help.FileImport.Section.Body.TextStyle</span></tt>) and
+setting an item named <tt class="docutils literal"><span class="pre">gcCustomFont</span></tt> with the path to the font file in your assets folder.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#file-import"><em>Back to screenshot.</em></a></p>
+</div>
+<div class="section" id="illustration">
+<span id="file-import-5-4"></span><h6>5.4 Illustration<a class="headerlink" href="#illustration" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first">Image</p>
+<p>Via image resources as specified in the section illustrations <a class="reference internal" href="index.html#file-import-6"><em>below</em></a>.</p>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#file-import"><em>Back to screenshot.</em></a></p>
+</div>
+</div>
+<div class="section" id="sections">
+<span id="file-import-6"></span><h5>6. Sections<a class="headerlink" href="#sections" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first"><strong>Section 1</strong></p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via overriding the string resource named <tt class="docutils literal"><span class="pre">gc_file_import_section_1_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Body</strong></p>
+<p>Via overriding the string resource named <tt class="docutils literal"><span class="pre">gc_file_import_section_1_body</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Illustration</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
+<tt class="docutils literal"><span class="pre">gc_file_import_section_1_illustration.png</span></tt>.</p>
+<p><strong>Note</strong>: For creating your custom illustration you may use <a class="reference external" href="https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_1.pdf">this template</a>
+from the <a class="reference external" href="https://github.com/gini/gini-vision-lib-assets">Gini Vision Library UI Assets</a> repository.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Section 2</strong></p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via overriding the string resource named <tt class="docutils literal"><span class="pre">gc_file_import_section_2_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Body</strong></p>
+<p>Via overriding the string resource named <tt class="docutils literal"><span class="pre">gc_file_import_section_2_body</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Illustration</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
+<tt class="docutils literal"><span class="pre">gc_file_import_section_2_illustration.png</span></tt>.</p>
+<p><strong>Note</strong>: For creating your custom illustration you may use <a class="reference external" href="https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_2.pdf">this template</a>
+from the <a class="reference external" href="https://github.com/gini/gini-vision-lib-assets">Gini Vision Library UI Assets</a> repository.</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul id="file-import-6-3">
+<li><p class="first"><strong>Section 3</strong></p>
+<ul>
+<li><p class="first"><strong>Title</strong></p>
+<p>Via overriding the string resource named <tt class="docutils literal"><span class="pre">gc_file_import_section_3_title</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Body</strong></p>
+<p>Via overriding the string resource named <tt class="docutils literal"><span class="pre">gc_file_import_section_3_body</span></tt> and <tt class="docutils literal"><span class="pre">gc_file_import_section_3_body_2</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Illustration</strong></p>
+<p>Via images for mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi named
+<tt class="docutils literal"><span class="pre">gc_file_import_section_3_illustration.png</span></tt>.
+<strong>Note</strong>: For creating your custom illustration you may use <a class="reference external" href="https://github.com/gini/gini-vision-lib-assets/blob/master/Gini-Vision-Lib-Design-Elements/Illustrations/PDF/android_pdf_open_with_illustration_3.pdf">this template</a>
+from the <a class="reference external" href="https://github.com/gini/gini-vision-lib-assets">Gini Vision Library UI Assets</a> repository.</p>
+</li>
+<li><p class="first"><strong>Clear app defaults section</strong></p>
+<ul class="simple">
+<li><strong>Title</strong></li>
+</ul>
+<p>Via overriding the string resource named <tt class="docutils literal"><span class="pre">gc_file_import_section_3_clear_app_defaults_title</span></tt>.</p>
+<ul class="simple">
+<li><strong>Body</strong></li>
+</ul>
+<p>Via overriding the string resource named <tt class="docutils literal"><span class="pre">gc_file_import_section_3_clear_app_defaults_body</span></tt>.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="index.html#file-import"><em>Back to screenshot.</em></a></p>
+</div>
+</div>
+<div class="section" id="clear-defaults-dialog">
+<h4><a class="toc-backref" href="#id35">Clear Defaults Dialog</a><a class="headerlink" href="#clear-defaults-dialog" title="Permalink to this headline">¶</a></h4>
+<img src="_static/customization/Clear Defaults Dialog.png" usemap="#clear-defaults-map" width="324" height="576">
+
+<map id="clear-defaults-map" name="clear-defaults-map">
+    <area shape="rect" alt="" title="Message" coords="236,139,260,166" href="customization-guide.html#clear-defaults-1" target="" />
+    <area shape="rect" alt="" title="File Type" coords="265,223,299,257" href="customization-guide.html#clear-defaults-1-1" target="" />
+    <area shape="rect" alt="" title="Positive Button Title" coords="73,329,106,362" href="customization-guide.html#clear-defaults-2" target="" />
+    <area shape="rect" alt="" title="Negative Button Title" coords="74,369,105,400" href="customization-guide.html#clear-defaults-3" target="" />
+    <!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+</map><div class="section" id="message">
+<span id="clear-defaults-1"></span><h5>1. Message<a class="headerlink" href="#message" title="Permalink to this headline">¶</a></h5>
+<p>Via the string resource named <tt class="docutils literal"><span class="pre">gc_file_import_default_app_dialog_message</span></tt>.</p>
+<div class="section" id="file-type">
+<span id="clear-defaults-1-1"></span><h6>1.1 File Type<a class="headerlink" href="#file-type" title="Permalink to this headline">¶</a></h6>
+<ul>
+<li><p class="first"><strong>PDF</strong></p>
+<p>Via the string resources named <tt class="docutils literal"><span class="pre">gc_file_import_default_app_dialog_pdf_file_type</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Image</strong></p>
+<p>Via the string resources named <tt class="docutils literal"><span class="pre">gc_file_import_default_app_dialog_image_file_type</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Document (Other)</strong></p>
+<p>Via the string resources named <tt class="docutils literal"><span class="pre">gc_file_import_default_app_dialog_document_file_type</span></tt>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="positive-button-title">
+<span id="clear-defaults-2"></span><h6>2. Positive Button Title<a class="headerlink" href="#positive-button-title" title="Permalink to this headline">¶</a></h6>
+<p>Via the string resources named <tt class="docutils literal"><span class="pre">gc_file_import_default_app_dialog_positive_button</span></tt>.</p>
+</div>
+<div class="section" id="negative-button-title">
+<span id="clear-defaults-3"></span><h6>3. Negative Button Title<a class="headerlink" href="#negative-button-title" title="Permalink to this headline">¶</a></h6>
+<p>Via the string resources named <tt class="docutils literal"><span class="pre">gc_file_import_default_app_dialog_negative_button</span></tt>.</p>
+<p><a class="reference internal" href="index.html#file-import"><em>Back to screenshot.</em></a></p>
+</div>
+</div>
+</div>
+</div>
+<span id="document-event-tracking"></span><div class="section" id="event-tracking">
+<h3>Event Tracking<a class="headerlink" href="#event-tracking" title="Permalink to this headline">¶</a></h3>
+<p>In version <a class="reference external" href="https://github.com/gini/gini-capture-sdk-android/releases/tag/3.12.0">3.12.0</a> we introduced the possibility to track various
+events which occur during the usage of the Gini Capture SDK.</p>
+<p>To subscribe to the events you need to implement the <tt class="docutils literal"><span class="pre">EventTracker</span></tt> interface and pass it to the
+builder when creating a new <tt class="docutils literal"><span class="pre">GiniCapture</span></tt> instance.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">GiniCapture</span><span class="o">.</span><span class="na">newInstance</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">setEventTracker</span><span class="o">(</span><span class="k">new</span> <span class="n">MyEventTracker</span><span class="o">());</span>
+    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</pre></div>
+</div>
+<p>In <tt class="docutils literal"><span class="pre">MyEventTracker</span></tt> you can handle the events you are interested in.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">MyEventTracker</span> <span class="kd">implements</span> <span class="n">EventTracker</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCameraScreenEvent</span><span class="o">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">CameraScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">switch</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getType</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="n">TAKE_PICTURE</span><span class="o">:</span>
+                <span class="c1">// handle the picture taken event</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="n">HELP</span><span class="o">:</span>
+                <span class="c1">// handle the show help event</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="n">EXIT</span><span class="o">:</span>
+                <span class="c1">// handle the exit event</span>
+                <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onOnboardingScreenEvent</span><span class="o">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">OnboardingScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">(...)</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAnalysisScreenEvent</span><span class="o">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">AnalysisScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">(...)</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onReviewScreenEvent</span><span class="o">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">ReviewScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">(...)</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you use the Screen API all events will be triggered automatically.</p>
+<p>If you use the Component API some events will not be triggered (for ex. events which rely on <tt class="docutils literal"><span class="pre">Activity#onBackPressed()</span></tt>). You can
+check in the table below whether all the events you are interested in are triggered.</p>
+<p class="last">To manually trigger events just call the relevant method of your <tt class="docutils literal"><span class="pre">EventTracker</span></tt> implementation with the required event.</p>
+</div>
+<div class="section" id="events">
+<h4>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h4>
+<p>Event types are partitioned into different domains according to the screens that they appear at. Each domain has a number of event types.
+Some events may supply additional details in a map.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="35%" />
+<col width="27%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">API</th>
+<th class="head">Domain</th>
+<th class="head">Event enum value and details map keys</th>
+<th class="head">Comment</th>
+<th class="head">Introduced in (updated in)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Screen + Component</td>
+<td>Onboarding</td>
+<td><tt class="docutils literal"><span class="pre">OnboardingScreenEvent.START</span></tt></td>
+<td>Onboarding started</td>
+<td>3.12.0</td>
+</tr>
+<tr class="row-odd"><td>Screen + Component</td>
+<td>Onboarding</td>
+<td><tt class="docutils literal"><span class="pre">OnboardingScreenEvent.FINISH</span></tt></td>
+<td>User completes onboarding</td>
+<td>3.12.0</td>
+</tr>
+<tr class="row-even"><td>Screen</td>
+<td>Camera Screen</td>
+<td><tt class="docutils literal"><span class="pre">CameraScreenEvent.EXIT</span></tt></td>
+<td>User closes the camera screen</td>
+<td>3.12.0</td>
+</tr>
+<tr class="row-odd"><td>Screen</td>
+<td>Camera Screen</td>
+<td><tt class="docutils literal"><span class="pre">CameraScreenEvent.HELP</span></tt></td>
+<td>User taps &#8220;Help&#8221; on the camera screen</td>
+<td>3.12.0</td>
+</tr>
+<tr class="row-even"><td>Screen + Component</td>
+<td>Camera Screen</td>
+<td><tt class="docutils literal"><span class="pre">CameraScreenEvent.TAKE_PICTURE</span></tt></td>
+<td>User takes a picture</td>
+<td>3.12.0</td>
+</tr>
+<tr class="row-odd"><td>Screen</td>
+<td>Review Screen</td>
+<td><tt class="docutils literal"><span class="pre">ReviewScreenEvent.BACK</span></tt></td>
+<td>User goes back from the review screen</td>
+<td>3.12.0</td>
+</tr>
+<tr class="row-even"><td>Screen + Component</td>
+<td>Review Screen</td>
+<td><tt class="docutils literal"><span class="pre">ReviewScreenEvent.NEXT</span></tt></td>
+<td>User advances from the review screen</td>
+<td>3.12.0</td>
+</tr>
+<tr class="row-odd"><td>Screen + Component</td>
+<td>Review Screen</td>
+<td><tt class="docutils literal"><span class="pre">ReviewScreenEvent.UPLOAD_ERROR</span></tt>
+<tt class="docutils literal"><span class="pre">ReviewScreenEvent.UPLOAD_ERROR_DETAILS_MAP_KEY.MESSAGE</span></tt>
+<tt class="docutils literal"><span class="pre">ReviewScreenEvent.UPLOAD_ERROR_DETAILS_MAP_KEY.ERROR_OBJECT</span></tt></td>
+<td>Upload error in the review screen</td>
+<td>3.15.0</td>
+</tr>
+<tr class="row-even"><td>Screen</td>
+<td>Analysis Screen</td>
+<td><tt class="docutils literal"><span class="pre">AnalysisScreenEvent.CANCEL</span></tt></td>
+<td>User cancels the process during analysis</td>
+<td>3.12.0</td>
+</tr>
+<tr class="row-odd"><td>Screen + Component</td>
+<td>Analysis Screen</td>
+<td><tt class="docutils literal"><span class="pre">AnalysisScreenEvent.ERROR</span></tt>
+<tt class="docutils literal"><span class="pre">AnalysisScreenEvent.ERROR_DETAILS_MAP_KEY.MESSAGE</span></tt>
+<tt class="docutils literal"><span class="pre">AnalysisScreenEvent.ERROR_DETAILS_MAP_KEY.ERROR_OBJECT</span></tt></td>
+<td>The analysis ended with an error.</td>
+<td>3.12.0 (3.15.0)</td>
+</tr>
+<tr class="row-even"><td>Screen + Component</td>
+<td>Analysis Screen</td>
+<td><tt class="docutils literal"><span class="pre">AnalysisScreenEvent.RETRY</span></tt></td>
+<td>The user decides to retry after an analysis error.</td>
+<td>3.12.0</td>
+</tr>
+</tbody>
+</table>
+<p>The supported events are listed for each screen in a dedicated enum. You can view these enums in our <a class="reference external" href="http://developer.gini.net/gini-capture-sdk-android/javadoc/net/gini/android/capture/tracking/package-summary.html">Javadoc</a>.</p>
+</div>
+</div>
+<span id="document-guide-for-open-with"></span><div class="section" id="how-to-upload-pdfs-and-images-pre-2-4-0">
+<h3>How to Upload PDFs and Images (pre-2.4.0)<a class="headerlink" href="#how-to-upload-pdfs-and-images-pre-2-4-0" title="Permalink to this headline">¶</a></h3>
+<p>Since version 2.4.0 the <em class="xref std std-ref">File Import</em> feature should be used.</p>
+<div class="section" id="general-considerations">
+<h4>General considerations<a class="headerlink" href="#general-considerations" title="Permalink to this headline">¶</a></h4>
+<p>Enabling your app to open PDFs and images allows your users to open any kind of files which are identified by the OS as PDFs or images. Make sure to check the MIME type and that the file size is below an acceptable threshold (5MB for example). It is also advisable to check the first bytes of the incoming files to determine their type and allow only PDFs and known image types.</p>
+</div>
+<div class="section" id="registering-pdf-and-image-file-types">
+<h4>Registering PDF and image file types<a class="headerlink" href="#registering-pdf-and-image-file-types" title="Permalink to this headline">¶</a></h4>
+<p>Add the following intent filter to the <em>Activity</em> in your <em>AndroidManifest.xml</em> you wish to receive incoming PDFs and images:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;activity</span> <span class="na">android:name=</span><span class="s">&quot;.ui.MyActivity&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;intent-filter</span> <span class="na">android:label=</span><span class="s">&quot;@string/app_name&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.action.VIEW&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.action.SEND&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.category.DEFAULT&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;data</span> <span class="na">android:mimeType=</span><span class="s">&quot;image/*&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;data</span> <span class="na">android:mimeType=</span><span class="s">&quot;application/pdf&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/intent-filter&gt;</span>
+<span class="nt">&lt;/activity&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We recommend adding <a class="reference external" href="https://developer.android.com/reference/android/content/Intent.html#ACTION_VIEW">ACTION_VIEW</a> to the intent filter to also allow users to send PDFs and images to your app from apps which don’t implement sharing with <a class="reference external" href="https://developer.android.com/reference/android/content/Intent.html#ACTION_SEND">ACTION_SEND</a> but enable viewing the PDF or file with other apps.</p>
+</div>
+<div class="section" id="documentation">
+<h5>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><a class="reference external" href="https://developer.android.com/training/basics/intents/filters.html">https://developer.android.com/training/basics/intents/filters.html</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="reading-files-from-external-storage">
+<h4>Reading files from external storage<a class="headerlink" href="#reading-files-from-external-storage" title="Permalink to this headline">¶</a></h4>
+<p>Since Android 4.4 (API Level 19) the <a class="reference external" href="https://developer.android.com/reference/android/Manifest.permission.html#READ_EXTERNAL_STORAGE">READ_EXTERNAL_STORAGE</a> permission has to be declared to access files outside of the app-specific directories. Declare this permission in your <em>AndroidManifest.xml</em>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Since the introduction of <a class="reference external" href="https://developer.android.com/training/permissions/requesting.html">Run Time Permissions</a> with Android 6.0 (API Level 23) your app also has to request permission from the user before accessing a PDF or an image file outside of the app-specific directories.</p>
+<p>We recommend checking for the permission whenever your app receives a PDF or an image and before accessing it. If an explanation is requested by the system to be shown to the user we highly recommend providing one.</p>
+<p>It is required to handle the case where the user did not grant permissions. We recommend showing an explanation and providing a link to your app’s <em>App info</em> page in the <em>Settings</em> app with a short guide on how to grant the permission there.</p>
+<p>The Intent for opening the <em>App info</em> page can be created as follows:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">Settings</span><span class="o">.</span><span class="na">ACTION_APPLICATION_DETAILS_SETTINGS</span><span class="o">);</span>
+<span class="n">Uri</span> <span class="n">uri</span> <span class="o">=</span> <span class="n">Uri</span><span class="o">.</span><span class="na">fromParts</span><span class="o">(</span><span class="n">Uri</span><span class="o">.</span><span class="s">&quot;package&quot;</span><span class="o">,</span> <span class="n">BuildConfig</span><span class="o">.</span><span class="na">APPLICATION_ID</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="n">intent</span><span class="o">.</span><span class="na">setData</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+<span class="n">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h5>Documentation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><a class="reference external" href="https://developer.android.com/training/permissions/index.html">https://developer.android.com/training/permissions/index.html</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="handling-incoming-pdfs-and-images">
+<h4>Handling incoming PDFs and images<a class="headerlink" href="#handling-incoming-pdfs-and-images" title="Permalink to this headline">¶</a></h4>
+<p>When your app is requested to handle a PDF or an image your <em>Activity</em> (declaring the intent filter we mentioned previously) is launched or resumed with an Intent having <tt class="docutils literal"><span class="pre">ACTION_VIEW</span></tt> or <tt class="docutils literal"><span class="pre">ACTION_SEND</span></tt>.</p>
+<p>Checking whether the Intent has the required action:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">String</span> <span class="n">action</span> <span class="o">=</span> <span class="n">intent</span><span class="o">.</span><span class="na">getAction</span><span class="o">();</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">Intent</span><span class="o">.</span><span class="na">ACTION_VIEW</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">action</span><span class="o">)</span> <span class="o">||</span> <span class="n">Intent</span><span class="o">.</span><span class="na">ACTION_SEND</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">action</span><span class="o">))</span> <span class="o">{</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The Intent will contain an <tt class="docutils literal"><span class="pre">Uri</span></tt> pointing to the PDF or image. The <tt class="docutils literal"><span class="pre">Uri</span></tt> can be in the <tt class="docutils literal"><span class="pre">data</span></tt> field or since Android 4.1 (API Level 16) it can also be in the <tt class="docutils literal"><span class="pre">clipData</span></tt> field.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To also support <a class="reference external" href="https://developer.android.com/reference/android/content/Intent.html#ACTION_VIEW">ACTION_VIEW</a> we recommend using <tt class="docutils literal"><span class="pre">data</span></tt> and <tt class="docutils literal"><span class="pre">clipData</span></tt>. The <a class="reference external" href="https://developer.android.com/training/sharing/receive.html">Androd example</a> uses <tt class="docutils literal"><span class="pre">intent.getParcelableExtra(Intent.EXTRA_STREAM)</span></tt> to extract the <tt class="docutils literal"><span class="pre">Uri</span></tt>, but this works only with <a class="reference external" href="https://developer.android.com/reference/android/content/Intent.html#ACTION_SEND">ACTION_SEND</a>.</p>
+</div>
+<p>Getting the <tt class="docutils literal"><span class="pre">Uri</span></tt> from the Intent:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Uri</span> <span class="n">uri</span> <span class="o">=</span> <span class="n">intent</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">uri</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="o">.</span><span class="na">VERSION_CODES</span><span class="o">.</span><span class="na">JELLY_BEAN</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ClipData</span> <span class="n">clipData</span> <span class="o">=</span> <span class="n">intent</span><span class="o">.</span><span class="na">getClipData</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">clipData</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">clipData</span><span class="o">.</span><span class="na">getItemCount</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">uri</span> <span class="o">=</span> <span class="n">clipData</span><span class="o">.</span><span class="na">getItemAt</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getUri</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>We recommend checking the MIME type of Intent. The MIME type can be in the <tt class="docutils literal"><span class="pre">type</span></tt> field or since Android 4.1 (API Level 16) it can also be in the <tt class="docutils literal"><span class="pre">clipData</span></tt> field.</p>
+<p>Getting the MIME type from the Intent:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">mimeTypes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">String</span> <span class="n">type</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getContentResolver</span><span class="o">().</span><span class="na">getType</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">type</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">type</span> <span class="o">=</span> <span class="n">intent</span><span class="o">.</span><span class="na">getType</span><span class="o">();</span>
+<span class="o">}</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">type</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">extension</span> <span class="o">=</span> <span class="n">MimeTypeMap</span><span class="o">.</span><span class="na">getFileExtensionFromUrl</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">extension</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">MimeTypeMap</span> <span class="n">mime</span> <span class="o">=</span> <span class="n">MimeTypeMap</span><span class="o">.</span><span class="na">getSingleton</span><span class="o">();</span>
+        <span class="n">type</span> <span class="o">=</span> <span class="n">mime</span><span class="o">.</span><span class="na">getMimeTypeFromExtension</span><span class="o">(</span><span class="n">extension</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">type</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">mimeTypes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">type</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="o">.</span><span class="na">VERSION_CODES</span><span class="o">.</span><span class="na">JELLY_BEAN</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ClipData</span> <span class="n">clipData</span> <span class="o">=</span> <span class="n">intent</span><span class="o">.</span><span class="na">getClipData</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">clipData</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ClipDescription</span> <span class="n">description</span> <span class="o">=</span> <span class="n">clipData</span><span class="o">.</span><span class="na">getDescription</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">description</span><span class="o">.</span><span class="na">getMimeTypeCount</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">type</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="na">getMimeType</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+            <span class="n">mimeTypes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">type</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Having the <tt class="docutils literal"><span class="pre">Uri</span></tt>, the contents of the PDF or image files can be read using the <tt class="docutils literal"><span class="pre">ContentResolver</span></tt>.</p>
+<p>Reading the PDF or image into a byte array:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="n">ContentResolver</span> <span class="n">contentResolver</span> <span class="o">=</span> <span class="n">activity</span><span class="o">.</span><span class="na">getContentResolver</span><span class="o">()</span>
+<span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="n">inputStream</span> <span class="o">=</span> <span class="n">contentResolver</span><span class="o">.</span><span class="na">openInputStream</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">inputStream</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// ByteStreams is a utility class from Google’s Guava library</span>
+        <span class="n">bytes</span> <span class="o">=</span> <span class="n">ByteStreams</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">(</span><span class="n">inputStream</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">inputStream</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">inputStream</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The byte array from the example above can be directly uploaded to the Gini API for information extraction.</p>
+<div class="section" id="id4">
+<h5>Documentation<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li>Android: <a class="reference external" href="https://developer.android.com/training/sharing/receive.html">https://developer.android.com/training/sharing/receive.html</a></li>
+<li>Gini API: <a class="reference external" href="http://developer.gini.net/gini-api/html/documents.html#submitting-files">http://developer.gini.net/gini-api/html/documents.html#submitting-files</a></li>
+<li>Gini Pay API lib: <a class="reference external" href="http://developer.gini.net/gini-pay-api-lib-android/guides/common-tasks.html#upload-a-document">http://developer.gini.net/gini-pay-api-lib-android/guides/common-tasks.html#upload-a-document</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="showing-a-preview-of-the-pdfs-first-page">
+<h4>Showing a preview of the PDF’s first page<a class="headerlink" href="#showing-a-preview-of-the-pdfs-first-page" title="Permalink to this headline">¶</a></h4>
+<p>We recommend showing a preview of the PDF’s first page or of the image while the document is being analyzed. Rendering PDFs is possible since Android 5.0 (API Level 21). On older versions we recommend showing a placeholder image.</p>
+<p>The following code shows how to generate a preview of the PDF’s first page on Android 5.0 and newer versions:</p>
+<div class="highlight-java"><div class="highlight"><pre>Bitmap bitmap = null;
+ContentResolver contentResolver = activity.getContentResolver();
+ParcelFileDescriptor fileDescriptor = contentResolver.openFileDescriptor(uri, &quot;r&quot;);
+if (fileDescriptor != null) {
+    PdfRenderer pdfRenderer = new PdfRenderer(fileDescriptor);
+    if (pdfRenderer != null) {
+        if (pdfRenderer.getPageCount() &gt; 0) {
+            PdfRenderer.Page page = pdfRenderer.openPage(0);
+            // Set the width and height based on the desired preview size
+            // and the aspect ratio of the pdf page
+            int bitmapWidth = …;
+            int bitmapHeight =  …;
+            // Create a white bitmap to make sure that PDFs without
+            // a background color are rendered on a white background
+            int[] colors = createWhiteColorArray(bitmapWidth, bitmapHeight);
+            bitmap = Bitmap.createBitmap(colors, bitmapWidth, bitmapHeight, Bitmap.Config.ARGB_8888);
+            page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+            page.close();
+        }
+}
+</pre></div>
+</div>
+<div class="section" id="id5">
+<h5>Documentation<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><a class="reference external" href="https://developer.android.com/reference/android/graphics/pdf/PdfRenderer.html">https://developer.android.com/reference/android/graphics/pdf/PdfRenderer.html</a></li>
+</ul>
+</div>
+</div>
+</div>
+<span id="document-license"></span><div class="section" id="license">
+<h3>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h3>
+<p>The Gini Capture SDK and the Gini Capture Network Library are licensed under a Private License and
+also integrate several third party libraries.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Always make sure to ship all license notices and permissions with your application.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Copyright (c) 2014-2018, Gini GmbH
+All rights reserved.
+
+The Gini Capture SDK is licensed through Gini GmbH (&quot;Gini&quot;) and may not be
+used, altered or copied in any way without explicit permission by Gini. The
+terms of usage are defined in a separate usage agreement between Gini and the
+licensee, where the licensee can gain access to a non-exclusive,
+non-transferable usage right which is restricted for the time of a contractual
+relationship between Gini and the licensee.
+
+For license related inquiries contact Gini via the email address
+technical-support@gini.net.
+</pre></div>
+</div>
+<div class="section" id="licenses-and-acknowledgements-for-incorporated-software">
+<h4>Licenses and Acknowledgements for Incorporated Software<a class="headerlink" href="#licenses-and-acknowledgements-for-incorporated-software" title="Permalink to this headline">¶</a></h4>
+<p>This library makes use of the following third party libraries:</p>
+<div class="section" id="apache-commons-sanselan">
+<h5>Apache Commons Sanselan<a class="headerlink" href="#apache-commons-sanselan" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-python"><div class="highlight"><pre>                              Apache License
+                        Version 2.0, January 2004
+                     http://www.apache.org/licenses/
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+1. Definitions.
+
+   &quot;License&quot; shall mean the terms and conditions for use, reproduction,
+   and distribution as defined by Sections 1 through 9 of this document.
+
+   &quot;Licensor&quot; shall mean the copyright owner or entity authorized by
+   the copyright owner that is granting the License.
+
+   &quot;Legal Entity&quot; shall mean the union of the acting entity and all
+   other entities that control, are controlled by, or are under common
+   control with that entity. For the purposes of this definition,
+   &quot;control&quot; means (i) the power, direct or indirect, to cause the
+   direction or management of such entity, whether by contract or
+   otherwise, or (ii) ownership of fifty percent (50%) or more of the
+   outstanding shares, or (iii) beneficial ownership of such entity.
+
+   &quot;You&quot; (or &quot;Your&quot;) shall mean an individual or Legal Entity
+   exercising permissions granted by this License.
+
+   &quot;Source&quot; form shall mean the preferred form for making modifications,
+   including but not limited to software source code, documentation
+   source, and configuration files.
+
+   &quot;Object&quot; form shall mean any form resulting from mechanical
+   transformation or translation of a Source form, including but
+   not limited to compiled object code, generated documentation,
+   and conversions to other media types.
+
+   &quot;Work&quot; shall mean the work of authorship, whether in Source or
+   Object form, made available under the License, as indicated by a
+   copyright notice that is included in or attached to the work
+   (an example is provided in the Appendix below).
+
+   &quot;Derivative Works&quot; shall mean any work, whether in Source or Object
+   form, that is based on (or derived from) the Work and for which the
+   editorial revisions, annotations, elaborations, or other modifications
+   represent, as a whole, an original work of authorship. For the purposes
+   of this License, Derivative Works shall not include works that remain
+   separable from, or merely link (or bind by name) to the interfaces of,
+   the Work and Derivative Works thereof.
+
+   &quot;Contribution&quot; shall mean any work of authorship, including
+   the original version of the Work and any modifications or additions
+   to that Work or Derivative Works thereof, that is intentionally
+   submitted to Licensor for inclusion in the Work by the copyright owner
+   or by an individual or Legal Entity authorized to submit on behalf of
+   the copyright owner. For the purposes of this definition, &quot;submitted&quot;
+   means any form of electronic, verbal, or written communication sent
+   to the Licensor or its representatives, including but not limited to
+   communication on electronic mailing lists, source code control systems,
+   and issue tracking systems that are managed by, or on behalf of, the
+   Licensor for the purpose of discussing and improving the Work, but
+   excluding communication that is conspicuously marked or otherwise
+   designated in writing by the copyright owner as &quot;Not a Contribution.&quot;
+
+   &quot;Contributor&quot; shall mean Licensor and any individual or Legal Entity
+   on behalf of whom a Contribution has been received by Licensor and
+   subsequently incorporated within the Work.
+
+2. Grant of Copyright License. Subject to the terms and conditions of
+   this License, each Contributor hereby grants to You a perpetual,
+   worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+   copyright license to reproduce, prepare Derivative Works of,
+   publicly display, publicly perform, sublicense, and distribute the
+   Work and such Derivative Works in Source or Object form.
+
+3. Grant of Patent License. Subject to the terms and conditions of
+   this License, each Contributor hereby grants to You a perpetual,
+   worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+   (except as stated in this section) patent license to make, have made,
+   use, offer to sell, sell, import, and otherwise transfer the Work,
+   where such license applies only to those patent claims licensable
+   by such Contributor that are necessarily infringed by their
+   Contribution(s) alone or by combination of their Contribution(s)
+   with the Work to which such Contribution(s) was submitted. If You
+   institute patent litigation against any entity (including a
+   cross-claim or counterclaim in a lawsuit) alleging that the Work
+   or a Contribution incorporated within the Work constitutes direct
+   or contributory patent infringement, then any patent licenses
+   granted to You under this License for that Work shall terminate
+   as of the date such litigation is filed.
+
+4. Redistribution. You may reproduce and distribute copies of the
+   Work or Derivative Works thereof in any medium, with or without
+   modifications, and in Source or Object form, provided that You
+   meet the following conditions:
+
+   (a) You must give any other recipients of the Work or
+       Derivative Works a copy of this License; and
+
+   (b) You must cause any modified files to carry prominent notices
+       stating that You changed the files; and
+
+   (c) You must retain, in the Source form of any Derivative Works
+       that You distribute, all copyright, patent, trademark, and
+       attribution notices from the Source form of the Work,
+       excluding those notices that do not pertain to any part of
+       the Derivative Works; and
+
+   (d) If the Work includes a &quot;NOTICE&quot; text file as part of its
+       distribution, then any Derivative Works that You distribute must
+       include a readable copy of the attribution notices contained
+       within such NOTICE file, excluding those notices that do not
+       pertain to any part of the Derivative Works, in at least one
+       of the following places: within a NOTICE text file distributed
+       as part of the Derivative Works; within the Source form or
+       documentation, if provided along with the Derivative Works; or,
+       within a display generated by the Derivative Works, if and
+       wherever such third-party notices normally appear. The contents
+       of the NOTICE file are for informational purposes only and
+       do not modify the License. You may add Your own attribution
+       notices within Derivative Works that You distribute, alongside
+       or as an addendum to the NOTICE text from the Work, provided
+       that such additional attribution notices cannot be construed
+       as modifying the License.
+
+   You may add Your own copyright statement to Your modifications and
+   may provide additional or different license terms and conditions
+   for use, reproduction, or distribution of Your modifications, or
+   for any such Derivative Works as a whole, provided Your use,
+   reproduction, and distribution of the Work otherwise complies with
+   the conditions stated in this License.
+
+5. Submission of Contributions. Unless You explicitly state otherwise,
+   any Contribution intentionally submitted for inclusion in the Work
+   by You to the Licensor shall be under the terms and conditions of
+   this License, without any additional terms or conditions.
+   Notwithstanding the above, nothing herein shall supersede or modify
+   the terms of any separate license agreement you may have executed
+   with Licensor regarding such Contributions.
+
+6. Trademarks. This License does not grant permission to use the trade
+   names, trademarks, service marks, or product names of the Licensor,
+   except as required for reasonable and customary use in describing the
+   origin of the Work and reproducing the content of the NOTICE file.
+
+7. Disclaimer of Warranty. Unless required by applicable law or
+   agreed to in writing, Licensor provides the Work (and each
+   Contributor provides its Contributions) on an &quot;AS IS&quot; BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+   implied, including, without limitation, any warranties or conditions
+   of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+   PARTICULAR PURPOSE. You are solely responsible for determining the
+   appropriateness of using or redistributing the Work and assume any
+   risks associated with Your exercise of permissions under this License.
+
+8. Limitation of Liability. In no event and under no legal theory,
+   whether in tort (including negligence), contract, or otherwise,
+   unless required by applicable law (such as deliberate and grossly
+   negligent acts) or agreed to in writing, shall any Contributor be
+   liable to You for damages, including any direct, indirect, special,
+   incidental, or consequential damages of any character arising as a
+   result of this License or out of the use or inability to use the
+   Work (including but not limited to damages for loss of goodwill,
+   work stoppage, computer failure or malfunction, or any and all
+   other commercial damages or losses), even if such Contributor
+   has been advised of the possibility of such damages.
+
+9. Accepting Warranty or Additional Liability. While redistributing
+   the Work or Derivative Works thereof, You may choose to offer,
+   and charge a fee for, acceptance of support, warranty, indemnity,
+   or other liability obligations and/or rights consistent with this
+   License. However, in accepting such obligations, You may act only
+   on Your own behalf and on Your sole responsibility, not on behalf
+   of any other Contributor, and only if You agree to indemnify,
+   defend, and hold each Contributor harmless for any liability
+   incurred by, or claims asserted against, such Contributor by reason
+   of your accepting any such warranty or additional liability.
+
+END OF TERMS AND CONDITIONS
+
+APPENDIX: How to apply the Apache License to your work.
+
+   To apply the Apache License to your work, attach the following
+   boilerplate notice, with the fields enclosed by brackets &quot;[]&quot;
+   replaced with your own identifying information. (Don&#39;t include
+   the brackets!)  The text should be enclosed in the appropriate
+   comment syntax for the file format. We also recommend that a
+   file or class name and description of purpose be included on the
+   same &quot;printed page&quot; as the copyright notice for easier
+   identification within third-party archives.
+
+Copyright [yyyy] [name of copyright owner]
+
+Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
+ EXTERNAL COMPONENTS
+
+ Apache Commons Sanselan includes a number of components with separate copyright
+ notices and license terms. Your use of these components is subject to the terms
+ and conditions of the following licenses.
+
+ rgb.txt comes from the X.org project and is under the following licenses:
+
+    Copyright 1985, 1989, 1998  The Open Group
+
+    Permission to use, copy, modify, distribute, and sell this software and its
+    documentation for any purpose is hereby granted without fee, provided that
+    the above copyright notice appear in all copies and that both that
+    copyright notice and this permission notice appear in supporting
+    documentation.
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE OPEN GROUP BE LIABLE FOR ANY CLAIM, DAMAGES OR
+    OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.
+
+    Except as contained in this notice, the name of The Open Group shall
+    not be used in advertising or otherwise to promote the sale, use or
+    other dealings in this Software without prior written authorization
+    from The Open Group.
+
+    Copyright (c) 1994, 2008, Oracle and/or its affiliates. All rights reserved.
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the &quot;Software&quot;),
+    to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice (including the next
+    paragraph) shall be included in all copies or substantial portions of the
+    Software.
+
+    THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE SOFTWARE.
+</pre></div>
+</div>
+</div>
+<div class="section" id="touchimageview">
+<h5>TouchImageView<a class="headerlink" href="#touchimageview" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-python"><div class="highlight"><pre>Copyright (c) 2012 Michael Ortiz
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the &quot;Software&quot;),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE
+</pre></div>
+</div>
+</div>
+<div class="section" id="gini-android-sdk">
+<h5>Gini Android SDK<a class="headerlink" href="#gini-android-sdk" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-python"><div class="highlight"><pre>The MIT License (MIT)
+
+Copyright (c) 2018 Gini GmbH
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+</body>
+</html>
