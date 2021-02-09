@@ -1,4 +1,4 @@
-![Gini Capture SDK for Android](GiniVision_Logo.png)
+![Gini Capture SDK for Android](GiniCapture_Logo.png)
 
 Gini Capture SDK for Android
 ===============================
