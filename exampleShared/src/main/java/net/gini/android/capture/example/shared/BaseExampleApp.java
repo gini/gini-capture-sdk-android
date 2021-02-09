@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import net.gini.android.DocumentMetadata;
 import net.gini.android.Gini;
 import net.gini.android.GiniApiType;
-import net.gini.android.SdkBuilder;
+import net.gini.android.GiniBuilder;
 import net.gini.android.capture.accounting.network.GiniCaptureAccountingNetworkApi;
 import net.gini.android.capture.accounting.network.GiniCaptureAccountingNetworkService;
 import net.gini.android.capture.network.GiniCaptureDefaultNetworkApi;
@@ -67,7 +67,7 @@ public abstract class BaseExampleApp extends MultiDexApplication {
                             + "with clientId and clientSecret properties or pass them in as gradle "
                             + "parameters with -PclientId and -PclientSecret.");
         }
-        final SdkBuilder builder = new SdkBuilder(this,
+        final GiniBuilder builder = new GiniBuilder(this,
                 clientId,
                 clientSecret,
                 "example.com");

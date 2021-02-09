@@ -9,7 +9,7 @@ import net.gini.android.DocumentMetadata;
 import net.gini.android.DocumentTaskManager;
 import net.gini.android.Gini;
 import net.gini.android.GiniApiType;
-import net.gini.android.SdkBuilder;
+import net.gini.android.GiniBuilder;
 import net.gini.android.authorization.CredentialsStore;
 import net.gini.android.authorization.EncryptedCredentialsStore;
 import net.gini.android.authorization.SessionManager;
@@ -359,40 +359,40 @@ public class GiniCaptureAccountingNetworkService implements GiniCaptureNetworkSe
          */
         @NonNull
         public GiniCaptureAccountingNetworkService build() {
-            final SdkBuilder sdkBuilder;
+            final GiniBuilder giniApiBuilder;
             if (mSessionManager != null) {
-                sdkBuilder = new SdkBuilder(mContext, mSessionManager);
+                giniApiBuilder = new GiniBuilder(mContext, mSessionManager);
             } else {
-                sdkBuilder = new SdkBuilder(mContext, mClientId, mClientSecret, mEmailDomain);
+                giniApiBuilder = new GiniBuilder(mContext, mClientId, mClientSecret, mEmailDomain);
             }
-            sdkBuilder.setGiniApiType(GiniApiType.ACCOUNTING);
+            giniApiBuilder.setGiniApiType(GiniApiType.ACCOUNTING);
             if (!TextUtils.isEmpty(mBaseUrl)) {
-                sdkBuilder.setApiBaseUrl(mBaseUrl);
+                giniApiBuilder.setApiBaseUrl(mBaseUrl);
             }
             if (!TextUtils.isEmpty(mUserCenterBaseUrl)) {
-                sdkBuilder.setUserCenterApiBaseUrl(mUserCenterBaseUrl);
+                giniApiBuilder.setUserCenterApiBaseUrl(mUserCenterBaseUrl);
             }
             if (mCache != null) {
-                sdkBuilder.setCache(mCache);
+                giniApiBuilder.setCache(mCache);
             }
             if (mCredentialsStore != null) {
-                sdkBuilder.setCredentialsStore(mCredentialsStore);
+                giniApiBuilder.setCredentialsStore(mCredentialsStore);
             }
             if (mNetworkSecurityConfigResId != 0) {
-                sdkBuilder.setNetworkSecurityConfigResId(mNetworkSecurityConfigResId);
+                giniApiBuilder.setNetworkSecurityConfigResId(mNetworkSecurityConfigResId);
             }
             if (mConnectionTimeoutUnit != null) {
-                sdkBuilder.setConnectionTimeoutInMs(
+                giniApiBuilder.setConnectionTimeoutInMs(
                         (int) TimeUnit.MILLISECONDS.convert(mConnectionTimeout,
                                 mConnectionTimeoutUnit));
             }
             if (mMaxNumberOfRetries >= 0) {
-                sdkBuilder.setMaxNumberOfRetries(mMaxNumberOfRetries);
+                giniApiBuilder.setMaxNumberOfRetries(mMaxNumberOfRetries);
             }
             if (mBackoffMultiplier >= 0) {
-                sdkBuilder.setConnectionBackOffMultiplier(mBackoffMultiplier);
+                giniApiBuilder.setConnectionBackOffMultiplier(mBackoffMultiplier);
             }
-            final Gini giniApi = sdkBuilder.build();
+            final Gini giniApi = giniApiBuilder.build();
             return new GiniCaptureAccountingNetworkService(giniApi, mDocumentMetadata);
         }
 
