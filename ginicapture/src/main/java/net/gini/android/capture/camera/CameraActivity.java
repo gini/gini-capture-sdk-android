@@ -31,6 +31,7 @@ import java.util.Map;
 import static net.gini.android.capture.internal.util.ActivityHelper.enableHomeAsUp;
 import static net.gini.android.capture.internal.util.FeatureConfiguration.shouldShowOnboarding;
 import static net.gini.android.capture.internal.util.FeatureConfiguration.shouldShowOnboardingAtFirstRun;
+import static net.gini.android.capture.review.ReviewActivity.EXTRA_IN_ANALYSIS_ACTIVITY;
 import static net.gini.android.capture.tracking.EventTrackingHelper.trackCameraScreenEvent;
 
 /**
@@ -509,14 +510,15 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
     }
 
     private void startReviewActivity(@NonNull final Document document) {
-        final Intent reviewIntent = new Intent();
+        final Intent reviewIntent = new Intent(this, ReviewActivity.class);
         reviewIntent.putExtra(ReviewActivity.EXTRA_IN_DOCUMENT, document);
+        reviewIntent.putExtra(EXTRA_IN_ANALYSIS_ACTIVITY, new Intent(this, AnalysisActivity.class));
         reviewIntent.setExtrasClassLoader(CameraActivity.class.getClassLoader());
         startActivityForResult(reviewIntent, REVIEW_DOCUMENT_REQUEST);
     }
 
     private void startAnalysisActivity(@NonNull final Document document) {
-        final Intent analysisIntent = new Intent();
+        final Intent analysisIntent = new Intent(this, AnalysisActivity.class);
         analysisIntent.putExtra(AnalysisActivity.EXTRA_IN_DOCUMENT, document);
         analysisIntent.setExtrasClassLoader(CameraActivity.class.getClassLoader());
         startActivityForResult(analysisIntent, ANALYSE_DOCUMENT_REQUEST);
