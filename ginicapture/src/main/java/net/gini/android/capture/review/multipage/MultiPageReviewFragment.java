@@ -529,13 +529,17 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         final Activity activity = getActivity();
         if (activity == null) {
             return;
         }
+        initMultiPageDocument();
         mNextClicked = false;
+        if (!mPreviewsShown) {
+            observeViewTree();
+        }
         showAlertIfOpenWithDocumentAndAppIsDefault(activity,
                 mMultiPageDocument, new FileImportHelper.ShowAlertCallback() {
                     @Override
@@ -558,15 +562,6 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
                         uploadDocuments();
                     }
                 });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        initMultiPageDocument();
-        if (!mPreviewsShown) {
-            observeViewTree();
-        }
     }
 
     private void uploadDocuments() {
