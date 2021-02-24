@@ -1,0 +1,17 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+net.gini.android.capture
+net.gini.android.capture.analysis
+net.gini.android.capture.camera
+net.gini.android.capture.document
+net.gini.android.capture.help
+net.gini.android.capture.network
+net.gini.android.capture.network.model
+net.gini.android.capture.noresults
+net.gini.android.capture.onboarding
+net.gini.android.capture.requirements
+net.gini.android.capture.review
+net.gini.android.capture.review.multipage
+net.gini.android.capture.tracking
+
