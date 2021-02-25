@@ -26,6 +26,7 @@ import net.gini.android.capture.internal.storage.ImageDiskStore;
 import net.gini.android.capture.internal.ui.ErrorSnackbar;
 import net.gini.android.capture.internal.util.FileImportHelper;
 import net.gini.android.capture.internal.util.MimeType;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.tracking.AnalysisScreenEvent;
 import net.gini.android.capture.tracking.AnalysisScreenEvent.ERROR_DETAILS_MAP_KEY;
@@ -61,7 +62,8 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
         }
 
         @Override
-        public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
+        public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
+                                           @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions) {
         }
 
         @Override
@@ -327,7 +329,8 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
                                     return null;
                                 }
                                     getAnalysisFragmentListenerOrNoOp()
-                                            .onExtractionsAvailable(getMapOrEmpty(resultHolder.getExtractions()));
+                                            .onExtractionsAvailable(getMapOrEmpty(resultHolder.getExtractions()),
+                                                    getMapOrEmpty(resultHolder.getCompoundExtractions()));
 
                             case NO_NETWORK_SERVICE:
                                 break;

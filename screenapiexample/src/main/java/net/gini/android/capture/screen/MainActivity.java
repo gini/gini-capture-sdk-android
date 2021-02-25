@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import ch.qos.logback.classic.LoggerContext;
@@ -400,9 +401,11 @@ public class MainActivity extends AppCompatActivity {
                         }
                         return;
                     }
+                    final Bundle compoundExtractionsBundle = data.getBundleExtra(CameraActivity.EXTRA_OUT_COMPOUND_EXTRACTIONS);
                     if (pay5ExtractionsAvailable(extractionsBundle)
-                            || epsPaymentAvailable(extractionsBundle)) {
-                        startExtractionsActivity(extractionsBundle);
+                            || epsPaymentAvailable(extractionsBundle)
+                            || compoundExtractionsBundle != null) {
+                        startExtractionsActivity(extractionsBundle, compoundExtractionsBundle);
                     } else {
                         // Show a special screen, if no Pay5 extractions were found to give
                         // the user some hints and tips
@@ -457,9 +460,10 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_NO_EXTRACTIONS);
     }
 
-    private void startExtractionsActivity(@NonNull final Bundle extractionsBundle) {
+    private void startExtractionsActivity(@NonNull final Bundle extractionsBundle, @Nullable final Bundle compoundExtractionsBundle) {
         final Intent intent = new Intent(this, ExtractionsActivity.class);
         intent.putExtra(ExtractionsActivity.EXTRA_IN_EXTRACTIONS, extractionsBundle);
+        intent.putExtra(ExtractionsActivity.EXTRA_IN_COMPOUND_EXTRACTIONS, compoundExtractionsBundle);
         startActivity(intent);
     }
 

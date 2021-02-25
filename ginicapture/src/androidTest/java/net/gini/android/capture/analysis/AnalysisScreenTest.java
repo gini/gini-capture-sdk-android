@@ -20,6 +20,7 @@ import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.document.DocumentFactory;
 import net.gini.android.capture.document.ImageDocument;
 import net.gini.android.capture.internal.camera.photo.PhotoFactory;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.review.ReviewActivity;
 
@@ -207,7 +208,8 @@ public class AnalysisScreenTest {
             }
 
             @Override
-            public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
+            public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
+                                               @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions) {
 
             }
 

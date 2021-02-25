@@ -12,6 +12,8 @@ import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
 import net.gini.android.capture.internal.network.AnalysisNetworkRequestResult;
 import net.gini.android.capture.internal.network.NetworkRequestResult;
 import net.gini.android.capture.internal.network.NetworkRequestsManager;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
+import net.gini.android.capture.network.model.GiniCaptureReturnReason;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 
 import java.util.ArrayList;
@@ -66,11 +68,15 @@ public class AnalysisInteractor {
                                 } else if (requestResult != null) {
                                     final Map<String, GiniCaptureSpecificExtraction> extractions =
                                             requestResult.getAnalysisResult().getExtractions();
-                                    if (extractions.isEmpty()) {
+                                    final Map<String, GiniCaptureCompoundExtraction> compoundExtractions =
+                                            requestResult.getAnalysisResult().getCompoundExtractions();
+                                    if (extractions.isEmpty() && compoundExtractions.isEmpty()) {
                                         return new ResultHolder(Result.SUCCESS_NO_EXTRACTIONS);
                                     } else {
                                         return new ResultHolder(Result.SUCCESS_WITH_EXTRACTIONS,
-                                                extractions);
+                                                extractions,
+                                                compoundExtractions,
+                                                requestResult.getAnalysisResult().getReturnReasons());
                                     }
                                 }
                                 return null;
@@ -156,16 +162,24 @@ public class AnalysisInteractor {
 
         private final Result mResult;
         private final Map<String, GiniCaptureSpecificExtraction> mExtractions;
+        private final Map<String, GiniCaptureCompoundExtraction> mCompoundExtractions;
+        private final List<GiniCaptureReturnReason> mReturnReasons;
 
         ResultHolder(@NonNull final Result result) {
-            this(result, Collections.<String, GiniCaptureSpecificExtraction>emptyMap());
+            this(result, Collections.<String, GiniCaptureSpecificExtraction>emptyMap(),
+                    Collections.<String, GiniCaptureCompoundExtraction>emptyMap(),
+                    Collections.<GiniCaptureReturnReason>emptyList());
         }
 
         ResultHolder(
                 @NonNull final Result result,
-                @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
+                @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
+                @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions,
+                @NonNull final List<GiniCaptureReturnReason> returnReasons) {
             mResult = result;
             mExtractions = extractions;
+            mCompoundExtractions = compoundExtractions;
+            mReturnReasons = returnReasons;
         }
 
         @NonNull
@@ -176,6 +190,16 @@ public class AnalysisInteractor {
         @NonNull
         public Map<String, GiniCaptureSpecificExtraction> getExtractions() {
             return mExtractions;
+        }
+
+        @NonNull
+        public Map<String, GiniCaptureCompoundExtraction> getCompoundExtractions() {
+            return mCompoundExtractions;
+        }
+
+        @NonNull
+        public List<GiniCaptureReturnReason> getReturnReasons() {
+            return mReturnReasons;
         }
     }
 }

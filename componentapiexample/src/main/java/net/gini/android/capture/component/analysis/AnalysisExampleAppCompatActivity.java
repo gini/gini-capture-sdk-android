@@ -10,6 +10,7 @@ import net.gini.android.capture.analysis.AnalysisFragmentCompat;
 import net.gini.android.capture.analysis.AnalysisFragmentListener;
 import net.gini.android.capture.component.R;
 import net.gini.android.capture.component.noresults.NoResultsExampleAppCompatActivity;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 
 import java.util.Map;
@@ -41,8 +42,9 @@ public class AnalysisExampleAppCompatActivity extends AppCompatActivity implemen
     }
 
     @Override
-    public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
-        mAnalysisScreenHandler.onExtractionsAvailable(extractions);
+    public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
+                                       @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions) {
+        mAnalysisScreenHandler.onExtractionsAvailable(extractions, compoundExtractions);
     }
 
     @Override

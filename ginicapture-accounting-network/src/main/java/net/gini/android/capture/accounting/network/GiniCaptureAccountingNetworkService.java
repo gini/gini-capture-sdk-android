@@ -13,6 +13,7 @@ import net.gini.android.GiniBuilder;
 import net.gini.android.authorization.CredentialsStore;
 import net.gini.android.authorization.EncryptedCredentialsStore;
 import net.gini.android.authorization.SessionManager;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.models.SpecificExtraction;
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCapture;
@@ -31,6 +32,7 @@ import net.gini.android.capture.util.NoOpCancellationToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -268,7 +270,8 @@ public class GiniCaptureAccountingNetworkService implements GiniCaptureNetworkSe
                                     LOG.debug("Document analysis success for document {}: {}",
                                             giniApiDocumentIdRotationMap, extractions);
                                     callback.success(
-                                            new AnalysisResult(giniApiDocumentId, extractions));
+                                            new AnalysisResult(giniApiDocumentId, extractions,
+                                                    Collections.<String, GiniCaptureCompoundExtraction>emptyMap()));
                                 } else {
                                     LOG.debug("Document analysis cancelled for document {}",
                                             giniApiDocumentIdRotationMap);

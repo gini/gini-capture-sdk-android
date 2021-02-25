@@ -11,6 +11,7 @@ import net.gini.android.capture.internal.network.NetworkRequestsManager;
 import net.gini.android.capture.internal.storage.ImageDiskStore;
 import net.gini.android.capture.network.GiniCaptureNetworkApi;
 import net.gini.android.capture.network.GiniCaptureNetworkService;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.onboarding.OnboardingPage;
 import net.gini.android.capture.review.ReviewActivity;
 import net.gini.android.capture.review.multipage.MultiPageReviewFragment;
@@ -27,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -135,6 +137,9 @@ public class GiniCapture {
             sInstance.mPhotoMemoryCache.clear();
             if (sInstance.mNetworkRequestsManager != null) {
                 sInstance.mNetworkRequestsManager.cleanup();
+            }
+            if (sInstance.mGiniCaptureNetworkApi != null) {
+                sInstance.mGiniCaptureNetworkApi.setUpdatedCompoundExtractions(Collections.<String, GiniCaptureCompoundExtraction>emptyMap());
             }
             sInstance.mImageMultiPageDocumentMemoryStore.clear();
             sInstance.internal().setReviewScreenAnalysisError(null);

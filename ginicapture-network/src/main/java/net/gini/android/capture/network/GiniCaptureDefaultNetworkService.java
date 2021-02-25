@@ -12,6 +12,10 @@ import net.gini.android.GiniBuilder;
 import net.gini.android.authorization.CredentialsStore;
 import net.gini.android.authorization.SessionManager;
 import net.gini.android.authorization.SharedPreferencesCredentialsStore;
+import net.gini.android.capture.network.model.CompoundExtractionsMapper;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
+import net.gini.android.capture.network.model.GiniCaptureReturnReason;
+import net.gini.android.capture.network.model.ReturnReasonsMapper;
 import net.gini.android.models.ExtractionsContainer;
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCapture;
@@ -26,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -262,11 +267,15 @@ public class GiniCaptureDefaultNetworkService implements GiniCaptureNetworkServi
                                     mAnalyzedGiniApiDocument = compositeDocument.get();
                                     final Map<String, GiniCaptureSpecificExtraction> extractions =
                                             SpecificExtractionMapper.mapToGiniCapture(task.getResult().getSpecificExtractions());
-                                    LOG.debug("Document analysis success for documents {}: extractions = {}",
-                                            giniApiDocumentIdRotationMap, extractions);
+                                    final Map<String, GiniCaptureCompoundExtraction> compoundExtractions =
+                                            CompoundExtractionsMapper.mapToGiniCapture(task.getResult().getCompoundExtractions());
+                                    final List<GiniCaptureReturnReason> returnReasons =
+                                            ReturnReasonsMapper.mapToGiniCapture((task.getResult().getReturnReasons()));
+                                    LOG.debug("Document analysis success for documents {}: extractions = {}; compoundExtractions = {}; returnReasons = {}",
+                                            giniApiDocumentIdRotationMap, extractions, compoundExtractions, returnReasons);
                                     callback.success(
                                             new AnalysisResult(compositeDocument.get().getId(),
-                                                    extractions));
+                                                    extractions, compoundExtractions, returnReasons));
                                 } else {
                                     LOG.debug("Document analysis cancelled for documents {}",
                                             giniApiDocumentIdRotationMap);

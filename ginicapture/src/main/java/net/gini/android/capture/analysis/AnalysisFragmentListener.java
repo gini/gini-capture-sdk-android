@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCaptureError;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.noresults.NoResultsFragmentCompat;
 
@@ -27,9 +28,11 @@ public interface AnalysisFragmentListener {
      * Called when the document has been analyzed and extractions are available.
      *
      * @param extractions a map of the extractions with the extraction labels as keys
+     * @param compoundExtractions a map of the compound extractions with the extraction labels as keys
      */
     void onExtractionsAvailable(
-            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions);
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
+            @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions);
 
     /**
      * Called when the document has been analyzed and no extractions were received.

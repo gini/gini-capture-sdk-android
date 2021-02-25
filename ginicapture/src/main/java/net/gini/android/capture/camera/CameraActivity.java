@@ -20,6 +20,7 @@ import net.gini.android.capture.R;
 import net.gini.android.capture.analysis.AnalysisActivity;
 import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
 import net.gini.android.capture.help.HelpActivity;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.onboarding.OnboardingActivity;
 import net.gini.android.capture.review.ReviewActivity;
@@ -312,6 +313,12 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * and {@link GiniCaptureSpecificExtraction} as values.
      */
     public static final String EXTRA_OUT_EXTRACTIONS = "GC_EXTRA_OUT_EXTRACTIONS";
+
+    /**
+     * Returned when compound extractions are available. Contains a Bundle with the extraction labels as keys and {@link
+     * GiniCaptureCompoundExtraction} as values.
+     */
+    public static final String EXTRA_OUT_COMPOUND_EXTRACTIONS = "GV_EXTRA_OUT_COMPOUND_EXTRACTIONS";
 
     /**
      * <p> Returned result code in case something went wrong. You should retrieve the {@link

@@ -7,6 +7,7 @@ import net.gini.android.capture.internal.camera.api.UIExecutor;
 import net.gini.android.capture.network.Error;
 import net.gini.android.capture.network.GiniCaptureNetworkApi;
 import net.gini.android.capture.network.GiniCaptureNetworkCallback;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 
 import org.json.JSONException;
@@ -112,6 +113,11 @@ public class GiniCaptureAccountingNetworkApi implements GiniCaptureNetworkApi {
     @Override
     public void deleteGiniUserCredentials() {
         mAccountingNetworkService.getGiniApi().getCredentialsStore().deleteUserCredentials();
+    }
+
+    @Override
+    public void setUpdatedCompoundExtractions(@NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions) {
+        // Not used
     }
 
     /**

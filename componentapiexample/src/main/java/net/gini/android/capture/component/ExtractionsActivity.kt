@@ -10,13 +10,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import net.gini.android.models.SpecificExtraction
 import net.gini.android.capture.GiniCapture
 import net.gini.android.capture.component.databinding.ActivityExtractionsBinding
 import net.gini.android.capture.example.shared.BaseExampleApp
 import net.gini.android.capture.network.Error
 import net.gini.android.capture.network.GiniCaptureNetworkCallback
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction
+import net.gini.android.models.SpecificExtraction
 import org.json.JSONException
 import org.slf4j.LoggerFactory
 
@@ -33,12 +34,14 @@ class ExtractionsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityExtractionsBinding
 
     private var mExtractions: MutableMap<String, GiniCaptureSpecificExtraction> = HashMap()
+    private var mCompoundExtractions: Map<String, GiniCaptureCompoundExtraction> = HashMap()
     private val mLegacyExtractions: MutableMap<String, SpecificExtraction> = HashMap()
     private var mExtractionsAdapter: ExtractionsAdapter<Any>? = null
 
     companion object {
         private val LOG = LoggerFactory.getLogger(ExtractionsActivity::class.java)
         const val EXTRA_IN_EXTRACTIONS = "EXTRA_IN_EXTRACTIONS"
+        const val EXTRA_IN_COMPOUND_EXTRACTIONS = "EXTRA_IN_COMPOUND_EXTRACTIONS"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +72,9 @@ class ExtractionsActivity : AppCompatActivity() {
                 }
             }
         }
+        mCompoundExtractions = intent.extras?.getParcelable<Bundle>(EXTRA_IN_COMPOUND_EXTRACTIONS)?.run {
+            keySet().map { it to getParcelable<GiniCaptureCompoundExtraction>(it)!! }.toMap()
+        } ?: emptyMap()
     }
 
     private fun setUpRecyclerView(binding: ActivityExtractionsBinding) {
@@ -76,7 +82,7 @@ class ExtractionsActivity : AppCompatActivity() {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@ExtractionsActivity)
             adapter = when {
-                mExtractions.isNotEmpty() -> ExtractionsAdapterImpl(getSortedExtractions(mExtractions))
+                mExtractions.isNotEmpty() -> ExtractionsAdapterImpl(getSortedExtractions(mExtractions), getSortedExtractions(mCompoundExtractions))
                 mLegacyExtractions.isNotEmpty() -> LegacyExtractionsAdapter(getSortedExtractions(mLegacyExtractions))
                 else -> null
             }
@@ -204,6 +210,7 @@ class ExtractionsActivity : AppCompatActivity() {
     private abstract class ExtractionsAdapter<T> :
             RecyclerView.Adapter<ExtractionsViewHolder>() {
         abstract var extractions: List<T>
+        abstract var compoundExtractions: List<GiniCaptureCompoundExtraction>
     }
 
     private class ExtractionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -216,8 +223,10 @@ class ExtractionsActivity : AppCompatActivity() {
         }
     }
 
-    private class ExtractionsAdapterImpl(override var extractions: List<GiniCaptureSpecificExtraction>)
-        : ExtractionsAdapter<GiniCaptureSpecificExtraction>() {
+    private class ExtractionsAdapterImpl(
+            override var extractions: List<GiniCaptureSpecificExtraction>,
+            override var compoundExtractions: List<GiniCaptureCompoundExtraction>
+    ) : ExtractionsAdapter<GiniCaptureSpecificExtraction>() {
 
         override fun onCreateViewHolder(parent: ViewGroup,
                                         viewType: Int): ExtractionsViewHolder {
@@ -231,17 +240,29 @@ class ExtractionsActivity : AppCompatActivity() {
             extractions.getOrNull(position)?.run {
                 holder.mTextName.text = name
                 holder.mTextValue.text = value
+            } ?: compoundExtractions.getOrNull(position - extractions.size)?.run {
+                holder.mTextName.text = name
+                holder.mTextValue.text = StringBuilder().apply {
+                    specificExtractionMaps.forEach { extractionMap ->
+                        extractionMap.forEach { (name, extraction) ->
+                            append("${name}: ${extraction.value}\n")
+                        }
+                        append("\n")
+                    }
+                }
             }
         }
 
         override fun getItemCount(): Int {
-            return extractions.size
+            return extractions.size + compoundExtractions.size
         }
 
     }
 
-    private class LegacyExtractionsAdapter(override var extractions: List<SpecificExtraction>)
-        : ExtractionsAdapter<SpecificExtraction>() {
+    private class LegacyExtractionsAdapter(
+            override var extractions: List<SpecificExtraction>,
+            override var compoundExtractions: List<GiniCaptureCompoundExtraction> = emptyList()
+    ) : ExtractionsAdapter<SpecificExtraction>() {
 
         override fun onCreateViewHolder(parent: ViewGroup,
                                         viewType: Int): ExtractionsViewHolder {

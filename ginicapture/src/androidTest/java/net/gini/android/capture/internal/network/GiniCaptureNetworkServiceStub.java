@@ -7,6 +7,7 @@ import net.gini.android.capture.network.GiniCaptureNetworkCallback;
 import net.gini.android.capture.network.GiniCaptureNetworkService;
 import net.gini.android.capture.network.Result;
 import net.gini.android.capture.network.model.GiniCaptureBox;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.util.CancellationToken;
@@ -58,7 +59,8 @@ public class GiniCaptureNetworkServiceStub implements GiniCaptureNetworkService 
                         new GiniCaptureSpecificExtraction("amountToPay",
                                 "1:00EUR", "amountToPay",
                                 new GiniCaptureBox(1, 0,0,0,0),
-                                Collections.<GiniCaptureExtraction>emptyList())));
+                                Collections.<GiniCaptureExtraction>emptyList())),
+                Collections.<String, GiniCaptureCompoundExtraction>emptyMap());
     }
 
     public static class CallbackCancellationToken implements CancellationToken {

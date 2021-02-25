@@ -18,6 +18,7 @@ import net.gini.android.capture.analysis.AnalysisFragmentListener;
 import net.gini.android.capture.component.ExtractionsActivity;
 import net.gini.android.capture.component.R;
 import net.gini.android.capture.component.noresults.NoResultsExampleAppCompatActivity;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 
 import org.slf4j.Logger;
@@ -139,7 +140,8 @@ public class AnalysisScreenHandler implements AnalysisFragmentListener {
     }
 
     @Override
-    public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
+    public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
+                                       @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions) {
         showExtractions(getExtractionsBundle(extractions));
     }
 

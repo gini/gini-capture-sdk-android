@@ -17,6 +17,7 @@ import net.gini.android.capture.R;
 import net.gini.android.capture.camera.CameraActivity;
 import net.gini.android.capture.network.GiniCaptureNetworkApi;
 import net.gini.android.capture.network.GiniCaptureNetworkService;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.noresults.NoResultsActivity;
 import net.gini.android.capture.onboarding.OnboardingActivity;
@@ -329,7 +330,8 @@ public class AnalysisActivity extends AppCompatActivity implements
 
     @Override
     public void onExtractionsAvailable(
-            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
+            @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
+            @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions) {
         final Intent result = new Intent();
         final Bundle extractionsBundle = new Bundle();
         for (final Map.Entry<String, GiniCaptureSpecificExtraction> extraction
@@ -337,6 +339,12 @@ public class AnalysisActivity extends AppCompatActivity implements
             extractionsBundle.putParcelable(extraction.getKey(), extraction.getValue());
         }
         result.putExtra(CameraActivity.EXTRA_OUT_EXTRACTIONS, extractionsBundle);
+        final Bundle compoundExtractionsBundle = new Bundle();
+        for (final Map.Entry<String, GiniCaptureCompoundExtraction> extraction
+                : compoundExtractions.entrySet()) {
+            compoundExtractionsBundle.putParcelable(extraction.getKey(), extraction.getValue());
+        }
+        result.putExtra(CameraActivity.EXTRA_OUT_COMPOUND_EXTRACTIONS, compoundExtractionsBundle);
         setResult(RESULT_OK, result);
         finish();
         clearMemory();

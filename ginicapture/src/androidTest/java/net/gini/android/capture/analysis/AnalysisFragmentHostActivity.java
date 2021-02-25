@@ -2,6 +2,7 @@ package net.gini.android.capture.analysis;
 
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCaptureError;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 
 import java.util.Map;
@@ -23,7 +24,8 @@ public class AnalysisFragmentHostActivity extends
     }
 
     @Override
-    public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions) {
+    public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
+                                       @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions) {
 
     }
 
