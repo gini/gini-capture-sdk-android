@@ -40,6 +40,8 @@ import net.gini.android.capture.internal.document.ImageMultiPageDocumentMemorySt
 import net.gini.android.capture.internal.ui.ErrorSnackbar;
 import net.gini.android.capture.internal.util.FileImportHelper;
 import net.gini.android.capture.internal.util.Size;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
+import net.gini.android.capture.network.model.GiniCaptureReturnReason;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.tracking.AnalysisScreenEvent;
 import net.gini.android.capture.tracking.Event;
@@ -622,11 +624,14 @@ public class AnalysisScreenPresenterTest {
 
         final Map<String, GiniCaptureSpecificExtraction> extractions = Collections.singletonMap(
                 "extraction", mock(GiniCaptureSpecificExtraction.class));
+        final Map<String, GiniCaptureCompoundExtraction> compoundExtraction = Collections.singletonMap(
+                "compoundExtraction", mock(GiniCaptureCompoundExtraction.class));
+        final List<GiniCaptureReturnReason> returnReasons = Collections.singletonList(mock(GiniCaptureReturnReason.class));
         final CompletableFuture<AnalysisInteractor.ResultHolder> analysisFuture =
                 new CompletableFuture<>();
         analysisFuture.complete(new AnalysisInteractor.ResultHolder(
                 AnalysisInteractor.Result.SUCCESS_WITH_EXTRACTIONS,
-                extractions));
+                extractions, compoundExtraction, returnReasons));
 
         final AnalysisScreenPresenter presenter = createPresenterWithAnalysisFuture(imageDocument,
                 analysisFuture);
@@ -638,7 +643,7 @@ public class AnalysisScreenPresenterTest {
         presenter.start();
 
         // Then
-        verify(listener).onExtractionsAvailable(extractions);
+        verify(listener).onExtractionsAvailable(extractions, compoundExtraction);
     }
 
     @Test
