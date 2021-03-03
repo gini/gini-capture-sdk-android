@@ -50,8 +50,8 @@ app/build.gradle:
 
 ```
 dependencies {
-    implementation 'net.gini:gini-capture-sdk:1.0.0-beta04'
-    implementation 'net.gini:gini-capture-accounting-network-lib:1.0.0-beta04'
+    implementation 'net.gini:gini-capture-sdk:1.0.0-beta05'
+    implementation 'net.gini:gini-capture-accounting-network-lib:1.0.0-beta05'
 }
 ```
 
