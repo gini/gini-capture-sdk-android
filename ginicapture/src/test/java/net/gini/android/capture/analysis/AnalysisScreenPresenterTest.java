@@ -643,7 +643,7 @@ public class AnalysisScreenPresenterTest {
         presenter.start();
 
         // Then
-        verify(listener).onExtractionsAvailable(extractions, compoundExtraction);
+        verify(listener).onExtractionsAvailable(extractions, compoundExtraction, returnReasons);
     }
 
     @Test
