@@ -18,12 +18,14 @@ import net.gini.android.capture.camera.CameraActivity;
 import net.gini.android.capture.network.GiniCaptureNetworkApi;
 import net.gini.android.capture.network.GiniCaptureNetworkService;
 import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
+import net.gini.android.capture.network.model.GiniCaptureReturnReason;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.noresults.NoResultsActivity;
 import net.gini.android.capture.onboarding.OnboardingActivity;
 import net.gini.android.capture.review.ReviewActivity;
 import net.gini.android.capture.tracking.AnalysisScreenEvent;
 
+import java.util.List;
 import java.util.Map;
 
 import static net.gini.android.capture.internal.util.ActivityHelper.enableHomeAsUp;
@@ -331,7 +333,8 @@ public class AnalysisActivity extends AppCompatActivity implements
     @Override
     public void onExtractionsAvailable(
             @NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
-            @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions) {
+            @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions,
+            @NonNull final List<GiniCaptureReturnReason> returnReasons) {
         final Intent result = new Intent();
         final Bundle extractionsBundle = new Bundle();
         for (final Map.Entry<String, GiniCaptureSpecificExtraction> extraction

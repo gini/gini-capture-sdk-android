@@ -1,13 +1,14 @@
 package net.gini.android.capture.analysis;
 
-import static net.gini.android.capture.internal.util.NullabilityHelper.getMapOrEmpty;
-import static net.gini.android.capture.tracking.EventTrackingHelper.trackAnalysisScreenEvent;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import net.gini.android.capture.AsyncCallback;
 import net.gini.android.capture.Document;
@@ -27,6 +28,7 @@ import net.gini.android.capture.internal.ui.ErrorSnackbar;
 import net.gini.android.capture.internal.util.FileImportHelper;
 import net.gini.android.capture.internal.util.MimeType;
 import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
+import net.gini.android.capture.network.model.GiniCaptureReturnReason;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.tracking.AnalysisScreenEvent;
 import net.gini.android.capture.tracking.AnalysisScreenEvent.ERROR_DETAILS_MAP_KEY;
@@ -41,14 +43,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 import jersey.repackaged.jsr166e.CompletableFuture;
+
+import static net.gini.android.capture.internal.util.NullabilityHelper.getListOrEmpty;
+import static net.gini.android.capture.internal.util.NullabilityHelper.getMapOrEmpty;
+import static net.gini.android.capture.tracking.EventTrackingHelper.trackAnalysisScreenEvent;
 
 /**
  * Created by Alpar Szotyori on 08.05.2019.
- *
+ * <p>
  * Copyright (c) 2019 Gini GmbH.
  */
 class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
@@ -63,7 +66,8 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
 
         @Override
         public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
-                                           @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions) {
+                                           @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions,
+                                           @NonNull final List<GiniCaptureReturnReason> returnReasons) {
         }
 
         @Override
@@ -164,7 +168,7 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
 
     @Override
     public void showError(@NonNull final String message, @NonNull final String buttonTitle,
-            @NonNull final View.OnClickListener onClickListener) {
+                          @NonNull final View.OnClickListener onClickListener) {
         getView().showErrorSnackbar(message, ErrorSnackbar.LENGTH_INDEFINITE, buttonTitle,
                 onClickListener);
     }
@@ -263,13 +267,13 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
                     new FileImportHelper.ShowAlertCallback() {
                         @Override
                         public void showAlertDialog(@NonNull final String message,
-                                @NonNull final String positiveButtonTitle,
-                                @NonNull final DialogInterface.OnClickListener
-                                        positiveButtonClickListener,
-                                @Nullable final String negativeButtonTitle,
-                                @Nullable final DialogInterface.OnClickListener
-                                        negativeButtonClickListener,
-                                @Nullable final DialogInterface.OnCancelListener cancelListener) {
+                                                    @NonNull final String positiveButtonTitle,
+                                                    @NonNull final DialogInterface.OnClickListener
+                                                            positiveButtonClickListener,
+                                                    @Nullable final String negativeButtonTitle,
+                                                    @Nullable final DialogInterface.OnClickListener
+                                                            negativeButtonClickListener,
+                                                    @Nullable final DialogInterface.OnCancelListener cancelListener) {
                             getView().showAlertDialog(message, positiveButtonTitle,
                                     positiveButtonClickListener, negativeButtonTitle,
                                     negativeButtonClickListener, cancelListener);
@@ -308,7 +312,7 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
                         AnalysisInteractor.ResultHolder, Throwable, Void>() {
                     @Override
                     public Void apply(final AnalysisInteractor.ResultHolder resultHolder,
-                            final Throwable throwable) {
+                                      final Throwable throwable) {
                         stopScanAnimation();
                         if (throwable != null) {
                             handleAnalysisError(throwable);
@@ -328,9 +332,10 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
                                             .onProceedToNoExtractionsScreen(mMultiPageDocument);
                                     return null;
                                 }
-                                    getAnalysisFragmentListenerOrNoOp()
-                                            .onExtractionsAvailable(getMapOrEmpty(resultHolder.getExtractions()),
-                                                    getMapOrEmpty(resultHolder.getCompoundExtractions()));
+                                getAnalysisFragmentListenerOrNoOp()
+                                        .onExtractionsAvailable(getMapOrEmpty(resultHolder.getExtractions()),
+                                                getMapOrEmpty(resultHolder.getCompoundExtractions()),
+                                                getListOrEmpty(resultHolder.getReturnReasons()));
 
                             case NO_NETWORK_SERVICE:
                                 break;
@@ -445,7 +450,7 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
                 new DocumentRenderer.Callback() {
                     @Override
                     public void onBitmapReady(@Nullable final Bitmap bitmap,
-                            final int rotationForDisplay) {
+                                              final int rotationForDisplay) {
                         LOG.debug("Document rendered");
                         if (isStopped()) {
                             return;

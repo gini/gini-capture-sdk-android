@@ -21,6 +21,7 @@ import net.gini.android.capture.document.DocumentFactory;
 import net.gini.android.capture.document.ImageDocument;
 import net.gini.android.capture.internal.camera.photo.PhotoFactory;
 import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
+import net.gini.android.capture.network.model.GiniCaptureReturnReason;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.review.ReviewActivity;
 
@@ -32,6 +33,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -209,7 +211,8 @@ public class AnalysisScreenTest {
 
             @Override
             public void onExtractionsAvailable(@NonNull final Map<String, GiniCaptureSpecificExtraction> extractions,
-                                               @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions) {
+                                               @NonNull final Map<String, GiniCaptureCompoundExtraction> compoundExtractions,
+                                               @NonNull final List<GiniCaptureReturnReason> returnReasons) {
 
             }
 
