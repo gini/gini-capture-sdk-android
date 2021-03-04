@@ -21,6 +21,7 @@ import net.gini.android.capture.analysis.AnalysisActivity;
 import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
 import net.gini.android.capture.help.HelpActivity;
 import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
+import net.gini.android.capture.network.model.GiniCaptureReturnReason;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.onboarding.OnboardingActivity;
 import net.gini.android.capture.review.ReviewActivity;
@@ -318,7 +319,13 @@ public class CameraActivity extends AppCompatActivity implements CameraFragmentL
      * Returned when compound extractions are available. Contains a Bundle with the extraction labels as keys and {@link
      * GiniCaptureCompoundExtraction} as values.
      */
-    public static final String EXTRA_OUT_COMPOUND_EXTRACTIONS = "GV_EXTRA_OUT_COMPOUND_EXTRACTIONS";
+    public static final String EXTRA_OUT_COMPOUND_EXTRACTIONS = "GC_EXTRA_OUT_COMPOUND_EXTRACTIONS";
+
+    /**
+     * Returned when return reasons are available. Contains a Parcelable ArrayList extra with
+     * {@link GiniCaptureReturnReason} as values.
+     */
+    public static final String EXTRA_OUT_RETURN_REASONS = "GC_EXTRA_OUT_RETURN_REASONS";
 
     /**
      * <p> Returned result code in case something went wrong. You should retrieve the {@link
