@@ -71,13 +71,13 @@
         <item name="gcCustomFont" />
     </style>
 
-    <style name="Root.GiniVisionTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage1.TextStyle" parent="TextAppearance.AppCompat">
+    <style name="Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage1.TextStyle" parent="TextAppearance.AppCompat">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/gc_unsupported_qrcode_detected_popup_message_1</item>
         <item name="gcCustomFont" />
     </style>
 
-    <style name="Root.GiniVisionTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage2.TextStyle" parent="TextAppearance.AppCompat">
+    <style name="Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage2.TextStyle" parent="TextAppearance.AppCompat">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/gc_unsupported_qrcode_detected_popup_message_2</item>
         <item name="gcCustomFont" />
@@ -266,9 +266,9 @@
 
     <style name="GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle" parent="Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle" />
 
-    <style name="GiniVisionTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage1.TextStyle" parent="Root.GiniVisionTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage1.TextStyle" />
+    <style name="GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage1.TextStyle" parent="Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage1.TextStyle" />
 
-    <style name="GiniVisionTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage2.TextStyle" parent="Root.GiniVisionTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage2.TextStyle" />
+    <style name="GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage2.TextStyle" parent="Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage2.TextStyle" />
 
     <style name="GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle" parent="Root.GiniCaptureTheme.Camera.DocumentImportSubtitle.TextStyle" />
 

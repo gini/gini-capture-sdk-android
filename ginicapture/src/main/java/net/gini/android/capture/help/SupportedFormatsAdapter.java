@@ -24,6 +24,7 @@ import static net.gini.android.capture.help.SupportedFormatsAdapter.ItemType.FOR
 import static net.gini.android.capture.help.SupportedFormatsAdapter.ItemType.HEADER;
 import static net.gini.android.capture.internal.util.FeatureConfiguration.getDocumentImportEnabledFileTypes;
 import static net.gini.android.capture.internal.util.FeatureConfiguration.isFileImportEnabled;
+import static net.gini.android.capture.internal.util.FeatureConfiguration.isQRCodeScanningEnabled;
 
 /**
  * Internal use only.
@@ -51,6 +52,9 @@ class SupportedFormatsAdapter extends
         } else if (getDocumentImportEnabledFileTypes()
                 == DocumentImportEnabledFileTypes.PDF) {
             items.add(SupportedFormat.PDF);
+        }
+        if (isQRCodeScanningEnabled()) {
+            items.add(SupportedFormat.QR_CODE);
         }
         items.add(SectionHeader.UNSUPPORTED_FORMATS);
         Collections.addAll(items, UnsupportedFormat.values());
@@ -142,7 +146,8 @@ class SupportedFormatsAdapter extends
     private enum SupportedFormat implements FormatInfo {
         PRINTED_INVOICES(R.string.gc_supported_format_printed_invoices),
         SINGLE_PAGE_AS_JPEG_PNG_GIF(R.string.gc_supported_format_single_page_as_jpeg_png_gif),
-        PDF(R.string.gc_supported_format_pdf);
+        PDF(R.string.gc_supported_format_pdf),
+        QR_CODE(R.string.gc_supported_format_qr_code);
 
         @DrawableRes
         private final int mIconBackground;
