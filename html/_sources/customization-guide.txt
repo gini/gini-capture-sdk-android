@@ -429,8 +429,11 @@ All Action Bar customizations except the title are global to all Activities.
 
 .. _camera-8:
 
-8. Document Import Hint
+8. Hints
 ^^^^
+
+8.1 Document Import Hint
+~~~~
 
 - **Background Color**
 
@@ -456,6 +459,35 @@ All Action Bar customizations except the title are global to all Activities.
     Via overriding the style named ``GiniCaptureTheme.Camera.DocumentImportHint.TextStyle`` (with
     parent style ``Root.GiniCaptureTheme.Camera.DocumentImportHint.TextStyle``) and setting an
     item named ``gcCustomFont`` with the path to the font file in your assets folder.
+
+8.2 QR Code Scanner Hint
+~~~~
+
+- **Background Color**
+
+  Via the color resource named ``gc_document_import_hint_background``.
+
+- **Close Icon Color**
+
+  Via the color resource name ``gc_hint_close``.
+
+- **Message**
+
+  - **Text**
+
+    Via the string resource named ``gc_qr_code_scanner_hint_text``.
+
+  - **Text Style**
+
+    Via overriding the style named ``GiniCaptureTheme.Camera.DocumentImportHint.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.DocumentImportHint.TextStyle``).
+
+  - **Font**
+
+    Via overriding the style named ``GiniCaptureTheme.Camera.DocumentImportHint.TextStyle`` (with
+    parent style ``Root.GiniCaptureTheme.Camera.DocumentImportHint.TextStyle``) and setting an
+    item named ``gcCustomFont`` with the path to the font file in your assets folder.
+
 
 :ref:`Back to screenshots. <camera>`
 
@@ -512,31 +544,66 @@ All Action Bar customizations except the title are global to all Activities.
 
 - **Background Color**
 
-  Via the color resource named ``gc_qrcode_detected_popup_background``.
+  - **Payable QRCode**
 
-- **Message**
+    Via the color resource named ``gc_qrcode_detected_popup_background``.
 
-  - **Text**
+  - **Unsupported QRCode**
 
-    Via the string resources named ``gc_qrcode_detected_popup_message_1`` and
-    ``gc_qrcode_detected_popup_message_2``.
+    Via the color resource named ``gc_unsupported_qrcode_detected_popup_background``.
 
-  - **Text Style**
+ - **Message**
 
-    Via overriding the styles named
-    ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle`` (with parent style
-    ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle``) and
-    ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle`` (with parent style
-    ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle``).
+   - **Text**
 
-  - **Font**
+    - **Payable QRCode**
 
-    Via overriding the styles named
-    ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle`` (with parent style
-    ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle``) and
-    ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle`` (with parent style
-    ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle``). and setting an
-    item named ``gcCustomFont`` with the path to the font file in your assets folder.
+      Via the string resources named ``gc_qrcode_detected_popup_message_1`` and
+      ``gc_qrcode_detected_popup_message_2``.
+
+    - **Unsupported QRCode**
+
+      Via the string resources named ``gc_unsupported_qrcode_detected_popup_message_1`` and
+      ``gc_unsupported_qrcode_detected_popup_message_2``.
+
+   - **Text Style**
+
+    - **Payable QRCode**
+
+      Via overriding the styles named
+      ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle`` (with parent style
+      ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle``) and
+      ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle`` (with parent style
+      ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle``).
+
+    - **Unsupported QRCode**
+
+      Via overriding the styles named
+      ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage1.TextStyle`` (with parent style
+      ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage1.TextStyle``) and
+      ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage2.TextStyle`` (with parent style
+      ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage2.TextStyle``).
+
+
+   - **Font**
+
+    - **Payable QRCode**
+
+      Via overriding the styles named
+      ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle`` (with parent style
+      ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message1.TextStyle``) and
+      ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle`` (with parent style
+      ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.Message2.TextStyle``). and setting an
+      item named ``gvCustomFont`` with the path to the font file in your assets folder.
+
+    - **Unsupported QRCode**
+
+      Via overriding the styles named
+      ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage1.TextStyle`` (with parent style
+      ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage1.TextStyle``) and
+      ``GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage2.TextStyle`` (with parent style
+      ``Root.GiniCaptureTheme.Camera.QRCodeDetectedPopup.UnsupportedMessage2.TextStyle``). and setting an
+      item named ``gvCustomFont`` with the path to the font file in your assets folder.
 
 :ref:`Back to screenshots. <camera>`
 
