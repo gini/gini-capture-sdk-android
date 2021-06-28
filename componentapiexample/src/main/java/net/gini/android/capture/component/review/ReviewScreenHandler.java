@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -13,11 +14,16 @@ import androidx.fragment.app.Fragment;
 
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCaptureError;
+import net.gini.android.capture.component.MainActivity;
 import net.gini.android.capture.component.R;
 import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
+import net.gini.android.capture.component.camera.CameraScreenHandler;
 import net.gini.android.capture.review.ReviewFragmentCompat;
 import net.gini.android.capture.review.ReviewFragmentInterface;
 import net.gini.android.capture.review.ReviewFragmentListener;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static android.app.Activity.RESULT_OK;
 import static net.gini.android.capture.component.review.ReviewExampleAppCompatActivity.EXTRA_IN_DOCUMENT;
@@ -33,20 +39,21 @@ import static net.gini.android.capture.component.review.ReviewExampleAppCompatAc
  */
 public class ReviewScreenHandler implements ReviewFragmentListener {
 
-    private static final int ANALYSIS_REQUEST = 1;
+    private static final Logger LOG = LoggerFactory.getLogger(ReviewScreenHandler.class);
     private final AppCompatActivity mActivity;
     private Document mDocument;
     private ReviewFragmentInterface mReviewFragmentInterface;
+    private final ActivityResultLauncher<Intent> startAnalysis;
 
-    protected ReviewScreenHandler(final AppCompatActivity activity) {
+    protected ReviewScreenHandler(final AppCompatActivity activity, ActivityResultLauncher<Intent> startAnalysis) {
         mActivity = activity;
+        this.startAnalysis = startAnalysis;
     }
 
     @Override
     public void onProceedToAnalysisScreen(@NonNull final Document document,
             @Nullable final String errorMessage) {
-        final Intent intent = getAnalysisActivityIntent(document, errorMessage);
-        mActivity.startActivityForResult(intent, ANALYSIS_REQUEST);
+        startAnalysis.launch(getAnalysisActivityIntent(document, errorMessage));
     }
 
     private Intent getAnalysisActivityIntent(final Document document, final String errorMessage) {
@@ -55,23 +62,15 @@ public class ReviewScreenHandler implements ReviewFragmentListener {
 
     @Override
     public void onError(@NonNull final GiniCaptureError error) {
-        Toast.makeText(mActivity, mActivity.getString(R.string.gini_capture_error,
-                error.getErrorCode(), error.getMessage()), Toast.LENGTH_LONG).show();
+        LOG.error("Gini Capture SDK error: {} - {}", error.getErrorCode(), error.getMessage());
+        final Intent result = new Intent();
+        result.putExtra(MainActivity.EXTRA_OUT_ERROR, error);
+        mActivity.setResult(MainActivity.RESULT_ERROR, result);
+        mActivity.finish();
     }
 
     public Document getDocument() {
         return mDocument;
-    }
-
-    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        switch (requestCode) {
-            case ANALYSIS_REQUEST:
-                if (resultCode == RESULT_OK) {
-                    mActivity.setResult(RESULT_OK);
-                    mActivity.finish();
-                }
-                break;
-        }
     }
 
     public void onCreate(final Bundle savedInstanceState) {
