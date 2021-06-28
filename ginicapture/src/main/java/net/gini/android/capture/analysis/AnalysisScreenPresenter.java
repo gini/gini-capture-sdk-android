@@ -45,6 +45,7 @@ import java.util.Random;
 
 import jersey.repackaged.jsr166e.CompletableFuture;
 
+import static net.gini.android.capture.GiniCaptureError.ErrorCode.MISSING_GINI_CAPTURE_INSTANCE;
 import static net.gini.android.capture.internal.util.NullabilityHelper.getListOrEmpty;
 import static net.gini.android.capture.internal.util.NullabilityHelper.getMapOrEmpty;
 import static net.gini.android.capture.tracking.EventTrackingHelper.trackAnalysisScreenEvent;
@@ -194,6 +195,7 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
     @Override
     public void start() {
         mStopped = false;
+        checkGiniCaptureInstance();
         createDocumentRenderer();
         clearParcelableMemoryCache();
         getView().showScanAnimation();
@@ -210,6 +212,13 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
         } else if (GiniCapture.hasInstance()) {
             GiniCapture.getInstance().internal().getImageMultiPageDocumentMemoryStore()
                     .clear();
+        }
+    }
+
+    private void checkGiniCaptureInstance() {
+        if (!GiniCapture.hasInstance()) {
+            mListener.onError(new GiniCaptureError(MISSING_GINI_CAPTURE_INSTANCE,
+                    "Missing GiniCapture instance. It was not created or there was an application process restart."));
         }
     }
 

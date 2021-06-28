@@ -67,7 +67,12 @@ public class GiniCaptureError implements Parcelable {
          *     An error occurred in the Analysis Screen. Check the message for details.
          * </p>
          */
-        ANALYSIS
+        ANALYSIS,
+        /**
+         * The [GiniCapture] instance is missing. Most likely cause is an application process
+         * restart.
+         */
+        MISSING_GINI_CAPTURE_INSTANCE
     }
 
     private final ErrorCode mErrorCode;

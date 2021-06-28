@@ -98,6 +98,10 @@ public class SupportedFormatsActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gc_activity_supported_formats);
+        if (!GiniCapture.hasInstance()) {
+            finish();
+            return;
+        }
         setUpFormatsList();
         forcePortraitOrientationOnPhones(this);
         setupHomeButton();

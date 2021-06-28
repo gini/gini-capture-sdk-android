@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import net.gini.android.capture.GiniCapture;
+import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.R;
 import net.gini.android.capture.analysis.AnalysisActivity;
 import net.gini.android.capture.camera.CameraActivity;
@@ -23,6 +24,8 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Alpar Szotyori on 16.02.2018.
@@ -210,6 +213,20 @@ public class MultiPageReviewActivity extends AppCompatActivity implements
     private static final String MP_REVIEW_FRAGMENT = "MP_REVIEW_FRAGMENT";
     private static final int ANALYSE_DOCUMENT_REQUEST = 1;
 
+    /**
+     * Internal use only.
+     *
+     * @suppress
+     */
+    public static final String EXTRA_OUT_ERROR = "GC_EXTRA_OUT_ERROR";
+
+    /**
+     * Internal use only.
+     *
+     * @suppress
+     */
+    public static final int RESULT_ERROR = RESULT_FIRST_USER + 1;
+
     private MultiPageReviewFragment mFragment;
 
     public static Intent createIntent(@NonNull final Context context) {
@@ -290,6 +307,14 @@ public class MultiPageReviewActivity extends AppCompatActivity implements
 
     @Override
     public void onImportedDocumentReviewCancelled() {
+        finish();
+    }
+
+    @Override
+    public void onError(@NonNull final GiniCaptureError error) {
+        final Intent result = new Intent();
+        result.putExtra(EXTRA_OUT_ERROR, error);
+        setResult(RESULT_ERROR, result);
         finish();
     }
 

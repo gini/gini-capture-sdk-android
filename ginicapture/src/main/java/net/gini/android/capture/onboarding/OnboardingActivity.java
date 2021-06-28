@@ -159,6 +159,10 @@ public class OnboardingActivity extends AppCompatActivity implements OnboardingF
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gc_activity_onboarding);
+        if (!GiniCapture.hasInstance()) {
+            finish();
+            return;
+        }
         initFragment();
         setupHomeButton();
     }

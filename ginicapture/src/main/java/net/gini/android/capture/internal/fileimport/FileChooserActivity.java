@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import net.gini.android.capture.DocumentImportEnabledFileTypes;
+import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.R;
 import net.gini.android.capture.internal.fileimport.providerchooser.ProvidersAdapter;
@@ -112,6 +113,10 @@ public class FileChooserActivity extends AppCompatActivity implements AlertDialo
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gc_activity_file_chooser);
+        if (!GiniCapture.hasInstance()) {
+            finish();
+            return;
+        }
         bindViews();
         setInputHandlers();
         readExtras();

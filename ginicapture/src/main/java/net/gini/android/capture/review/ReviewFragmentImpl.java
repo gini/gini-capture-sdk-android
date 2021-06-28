@@ -44,6 +44,7 @@ import org.slf4j.LoggerFactory;
 
 import jersey.repackaged.jsr166e.CompletableFuture;
 
+import static net.gini.android.capture.GiniCaptureError.ErrorCode.MISSING_GINI_CAPTURE_INSTANCE;
 import static net.gini.android.capture.internal.network.NetworkRequestsManager.isCancellation;
 import static net.gini.android.capture.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
 import static net.gini.android.capture.internal.util.FileImportHelper.showAlertIfOpenWithDocumentAndAppIsDefault;
@@ -135,6 +136,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
     }
 
     public void onStart() {
+        checkGiniCaptureInstance();
         mNextClicked = false;
         mStopped = false;
         final Activity activity = mFragment.getActivity();
@@ -163,6 +165,13 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                         handleOnStart();
                     }
                 });
+    }
+
+    private void checkGiniCaptureInstance() {
+        if (!GiniCapture.hasInstance()) {
+            mListener.onError(new GiniCaptureError(MISSING_GINI_CAPTURE_INSTANCE,
+                    "Missing GiniCapture instance. It was not created or there was an application process restart."));
+        }
     }
 
     private void handleOnStart() {

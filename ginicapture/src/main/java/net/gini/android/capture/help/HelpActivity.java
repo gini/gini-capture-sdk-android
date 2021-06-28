@@ -102,6 +102,10 @@ public class HelpActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gc_activity_help);
+        if (!GiniCapture.hasInstance()) {
+            finish();
+            return;
+        }
         setUpHelpItems();
         forcePortraitOrientationOnPhones(this);
         if (hasOnlyOneHelpItem()) {
