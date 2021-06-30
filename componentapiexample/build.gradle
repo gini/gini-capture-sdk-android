@@ -67,6 +67,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':exampleShared')
     implementation deps.androidxAppCompat
+    implementation deps.androidxActivity
     implementation deps.androidxCoordinatorLayout
     implementation deps.androidxMultidex
     implementation deps.androidxConstraintLayout
