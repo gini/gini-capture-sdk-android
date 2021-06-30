@@ -49,6 +49,7 @@ android {
         unitTests {
             includeAndroidResources = true
         }
+        kotlinOptions { jvmTarget = "1.8" }
     }
 
     sourceSets {
@@ -82,12 +83,14 @@ dependencies {
     testImplementation deps.truth
     testImplementation deps.mockito
     testImplementation deps.mockitoKotlin
+    testImplementation deps.mockitoInline
     testImplementation deps.robolectric
     testImplementation deps.androidxTestCore
     testImplementation deps.androidxTestJUnit
     testImplementation deps.androidxTestRunner
     testImplementation deps.androidxTestEspressoCore
     testImplementation deps.androidxTestEspressoIntents
+    debugImplementation deps.androidxFragmentTesting
 
     androidTestImplementation deps.androidxTestCore
     androidTestImplementation deps.androidxTestJUnit

@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -27,6 +28,7 @@ import net.gini.android.capture.camera.CameraFragmentCompat;
 import net.gini.android.capture.camera.CameraFragmentInterface;
 import net.gini.android.capture.camera.CameraFragmentListener;
 import net.gini.android.capture.component.ExtractionsActivity;
+import net.gini.android.capture.component.MainActivity;
 import net.gini.android.capture.component.R;
 import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
 import net.gini.android.capture.component.review.ReviewExampleAppCompatActivity;
@@ -74,8 +76,18 @@ public class CameraScreenHandler implements CameraFragmentListener,
     private SingleDocumentAnalyzer mSingleDocumentAnalyzer;
     private CancellationToken mFileImportCancellationToken;
 
-    protected CameraScreenHandler(final AppCompatActivity activity) {
+    private final ActivityResultLauncher<Intent> startReview;
+    private final ActivityResultLauncher<Intent> startMultiPageReview;
+    private final ActivityResultLauncher<Intent> startAnalysis;
+
+    protected CameraScreenHandler(final AppCompatActivity activity,
+                                  ActivityResultLauncher<Intent> startReview,
+                                  ActivityResultLauncher<Intent> startMultiPageReview,
+                                  ActivityResultLauncher<Intent> startAnalysis) {
         mActivity = activity;
+        this.startReview = startReview;
+        this.startMultiPageReview = startMultiPageReview;
+        this.startAnalysis = startAnalysis;
     }
 
     @Override
@@ -175,13 +187,14 @@ public class CameraScreenHandler implements CameraFragmentListener,
     @Override
     public void onError(@NonNull final GiniCaptureError error) {
         LOG.error("Gini Capture SDK error: {} - {}", error.getErrorCode(), error.getMessage());
-        Toast.makeText(mActivity, mActivity.getString(R.string.gini_capture_error,
-                error.getErrorCode(), error.getMessage()), Toast.LENGTH_LONG).show();
+        final Intent result = new Intent();
+        result.putExtra(MainActivity.EXTRA_OUT_ERROR, error);
+        mActivity.setResult(MainActivity.RESULT_ERROR, result);
+        mActivity.finish();
     }
 
     private void launchReviewScreen(final Document document) {
-        final Intent intent = getReviewActivityIntent(document);
-        mActivity.startActivityForResult(intent, REVIEW_REQUEST);
+        startReview.launch(getReviewActivityIntent(document));
     }
 
     private Intent getReviewActivityIntent(final Document document) {
@@ -189,8 +202,7 @@ public class CameraScreenHandler implements CameraFragmentListener,
     }
 
     private void launchAnalysisScreen(final Document document) {
-        final Intent intent = getAnalysisActivityIntent(document);
-        mActivity.startActivityForResult(intent, ANALYSIS_REQUEST);
+        startAnalysis.launch(getAnalysisActivityIntent(document));
     }
 
     private Intent getAnalysisActivityIntent(final Document document) {
@@ -199,18 +211,6 @@ public class CameraScreenHandler implements CameraFragmentListener,
 
     protected Activity getActivity() {
         return mActivity;
-    }
-
-    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        switch (requestCode) {
-            case REVIEW_REQUEST:
-            case MULTI_PAGE_REVIEW_REQUEST:
-            case ANALYSIS_REQUEST:
-                if (resultCode == RESULT_OK) {
-                    mActivity.finish();
-                }
-                break;
-        }
     }
 
     public boolean onBackPressed() {
@@ -413,8 +413,7 @@ public class CameraScreenHandler implements CameraFragmentListener,
     }
 
     private void launchMultiPageReviewScreen() {
-        final Intent intent = MultiPageReviewExampleActivity.newInstance(mActivity);
-        mActivity.startActivityForResult(intent, MULTI_PAGE_REVIEW_REQUEST);
+        startMultiPageReview.launch(MultiPageReviewExampleActivity.newInstance(mActivity));
     }
 
     public boolean onCreateOptionsMenu(final Menu menu) {

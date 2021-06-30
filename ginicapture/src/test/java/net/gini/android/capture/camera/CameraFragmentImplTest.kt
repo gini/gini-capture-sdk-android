@@ -3,12 +3,11 @@ package net.gini.android.capture.camera
 import android.app.Activity
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.spy
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import com.google.common.truth.Truth
+import com.nhaarman.mockitokotlin2.*
 import jersey.repackaged.jsr166e.CompletableFuture
 import net.gini.android.capture.GiniCapture
+import net.gini.android.capture.GiniCaptureError
 import net.gini.android.capture.internal.camera.api.CameraInterface
 import net.gini.android.capture.tracking.CameraScreenEvent
 import net.gini.android.capture.tracking.Event
@@ -16,6 +15,7 @@ import net.gini.android.capture.tracking.EventTracker
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito
 
 /**
  * Created by Alpar Szotyori on 02.03.2020.
@@ -52,5 +52,23 @@ class CameraFragmentImplTest {
 
         // Then
         verify(eventTracker).onCameraScreenEvent(Event(CameraScreenEvent.TAKE_PICTURE))
+    }
+
+    @Test
+    fun `notifies listener of error when GiniInstance is missing`() {
+        // Given
+        val fragmentImpl = CameraFragmentImpl(mock())
+
+        val listener = mock<CameraFragmentListener>()
+        fragmentImpl.setListener(listener)
+
+        // When
+        fragmentImpl.onStart()
+
+        // Then
+        val args = argumentCaptor<GiniCaptureError>()
+        Mockito.verify(listener).onError(args.capture())
+        Truth.assertThat(args.firstValue.errorCode)
+            .isEqualTo(GiniCaptureError.ErrorCode.MISSING_GINI_CAPTURE_INSTANCE)
     }
 }

@@ -1,11 +1,15 @@
 package net.gini.android.capture.review.multipage
 
+import androidx.fragment.app.testing.launchFragment
+import androidx.lifecycle.Lifecycle.State.CREATED
+import androidx.lifecycle.Lifecycle.State.RESUMED
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.spy
-import com.nhaarman.mockitokotlin2.verify
+import androidx.test.platform.app.InstrumentationRegistry
+import com.google.common.truth.Truth
+import com.nhaarman.mockitokotlin2.*
 import jersey.repackaged.jsr166e.CompletableFuture
 import net.gini.android.capture.GiniCapture
+import net.gini.android.capture.GiniCaptureError
 import net.gini.android.capture.GiniCaptureHelper
 import net.gini.android.capture.document.GiniCaptureDocument
 import net.gini.android.capture.document.ImageDocumentFake
@@ -21,6 +25,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.any
+import org.robolectric.annotation.LooperMode
 
 /**
  * Created by Alpar Szotyori on 02.03.2020.
@@ -34,7 +39,6 @@ class MultipageReviewFragmentTest {
     @After
     fun after() {
         GiniCaptureHelper.setGiniCaptureInstance(null)
-//        GiniVision.cleanup(InstrumentationRegistry.getInstrumentation().targetContext)
     }
 
     @Test
@@ -66,6 +70,7 @@ class MultipageReviewFragmentTest {
         val fragment = mock<MultiPageReviewFragment>()
         fragment.setListener(mock())
 
+        // TODO: use FragmentScenario to fix the error
         `when`(fragment.activity).thenReturn(mock())
         fragment.mThumbnailsAdapter = mock()
         fragment.mMultiPageDocument = mock()
@@ -101,5 +106,26 @@ class MultipageReviewFragmentTest {
                 ERROR_OBJECT to exception
         )
         Mockito.verify(eventTracker).onReviewScreenEvent(Event(ReviewScreenEvent.UPLOAD_ERROR, errorDetails))
+    }
+
+    @Test
+    fun `notifies listener of error when GiniInstance is missing`() {
+        // Given
+        val listener = mock<MultiPageReviewFragmentListener>()
+
+        val scenario = launchFragment(initialState = CREATED) {
+            MultiPageReviewFragment.createInstance().apply {
+                setListener(listener)
+            }
+        }
+
+        // When
+        scenario.moveToState(RESUMED)
+
+        // Then
+        val args = argumentCaptor<GiniCaptureError>()
+        Mockito.verify(listener).onError(args.capture())
+        Truth.assertThat(args.firstValue.errorCode)
+            .isEqualTo(GiniCaptureError.ErrorCode.MISSING_GINI_CAPTURE_INSTANCE)
     }
 }

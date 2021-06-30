@@ -16,6 +16,7 @@ import net.gini.android.capture.analysis.AnalysisFragmentCompat;
 import net.gini.android.capture.analysis.AnalysisFragmentInterface;
 import net.gini.android.capture.analysis.AnalysisFragmentListener;
 import net.gini.android.capture.component.ExtractionsActivity;
+import net.gini.android.capture.component.MainActivity;
 import net.gini.android.capture.component.R;
 import net.gini.android.capture.component.noresults.NoResultsExampleAppCompatActivity;
 import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
@@ -77,8 +78,11 @@ public class AnalysisScreenHandler implements AnalysisFragmentListener {
 
     @Override
     public void onError(@NonNull final GiniCaptureError error) {
-        mAnalysisFragmentInterface.showError(mActivity.getString(R.string.gini_capture_error,
-                error.getErrorCode(), error.getMessage()), Toast.LENGTH_LONG);
+        LOG.error("Gini Capture SDK error: {} - {}", error.getErrorCode(), error.getMessage());
+        final Intent result = new Intent();
+        result.putExtra(MainActivity.EXTRA_OUT_ERROR, error);
+        mActivity.setResult(MainActivity.RESULT_ERROR, result);
+        mActivity.finish();
     }
 
     public Document getDocument() {

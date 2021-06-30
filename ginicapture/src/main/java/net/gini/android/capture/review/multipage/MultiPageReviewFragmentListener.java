@@ -6,6 +6,7 @@ import android.content.Intent;
 import net.gini.android.capture.AsyncCallback;
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCapture;
+import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.analysis.AnalysisActivity;
 import net.gini.android.capture.analysis.AnalysisFragmentCompat;
 import net.gini.android.capture.camera.CameraFragmentCompat;
@@ -61,4 +62,11 @@ public interface MultiPageReviewFragmentListener {
      * cleaning up using {@link GiniCapture#cleanup(Context)}.
      */
     void onImportedDocumentReviewCancelled();
+
+    /**
+     * Called when an error occurred.
+     *
+     * @param error details about what went wrong
+     */
+    void onError(@NonNull GiniCaptureError error);
 }
