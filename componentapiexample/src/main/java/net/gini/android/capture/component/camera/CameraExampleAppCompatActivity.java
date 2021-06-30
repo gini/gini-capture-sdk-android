@@ -1,10 +1,13 @@
 package net.gini.android.capture.component.camera;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +15,8 @@ import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.camera.CameraFragmentCompat;
 import net.gini.android.capture.camera.CameraFragmentListener;
+import net.gini.android.capture.component.CaptureComponentContract;
+import net.gini.android.capture.component.MainActivity;
 import net.gini.android.capture.component.R;
 import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
 import net.gini.android.capture.component.review.ReviewExampleAppCompatActivity;
@@ -38,14 +43,35 @@ public class CameraExampleAppCompatActivity extends AppCompatActivity implements
         CameraFragmentListener,
         OnboardingFragmentListener {
 
+    public static Intent newInstance(final Context context) {
+        return new Intent(context, CameraExampleAppCompatActivity.class);
+    }
+
     private CameraScreenHandler mCameraScreenHandler;
 
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode,
-            final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        mCameraScreenHandler.onActivityResult(requestCode, resultCode, data);
-    }
+    private final ActivityResultCallback<CaptureComponentContract.Result> activityResultCallback =
+            new ActivityResultCallback<CaptureComponentContract.Result>() {
+                @Override
+                public void onActivityResult(CaptureComponentContract.Result result) {
+                    if (result.getError() != null) {
+                        final Intent data = new Intent();
+                        data.putExtra(MainActivity.EXTRA_OUT_ERROR, result.getError());
+                        CameraExampleAppCompatActivity.this.setResult(MainActivity.RESULT_ERROR,
+                                data);
+                        CameraExampleAppCompatActivity.this.finish();
+                    } else if (result.getResultCode() == RESULT_OK) {
+                        CameraExampleAppCompatActivity.this.setResult(RESULT_OK);
+                        CameraExampleAppCompatActivity.this.finish();
+                    }
+                }
+            };
+
+    private final ActivityResultLauncher<Intent> mStartReview = registerForActivityResult(
+            new CaptureComponentContract(), activityResultCallback);
+    private final ActivityResultLauncher<Intent> mStartAnalysis = registerForActivityResult(
+            new CaptureComponentContract(), activityResultCallback);
+    private final ActivityResultLauncher<Intent> mStartMultiPageReview = registerForActivityResult(
+            new CaptureComponentContract(), activityResultCallback);
 
     @Override
     public void onBackPressed() {
@@ -70,7 +96,7 @@ public class CameraExampleAppCompatActivity extends AppCompatActivity implements
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_compat);
-        mCameraScreenHandler = new CameraScreenHandler(this);
+        mCameraScreenHandler = new CameraScreenHandler(this, mStartReview, mStartMultiPageReview, mStartAnalysis);
         mCameraScreenHandler.onCreate(savedInstanceState);
     }
 

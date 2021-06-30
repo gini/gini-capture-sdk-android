@@ -133,6 +133,10 @@ public class FileImportActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gc_activity_file_import);
+        if (!GiniCapture.hasInstance()) {
+            finish();
+            return;
+        }
         forcePortraitOrientationOnPhones(this);
 
         // Show illustration for the first section only if available (height > 0)

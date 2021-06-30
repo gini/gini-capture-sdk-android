@@ -67,16 +67,16 @@ class DeviceMemoryRequirement implements Requirement {
     @VisibleForTesting
     boolean sufficientMemoryAvailable(final Size photoSize) {
         final Runtime runtime = Runtime.getRuntime();
-        return sufficientMemoryAvailable(runtime, photoSize);
+        return sufficientMemoryAvailable(runtime.totalMemory(), runtime.freeMemory(),
+                runtime.maxMemory(), photoSize);
     }
 
     @VisibleForTesting
-    boolean sufficientMemoryAvailable(final Runtime runtime,
-            final Size photoSize) {
-        final float memoryUsed = (runtime.totalMemory() - runtime.freeMemory()) / 1024f / 1024f;
-        final float memoryNeeded = calculateMemoryUsageForSize(photoSize) / 1024f / 1024f;
-        final float maxMemory = runtime.maxMemory() / 1024f / 1024f;
-        return memoryNeeded + memoryUsed < maxMemory;
+    boolean sufficientMemoryAvailable(final long totalMemoryBytes, final long freeMemoryBytes,
+                                      final long maxMemoryBytes, final Size photoSize) {
+        final float memoryUsedBytes = (totalMemoryBytes - freeMemoryBytes);
+        final float memoryNeededBytes = calculateMemoryUsageForSize(photoSize);
+        return memoryNeededBytes + memoryUsedBytes < maxMemoryBytes;
     }
 
     private float calculateMemoryUsageForSize(final Size photoSize) {

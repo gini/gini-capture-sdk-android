@@ -1,5 +1,6 @@
 package net.gini.android.capture.review.multipage;
 
+import static net.gini.android.capture.GiniCaptureError.ErrorCode.MISSING_GINI_CAPTURE_INSTANCE;
 import static net.gini.android.capture.document.GiniCaptureDocumentError.ErrorCode.FILE_VALIDATION_FAILED;
 import static net.gini.android.capture.document.GiniCaptureDocumentError.ErrorCode.UPLOAD_FAILED;
 import static net.gini.android.capture.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCapture;
+import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.R;
 import net.gini.android.capture.document.GiniCaptureDocument;
 import net.gini.android.capture.document.GiniCaptureDocumentError;
@@ -144,8 +146,13 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         forcePortraitOrientationOnPhones(getActivity());
-        initMultiPageDocument();
         initListener();
+        if (!GiniCapture.hasInstance()) {
+            mListener.onError(new GiniCaptureError(MISSING_GINI_CAPTURE_INSTANCE,
+                    "Missing GiniCapture instance. It was not created or there was an application process restart."));
+        } else {
+            initMultiPageDocument();
+        }
     }
 
     @Override
@@ -200,9 +207,11 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
                 false);
         bindViews(view);
         setInputHandlers();
-        setupPreviewsViewPager();
-        setupThumbnailsRecyclerView();
-        updateNextButtonVisibility();
+        if (mMultiPageDocument != null) {
+            setupPreviewsViewPager();
+            setupThumbnailsRecyclerView();
+            updateNextButtonVisibility();
+        }
         return view;
     }
 
@@ -535,6 +544,9 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
         if (activity == null) {
             return;
         }
+        if (!GiniCapture.hasInstance()) {
+            return;
+        }
         initMultiPageDocument();
         mNextClicked = false;
         if (!mPreviewsShown) {
@@ -685,7 +697,7 @@ public class MultiPageReviewFragment extends Fragment implements MultiPageReview
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (!mNextClicked
+        if (!mNextClicked && mMultiPageDocument != null
                 && mMultiPageDocument.getImportMethod() == Document.ImportMethod.OPEN_WITH) {
             // Delete documents imported using "open with" because the
             // Camera Screen is not launched for "open with"

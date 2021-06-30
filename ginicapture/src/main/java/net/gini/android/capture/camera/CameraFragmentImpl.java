@@ -98,6 +98,7 @@ import kotlin.jvm.functions.Function1;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static net.gini.android.capture.GiniCaptureError.ErrorCode.MISSING_GINI_CAPTURE_INSTANCE;
 import static net.gini.android.capture.camera.Util.cameraExceptionToGiniCaptureError;
 import static net.gini.android.capture.document.ImageDocument.ImportMethod;
 import static net.gini.android.capture.internal.camera.view.FlashButtonHelper.getFlashButtonPosition;
@@ -343,6 +344,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
     }
 
     public void onStart() {
+        checkGiniCaptureInstance();
         final Activity activity = mFragment.getActivity();
         if (activity == null) {
             return;
@@ -393,6 +395,13 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
                     });
         } else {
             showNoPermissionView();
+        }
+    }
+
+    private void checkGiniCaptureInstance() {
+        if (!GiniCapture.hasInstance()) {
+            mListener.onError(new GiniCaptureError(MISSING_GINI_CAPTURE_INSTANCE,
+                    "Missing GiniCapture instance. It was not created or there was an application process restart."));
         }
     }
 

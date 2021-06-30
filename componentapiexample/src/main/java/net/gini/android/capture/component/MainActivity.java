@@ -10,6 +10,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +19,7 @@ import net.gini.android.GiniApiType;
 import net.gini.android.capture.DocumentImportEnabledFileTypes;
 import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.GiniCaptureDebug;
+import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.component.camera.CameraExampleAppCompatActivity;
 import net.gini.android.capture.example.shared.BaseExampleApp;
 import net.gini.android.capture.example.shared.RuntimePermissionHandler;
@@ -43,6 +46,23 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextGiniCaptureSdkVersion;
     private Spinner mGiniApiTypeSpinner;
     private GiniApiType mGiniApiType = GiniApiType.DEFAULT;
+
+    public static final int RESULT_ERROR = RESULT_FIRST_USER + 1;
+    public static final String EXTRA_OUT_ERROR = "EXTRA_OUT_ERROR";
+
+    private final ActivityResultLauncher<Intent> mStartGVL = registerForActivityResult(
+            new CaptureComponentContract(),
+            new ActivityResultCallback<CaptureComponentContract.Result>() {
+                @Override
+                public void onActivityResult(CaptureComponentContract.Result result) {
+                    if (result.getError() != null) {
+                        Toast.makeText(MainActivity.this, "Error: "
+                                        + result.getError().getErrorCode() + " - "
+                                        + result.getError().getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -166,9 +186,7 @@ public class MainActivity extends AppCompatActivity {
                             // We make an exception here to allow running the app on emulators
                             showUnfulfilledRequirementsToast(report);
                         }
-                        final Intent intent = new Intent(MainActivity.this,
-                                CameraExampleAppCompatActivity.class);
-                        startActivity(intent);
+                        mStartGVL.launch(CameraExampleAppCompatActivity.newInstance(MainActivity.this));
                     }
 
                     @Override
@@ -223,6 +241,11 @@ public class MainActivity extends AppCompatActivity {
         if (BuildConfig.DEBUG) {
             GiniCaptureDebug.enable();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @SuppressLint("SetTextI18n")

@@ -61,11 +61,15 @@ public class DeviceMemoryRequirementTest {
         DeviceMemoryRequirement requirement = new DeviceMemoryRequirement(cameraHolder);
 
         // Unused memory = max - (total - free)
-        Runtime runtime = getRuntimeMock(28, 1, 32);
+        final long totalMemoryByte = 28 * 1024 * 1024;
+        final long freeMemoryByte = 1024 * 1024;
+        final long maxMemoryByte = 32 * 1024 * 1024;
 
         // Required memory: size.width * size.height * 3 * 3
-        assertThat(requirement.sufficientMemoryAvailable(runtime, new Size(800, 600))).isTrue();
-        assertThat(requirement.sufficientMemoryAvailable(runtime, new Size(1024, 768))).isFalse();
+        assertThat(requirement.sufficientMemoryAvailable(totalMemoryByte, freeMemoryByte, maxMemoryByte,
+                new Size(800, 600))).isTrue();
+        assertThat(requirement.sufficientMemoryAvailable(totalMemoryByte, freeMemoryByte, maxMemoryByte,
+                new Size(1024, 768))).isFalse();
     }
 
     private CameraHolder getCameraHolder(List<Camera.Size> pictureSizes) {
@@ -82,13 +86,4 @@ public class DeviceMemoryRequirementTest {
         return cameraHolder;
     }
 
-    private Runtime getRuntimeMock(int totalMemoryMbs, int freeMemoryMbs, int maxMemoryMbs) {
-        // Memory used = total memory - free memory
-        Runtime runtime = mock(Runtime.class);
-        when(runtime.totalMemory()).thenReturn(totalMemoryMbs * 1024L * 1024L);
-        when(runtime.freeMemory()).thenReturn(freeMemoryMbs * 1024L * 1024L);
-        // Max memory
-        when(runtime.maxMemory()).thenReturn(maxMemoryMbs * 1024L * 1024L);
-        return runtime;
-    }
 }

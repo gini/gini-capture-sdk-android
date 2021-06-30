@@ -108,6 +108,10 @@ public class PhotoTipsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!GiniCapture.hasInstance()) {
+            finish();
+            return;
+        }
         if (FeatureConfiguration.isMultiPageEnabled()) {
             setContentView(R.layout.gc_activity_photo_tips_with_multipage);
         } else {

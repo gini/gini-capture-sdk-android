@@ -4,16 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import net.gini.android.capture.GiniCaptureError;
+import net.gini.android.capture.component.CaptureComponentContract;
+import net.gini.android.capture.component.MainActivity;
 import net.gini.android.capture.component.R;
 import net.gini.android.capture.component.analysis.AnalysisExampleAppCompatActivity;
+import net.gini.android.capture.component.camera.CameraScreenHandler;
 import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
 import net.gini.android.capture.review.multipage.MultiPageReviewFragment;
 import net.gini.android.capture.review.multipage.MultiPageReviewFragmentListener;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Alpar Szotyori on 08.05.2018.
@@ -23,6 +33,8 @@ import androidx.appcompat.widget.Toolbar;
 public class MultiPageReviewExampleActivity extends AppCompatActivity implements
         MultiPageReviewFragmentListener {
 
+    private static final Logger LOG = LoggerFactory.getLogger(MultiPageReviewExampleActivity.class);
+
     private static final int ANALYSIS_REQUEST = 1;
     private MultiPageReviewFragment mMultiPageReviewFragment;
 
@@ -30,11 +42,30 @@ public class MultiPageReviewExampleActivity extends AppCompatActivity implements
         return new Intent(context, MultiPageReviewExampleActivity.class);
     }
 
+    private final ActivityResultCallback<CaptureComponentContract.Result> activityResultCallback =
+            new ActivityResultCallback<CaptureComponentContract.Result>() {
+                @Override
+                public void onActivityResult(CaptureComponentContract.Result result) {
+                    if (result.getError() != null) {
+                        final Intent data = new Intent();
+                        data.putExtra(MainActivity.EXTRA_OUT_ERROR, result.getError());
+                        MultiPageReviewExampleActivity.this.setResult(MainActivity.RESULT_ERROR,
+                                data);
+                        MultiPageReviewExampleActivity.this.finish();
+                    } else if (result.getResultCode() == RESULT_OK) {
+                        MultiPageReviewExampleActivity.this.setResult(RESULT_OK);
+                        MultiPageReviewExampleActivity.this.finish();
+                    }
+                }
+            };
+
+    private final ActivityResultLauncher<Intent> mStartAnalysis = registerForActivityResult(
+            new CaptureComponentContract(), activityResultCallback);
+
     @Override
     public void onProceedToAnalysisScreen(@NonNull final GiniCaptureMultiPageDocument document) {
-        final Intent intent = AnalysisExampleAppCompatActivity.newInstance(document, null,
-                this);
-        startActivityForResult(intent, ANALYSIS_REQUEST);
+        mStartAnalysis.launch(AnalysisExampleAppCompatActivity.newInstance(document, null,
+                this));
     }
 
     @Override
@@ -48,17 +79,12 @@ public class MultiPageReviewExampleActivity extends AppCompatActivity implements
     }
 
     @Override
-    protected void onActivityResult(final int requestCode, final int resultCode,
-            final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case ANALYSIS_REQUEST:
-                if (resultCode == RESULT_OK) {
-                    setResult(RESULT_OK);
-                    finish();
-                }
-                break;
-        }
+    public void onError(@NonNull @NotNull GiniCaptureError error) {
+        LOG.error("Gini Capture SDK error: {} - {}", error.getErrorCode(), error.getMessage());
+        final Intent result = new Intent();
+        result.putExtra(MainActivity.EXTRA_OUT_ERROR, error);
+        setResult(MainActivity.RESULT_ERROR, result);
+        finish();
     }
 
     @Override
