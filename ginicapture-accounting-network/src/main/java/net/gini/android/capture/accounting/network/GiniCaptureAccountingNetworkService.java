@@ -14,6 +14,7 @@ import net.gini.android.authorization.CredentialsStore;
 import net.gini.android.authorization.EncryptedCredentialsStore;
 import net.gini.android.authorization.SessionManager;
 import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
+import net.gini.android.models.ExtractionsContainer;
 import net.gini.android.models.SpecificExtraction;
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCapture;
@@ -228,9 +229,9 @@ public class GiniCaptureAccountingNetworkService implements GiniCaptureNetworkSe
         mGiniApi.getDocumentTaskManager().pollDocument(giniApiDocument)
                 .onSuccessTask(
                         new Continuation<net.gini.android.models.Document,
-                                Task<Map<String, SpecificExtraction>>>() {
+                                Task<ExtractionsContainer>>() {
                             @Override
-                            public Task<Map<String, SpecificExtraction>> then(
+                            public Task<ExtractionsContainer> then(
                                     final Task<net.gini.android.models.Document> task)
                                     throws Exception {
                                 if (isCancelled.get()) {
@@ -247,15 +248,15 @@ public class GiniCaptureAccountingNetworkService implements GiniCaptureNetworkSe
                                             giniApiDocumentIdRotationMap);
                                     return Task.cancelled();
                                 }
-                                return mGiniApi.getDocumentTaskManager().getExtractions(
+                                return mGiniApi.getDocumentTaskManager().getAllExtractions(
                                         giniApiDocument);
                             }
                         })
                 .continueWith(
-                        new Continuation<Map<String, SpecificExtraction>, Void>() {
+                        new Continuation<ExtractionsContainer, Void>() {
                             @Override
                             public Void then(
-                                    final Task<Map<String, SpecificExtraction>> task)
+                                    final Task<ExtractionsContainer> task)
                                     throws Exception {
                                 if (task.isFaulted()) {
                                     final Error error = new Error(getTaskErrorMessage(task));
@@ -266,7 +267,7 @@ public class GiniCaptureAccountingNetworkService implements GiniCaptureNetworkSe
                                     mAnalyzedGiniApiDocument = giniApiDocument;
                                     mAnalyzedDocument = mDocuments.get(giniApiDocument.getId());
                                     final Map<String, GiniCaptureSpecificExtraction> extractions =
-                                            SpecificExtractionMapper.mapToGiniCapture(task.getResult());
+                                            SpecificExtractionMapper.mapToGiniCapture(task.getResult().getSpecificExtractions());
                                     LOG.debug("Document analysis success for document {}: {}",
                                             giniApiDocumentIdRotationMap, extractions);
                                     callback.success(
