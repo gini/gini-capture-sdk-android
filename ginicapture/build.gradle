@@ -105,7 +105,7 @@ dependencies {
 
     androidTestUtil "androidx.test:orchestrator:$versions.androidxTest"
 
-    dokkaHtmlPlugin 'org.jetbrains.dokka:kotlin-as-java-plugin:1.4.10'
+    dokkaHtmlPlugin 'org.jetbrains.dokka:kotlin-as-java-plugin:1.4.32'
 }
 
 apply from: rootProject.file('gradle/codequality.gradle')
