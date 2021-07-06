@@ -4,7 +4,7 @@ apply plugin: 'com.hiya.jacoco-android'
 apply plugin: 'org.jetbrains.dokka'
 
 jacoco {
-    toolVersion = "0.8.3"
+    toolVersion = "0.8.7"
 }
 
 android {
