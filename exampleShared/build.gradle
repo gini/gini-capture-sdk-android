@@ -46,8 +46,8 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation deps.androidxAppCompat
-    implementation deps.androidxMultidex
+    implementation "androidx.appcompat:appcompat:$versions.androidxAppCompat"
+    implementation "androidx.multidex:multidex:$versions.androidxMultidex"
 
     implementation 'com.karumi:dexter:6.0.2'
 

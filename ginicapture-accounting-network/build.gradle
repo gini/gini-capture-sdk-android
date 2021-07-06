@@ -30,25 +30,25 @@ repositories {
 }
 
 dependencies {
-    api deps.slf4j
+    api "org.slf4j:slf4j-api:$versions.slf4j"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation deps.androidxAnnotations
+    implementation "androidx.annotation:annotation:$versions.androidxAnnotations"
     implementation project(path: ':ginicapture')
     api('net.gini:gini-pay-api-lib-android:1.0.0-beta01@aar') {
         transitive = true
     }
 
-    testImplementation deps.junit
-    testImplementation deps.truth
-    testImplementation deps.mockito
+    testImplementation "junit:junit:$versions.junit"
+    testImplementation "com.google.truth:truth:$versions.truth"
+    testImplementation "org.mockito:mockito-core:$versions.mockito"
 
-    androidTestImplementation deps.androidxTestJUnit
-    androidTestImplementation deps.androidxTestRunner
-    androidTestImplementation deps.truth
-    androidTestImplementation deps.androidxTestEspressoCore
-    androidTestImplementation deps.mockito
-    androidTestImplementation deps.mockitoAndroid
+    androidTestImplementation "androidx.test.ext:junit:$versions.androidxTestJUnit"
+    androidTestImplementation "androidx.test:runner:$versions.androidxTest"
+    androidTestImplementation "com.google.truth:truth:$versions.truth"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.androidxTestEspresso"
+    androidTestImplementation "org.mockito:mockito-core:$versions.mockito"
+    androidTestImplementation "org.mockito:mockito-android:$versions.mockito"
 }
 
 apply from: rootProject.file('gradle/codequality.gradle')

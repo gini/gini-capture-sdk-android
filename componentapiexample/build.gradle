@@ -66,11 +66,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':exampleShared')
-    implementation deps.androidxAppCompat
-    implementation deps.androidxActivity
-    implementation deps.androidxCoordinatorLayout
-    implementation deps.androidxMultidex
-    implementation deps.androidxConstraintLayout
+    implementation "androidx.appcompat:appcompat:$versions.androidxAppCompat"
+    implementation "androidx.activity:activity:$versions.androidxActivity"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$versions.androidxCoordinatorLayout"
+    implementation "androidx.multidex:multidex:$versions.androidxMultidex"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.androidxConstraintLayout"
 
     implementation 'com.karumi:dexter:6.0.2'
 
@@ -95,7 +95,7 @@ dependencies {
     // For testing a released version
     //implementation 'net.gini:gini-capture-network-lib:2.5.0'
 
-    testImplementation deps.junit
+    testImplementation "junit:junit:$versions.junit"
 
     // For testing the local version
     implementation project(path: ':ginicapture')
