@@ -3,6 +3,7 @@ package net.gini.android.capture.example.shared;
 import android.util.Log;
 
 import net.gini.android.DocumentTaskManager;
+import net.gini.android.models.ExtractionsContainer;
 import net.gini.android.models.SpecificExtraction;
 import net.gini.android.capture.Document;
 import net.gini.android.capture.internal.camera.api.UIExecutor;
@@ -25,7 +26,7 @@ public class DocumentAnalyzer {
     private boolean mCancelled = false;
     private net.gini.android.models.Document mGiniApiDocument;
     private Listener mListener;
-    private Task<Map<String, SpecificExtraction>> mResultTask;
+    private Task<ExtractionsContainer> mResultTask;
 
     DocumentAnalyzer(final DocumentTaskManager documentTaskManager) {
         mDocumentTaskManager = documentTaskManager;
@@ -54,9 +55,9 @@ public class DocumentAnalyzer {
                             }
                         })
                 .onSuccessTask(
-                        new Continuation<net.gini.android.models.Document, Task<Map<String, SpecificExtraction>>>() {
+                        new Continuation<net.gini.android.models.Document, Task<ExtractionsContainer>>() {
                             @Override
-                            public Task<Map<String, SpecificExtraction>> then(
+                            public Task<ExtractionsContainer> then(
                                     final Task<net.gini.android.models.Document> task)
                                     throws Exception {
                                 final net.gini.android.models.Document giniDocument =
@@ -69,14 +70,14 @@ public class DocumentAnalyzer {
                                 }
                                 Log.d("gini-api", "Getting extractions for document: "
                                         + giniDocument.getId());
-                                return mDocumentTaskManager.getExtractions(task.getResult());
+                                return mDocumentTaskManager.getAllExtractions(task.getResult());
                             }
                         })
                 .continueWith(
-                        new Continuation<Map<String, SpecificExtraction>, Map<String, SpecificExtraction>>() {
+                        new Continuation<ExtractionsContainer, Map<String, SpecificExtraction>>() {
                             @Override
                             public Map<String, SpecificExtraction> then(
-                                    final Task<Map<String, SpecificExtraction>> task)
+                                    final Task<ExtractionsContainer> task)
                                     throws Exception {
                                 if (isCancelled()) {
                                     Log.d("gini-api",
@@ -101,7 +102,7 @@ public class DocumentAnalyzer {
         mUIExecutor.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                final Task<Map<String, SpecificExtraction>> resultTask = getResultTask();
+                final Task<ExtractionsContainer> resultTask = getResultTask();
                 final Listener listener = getListener();
                 if (resultTask == null || isCancelled() || listener == null) {
                     return;
@@ -110,7 +111,7 @@ public class DocumentAnalyzer {
                 if (resultTask.isFaulted()) {
                     listener.onException(resultTask.getError());
                 } else {
-                    listener.onExtractionsReceived(resultTask.getResult());
+                    listener.onExtractionsReceived(resultTask.getResult().getSpecificExtractions());
                 }
             }
         });
@@ -125,12 +126,12 @@ public class DocumentAnalyzer {
         publishResult();
     }
 
-    private synchronized Task<Map<String, SpecificExtraction>> getResultTask() {
+    private synchronized Task<ExtractionsContainer> getResultTask() {
         return mResultTask;
     }
 
     private synchronized void setResultTask(
-            final Task<Map<String, SpecificExtraction>> resultTask) {
+            final Task<ExtractionsContainer> resultTask) {
         mResultTask = resultTask;
     }
 
