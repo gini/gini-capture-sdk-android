@@ -71,6 +71,9 @@
         <activity
             android:name="net.gini.android.capture.screen.NoExtractionsActivity"
             android:label="@string/title_no_extractions"/>
+        <activity
+            android:name=".CustomHelpActivity"
+            android:label="@string/custom_help_screen_title" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -26,6 +26,9 @@
         <item>ACCOUNTING</item>
     </string-array>
 
+    <string name="custom_help_screen_title">Custom Help Screen</string>
+    <string name="custom_help_screen_greeting">This is a custom help screen.</string>
+
     <!-- String customization examples -->
 
     <!--<string name="gc_title_camera">Dokument fotografieren</string>-->

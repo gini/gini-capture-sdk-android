@@ -1,7 +1,5 @@
 package net.gini.android.capture.screen;
 
-import static net.gini.android.capture.example.shared.ExampleUtil.isPay5Extraction;
-
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +11,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import net.gini.android.GiniApiType;
 import net.gini.android.capture.AsyncCallback;
 import net.gini.android.capture.DocumentImportEnabledFileTypes;
@@ -23,6 +26,9 @@ import net.gini.android.capture.ImportedFileValidationException;
 import net.gini.android.capture.camera.CameraActivity;
 import net.gini.android.capture.example.shared.BaseExampleApp;
 import net.gini.android.capture.example.shared.RuntimePermissionHandler;
+import net.gini.android.capture.help.FileImportActivity;
+import net.gini.android.capture.help.HelpItem;
+import net.gini.android.capture.help.PhotoTipsActivity;
 import net.gini.android.capture.onboarding.DefaultPagesPhone;
 import net.gini.android.capture.onboarding.OnboardingPage;
 import net.gini.android.capture.requirements.GiniCaptureRequirements;
@@ -42,13 +48,11 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.android.LogcatAppender;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+
+import static net.gini.android.capture.example.shared.ExampleUtil.isPay5Extraction;
 
 /**
  * Entry point for the screen api example app.
@@ -322,6 +326,12 @@ public class MainActivity extends AppCompatActivity {
         }
         builder.setFlashButtonEnabled(true);
         builder.setEventTracker(new GiniCaptureEventTracker());
+
+        final List<HelpItem.Custom> customHelpItems = new ArrayList<>();
+        customHelpItems.add(new HelpItem.Custom(R.string.custom_help_screen_title,
+                new Intent(this, CustomHelpActivity.class)));
+        builder.setCustomHelpItems(customHelpItems);
+
         // Uncomment to turn off the camera flash by default
 //        builder.setFlashOnByDefault(false);
         // Uncomment to disable back buttons (except in the review and analysis screens)
