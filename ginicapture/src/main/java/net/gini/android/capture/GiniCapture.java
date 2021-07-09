@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import net.gini.android.capture.analysis.AnalysisActivity;
+import net.gini.android.capture.help.HelpItem;
 import net.gini.android.capture.internal.cache.DocumentDataMemoryCache;
 import net.gini.android.capture.internal.cache.PhotoMemoryCache;
 import net.gini.android.capture.internal.document.ImageMultiPageDocumentMemoryStore;
@@ -29,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -79,6 +81,7 @@ public class GiniCapture {
     private final boolean mBackButtonsEnabled;
     private final boolean mIsFlashOnByDefault;
     private final EventTracker mEventTracker;
+    private final List<HelpItem.Custom> mCustomHelpItems;
 
     /**
      * Retrieve the current instance.
@@ -175,6 +178,7 @@ public class GiniCapture {
         mBackButtonsEnabled = builder.areBackButtonsEnabled();
         mIsFlashOnByDefault = builder.isFlashOnByDefault();
         mEventTracker = builder.getEventTracker();
+        mCustomHelpItems = builder.getCustomHelpItems();
     }
 
     /**
@@ -456,6 +460,16 @@ public class GiniCapture {
         return GiniCaptureFileImport.createDocumentForImportedFile(intent, context);
     }
 
+    /**
+     * The custom help items, if configured.
+     *
+     * @return list of {@link HelpItem.Custom} objects
+     */
+    @NonNull
+    public List<HelpItem.Custom> getCustomHelpItems() {
+        return mCustomHelpItems;
+    }
+
     @NonNull
     ImageMultiPageDocumentMemoryStore getImageMultiPageDocumentMemoryStore() {
         return mImageMultiPageDocumentMemoryStore;
@@ -527,6 +541,7 @@ public class GiniCapture {
             public void onAnalysisScreenEvent(@NotNull final Event<AnalysisScreenEvent> event) {
             }
         };
+        private List<HelpItem.Custom> mCustomHelpItems = new ArrayList<>();
 
         /**
          * Create a new {@link GiniCapture} instance.
@@ -826,6 +841,22 @@ public class GiniCapture {
             return mEventTracker;
         }
 
+        @NonNull
+        List<HelpItem.Custom> getCustomHelpItems() {
+            return mCustomHelpItems;
+        }
+
+        /**
+         * Set custom help items to be shown in the Help Screen.
+         *
+         * @param customHelpItems an {@link List} of {@link HelpItem.Custom} objects
+         *
+         * @return the {@link Builder} instance
+         */
+        public Builder setCustomHelpItems(@NonNull final List<HelpItem.Custom> customHelpItems) {
+            this.mCustomHelpItems = customHelpItems;
+            return this;
+        }
     }
 
     /**
