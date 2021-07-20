@@ -1,5 +1,7 @@
 package net.gini.android.capture.internal.camera.api;
 
+import androidx.annotation.NonNull;
+
 /**
  * Internal use only.
  *
@@ -10,11 +12,28 @@ package net.gini.android.capture.internal.camera.api;
  */
 public class CameraException extends RuntimeException {
 
-    CameraException(final String detailMessage) {
-        super(detailMessage);
+    public enum Type {
+        NO_ACCESS,
+        NO_BACK_CAMERA,
+        OPEN_FAILED,
+        NO_PREVIEW,
+        SHOT_FAILED
     }
 
-    public CameraException(final Throwable cause) {
+    private final Type type;
+
+    CameraException(@NonNull final String detailMessage, @NonNull final Type type) {
+        super(detailMessage);
+        this.type = type;
+    }
+
+    public CameraException(final Throwable cause, @NonNull final Type type) {
         super(cause);
+        this.type = type;
+    }
+
+    @NonNull
+    public Type getType() {
+        return type;
     }
 }

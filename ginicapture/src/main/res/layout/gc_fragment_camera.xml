@@ -7,20 +7,21 @@
     android:background="@color/gc_camera_fragment_background"
     tools:context=".camera.CameraFragmentCompat">
 
-    <net.gini.android.capture.internal.camera.view.CameraPreviewSurface
-        android:id="@+id/gc_camera_preview"
+    <net.gini.android.capture.internal.camera.view.CameraPreviewContainer
+        android:id="@+id/gc_camera_preview_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true">
+    </net.gini.android.capture.internal.camera.view.CameraPreviewContainer>
 
     <View
         android:id="@+id/gc_camera_preview_shade"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@id/gc_camera_preview"
-        android:layout_alignEnd="@id/gc_camera_preview"
-        android:layout_alignStart="@id/gc_camera_preview"
-        android:layout_alignTop="@id/gc_camera_preview"
+        android:layout_alignBottom="@id/gc_camera_preview_container"
+        android:layout_alignEnd="@id/gc_camera_preview_container"
+        android:layout_alignStart="@id/gc_camera_preview_container"
+        android:layout_alignTop="@id/gc_camera_preview_container"
         android:alpha="0"
         android:background="@color/gc_camera_preview_shade"
         android:visibility="gone"
@@ -38,10 +39,10 @@
         android:id="@+id/gc_image_corners"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/gc_camera_preview"
-        android:layout_alignEnd="@id/gc_camera_preview"
-        android:layout_alignStart="@id/gc_camera_preview"
-        android:layout_alignTop="@+id/gc_camera_preview" />
+        android:layout_alignBottom="@+id/gc_camera_preview_container"
+        android:layout_alignEnd="@id/gc_camera_preview_container"
+        android:layout_alignStart="@id/gc_camera_preview_container"
+        android:layout_alignTop="@+id/gc_camera_preview_container" />
 
     <ImageButton
         android:id="@+id/gc_button_camera_trigger"

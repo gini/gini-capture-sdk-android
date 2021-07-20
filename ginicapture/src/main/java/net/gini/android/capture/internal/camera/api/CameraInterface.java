@@ -1,5 +1,6 @@
 package net.gini.android.capture.internal.camera.api;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.view.SurfaceHolder;
@@ -42,26 +43,10 @@ public interface CameraInterface {
      */
     void close();
 
-    /**
-     * <p>
-     *     Starts the preview using the given {@link SurfaceHolder}.
-     * </p>
-     * <p>
-     *     <b>Note</b>: the {@link android.view.SurfaceView} must have been created when starting the preview.
-     * </p>
-     * @param surfaceHolder the {@link SurfaceHolder} for the camera preview {@link android.view.SurfaceView}
-     * @return a {@link CompletableFuture} that completes when the preview was started
-     */
-    @NonNull
-    CompletableFuture<Void> startPreview(@NonNull SurfaceHolder surfaceHolder);
-
 
     /**
      * <p>
-     *     Starts the preview using the {@link SurfaceHolder} provided by {@link CameraInterface#startPreview(SurfaceHolder)}.
-     * </p>
-     * <p>
-     *     This method has no effect, if no {@link android.view.SurfaceHolder} is available.
+     *     Starts the camera preview.
      * </p>
      */
     @NonNull
@@ -91,15 +76,14 @@ public interface CameraInterface {
      *     <b>Note</b>: the view should have the same size as the camera preview and be above it. You could also set the
      *     camera preview {@link android.view.SurfaceView} directly as the tap view..
      * </p>
-     * @param tapView the view used to handle taps
+     * @param listener the listener for tap to focus events
      */
-    void enableTapToFocus(@NonNull View tapView, @Nullable TapToFocusListener listener);
+    void enableTapToFocus(@Nullable TapToFocusListener listener);
 
     /**
      * Disables tap-to-focus.
-     * @param tapView the view set with {@link CameraInterface#enableTapToFocus(View, TapToFocusListener)} to handle taps
      */
-    void disableTapToFocus(@NonNull View tapView);
+    void disableTapToFocus();
 
     /**
      * <p>
@@ -129,16 +113,6 @@ public interface CameraInterface {
     Size getPreviewSize();
 
     /**
-     * <p>
-     *     The selected preview size for the camera rotated to match the camera orientation.
-     *     It is the largest preview size which has an aspect ratio of 4:3.
-     * </p>
-     * @return preview size
-     */
-    @NonNull
-    Size getPreviewSizeForDisplay();
-
-    /**
      *<p>
      *     The selected picture size for the camera. It is the largest picture size which has an aspect ratio of 4:3.
      *</p>
@@ -153,7 +127,15 @@ public interface CameraInterface {
      * </p>
      * @param previewCallback callback implementation
      */
-    void setPreviewCallback(@NonNull Camera.PreviewCallback previewCallback);
+    void setPreviewCallback(@Nullable Camera.PreviewCallback previewCallback);
+
+    /**
+     * The view which shows the camera preview.
+     *
+     * @param context Android context
+     * @return the camera preview view
+     */
+    View getPreviewView(@NonNull final Context context);
 
     /**
      * <p>
@@ -174,7 +156,7 @@ public interface CameraInterface {
      * Listener for tap to focus.
      */
     interface TapToFocusListener {
-        void onFocusing(Point point);
+        void onFocusing(@NonNull final Point point, @NonNull final Size previewViewSize);
 
         void onFocused(boolean success);
     }

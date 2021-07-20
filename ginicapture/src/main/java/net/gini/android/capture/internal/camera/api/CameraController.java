@@ -1,6 +1,7 @@
 package net.gini.android.capture.internal.camera.api;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,8 +20,10 @@ import androidx.annotation.VisibleForTesting;
 import androidx.core.util.Pair;
 
 import net.gini.android.capture.Document;
+import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.internal.camera.photo.Photo;
 import net.gini.android.capture.internal.camera.photo.PhotoFactory;
+import net.gini.android.capture.internal.camera.view.CameraPreviewSurface;
 import net.gini.android.capture.internal.util.Size;
 import net.gini.android.capture.requirements.CameraResolutionRequirement;
 
@@ -29,10 +33,15 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
 
 import jersey.repackaged.jsr166e.CompletableFuture;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static net.gini.android.capture.internal.camera.api.CameraException.Type.NO_ACCESS;
+import static net.gini.android.capture.internal.camera.api.CameraException.Type.NO_BACK_CAMERA;
+import static net.gini.android.capture.internal.camera.api.CameraException.Type.OPEN_FAILED;
 import static net.gini.android.capture.internal.camera.api.CameraParametersHelper.isFlashModeSupported;
 import static net.gini.android.capture.internal.camera.api.CameraParametersHelper.isFocusModeSupported;
 import static net.gini.android.capture.internal.camera.api.CameraParametersHelper.isUsingFocusMode;
@@ -48,6 +57,9 @@ import static net.gini.android.capture.internal.util.DeviceHelper.getDeviceType;
 public class CameraController implements CameraInterface {
 
     private static final Logger LOG = LoggerFactory.getLogger(CameraController.class);
+
+    private static final String CAMERA_EXCEPTION_MESSAGE_NO_ACCESS =
+            "Fail to connect to camera service";
 
     private Camera mCamera;
 
@@ -80,9 +92,44 @@ public class CameraController implements CameraInterface {
         }
     };
 
+    private final CameraPreviewSurface mPreviewView;
+    private CompletableFuture<SurfaceHolder> mSurfaceCreatedFuture = new CompletableFuture<>();
+
     public CameraController(@NonNull final Activity activity) {
         mActivity = activity;
         mResetFocusHandler = new Handler();
+        mPreviewView = createPreviewView(activity);
+        setSurfaceViewCallback();
+    }
+
+    @NonNull
+    private CameraPreviewSurface createPreviewView(@NonNull final Context context) {
+        final CameraPreviewSurface view = new CameraPreviewSurface(context);
+        final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT);
+        view.setLayoutParams(layoutParams);
+        return view;
+    }
+
+    private void setSurfaceViewCallback() {
+        mPreviewView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(final SurfaceHolder holder) {
+                LOG.debug("Surface created");
+                mSurfaceCreatedFuture.complete(holder);
+            }
+
+            @Override
+            public void surfaceChanged(final SurfaceHolder holder, final int format,
+                                       final int width, final int height) {
+                LOG.debug("Surface changed");
+            }
+
+            @Override
+            public void surfaceDestroyed(final SurfaceHolder holder) {
+                LOG.debug("Surface destroyed");
+                mSurfaceCreatedFuture = new CompletableFuture<>();
+            }
+        });
     }
 
     @Nullable
@@ -95,25 +142,58 @@ public class CameraController implements CameraInterface {
     @Override
     public CompletableFuture<Void> open() {
         LOG.info("Open camera");
+        final CompletableFuture<Void> openCameraFuture = new CompletableFuture<>();
         if (mCamera != null) {
             LOG.debug("Camera already open");
             LOG.info("Camera opened");
-            return CompletableFuture.completedFuture(null);
-        }
-        try {
-            mCamera = openCamera();
-            if (mCamera != null) {
-                configureCamera(mActivity);
-                LOG.info("Camera opened");
-                return CompletableFuture.completedFuture(null);
-            } else {
-                LOG.error("No back-facing camera");
-                return failedFuture(new CameraException("No back-facing camera"));
+            openCameraFuture.complete(null);
+        } else {
+            try {
+                mCamera = openCamera();
+                if (mCamera != null) {
+                    configureCamera(mActivity);
+                    LOG.info("Camera opened");
+                    openCameraFuture.complete(null);
+                } else {
+                    LOG.error("No back-facing camera");
+                    openCameraFuture.completeExceptionally(new CameraException("No back-facing camera", NO_BACK_CAMERA));
+                }
+            } catch (final RuntimeException e) {
+                LOG.error("Cannot start camera", e);
+                // String comparison is the only way to determine the cause of the camera exception with the old Camera API
+                // Here are the possible error messages:
+                // https://android.googlesource.com/platform/frameworks/base/+/marshmallow-release/core/java/android/hardware/Camera.java#415
+                final String message = e.getMessage();
+                if (message != null && message.equals(CAMERA_EXCEPTION_MESSAGE_NO_ACCESS)) {
+                    openCameraFuture.completeExceptionally(new CameraException(e, NO_ACCESS));
+                } else {
+                    openCameraFuture.completeExceptionally(new CameraException(e, OPEN_FAILED));
+                }
             }
-        } catch (final RuntimeException e) {
-            LOG.error("Cannot start camera", e);
-            return failedFuture(e);
         }
+
+        return CompletableFuture.allOf(openCameraFuture, mSurfaceCreatedFuture)
+                .thenCompose(new CompletableFuture.Fun<Void, CompletableFuture<Void>>() {
+                    @Override
+                    public CompletableFuture<Void> apply(Void unused) {
+                        try {
+                            final SurfaceHolder surfaceHolder =
+                                    mSurfaceCreatedFuture.get();
+                            if (surfaceHolder != null) {
+                                final Size previewSize = getPreviewSizeForDisplay();
+                                mPreviewView.setPreviewSize(previewSize);
+                                return startPreview(surfaceHolder);
+                            } else {
+                                LOG.error("Cannot start preview: no SurfaceHolder");
+                                return failedFuture(new CameraException("Cannot start preview: no SurfaceHolder received for SurfaceView",
+                                        CameraException.Type.NO_PREVIEW));
+                            }
+                        } catch (final InterruptedException | ExecutionException e) {
+                            LOG.error("Cannot start preview", e);
+                            return failedFuture(new CameraException(e, CameraException.Type.NO_PREVIEW));
+                        }
+                    }
+                });
     }
 
     @VisibleForTesting
@@ -136,12 +216,12 @@ public class CameraController implements CameraInterface {
     }
 
     @NonNull
-    @Override
-    public CompletableFuture<Void> startPreview(@NonNull final SurfaceHolder surfaceHolder) {
+    private CompletableFuture<Void> startPreview(@NonNull final SurfaceHolder surfaceHolder) {
         LOG.info("Start preview for the given SurfaceHolder");
         if (mCamera == null) {
             LOG.error("Cannot start preview: camera not open");
-            return failedFuture(new CameraException("Cannot start preview: camera not open"));
+            return failedFuture(new CameraException("Cannot start preview: camera not open",
+                    CameraException.Type.NO_PREVIEW));
         }
         if (mPreviewRunning) {
             LOG.info("Preview already running");
@@ -155,7 +235,7 @@ public class CameraController implements CameraInterface {
             LOG.info("Preview started");
         } catch (final IOException e) {
             LOG.error("Cannot start preview", e);
-            return failedFuture(e);
+            return failedFuture(new CameraException(e, CameraException.Type.NO_PREVIEW));
         }
         return CompletableFuture.completedFuture(null);
     }
@@ -166,7 +246,8 @@ public class CameraController implements CameraInterface {
         LOG.info("Start preview");
         if (mCamera == null) {
             LOG.error("Cannot start preview: camera not open");
-            return failedFuture(new CameraException("Cannot start preview: camera not open"));
+            return failedFuture(new CameraException("Cannot start preview: camera not open",
+                    CameraException.Type.NO_PREVIEW));
         }
         if (mPreviewRunning) {
             LOG.info("Preview already running");
@@ -198,10 +279,9 @@ public class CameraController implements CameraInterface {
     }
 
     @Override
-    public void enableTapToFocus(@NonNull final View tapView,
-            @Nullable final TapToFocusListener listener) {
+    public void enableTapToFocus(@Nullable final TapToFocusListener listener) {
         LOG.info("Tap to focus enabled");
-        tapView.setOnTouchListener(new View.OnTouchListener() {
+        mPreviewView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(final View view, final MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -247,7 +327,8 @@ public class CameraController implements CameraInterface {
 
                     try {
                         if (listener != null) {
-                            listener.onFocusing(new Point(Math.round(x), Math.round(y)));
+                            listener.onFocusing(new Point(Math.round(x), Math.round(y)),
+                                    new Size(mPreviewView.getWidth(), mPreviewView.getHeight()));
                         }
                         mCamera.setParameters(parameters);
                         LOG.info("Focusing started");
@@ -285,9 +366,9 @@ public class CameraController implements CameraInterface {
     }
 
     @Override
-    public void disableTapToFocus(@NonNull final View tapView) {
+    public void disableTapToFocus() {
         LOG.info("Tap to focus disabled");
-        tapView.setOnTouchListener(null);
+        mPreviewView.setOnTouchListener(null);
     }
 
     @NonNull
@@ -339,7 +420,7 @@ public class CameraController implements CameraInterface {
 
         if (mCamera == null) {
             LOG.error("Cannot take picture: camera not open");
-            return failedFuture(new CameraException("Cannot take picture: camera not open"));
+            return failedFuture(new CameraException("Cannot take picture: camera not open", CameraException.Type.SHOT_FAILED));
         }
 
         final CompletableFuture<Photo> pictureTaken = new CompletableFuture<>();
@@ -407,8 +488,7 @@ public class CameraController implements CameraInterface {
     }
 
     @NonNull
-    @Override
-    public Size getPreviewSizeForDisplay() {
+    private Size getPreviewSizeForDisplay() {
         final int rotation = getDisplayOrientationForCamera(mActivity);
         if (rotation == 90 || rotation == 270) {
             return new Size(mPreviewSize.height, mPreviewSize.width);
@@ -425,6 +505,11 @@ public class CameraController implements CameraInterface {
     @Override
     public void setPreviewCallback(@Nullable final Camera.PreviewCallback previewCallback) {
         mPreviewCallback = previewCallback;
+    }
+
+    @Override
+    public View getPreviewView(@NonNull final Context context) {
+        return mPreviewView;
     }
 
     @Override

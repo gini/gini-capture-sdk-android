@@ -12,7 +12,6 @@ import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -30,7 +29,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorCompat;
-import androidx.core.view.ViewPropertyAnimatorListener;
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
 import androidx.transition.Transition;
 import androidx.transition.TransitionListenerAdapter;
@@ -54,7 +52,6 @@ import net.gini.android.capture.internal.camera.api.CameraInterface;
 import net.gini.android.capture.internal.camera.api.UIExecutor;
 import net.gini.android.capture.internal.camera.photo.Photo;
 import net.gini.android.capture.internal.camera.photo.PhotoEdit;
-import net.gini.android.capture.internal.camera.view.CameraPreviewSurface;
 import net.gini.android.capture.internal.camera.view.FlashButtonHelper.FlashButtonPosition;
 import net.gini.android.capture.internal.camera.view.HintPopup;
 import net.gini.android.capture.internal.camera.view.QRCodePopup;
@@ -88,7 +85,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import jersey.repackaged.jsr166e.CompletableFuture;
@@ -99,7 +95,6 @@ import kotlin.jvm.functions.Function1;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static net.gini.android.capture.GiniCaptureError.ErrorCode.MISSING_GINI_CAPTURE_INSTANCE;
-import static net.gini.android.capture.camera.Util.cameraExceptionToGiniCaptureError;
 import static net.gini.android.capture.document.ImageDocument.ImportMethod;
 import static net.gini.android.capture.internal.camera.view.FlashButtonHelper.getFlashButtonPosition;
 import static net.gini.android.capture.internal.network.NetworkRequestsManager.isCancellation;
@@ -172,7 +167,8 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
     private PaymentQRCodeReader mPaymentQRCodeReader;
 
     private RelativeLayout mLayoutRoot;
-    private CameraPreviewSurface mCameraPreview;
+    private ViewGroup mCameraPreviewContainer;
+    private View mCameraPreview;
     private ImageView mCameraFocusIndicator;
     @VisibleForTesting
     ImageButton mButtonCameraTrigger;
@@ -197,7 +193,6 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
 
     private ViewStubSafeInflater mViewStubInflater;
 
-    private CompletableFuture<SurfaceHolder> mSurfaceCreatedFuture = new CompletableFuture<>();
     private boolean mIsTakingPicture;
 
     private boolean mImportDocumentButtonEnabled;
@@ -296,9 +291,20 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         final View view = inflater.inflate(R.layout.gc_fragment_camera, container, false);
         bindViews(view);
         setInputHandlers();
-        setSurfaceViewCallback();
         createPopups();
         return view;
+    }
+
+    private void addCameraPreviewView() {
+        final Activity activity = mFragment
+                .getActivity();
+        if (activity == null) {
+            return;
+        }
+        mCameraPreview = mCameraController.getPreviewView(activity);
+        if (mCameraPreview.getParent() == null) {
+            mCameraPreviewContainer.addView(mCameraPreview);
+        }
     }
 
     private void createPopups() {
@@ -353,46 +359,20 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         mProceededToMultiPageReview = false;
         initViews();
         initCameraController(activity);
+        addCameraPreviewView();
         if (isQRCodeScanningEnabled()) {
             initQRCodeReader(activity);
         }
 
         if (isCameraPermissionGranted()) {
-            final CompletableFuture<Void> openCameraCompletable = openCamera();
-            final CompletableFuture<SurfaceHolder> surfaceCreationCompletable =
-                    handleSurfaceCreation();
-
-            CompletableFuture.allOf(openCameraCompletable, surfaceCreationCompletable)
-                    .handle(new CompletableFuture.BiFun<Void, Throwable, Object>() {
-                        @Override
-                        public Object apply(final Void aVoid, final Throwable throwable) {
-                            if (throwable != null) {
-                                // Exceptions were handled before
-                                return null;
-                            }
-                            try {
-                                final SurfaceHolder surfaceHolder =
-                                        surfaceCreationCompletable.get();
-                                if (surfaceHolder != null) {
-                                    final Size previewSize =
-                                            mCameraController.getPreviewSizeForDisplay();
-                                    mCameraPreview.setPreviewSize(previewSize);
-                                    startPreview(surfaceHolder);
-                                    enableTapToFocus();
-                                    showHintPopUpsOnFirstExecution();
-                                    initFlashButton();
-                                } else {
-                                    handleError(GiniCaptureError.ErrorCode.CAMERA_NO_PREVIEW,
-                                            "Cannot start preview: no SurfaceHolder received for SurfaceView",
-                                            null);
-                                }
-                            } catch (final InterruptedException | ExecutionException e) {
-                                handleError(GiniCaptureError.ErrorCode.CAMERA_NO_PREVIEW,
-                                        "Cannot start preview", e);
-                            }
-                            return null;
-                        }
-                    });
+            openCamera().thenAccept(new CompletableFuture.Action<Void>() {
+                @Override
+                public void accept(Void unused) {
+                    enableTapToFocus();
+                    showHintPopUpsOnFirstExecution();
+                    initFlashButton();
+                }
+            });
         } else {
             showNoPermissionView();
         }
@@ -557,26 +537,11 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
         return false;
     }
 
-    private void startPreview(final SurfaceHolder holder) {
-        mCameraController.startPreview(holder)
-                .handle(new CompletableFuture.BiFun<Void, Throwable, Void>() {
-                    @Override
-                    public Void apply(final Void aVoid, final Throwable throwable) {
-                        if (throwable != null) {
-                            handleError(GiniCaptureError.ErrorCode.CAMERA_NO_PREVIEW,
-                                    "Cannot start preview", throwable);
-                        }
-                        return null;
-                    }
-                });
-    }
-
     private void enableTapToFocus() {
-        mCameraController.enableTapToFocus(mCameraPreview,
-                new CameraInterface.TapToFocusListener() {
+        mCameraController.enableTapToFocus(new CameraInterface.TapToFocusListener() {
                     @Override
-                    public void onFocusing(final Point point) {
-                        showFocusIndicator(point);
+                    public void onFocusing(@NonNull final Point point, @NonNull final Size previewViewSize) {
+                        showFocusIndicator(point, previewViewSize);
                     }
 
                     @Override
@@ -586,9 +551,9 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
                 });
     }
 
-    private void showFocusIndicator(final Point point) {
-        final int top = Math.round((mLayoutRoot.getHeight() - mCameraPreview.getHeight()) / 2.0f);
-        final int left = Math.round((mLayoutRoot.getWidth() - mCameraPreview.getWidth()) / 2.0f);
+    private void showFocusIndicator(@NonNull final Point point, @NonNull final Size previewViewSize) {
+        final int top = Math.round((mLayoutRoot.getHeight() - previewViewSize.height) / 2.0f);
+        final int left = Math.round((mLayoutRoot.getWidth() - previewViewSize.width) / 2.0f);
         final RelativeLayout.LayoutParams layoutParams =
                 (RelativeLayout.LayoutParams) mCameraFocusIndicator.getLayoutParams();
         layoutParams.leftMargin = (int) Math.round(
@@ -610,16 +575,30 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
                     @Override
                     public Void apply(final Void aVoid, final Throwable throwable) {
                         if (throwable != null) {
-                            if (throwable instanceof CameraException) {
-                                handleError(GiniCaptureError.ErrorCode.CAMERA_OPEN_FAILED,
-                                        "Failed to open camera", throwable);
-                            } else if (throwable instanceof Exception) {
-                                handleCameraException((Exception) throwable);
+                            if (throwable.getCause() instanceof CameraException) {
+                                final CameraException cameraException = (CameraException) throwable.getCause();
+                                switch (cameraException.getType()) {
+                                    case NO_ACCESS:
+                                        showNoPermissionView();
+                                        break;
+                                    case NO_BACK_CAMERA:
+                                    case OPEN_FAILED:
+                                        handleError(GiniCaptureError.ErrorCode.CAMERA_OPEN_FAILED,
+                                                "Failed to open camera", cameraException);
+                                        break;
+                                    case NO_PREVIEW:
+                                        handleError(GiniCaptureError.ErrorCode.CAMERA_NO_PREVIEW,
+                                                "Failed to open camera", cameraException);
+                                        break;
+                                    case SHOT_FAILED:
+                                        handleError(GiniCaptureError.ErrorCode.CAMERA_SHOT_FAILED,
+                                                "Failed to open camera", cameraException);
+                                        break;
+                                }
                             } else {
-                                handleError(GiniCaptureError.ErrorCode.CAMERA_OPEN_FAILED,
-                                        "Failed to open camera", throwable);
+                                handleError(GiniCaptureError.ErrorCode.CAMERA_UNKNOWN,
+                                        "Failed to open camera", throwable.getCause());
                             }
-                            throw new CameraException(throwable);
                         } else {
                             LOG.info("Camera opened");
                             hideNoPermissionView();
@@ -627,32 +606,6 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
                         return null;
                     }
                 });
-    }
-
-    private CompletableFuture<SurfaceHolder> handleSurfaceCreation() {
-        return mSurfaceCreatedFuture.handle(
-                new CompletableFuture.BiFun<SurfaceHolder, Throwable, SurfaceHolder>() {
-                    @Override
-                    public SurfaceHolder apply(final SurfaceHolder surfaceHolder,
-                            final Throwable throwable) {
-                        if (throwable != null) {
-                            handleError(GiniCaptureError.ErrorCode.CAMERA_NO_PREVIEW,
-                                    "Cannot start preview", throwable);
-                            throw new CameraException(throwable);
-                        }
-                        return surfaceHolder;
-                    }
-                });
-    }
-
-    private void handleCameraException(@NonNull final Exception e) {
-        LOG.error("Failed to open camera", e);
-        final GiniCaptureError error = cameraExceptionToGiniCaptureError(e);
-        if (error.getErrorCode() == GiniCaptureError.ErrorCode.CAMERA_NO_ACCESS) {
-            showNoPermissionView();
-        } else {
-            mListener.onError(cameraExceptionToGiniCaptureError(e));
-        }
     }
 
     void onSaveInstanceState(@NonNull final Bundle outState) {
@@ -755,7 +708,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
             mPaymentQRCodeReader.release();
             mPaymentQRCodeReader = null; // NOPMD
         }
-        mCameraController.disableTapToFocus(mCameraPreview);
+        mCameraController.disableTapToFocus();
         mCameraController.setPreviewCallback(null);
         mCameraController.stopPreview();
         mCameraController.close();
@@ -764,7 +717,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
 
     private void bindViews(final View view) {
         mLayoutRoot = view.findViewById(R.id.gc_root);
-        mCameraPreview = view.findViewById(R.id.gc_camera_preview);
+        mCameraPreviewContainer = view.findViewById(R.id.gc_camera_preview_container);
         mImageCorners = view.findViewById(R.id.gc_image_corners);
         mCameraFocusIndicator = view.findViewById(R.id.gc_camera_focus_indicator);
         mButtonCameraTrigger = view.findViewById(R.id.gc_button_camera_trigger);
@@ -1651,28 +1604,6 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
                 GiniCapture.getInstance().internal().getImageDiskStore();
         final Uri savedAtUri = imageDiskStore.save(activity, photo.getData());
         return DocumentFactory.newImageDocumentFromPhoto(photo, savedAtUri);
-    }
-
-    private void setSurfaceViewCallback() {
-        mCameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(final SurfaceHolder holder) {
-                LOG.debug("Surface created");
-                mSurfaceCreatedFuture.complete(holder);
-            }
-
-            @Override
-            public void surfaceChanged(final SurfaceHolder holder, final int format,
-                    final int width, final int height) {
-                LOG.debug("Surface changed");
-            }
-
-            @Override
-            public void surfaceDestroyed(final SurfaceHolder holder) {
-                LOG.debug("Surface destroyed");
-                mSurfaceCreatedFuture = new CompletableFuture<>();
-            }
-        });
     }
 
     private void showDocumentCornerGuidesAnimated() {
