@@ -3,60 +3,59 @@ package net.gini.android.capture.test;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.google.common.truth.FailureStrategy;
+import com.google.common.truth.FailureMetadata;
 import com.google.common.truth.Subject;
-import com.google.common.truth.SubjectFactory;
 
 import net.gini.android.capture.Document;
 import net.gini.android.capture.document.ImageDocument;
 import net.gini.android.capture.internal.camera.photo.JpegByteArraySubject;
 
-import androidx.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
-public class DocumentSubject extends Subject<DocumentSubject, Document> {
+import static com.google.common.truth.Fact.fact;
+import static com.google.common.truth.Fact.simpleFact;
+
+public class DocumentSubject extends Subject {
 
     private final JpegByteArraySubject mJpegByteArraySubject;
 
-    public static SubjectFactory<DocumentSubject, Document> document() {
-        return new SubjectFactory<DocumentSubject, Document>() {
-
+    public static Factory<DocumentSubject, Document> document() {
+        return new Factory<DocumentSubject, Document>() {
             @Override
-            public DocumentSubject getSubject(final FailureStrategy fs, final Document that) {
-                return new DocumentSubject(fs, that);
+            public DocumentSubject createSubject(FailureMetadata metadata, Document actual) {
+                return new DocumentSubject(metadata, actual);
             }
         };
     }
 
-    private DocumentSubject(final FailureStrategy failureStrategy,
-            @Nullable final Document subject) {
-        super(failureStrategy, subject);
+    private final Document actual;
+
+    protected DocumentSubject(FailureMetadata metadata, @Nullable Object actual) {
+        super(metadata, actual);
         isNotNull();
+        this.actual = (Document) actual;
         //noinspection ConstantConditions
-        mJpegByteArraySubject = new JpegByteArraySubject(failureStrategy, subject.getData());
+        mJpegByteArraySubject = new JpegByteArraySubject(metadata, this.actual.getData());
     }
 
     public void isEqualToDocument(final Document other) {
-        final Document document = getSubject();
-        if (document == null) {
-            fail("is equal to another Document - subject is null");
-        }
         if (other == null) {
-            fail("is equal to another Document - comparing to null");
+            failWithActual("is equal to", null);
         }
 
         //noinspection ConstantConditions - null check done above
-        final Bitmap bitmap = BitmapFactory.decodeByteArray(document.getData(), 0,
-                document.getData().length);
+        final Bitmap bitmap = BitmapFactory.decodeByteArray(actual.getData(), 0,
+                actual.getData().length);
         //noinspection ConstantConditions - null check done above
         final Bitmap otherBitmap = BitmapFactory.decodeByteArray(other.getData(), 0,
                 other.getData().length);
 
         if (!bitmap.sameAs(otherBitmap)) {
-            fail("is equal to Document " + other + " - contain different bitmaps");
+            failWithActual(fact("is equal to", other), simpleFact("contain different bitmaps"));
         } else {
-            if (document instanceof ImageDocument && other instanceof ImageDocument) {
-                if (((ImageDocument) document).getRotationForDisplay() != ((ImageDocument) other).getRotationForDisplay()) {
-                    fail("is equal to Document " + other + " - have different rotation");
+            if (actual instanceof ImageDocument && other instanceof ImageDocument) {
+                if (((ImageDocument) actual).getRotationForDisplay() != ((ImageDocument) other).getRotationForDisplay()) {
+                    failWithActual(fact("is equal to", other), simpleFact("have different rotation"));
                 }
             }
         }
@@ -64,10 +63,10 @@ public class DocumentSubject extends Subject<DocumentSubject, Document> {
 
     public void hasSameContentIdInUserCommentAs(final Document other) {
         isNotNull();
-        final String verb = "has same User Comment ContentId";
+        final String key = "User Comment ContentId";
 
         if (other == null) {
-            fail(verb, (Object) null);
+            failWithActual(key, null);
             return;
         }
 

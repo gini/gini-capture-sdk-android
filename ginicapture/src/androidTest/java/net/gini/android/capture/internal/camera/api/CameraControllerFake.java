@@ -1,5 +1,6 @@
 package net.gini.android.capture.internal.camera.api;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,6 +16,9 @@ import net.gini.android.capture.internal.util.Size;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import org.jetbrains.annotations.NotNull;
+
 import jersey.repackaged.jsr166e.CompletableFuture;
 
 /**
@@ -45,13 +49,6 @@ public class CameraControllerFake implements CameraInterface {
 
     @NonNull
     @Override
-    public CompletableFuture<Void> startPreview(@NonNull final SurfaceHolder surfaceHolder) {
-        mSurfaceHolder = surfaceHolder;
-        return CompletableFuture.completedFuture(null);
-    }
-
-    @NonNull
-    @Override
     public CompletableFuture<Void> startPreview() {
         return CompletableFuture.completedFuture(null);
     }
@@ -67,13 +64,12 @@ public class CameraControllerFake implements CameraInterface {
     }
 
     @Override
-    public void enableTapToFocus(@NonNull final View tapView,
-            @Nullable final TapToFocusListener listener) {
+    public void enableTapToFocus(@Nullable final TapToFocusListener listener) {
 
     }
 
     @Override
-    public void disableTapToFocus(@NonNull final View tapView) {
+    public void disableTapToFocus() {
 
     }
 
@@ -97,12 +93,6 @@ public class CameraControllerFake implements CameraInterface {
 
     @NonNull
     @Override
-    public Size getPreviewSizeForDisplay() {
-        return mPreviewSize;
-    }
-
-    @NonNull
-    @Override
     public Size getPictureSize() {
         return mPreviewSize;
     }
@@ -115,6 +105,11 @@ public class CameraControllerFake implements CameraInterface {
     @Override
     public void setPreviewCallback(@NonNull final Camera.PreviewCallback previewCallback) {
         mPreviewCallback = previewCallback;
+    }
+
+    @Override
+    public View getPreviewView(@NonNull @NotNull Context context) {
+        return null;
     }
 
     @Override

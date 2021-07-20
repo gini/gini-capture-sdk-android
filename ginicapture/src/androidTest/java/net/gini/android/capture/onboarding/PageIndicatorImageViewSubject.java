@@ -4,38 +4,42 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageView;
 
-import com.google.common.truth.FailureStrategy;
+import com.google.common.truth.FailureMetadata;
 import com.google.common.truth.Subject;
-import com.google.common.truth.SubjectFactory;
-
-import javax.annotation.Nullable;
 
 import androidx.annotation.DrawableRes;
 
-public class PageIndicatorImageViewSubject extends
-        Subject<PageIndicatorImageViewSubject, ImageView> {
+import org.checkerframework.checker.nullness.qual.Nullable;
 
-    public static SubjectFactory<PageIndicatorImageViewSubject, ImageView> pageIndicatorImageView() {
-        return new SubjectFactory<PageIndicatorImageViewSubject, ImageView>() {
+import static com.google.common.truth.Fact.fact;
+import static com.google.common.truth.Fact.simpleFact;
+
+public class PageIndicatorImageViewSubject extends Subject {
+
+    public static Factory<PageIndicatorImageViewSubject, ImageView> pageIndicatorImageView() {
+        return new Factory<PageIndicatorImageViewSubject, ImageView>() {
             @Override
-            public PageIndicatorImageViewSubject getSubject(final FailureStrategy fs, final ImageView that) {
-                return new PageIndicatorImageViewSubject(fs, that);
+            public PageIndicatorImageViewSubject createSubject(FailureMetadata metadata, ImageView actual) {
+                return new PageIndicatorImageViewSubject(metadata, actual);
             }
         };
     }
 
-    public PageIndicatorImageViewSubject(final FailureStrategy failureStrategy,
-            @Nullable final ImageView subject) {
-        super(failureStrategy, subject);
+    private final ImageView actual;
+
+    protected PageIndicatorImageViewSubject(FailureMetadata metadata, @Nullable Object actual) {
+        super(metadata, actual);
+        isNotNull();
+        this.actual = (ImageView) actual;
     }
 
     public void showsDrawable(@DrawableRes final int drawableResId) {
-        final ImageView imageView = getSubject();
+        final ImageView imageView = actual;
 
         final BitmapDrawable expectedDrawable = (BitmapDrawable) imageView.getResources().getDrawable(
                 drawableResId);
         if (expectedDrawable == null || expectedDrawable.getBitmap() == null) {
-            fail("shows drawable with id " + drawableResId + " - no such drawable");
+            failWithActual(fact("shows drawable with id", drawableResId), simpleFact("no such drawable"));
         }
         // NullPointerException warning is not relevant, fail() above will prevent it
         //noinspection ConstantConditions
@@ -45,7 +49,7 @@ public class PageIndicatorImageViewSubject extends
         final Bitmap bitmap = bitmapDrawable.getBitmap();
 
         if (!bitmap.sameAs(expectedBitmap)) {
-            fail("shows drawable with id " + drawableResId);
+            failWithActual(fact("shows drawable with id", drawableResId));
         }
     }
 }
