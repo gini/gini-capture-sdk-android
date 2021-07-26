@@ -71,6 +71,8 @@ ext.versions = [
         androidxRecyclerView       : '1.2.1',
         androidxCardView           : '1.0.0',
         androidxAnnotations        : '1.2.0',
+        androidxCameraX            : '1.0.1',
+        androidxCameraXView        : '1.0.0-alpha27',
 
         // Google Mobile Vision API
         playServicesVision         : '20.1.3',
