@@ -20,7 +20,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.core.util.Pair;
 
 import net.gini.android.capture.Document;
-import net.gini.android.capture.GiniCaptureError;
 import net.gini.android.capture.internal.camera.photo.Photo;
 import net.gini.android.capture.internal.camera.photo.PhotoFactory;
 import net.gini.android.capture.internal.camera.view.CameraPreviewSurface;
@@ -482,12 +481,6 @@ public class CameraController implements CameraInterface {
     }
 
     @NonNull
-    @Override
-    public Size getPreviewSize() {
-        return mPreviewSize;
-    }
-
-    @NonNull
     private Size getPreviewSizeForDisplay() {
         final int rotation = getDisplayOrientationForCamera(mActivity);
         if (rotation == 90 || rotation == 270) {
@@ -496,25 +489,19 @@ public class CameraController implements CameraInterface {
         return mPreviewSize;
     }
 
-    @NonNull
     @Override
-    public Size getPictureSize() {
-        return mPictureSize;
-    }
-
-    @Override
-    public void setPreviewCallback(@Nullable final Camera.PreviewCallback previewCallback) {
-        mPreviewCallback = previewCallback;
+    public void setPreviewCallback(@Nullable final PreviewCallback previewCallback) {
+        if (previewCallback == null) {
+            mPreviewCallback = null;
+            return;
+        }
+        mPreviewCallback = (data, camera) -> previewCallback.onPreviewFrame(data,
+                mPreviewSize, getDisplayOrientationForCamera(mActivity));
     }
 
     @Override
     public View getPreviewView(@NonNull final Context context) {
         return mPreviewView;
-    }
-
-    @Override
-    public int getCameraRotation() {
-        return getDisplayOrientationForCamera(mActivity);
     }
 
     @Override

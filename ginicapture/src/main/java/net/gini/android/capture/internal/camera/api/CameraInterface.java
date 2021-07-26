@@ -2,8 +2,6 @@ package net.gini.android.capture.internal.camera.api;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.hardware.Camera;
-import android.view.SurfaceHolder;
 import android.view.View;
 
 import net.gini.android.capture.internal.camera.photo.Photo;
@@ -105,29 +103,11 @@ public interface CameraInterface {
 
     /**
      * <p>
-     *     The selected preview size for the camera. It is the largest preview size which has an aspect ratio of 4:3.
-     * </p>
-     * @return preview size
-     */
-    @NonNull
-    Size getPreviewSize();
-
-    /**
-     *<p>
-     *     The selected picture size for the camera. It is the largest picture size which has an aspect ratio of 4:3.
-     *</p>
-     * @return picture size
-     */
-    @NonNull
-    Size getPictureSize();
-
-    /**
-     * <p>
      *      Set a callback to recieve preview images from the camera.
      * </p>
      * @param previewCallback callback implementation
      */
-    void setPreviewCallback(@Nullable Camera.PreviewCallback previewCallback);
+    void setPreviewCallback(@Nullable PreviewCallback previewCallback);
 
     /**
      * The view which shows the camera preview.
@@ -136,15 +116,6 @@ public interface CameraInterface {
      * @return the camera preview view
      */
     View getPreviewView(@NonNull final Context context);
-
-    /**
-     * <p>
-     *     The rotation in degrees of the camera. Derived from the camera sensor orientation
-     *     and device orientation.
-     * </p>
-     * @return rotation in degrees
-     */
-    int getCameraRotation();
 
     boolean isFlashAvailable();
 
@@ -159,5 +130,14 @@ public interface CameraInterface {
         void onFocusing(@NonNull final Point point, @NonNull final Size previewViewSize);
 
         void onFocused(boolean success);
+    }
+
+    /**
+     * Callback to receive preview images.
+     */
+    interface PreviewCallback {
+
+        void onPreviewFrame(@NonNull final byte[] image, @NonNull final Size imageSize,
+                            final int rotation);
     }
 }

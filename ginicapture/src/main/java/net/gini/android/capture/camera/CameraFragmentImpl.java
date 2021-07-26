@@ -80,6 +80,7 @@ import net.gini.android.capture.tracking.CameraScreenEvent;
 import net.gini.android.capture.util.IntentHelper;
 import net.gini.android.capture.util.UriHelper;
 
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1824,16 +1825,11 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
             mCameraController = createCameraController(activity);
         }
         if (isQRCodeScanningEnabled()) {
-            final int rotation = mCameraController.getCameraRotation();
-            mCameraController.setPreviewCallback(new Camera.PreviewCallback() {
-                @Override
-                public void onPreviewFrame(final byte[] data, final Camera camera) {
-                    if (mPaymentQRCodeReader == null) {
-                        return;
-                    }
-                    mPaymentQRCodeReader.readFromImage(data, mCameraController.getPreviewSize(),
-                            rotation);
+            mCameraController.setPreviewCallback((image, imageSize, rotation) -> {
+                if (mPaymentQRCodeReader == null) {
+                    return;
                 }
+                mPaymentQRCodeReader.readFromImage(image, imageSize, rotation);
             });
         }
     }
