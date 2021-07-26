@@ -141,17 +141,11 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                         useCaseGroup
                     )
 
-                    // TODO: move to a method to get the supported resolutions
-//                    @SuppressLint("RestrictedApi", "UnsafeOptInUsageError")
-//                    val characteristics = Camera2CameraInfo.extractCameraCharacteristics(camera!!.cameraInfo)
-//                    val streamConfigurationMap = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
-//                    val outputSizes = streamConfigurationMap?.getOutputSizes(ImageFormat.JPEG)
-
                     LOG.info("Camera is open")
 
                     openFuture.complete(null)
                 } catch (e: Exception) {
-                    LOG.error("Preview use case binding failed", e)
+                    LOG.error("Use cases binding failed", e)
                     openFuture.completeExceptionally(
                         CameraException(
                             e,
@@ -200,7 +194,7 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
             val notALongPress = (event.eventTime - event.downTime
                     < ViewConfiguration.getLongPressTimeout())
             if (isSingleTouch && isUpEvent && notALongPress) {
-                focusAtPoint(event.x, event.y)
+                focusAtPoint(event.x, event.y, listener)
             }
             true
         }
@@ -230,9 +224,14 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
         val focusFuture = camera?.cameraControl?.startFocusAndMetering(focusMeteringAction)
 
         focusFuture?.addListener({
-            val result = focusFuture.get()
-            LOG.debug("Focus result: {}", result.isFocusSuccessful)
-            listener?.onFocused(result.isFocusSuccessful)
+            try {
+                val result = focusFuture.get()
+                LOG.debug("Focus result: {}", result.isFocusSuccessful)
+                listener?.onFocused(result.isFocusSuccessful)
+            } catch (e: Exception) {
+                LOG.warn("Focus failed", e)
+                listener?.onFocused(false)
+            }
         }, ContextCompat.getMainExecutor(activity))
     }
 
@@ -306,7 +305,9 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                         Document.Source.newCameraSource()
                     )
 
-                    LOG.info("Picture taken")
+                    LOG.info("Picture taken with resolution {}x{}", image.cropRect.width(),
+                        image.cropRect.height())
+
                     pictureFuture.complete(photo)
                 }
 
