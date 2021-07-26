@@ -3,17 +3,14 @@ package net.gini.android.capture.internal.camera.api
 import android.app.Activity
 import android.content.Context
 import android.graphics.*
-import android.hardware.Camera
 import android.os.Build
 import android.util.Rational
 import android.view.MotionEvent
-import android.view.Surface
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.annotation.OptIn
 import androidx.annotation.RequiresApi
 import androidx.camera.core.*
-import androidx.camera.core.impl.ImageOutputConfig
 import androidx.camera.lifecycle.ExperimentalUseCaseGroupLifecycle
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -32,8 +29,6 @@ import net.gini.android.capture.internal.util.DeviceHelper
 import net.gini.android.capture.internal.util.Size
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.io.ByteArrayOutputStream
-import java.io.IOException
 import java.util.concurrent.RejectedExecutionException
 import kotlin.math.roundToInt
 
@@ -53,6 +48,8 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
     private val previewContainer: CameraXPreviewContainer = CameraXPreviewContainer(activity)
 
     private var imageCaptureUseCase: ImageCapture? = null
+    private var imageAnalysisUseCase: ImageAnalysis? = null
+    private var imageAnalyzer: ImageAnalysis.Analyzer? = null
 
     override fun open(): CompletableFuture<Void> {
         val openFuture = CompletableFuture<Void>()
@@ -89,6 +86,7 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                     .setTargetResolution(targetResolution)
                     .setTargetRotation(targetRotation)
                     .build()
+                previewUseCase = preview
 
                 preview.setSurfaceProvider { request ->
                     LOG.debug("Using preview resolution {}", request.resolution)
@@ -101,15 +99,21 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                     previewContainer.previewView.surfaceProvider.onSurfaceRequested(request)
                 }
 
-                previewUseCase = preview
-
                 val imageCapture = ImageCapture.Builder()
                     .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
                     .setTargetResolution(targetResolution)
                     .setTargetRotation(targetRotation)
                     .build()
-
                 imageCaptureUseCase = imageCapture
+
+                val imageAnalysis = ImageAnalysis.Builder()
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .build()
+                imageAnalysisUseCase = imageAnalysis
+
+                imageAnalyzer?.let {
+                    imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(activity), it)
+                }
 
                 @OptIn(markerClass = [ExperimentalUseCaseGroup::class])
                 val viewPort = ViewPort.Builder(
@@ -121,6 +125,7 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                 val useCaseGroup = UseCaseGroup.Builder()
                     .addUseCase(preview)
                     .addUseCase(imageCapture)
+                    .addUseCase(imageAnalysis)
                     .setViewPort(viewPort)
                     .build()
 
@@ -169,8 +174,9 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
     override fun close() {
         cameraLifecycle.stop()
         previewUseCase = null
-        camera = null
         imageCaptureUseCase = null
+        imageAnalysisUseCase = null
+        camera = null
     }
 
     override fun startPreview(): CompletableFuture<Void> {
@@ -285,7 +291,7 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
             object : ImageCapture.OnImageCapturedCallback() {
                 override fun onCaptureSuccess(image: ImageProxy) {
                     val byteArray = try {
-                         image.toCroppedByteArray()
+                        image.toCroppedByteArray()
                     } catch (e: CameraException) {
                         LOG.error("Failed to take picture", e)
                         pictureFuture.completeExceptionally(e)
@@ -318,26 +324,26 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
         return pictureFuture
     }
 
-    override fun getPreviewSize(): Size {
-        // TODO: needed for QR code scanning
-        return Size(300, 300)
-    }
+    override fun setPreviewCallback(previewCallback: CameraInterface.PreviewCallback?) {
+        if (previewCallback == null) {
+            imageAnalyzer = null
+            imageAnalysisUseCase?.clearAnalyzer()
+            return
+        }
 
-    override fun getPictureSize(): Size {
-        // TODO
-        return Size(300, 300)
-    }
-
-    override fun setPreviewCallback(previewCallback: Camera.PreviewCallback?) {
-        // TODO: needed for QR code scanning
+        imageAnalyzer = ImageAnalysis.Analyzer { imageProxy ->
+            previewCallback.onPreviewFrame(
+                imageProxy.toByteArray(),
+                Size(imageProxy.width, imageProxy.height),
+                imageProxy.imageInfo.rotationDegrees
+            )
+            imageProxy.close()
+        }.also {
+            imageAnalysisUseCase?.setAnalyzer(ContextCompat.getMainExecutor(activity), it)
+        }
     }
 
     override fun getPreviewView(context: Context): View = previewContainer
-
-    override fun getCameraRotation(): Int {
-        // TODO: needed for QR code scanning
-        return previewUseCase?.targetRotation ?: 0
-    }
 
     override fun isFlashAvailable(): Boolean {
         return camera?.cameraInfo?.hasFlashUnit() ?: false
