@@ -27,7 +27,7 @@ public class DeviceMemoryRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifCamera_isNotOpen() {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
+        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
 
         DeviceMemoryRequirement requirement = new DeviceMemoryRequirement(cameraHolder);
 
@@ -36,7 +36,7 @@ public class DeviceMemoryRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifEnoughMemory_isNotAvailable() {
-        CameraHolder cameraHolder = getCameraHolder(null);
+        OldCameraApiHolder cameraHolder = getCameraHolder(null);
 
         DeviceMemoryRequirement requirement = spy(new DeviceMemoryRequirement(cameraHolder));
 
@@ -47,7 +47,7 @@ public class DeviceMemoryRequirementTest {
 
     @Test
     public void should_reportFulfilled_ifEnoughMemory_isAvailable() {
-        CameraHolder cameraHolder = getCameraHolder(
+        OldCameraApiHolder cameraHolder = getCameraHolder(
                 Collections.singletonList(createSize(3264, 2448)));
 
         DeviceMemoryRequirement requirement = new DeviceMemoryRequirement(cameraHolder);
@@ -57,7 +57,7 @@ public class DeviceMemoryRequirementTest {
 
     @Test
     public void should_checkIfPictureSize_fitsIntoUnusedMemory() {
-        CameraHolder cameraHolder = getCameraHolder(null);
+        OldCameraApiHolder cameraHolder = getCameraHolder(null);
         DeviceMemoryRequirement requirement = new DeviceMemoryRequirement(cameraHolder);
 
         // Unused memory = max - (total - free)
@@ -72,8 +72,8 @@ public class DeviceMemoryRequirementTest {
                 new Size(1024, 768))).isFalse();
     }
 
-    private CameraHolder getCameraHolder(List<Camera.Size> pictureSizes) {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
+    private OldCameraApiHolder getCameraHolder(List<Camera.Size> pictureSizes) {
+        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
         Camera.Parameters parameters = mock(Camera.Parameters.class);
         when(cameraHolder.getCameraParameters()).thenReturn(parameters);
         if (pictureSizes == null) {

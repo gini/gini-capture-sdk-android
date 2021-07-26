@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 import jersey.repackaged.jsr166e.CompletableFuture;
 
@@ -546,8 +547,14 @@ public class CameraController implements CameraInterface {
     }
 
     private void selectPictureAndPreviewSize(final Camera.Parameters params) {
-        final List<Camera.Size> pictureSizes = params.getSupportedPictureSizes();
-        final List<Camera.Size> previewSizes = params.getSupportedPreviewSizes();
+        final List<Size> pictureSizes = params.getSupportedPictureSizes()
+                .stream()
+                .map(size -> new Size(size.width, size.height))
+                .collect(Collectors.toList());
+        final List<Size> previewSizes = params.getSupportedPreviewSizes()
+                .stream()
+                .map(size -> new Size(size.width, size.height))
+                .collect(Collectors.toList());
 
         final Pair<Size, Size> sizes = getBestSize(pictureSizes, previewSizes,
                 CameraResolutionRequirement.MAX_PICTURE_AREA,

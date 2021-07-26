@@ -22,7 +22,7 @@ public class CameraResolutionRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifNoPreviewSize_withSameAspectRatio_asLargestPictureSize() {
-        CameraHolder cameraHolder = getCameraHolder(Collections.singletonList(createSize(300, 200)),
+        OldCameraApiHolder cameraHolder = getCameraHolder(Collections.singletonList(createSize(300, 200)),
                 null);
 
         CameraResolutionRequirement requirement = new CameraResolutionRequirement(cameraHolder);
@@ -34,7 +34,7 @@ public class CameraResolutionRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifPictureSize_isSmallerThan8MP() {
-        CameraHolder cameraHolder = getCameraHolder(null,
+        OldCameraApiHolder cameraHolder = getCameraHolder(null,
                 Arrays.asList(
                         createSize(400, 300),
                         createSize(3200, 2048)) //6,55MP
@@ -49,7 +49,7 @@ public class CameraResolutionRequirementTest {
 
     @Test
     public void should_reportFulfilled_ifPreviewSize_andPictureSize_isLargerThan8MP() {
-        CameraHolder cameraHolder = getCameraHolder(null, null);
+        OldCameraApiHolder cameraHolder = getCameraHolder(null, null);
 
         CameraResolutionRequirement requirement = new CameraResolutionRequirement(cameraHolder);
 
@@ -59,7 +59,7 @@ public class CameraResolutionRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifCamera_isNotOpen() {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
+        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
 
         CameraResolutionRequirement requirement = new CameraResolutionRequirement(cameraHolder);
 
@@ -67,9 +67,9 @@ public class CameraResolutionRequirementTest {
         assertThat(requirement.check().getDetails()).isEqualTo("Camera not open");
     }
 
-    private CameraHolder getCameraHolder(List<Camera.Size> previewSizes,
-            List<Camera.Size> pictureSizes) {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
+    private OldCameraApiHolder getCameraHolder(List<Camera.Size> previewSizes,
+                                               List<Camera.Size> pictureSizes) {
+        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
         Camera.Parameters parameters = mock(Camera.Parameters.class);
         when(cameraHolder.getCameraParameters()).thenReturn(parameters);
         if (previewSizes == null) {

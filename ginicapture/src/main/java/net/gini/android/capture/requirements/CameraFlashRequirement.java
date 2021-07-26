@@ -1,10 +1,8 @@
 package net.gini.android.capture.requirements;
 
-import android.hardware.Camera;
-
-import java.util.List;
-
 import androidx.annotation.NonNull;
+
+import kotlin.Pair;
 
 class CameraFlashRequirement implements Requirement {
 
@@ -23,27 +21,7 @@ class CameraFlashRequirement implements Requirement {
     @NonNull
     @Override
     public RequirementReport check() {
-        boolean result = true;
-        String details = "";
-
-        try {
-            final Camera.Parameters parameters = mCameraHolder.getCameraParameters();
-            if (parameters != null) {
-                final List<String> supportedFlashModes = parameters.getSupportedFlashModes();
-                if (supportedFlashModes == null || !supportedFlashModes.contains(
-                        Camera.Parameters.FLASH_MODE_ON)) {
-                    result = false;
-                    details = "Camera does not support flash";
-                }
-            } else {
-                result = false;
-                details = "Camera not open";
-            }
-        } catch (final RuntimeException e) {
-            result = false;
-            details = "Camera exception: " + e.getMessage();
-        }
-
-        return new RequirementReport(getId(), result, details);
+        final Pair<Boolean, String> result = mCameraHolder.hasFlash();
+        return new RequirementReport(getId(), result.getFirst(), result.getSecond());
     }
 }
