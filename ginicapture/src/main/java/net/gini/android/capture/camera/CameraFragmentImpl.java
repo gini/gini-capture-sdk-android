@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,7 @@ import net.gini.android.capture.document.QRCodeDocument;
 import net.gini.android.capture.internal.camera.api.CameraController;
 import net.gini.android.capture.internal.camera.api.CameraException;
 import net.gini.android.capture.internal.camera.api.CameraInterface;
+import net.gini.android.capture.internal.camera.api.CameraXController;
 import net.gini.android.capture.internal.camera.api.UIExecutor;
 import net.gini.android.capture.internal.camera.photo.Photo;
 import net.gini.android.capture.internal.camera.photo.PhotoEdit;
@@ -1838,7 +1840,7 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
 
     @NonNull
     protected CameraInterface createCameraController(final Activity activity) {
-        return new CameraController(activity);
+        return new CameraXController(activity);
     }
 
     private void handleError(final GiniCaptureError.ErrorCode errorCode,

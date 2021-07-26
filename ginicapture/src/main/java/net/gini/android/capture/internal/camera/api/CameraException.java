@@ -22,7 +22,7 @@ public class CameraException extends RuntimeException {
 
     private final Type type;
 
-    CameraException(@NonNull final String detailMessage, @NonNull final Type type) {
+    public CameraException(@NonNull final String detailMessage, @NonNull final Type type) {
         super(detailMessage);
         this.type = type;
     }
