@@ -3,6 +3,7 @@ package net.gini.android.capture.internal.camera.api
 import android.app.Activity
 import android.content.Context
 import android.graphics.*
+import android.media.MediaActionSound
 import android.os.Build
 import android.util.Rational
 import android.view.MotionEvent
@@ -50,6 +51,8 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
     private var imageCaptureUseCase: ImageCapture? = null
     private var imageAnalysisUseCase: ImageAnalysis? = null
     private var imageAnalyzer: ImageAnalysis.Analyzer? = null
+
+    private val mediaActionSound = MediaActionSound()
 
     override fun open(): CompletableFuture<Void> {
         val openFuture = CompletableFuture<Void>()
@@ -224,6 +227,8 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
         val focusFuture = camera?.cameraControl?.startFocusAndMetering(focusMeteringAction)
 
         focusFuture?.addListener({
+            mediaActionSound.play(MediaActionSound.FOCUS_COMPLETE)
+
             try {
                 val result = focusFuture.get()
                 LOG.debug("Focus result: {}", result.isFocusSuccessful)
@@ -289,6 +294,8 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
         imageCaptureUseCase?.takePicture(ContextCompat.getMainExecutor(activity),
             object : ImageCapture.OnImageCapturedCallback() {
                 override fun onCaptureSuccess(image: ImageProxy) {
+                    mediaActionSound.play(MediaActionSound.SHUTTER_CLICK)
+
                     val byteArray = try {
                         image.toCroppedByteArray()
                     } catch (e: CameraException) {
