@@ -294,6 +294,7 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                     } catch (e: CameraException) {
                         LOG.error("Failed to take picture", e)
                         pictureFuture.completeExceptionally(e)
+                        image.close()
                         return
                     }
 
@@ -309,6 +310,7 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                         image.cropRect.height())
 
                     pictureFuture.complete(photo)
+                    image.close()
                 }
 
                 override fun onError(exception: ImageCaptureException) {
