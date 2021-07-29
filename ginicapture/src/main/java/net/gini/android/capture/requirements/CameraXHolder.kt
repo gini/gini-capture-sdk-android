@@ -80,19 +80,19 @@ class CameraXHolder(context: Context) : CameraHolder {
 
     override fun hasAutoFocus(): Pair<Boolean, String> {
         return cameraCharacteristics?.let {
-            val hasFlash =
-                cameraCharacteristics?.get(CameraCharacteristics.FLASH_INFO_AVAILABLE)
-                    ?: false
-            return Pair(hasFlash, "")
+            val focusModes = it.get(CameraCharacteristics.CONTROL_AF_AVAILABLE_MODES)
+            val hasAutoFocus = focusModes?.contains(CameraCharacteristics.CONTROL_AF_MODE_AUTO)
+                ?: false
+            return Pair(hasAutoFocus, "")
         } ?: Pair(false, "Camera not open")
     }
 
     override fun hasFlash(): Pair<Boolean, String> {
         return cameraCharacteristics?.let {
-            val focusModes = it.get(CameraCharacteristics.CONTROL_AF_AVAILABLE_MODES)
-            val hasAutoFocus = focusModes?.contains(CameraCharacteristics.CONTROL_AF_MODE_AUTO)
-                ?: false
-            return Pair(hasAutoFocus, "")
+            val hasFlash =
+                cameraCharacteristics?.get(CameraCharacteristics.FLASH_INFO_AVAILABLE)
+                    ?: false
+            return Pair(hasFlash, "")
         } ?: Pair(false, "Camera not open")
     }
 

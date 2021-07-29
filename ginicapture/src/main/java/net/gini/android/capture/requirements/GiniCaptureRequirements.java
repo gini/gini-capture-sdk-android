@@ -39,7 +39,7 @@ public final class GiniCaptureRequirements {
      */
     public static RequirementsReport checkRequirements(final Context context) {
         LOG.info("Checking requirements");
-        final CameraHolder cameraHolder = new OldCameraApiHolder();
+        final CameraHolder cameraHolder = new CameraXHolder(context);
 
         final List<Requirement> requirements;
         if (isTablet(context)) {
