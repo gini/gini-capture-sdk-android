@@ -5,14 +5,12 @@ import android.content.Context
 import android.graphics.*
 import android.media.MediaActionSound
 import android.os.Build
-import android.util.Rational
 import android.view.MotionEvent
+import android.view.Surface
 import android.view.View
 import android.view.ViewConfiguration
-import androidx.annotation.OptIn
 import androidx.annotation.RequiresApi
 import androidx.camera.core.*
-import androidx.camera.lifecycle.ExperimentalUseCaseGroupLifecycle
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
@@ -77,8 +75,9 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                     return@addListener
                 }
 
-                val targetRotation = previewContainer.previewView.display.rotation
-                val targetResolution = android.util.Size(3000, 4000)
+                val targetRotation = activity.display?.rotation ?: Surface.ROTATION_0
+                val targetResolution = android.util.Size(4000, 3000)
+                    .forRotation(targetRotation)
 
                 LOG.debug(
                     "Opening camera for target rotation {} and target resolution {}",
@@ -118,30 +117,15 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                     imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(activity), it)
                 }
 
-                @OptIn(markerClass = [ExperimentalUseCaseGroup::class])
-                val viewPort = ViewPort.Builder(
-                    Rational(4, 3).forRotation(targetRotation),
-                    targetRotation
-                ).build()
-
-                @OptIn(markerClass = [ExperimentalUseCaseGroup::class])
-                val useCaseGroup = UseCaseGroup.Builder()
-                    .addUseCase(preview)
-                    .addUseCase(imageCapture)
-                    .addUseCase(imageAnalysis)
-                    .setViewPort(viewPort)
-                    .build()
-
                 val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
                 try {
                     cameraProvider.unbindAll()
 
-                    @OptIn(markerClass = [ExperimentalUseCaseGroupLifecycle::class])
                     camera = cameraProvider.bindToLifecycle(
                         cameraLifecycle,
                         cameraSelector,
-                        useCaseGroup
+                        preview, imageCapture, imageAnalysis
                     )
 
                     LOG.info("Camera is open")
