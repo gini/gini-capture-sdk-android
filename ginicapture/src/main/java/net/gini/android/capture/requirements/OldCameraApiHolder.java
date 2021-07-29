@@ -36,6 +36,7 @@ class OldCameraApiHolder implements CameraHolder {
         }
     }
 
+    @NotNull
     @Override
     public Pair<Boolean, String> hasAutoFocus() {
         if (mCamera == null) {

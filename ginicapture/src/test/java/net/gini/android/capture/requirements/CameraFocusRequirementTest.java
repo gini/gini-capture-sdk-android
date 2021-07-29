@@ -13,6 +13,8 @@ import org.junit.runners.JUnit4;
 
 import java.util.Collections;
 
+import kotlin.Pair;
+
 @RunWith(JUnit4.class)
 public class CameraFocusRequirementTest {
 
@@ -36,7 +38,7 @@ public class CameraFocusRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifCamera_isNotOpen() {
-        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
+        OldCameraApiHolder cameraHolder = new OldCameraApiHolder();
 
         CameraFocusRequirement requirement = new CameraFocusRequirement(cameraHolder);
 
@@ -45,13 +47,7 @@ public class CameraFocusRequirementTest {
 
     public OldCameraApiHolder getCameraHolder(boolean isAutoFocusSupported) {
         OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
-        Camera.Parameters parameters = mock(Camera.Parameters.class);
-        when(cameraHolder.getCameraParameters()).thenReturn(parameters);
-        when(parameters.getSupportedFocusModes()).thenReturn(
-                isAutoFocusSupported ?
-                        Collections.singletonList(Camera.Parameters.FOCUS_MODE_AUTO)
-                        : Collections.singletonList(Camera.Parameters.FOCUS_MODE_FIXED));
-
+        when(cameraHolder.hasAutoFocus()).thenReturn(new Pair<>(isAutoFocusSupported, ""));
         return cameraHolder;
     }
 }

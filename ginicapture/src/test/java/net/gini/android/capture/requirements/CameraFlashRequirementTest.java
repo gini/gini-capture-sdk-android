@@ -13,6 +13,8 @@ import org.junit.runners.JUnit4;
 
 import java.util.Collections;
 
+import kotlin.Pair;
+
 @RunWith(JUnit4.class)
 public class CameraFlashRequirementTest {
 
@@ -36,7 +38,7 @@ public class CameraFlashRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifCamera_isNotOpen() {
-        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
+        OldCameraApiHolder cameraHolder = new OldCameraApiHolder();
 
         CameraFlashRequirement requirement = new CameraFlashRequirement(cameraHolder);
 
@@ -45,13 +47,7 @@ public class CameraFlashRequirementTest {
 
     private OldCameraApiHolder getCameraHolder(boolean isFlashSupported) {
         OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
-        Camera.Parameters parameters = mock(Camera.Parameters.class);
-        when(cameraHolder.getCameraParameters()).thenReturn(parameters);
-        when(parameters.getSupportedFlashModes()).thenReturn(
-                isFlashSupported ?
-                        Collections.singletonList(Camera.Parameters.FLASH_MODE_ON)
-                        : Collections.singletonList(Camera.Parameters.FLASH_MODE_OFF));
-
+        when(cameraHolder.hasFlash()).thenReturn(new Pair<>(isFlashSupported, ""));
         return cameraHolder;
     }
 }

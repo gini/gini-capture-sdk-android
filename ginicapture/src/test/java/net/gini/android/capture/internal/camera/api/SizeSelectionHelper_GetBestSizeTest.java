@@ -107,8 +107,8 @@ public class SizeSelectionHelper_GetBestSizeTest {
 
     @Test
     public void should_returnLargestPictureSizeWithMatchingPreviewSize() {
-        final List<Camera.Size> picture = toSizesList(pictureResolution);
-        final List<Camera.Size> preview = toSizesList(previewResolutions);
+        final List<Size> picture = toSizesList(pictureResolution);
+        final List<Size> preview = toSizesList(previewResolutions);
         final Pair<Size, Size> size = SizeSelectionHelper.getBestSize(picture,
                 preview, maxArea, minArea, minAspectRatio);
         assertThat(size).isNotNull();
