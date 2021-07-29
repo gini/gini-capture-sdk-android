@@ -76,6 +76,9 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                 }
 
                 val targetRotation = activity.display?.rotation ?: Surface.ROTATION_0
+                
+                // We require an image between 8MP and 12MP with at least 4:3 ratio
+                // so using 4000x3000 fits that nicely (see CameraResolutionRequirement)
                 val targetResolution = android.util.Size(4000, 3000)
                     .forRotation(targetRotation)
 
