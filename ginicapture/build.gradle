@@ -115,7 +115,6 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.androidxTestEspresso"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$versions.androidxTestEspresso"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$versions.androidxTestUiAutomator"
-    androidTestImplementation "org.mockito:mockito-core:$versions.mockito"
     androidTestImplementation "org.mockito:mockito-android:$versions.mockito"
     androidTestImplementation "androidx.multidex:multidex:$versions.androidxMultidex"
 

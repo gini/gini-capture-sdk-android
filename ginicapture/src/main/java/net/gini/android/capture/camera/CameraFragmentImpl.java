@@ -112,7 +112,8 @@ import static net.gini.android.capture.tracking.EventTrackingHelper.trackCameraS
 
 class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader.Listener {
 
-    private static final String GC_SHARED_PREFS = "GC_SHARED_PREFS";
+    @VisibleForTesting
+    static final String GC_SHARED_PREFS = "GC_SHARED_PREFS";
     @VisibleForTesting
     static final int DEFAULT_ANIMATION_DURATION = 200;
     private static final long HIDE_QRCODE_DETECTED_POPUP_DELAY_MS = 10000;
@@ -147,8 +148,10 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
     };
 
     private static final int REQ_CODE_CHOOSE_FILE = 1;
-    private static final String SHOW_UPLOAD_HINT_POP_UP = "SHOW_HINT_POP_UP";
-    private static final String SHOW_QRCODE_SCANNER_HINT_POP_UP = "SHOW_QR_CODE_SCANNER_HINT_POP_UP";
+    @VisibleForTesting
+    static final String SHOW_UPLOAD_HINT_POP_UP = "SHOW_HINT_POP_UP";
+    @VisibleForTesting
+    static final String SHOW_QRCODE_SCANNER_HINT_POP_UP = "SHOW_QR_CODE_SCANNER_HINT_POP_UP";
     private static final String IN_MULTI_PAGE_STATE_KEY = "IN_MULTI_PAGE_STATE_KEY";
     private static final String IS_FLASH_ENABLED_KEY = "IS_FLASH_ENABLED_KEY";
 
