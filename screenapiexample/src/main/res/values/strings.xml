@@ -20,10 +20,10 @@
     <string name="camera_permission_denied_message">Nur mit Kamera-Zugriff können Sie die Gini Capture SDK verwenden.</string>
     <string name="camera_permission_rationale">Um Rechnungen fotografieren zu können, wird Kamera-Zugriff benötigt.</string>
 
-    <string name="gini_api_type_label">Gini API Type</string>
-    <string-array name="gini_api_types">
-        <item>DEFAULT</item>
-        <item>ACCOUNTING</item>
+    <string name="camera_api_label">Camera API</string>
+    <string-array name="camera_apis">
+        <item>New (CameraX)</item>
+        <item>Old</item>
     </string-array>
 
     <string name="custom_help_screen_title">Custom Help Screen</string>

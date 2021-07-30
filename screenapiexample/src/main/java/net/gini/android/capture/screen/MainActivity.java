@@ -26,9 +26,7 @@ import net.gini.android.capture.ImportedFileValidationException;
 import net.gini.android.capture.camera.CameraActivity;
 import net.gini.android.capture.example.shared.BaseExampleApp;
 import net.gini.android.capture.example.shared.RuntimePermissionHandler;
-import net.gini.android.capture.help.FileImportActivity;
 import net.gini.android.capture.help.HelpItem;
-import net.gini.android.capture.help.PhotoTipsActivity;
 import net.gini.android.capture.onboarding.DefaultPagesPhone;
 import net.gini.android.capture.onboarding.OnboardingPage;
 import net.gini.android.capture.requirements.GiniCaptureRequirements;
@@ -71,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
     private RuntimePermissionHandler mRuntimePermissionHandler;
     private TextView mTextGiniCaptureSdkVersion;
     private TextView mTextAppVersion;
-    private Spinner mGiniApiTypeSpinner;
+    private Spinner mCameraApiSpinner;
     private CancellationToken mFileImportCancellationToken;
-    private GiniApiType mGiniApiType = GiniApiType.DEFAULT;
+    private boolean mIsCameraXEnabled = true;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -230,11 +228,11 @@ public class MainActivity extends AppCompatActivity {
                 startGiniCaptureSdk();
             }
         });
-        mGiniApiTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mCameraApiSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(final AdapterView<?> parent, final View view,
                     final int position, final long id) {
-                mGiniApiType = GiniApiType.values()[position];
+                mIsCameraXEnabled = position == 0;
             }
 
             @Override
@@ -316,16 +314,15 @@ public class MainActivity extends AppCompatActivity {
         final GiniCapture.Builder builder = GiniCapture.newInstance()
                 .setGiniCaptureNetworkService(
                         app.getGiniCaptureNetworkService("ScreenAPI",
-                                mGiniApiType)
-                ).setGiniCaptureNetworkApi(app.getGiniCaptureNetworkApi());
-        if (mGiniApiType == GiniApiType.DEFAULT) {
-            builder.setDocumentImportEnabledFileTypes(DocumentImportEnabledFileTypes.PDF_AND_IMAGES)
-                    .setFileImportEnabled(true)
-                    .setQRCodeScanningEnabled(true)
-                    .setMultiPageEnabled(true);
-        }
-        builder.setFlashButtonEnabled(true);
-        builder.setEventTracker(new GiniCaptureEventTracker());
+                                GiniApiType.DEFAULT)
+                ).setGiniCaptureNetworkApi(app.getGiniCaptureNetworkApi())
+                .setDocumentImportEnabledFileTypes(DocumentImportEnabledFileTypes.PDF_AND_IMAGES)
+                .setFileImportEnabled(true)
+                .setQRCodeScanningEnabled(true)
+                .setMultiPageEnabled(true)
+                .setFlashButtonEnabled(true)
+                .setEventTracker(new GiniCaptureEventTracker())
+                .setCameraXEnabled(mIsCameraXEnabled);
 
         final List<HelpItem.Custom> customHelpItems = new ArrayList<>();
         customHelpItems.add(new HelpItem.Custom(R.string.custom_help_screen_title,
@@ -373,7 +370,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonStartScanner = (Button) findViewById(R.id.button_start_scanner);
         mTextGiniCaptureSdkVersion = (TextView) findViewById(R.id.text_gini_capture_version);
         mTextAppVersion = (TextView) findViewById(R.id.text_app_version);
-        mGiniApiTypeSpinner = findViewById(R.id.gini_api_type_spinner);
+        mCameraApiSpinner = findViewById(R.id.camera_api_spinner);
     }
 
     private ArrayList<OnboardingPage> getOnboardingPages() {

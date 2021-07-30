@@ -1839,7 +1839,11 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
 
     @NonNull
     protected CameraInterface createCameraController(final Activity activity) {
-        return new CameraXController(activity);
+        if (GiniCapture.getInstance().isCameraXEnabled()) {
+            return new CameraXController(activity);
+        } else {
+            return new CameraController(activity);
+        }
     }
 
     private void handleError(final GiniCaptureError.ErrorCode errorCode,

@@ -82,6 +82,7 @@ public class GiniCapture {
     private final boolean mIsFlashOnByDefault;
     private final EventTracker mEventTracker;
     private final List<HelpItem.Custom> mCustomHelpItems;
+    private final boolean mIsCameraXEnabled;
 
     /**
      * Retrieve the current instance.
@@ -179,6 +180,7 @@ public class GiniCapture {
         mIsFlashOnByDefault = builder.isFlashOnByDefault();
         mEventTracker = builder.getEventTracker();
         mCustomHelpItems = builder.getCustomHelpItems();
+        mIsCameraXEnabled = builder.isCameraXEnabled();
     }
 
     /**
@@ -470,6 +472,10 @@ public class GiniCapture {
         return mCustomHelpItems;
     }
 
+    public boolean isCameraXEnabled() {
+        return mIsCameraXEnabled;
+    }
+
     @NonNull
     ImageMultiPageDocumentMemoryStore getImageMultiPageDocumentMemoryStore() {
         return mImageMultiPageDocumentMemoryStore;
@@ -542,6 +548,7 @@ public class GiniCapture {
             }
         };
         private List<HelpItem.Custom> mCustomHelpItems = new ArrayList<>();
+        private boolean mIsCameraXEnabled;
 
         /**
          * Create a new {@link GiniCapture} instance.
@@ -856,6 +863,15 @@ public class GiniCapture {
         public Builder setCustomHelpItems(@NonNull final List<HelpItem.Custom> customHelpItems) {
             this.mCustomHelpItems = customHelpItems;
             return this;
+        }
+
+        public Builder setCameraXEnabled(final boolean enabled) {
+            this.mIsCameraXEnabled = enabled;
+            return this;
+        }
+
+        boolean isCameraXEnabled() {
+            return mIsCameraXEnabled;
         }
     }
 
