@@ -18,12 +18,13 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import jersey.repackaged.jsr166e.CompletableFuture
 import net.gini.android.capture.Document
-import net.gini.android.capture.internal.camera.api.camerax.forRotation
+import net.gini.android.capture.internal.camera.api.camerax.forOrientation
 import net.gini.android.capture.internal.camera.api.camerax.toByteArray
 import net.gini.android.capture.internal.camera.api.camerax.toCroppedByteArray
 import net.gini.android.capture.internal.camera.photo.Photo
 import net.gini.android.capture.internal.camera.photo.PhotoFactory
 import net.gini.android.capture.internal.camera.view.CameraXPreviewContainer
+import net.gini.android.capture.internal.util.ContextHelper
 import net.gini.android.capture.internal.util.DeviceHelper
 import net.gini.android.capture.internal.util.Size
 import org.slf4j.Logger
@@ -76,11 +77,12 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                 }
 
                 val targetRotation = activity.display?.rotation ?: Surface.ROTATION_0
+                val isPortrait = ContextHelper.isPortraitOrientation(activity)
                 
                 // We require an image between 8MP and 12MP with at least 4:3 ratio
                 // so using 4000x3000 fits that nicely (see CameraResolutionRequirement)
                 val targetResolution = android.util.Size(4000, 3000)
-                    .forRotation(targetRotation)
+                    .forOrientation(isPortrait)
 
                 LOG.debug(
                     "Opening camera for target rotation {} and target resolution {}",
@@ -99,7 +101,7 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                         android.util.Size(
                             request.resolution.width,
                             request.resolution.height
-                        ).forRotation(targetRotation)
+                        ).forOrientation(isPortrait)
                     )
                     previewContainer.previewView.surfaceProvider.onSurfaceRequested(request)
                 }
