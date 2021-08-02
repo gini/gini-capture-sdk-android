@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.ImageFormat
 import android.hardware.camera2.CameraCharacteristics
+import android.view.SurfaceHolder
 import androidx.annotation.OptIn
 import androidx.camera.camera2.interop.Camera2CameraInfo
 import androidx.camera.core.Camera
@@ -46,7 +47,6 @@ class CameraXHolder(context: Context) : CameraHolder {
             try {
                 cameraProvider?.unbindAll()
 
-                @OptIn(markerClass = [ExperimentalUseCaseGroupLifecycle::class])
                 camera = cameraProvider?.bindToLifecycle(
                     cameraLifecycle,
                     cameraSelector,
@@ -104,10 +104,9 @@ class CameraXHolder(context: Context) : CameraHolder {
     }
 
     override fun getSupportedPreviewSizes(): List<Size>? {
-        // TODO get preview sizes
         val streamConfigurationMap =
             cameraCharacteristics?.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
-        return streamConfigurationMap?.getOutputSizes(ImageFormat.JPEG)
+        return streamConfigurationMap?.getOutputSizes(SurfaceHolder::class.java)
             ?.map { Size(it.width, it.height) }
     }
 
