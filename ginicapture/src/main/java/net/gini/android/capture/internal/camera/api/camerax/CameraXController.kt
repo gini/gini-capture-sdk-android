@@ -80,8 +80,8 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                 val isPortrait = ContextHelper.isPortraitOrientation(activity)
                 
                 // We require an image between 8MP and 12MP with at least 4:3 ratio
-                // so using 4000x3000 fits that nicely (see CameraResolutionRequirement)
-                val targetResolution = android.util.Size(4000, 3000)
+                // so using 3648x2736 fits that nicely (see CameraResolutionRequirement)
+                val targetResolution = android.util.Size(3648, 2736)
                     .forOrientation(isPortrait)
 
                 LOG.debug(
