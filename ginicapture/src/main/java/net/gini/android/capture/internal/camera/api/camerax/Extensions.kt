@@ -67,23 +67,11 @@ private fun cropByteArray(data: ByteArray, cropRect: Rect?): ByteArray {
 /**
  * Swaps width and height for portrait.
  *
- * @param rotation a [Surface].`ROTATION_X` constant: [Surface.ROTATION_0]
+ * @param isPortrait pass in `true` if in portrait orientation
  */
-fun Size.forRotation(@ImageOutputConfig.RotationValue rotation: Int): Size =
-    when (rotation) {
-        Surface.ROTATION_0, Surface.ROTATION_180 -> Size(height, width)
-        Surface.ROTATION_90, Surface.ROTATION_270 -> Size(width, height)
-        else -> this
-    }
-
-/**
- * Swaps numerator and denominator for portrait.
- *
- * @param rotation a [Surface].`ROTATION_X` constant: [Surface.ROTATION_0]
- */
-fun Rational.forRotation(@ImageOutputConfig.RotationValue rotation: Int): Rational =
-    when (rotation) {
-        Surface.ROTATION_0, Surface.ROTATION_180 -> Rational(denominator, numerator)
-        Surface.ROTATION_90, Surface.ROTATION_270 -> Rational(numerator, denominator)
-        else -> this
+fun Size.forOrientation(isPortrait: Boolean): Size =
+    if (isPortrait) {
+        Size(height, width)
+    } else {
+        Size(width, height)
     }
