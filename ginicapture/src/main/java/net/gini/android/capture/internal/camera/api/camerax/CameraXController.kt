@@ -349,9 +349,7 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
     }
 
     override fun isFlashEnabled(): Boolean {
-        // TODO
         return imageCaptureUseCase?.flashMode == ImageCapture.FLASH_MODE_ON
-                || imageCaptureUseCase?.flashMode == ImageCapture.FLASH_MODE_AUTO
     }
 
     override fun setFlashEnabled(enabled: Boolean) {
