@@ -5,6 +5,8 @@ import android.content.Context
 import android.graphics.*
 import android.media.MediaActionSound
 import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.MotionEvent
 import android.view.Surface
 import android.view.View
@@ -13,14 +15,14 @@ import androidx.annotation.RequiresApi
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import jersey.repackaged.jsr166e.CompletableFuture
 import net.gini.android.capture.Document
-import net.gini.android.capture.internal.camera.api.camerax.forOrientation
-import net.gini.android.capture.internal.camera.api.camerax.toByteArray
-import net.gini.android.capture.internal.camera.api.camerax.toCroppedByteArray
+import net.gini.android.capture.internal.camera.api.CameraException
+import net.gini.android.capture.internal.camera.api.CameraInterface
 import net.gini.android.capture.internal.camera.photo.Photo
 import net.gini.android.capture.internal.camera.photo.PhotoFactory
 import net.gini.android.capture.internal.camera.view.CameraXPreviewContainer
@@ -38,6 +40,9 @@ private val LOG: Logger = LoggerFactory.getLogger(CameraXController::class.java)
 private const val AF_SIZE = 1.0f / 6.0f
 private const val AE_SIZE = AF_SIZE * 1.5f
 
+private const val SHUTTER_VIBRATION_DURATION_MS = 50L
+private const val FOCUS_VIBRATION_DURATION_MS = 10L
+
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 internal class CameraXController(val activity: Activity) : CameraInterface {
 
@@ -51,7 +56,7 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
     private var imageAnalysisUseCase: ImageAnalysis? = null
     private var imageAnalyzer: ImageAnalysis.Analyzer? = null
 
-    private val mediaActionSound = MediaActionSound()
+    private var mediaActionSound: MediaActionSound? = null
 
     override fun open(): CompletableFuture<Void> {
         val openFuture = CompletableFuture<Void>()
@@ -133,6 +138,10 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                         preview, imageCapture, imageAnalysis
                     )
 
+                    // Not playing sounds because on some devices (for eg. Samsung Galaxy S9) it
+                    // always plays at 100% volume
+                    // mediaActionSound = MediaActionSound()
+
                     LOG.info("Camera is open")
 
                     openFuture.complete(null)
@@ -163,6 +172,8 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
         imageCaptureUseCase = null
         imageAnalysisUseCase = null
         camera = null
+        mediaActionSound?.release()
+        mediaActionSound = null
     }
 
     override fun startPreview(): CompletableFuture<Void> {
@@ -216,8 +227,7 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
         val focusFuture = camera?.cameraControl?.startFocusAndMetering(focusMeteringAction)
 
         focusFuture?.addListener({
-            mediaActionSound.play(MediaActionSound.FOCUS_COMPLETE)
-
+            vibrate(FOCUS_VIBRATION_DURATION_MS)
             try {
                 val result = focusFuture.get()
                 LOG.debug("Focus result: {}", result.isFocusSuccessful)
@@ -283,7 +293,11 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
         imageCaptureUseCase?.takePicture(ContextCompat.getMainExecutor(activity),
             object : ImageCapture.OnImageCapturedCallback() {
                 override fun onCaptureSuccess(image: ImageProxy) {
-                    mediaActionSound.play(MediaActionSound.SHUTTER_CLICK)
+                    // Not playing shutter sound because on some devices (for eg. Samsung Galaxy S9) it
+                    // always plays at 100% volume
+                    // mediaActionSound?.play(MediaActionSound.SHUTTER_CLICK)
+
+                    vibrate(SHUTTER_VIBRATION_DURATION_MS)
 
                     val byteArray = try {
                         image.toCroppedByteArray()
@@ -355,6 +369,19 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
     override fun setFlashEnabled(enabled: Boolean) {
         imageCaptureUseCase?.flashMode =
             if (enabled) ImageCapture.FLASH_MODE_ON else ImageCapture.FLASH_MODE_OFF
+    }
+
+    private fun vibrate(duration: Long) {
+        with((getSystemService(activity, Vibrator::class.java) as Vibrator)) {
+            if (!hasVibrator()) {
+                return
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrate(VibrationEffect.createOneShot(duration, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                vibrate(duration);
+            }
+        }
     }
 }
 

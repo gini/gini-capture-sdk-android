@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.gini.android.capture">
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application>
         <activity
             android:name="net.gini.android.capture.camera.CameraActivity"
