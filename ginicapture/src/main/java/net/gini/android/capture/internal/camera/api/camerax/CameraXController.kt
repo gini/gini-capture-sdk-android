@@ -1,4 +1,4 @@
-package net.gini.android.capture.internal.camera.api
+package net.gini.android.capture.internal.camera.api.camerax
 
 import android.app.Activity
 import android.content.Context

@@ -5,14 +5,12 @@ import android.content.Context
 import android.graphics.ImageFormat
 import android.hardware.camera2.CameraCharacteristics
 import android.view.SurfaceHolder
-import androidx.annotation.OptIn
 import androidx.camera.camera2.interop.Camera2CameraInfo
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ExperimentalUseCaseGroupLifecycle
 import androidx.camera.lifecycle.ProcessCameraProvider
-import net.gini.android.capture.internal.camera.api.CameraLifecycle
+import net.gini.android.capture.internal.camera.api.camerax.CameraLifecycle
 import net.gini.android.capture.internal.util.Size
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

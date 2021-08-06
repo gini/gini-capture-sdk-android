@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
-import android.hardware.Camera;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +48,7 @@ import net.gini.android.capture.document.QRCodeDocument;
 import net.gini.android.capture.internal.camera.api.CameraController;
 import net.gini.android.capture.internal.camera.api.CameraException;
 import net.gini.android.capture.internal.camera.api.CameraInterface;
-import net.gini.android.capture.internal.camera.api.CameraXController;
+import net.gini.android.capture.internal.camera.api.camerax.CameraXController;
 import net.gini.android.capture.internal.camera.api.UIExecutor;
 import net.gini.android.capture.internal.camera.photo.Photo;
 import net.gini.android.capture.internal.camera.photo.PhotoEdit;
@@ -80,7 +78,6 @@ import net.gini.android.capture.tracking.CameraScreenEvent;
 import net.gini.android.capture.util.IntentHelper;
 import net.gini.android.capture.util.UriHelper;
 
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
