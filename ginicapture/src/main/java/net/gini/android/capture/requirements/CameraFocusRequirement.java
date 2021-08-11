@@ -1,10 +1,8 @@
 package net.gini.android.capture.requirements;
 
-import android.hardware.Camera;
-
-import java.util.List;
-
 import androidx.annotation.NonNull;
+
+import kotlin.Pair;
 
 class CameraFocusRequirement implements Requirement {
 
@@ -23,27 +21,7 @@ class CameraFocusRequirement implements Requirement {
     @NonNull
     @Override
     public RequirementReport check() {
-        boolean fulfilled = true;
-        String details = "";
-
-        try {
-            final Camera.Parameters parameters = mCameraHolder.getCameraParameters();
-            if (parameters != null) {
-                final List<String> supportedFocusModes = parameters.getSupportedFocusModes();
-                if (supportedFocusModes == null || !supportedFocusModes.contains(
-                        Camera.Parameters.FOCUS_MODE_AUTO)) {
-                    fulfilled = false;
-                    details = "Camera does not support auto-focus";
-                }
-            } else {
-                fulfilled = false;
-                details = "Camera not open";
-            }
-        } catch (final RuntimeException e) {
-            fulfilled = false;
-            details = "Camera exception: " + e.getMessage();
-        }
-
-        return new RequirementReport(getId(), fulfilled, details);
+        final Pair<Boolean, String> result = mCameraHolder.hasAutoFocus();
+        return new RequirementReport(getId(), result.getFirst(), result.getSecond());
     }
 }

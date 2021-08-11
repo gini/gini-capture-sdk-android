@@ -19,7 +19,7 @@ import androidx.annotation.NonNull;
 public class CameraFragmentImplFake extends CameraFragmentImpl {
 
     private CameraControllerFake mCameraControllerFake;
-    private int mHidePaymentDataDetectedPopupDelayMs = 10000;
+    private int mHidePaymentDataDetectedPopupDelayMs = 1000;
     private QRCodeDocument mQRCodeDocument;
     private PaymentQRCodeData mPaymentQRCodeData;
 
@@ -52,11 +52,6 @@ public class CameraFragmentImplFake extends CameraFragmentImpl {
 
     public QRCodeDocument getQRCodeDocument() {
         return mQRCodeDocument;
-    }
-
-    void setHidePaymentDataDetectedPopupDelayMs(
-            final int hidePaymentDataDetectedPopupDelayMs) {
-        mHidePaymentDataDetectedPopupDelayMs = hidePaymentDataDetectedPopupDelayMs;
     }
 
     CameraControllerFake getCameraControllerFake() {

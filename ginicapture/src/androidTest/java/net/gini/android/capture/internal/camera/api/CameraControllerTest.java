@@ -2,6 +2,7 @@ package net.gini.android.capture.internal.camera.api;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static net.gini.android.capture.internal.camera.api.SizeSelectionHelper.getBestSize;
 import static net.gini.android.capture.test.Helpers.prepareLooper;
 import static net.gini.android.capture.test.PermissionsHelper.grantCameraPermission;
 
@@ -19,14 +20,19 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
+import androidx.core.util.Pair;
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.filters.RequiresDevice;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import jersey.repackaged.jsr166e.CompletableFuture;
+
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RunWith(AndroidJUnit4.class)
 public class CameraControllerTest {
-
-    private final ActivityTestRule<NoOpActivity> mIntentsTestRule = new ActivityTestRule<>(
-            NoOpActivity.class, true, false);
 
     private CameraController mCameraController;
 
@@ -40,51 +46,75 @@ public class CameraControllerTest {
     public void tearDown() throws Exception {
         if (mCameraController != null) {
             mCameraController.close();
+            mCameraController = null;
         }
     }
 
     @Test
-    public void should_useLargestPictureResolution() throws InterruptedException {
-        mCameraController = new CameraController(createNoOpActivity());
-        final Camera.Parameters parameters = openAndGetCamera().getParameters();
-        final Size largestSize = SizeSelectionHelper.getLargestAllowedSize(
-                parameters.getSupportedPictureSizes(), CameraResolutionRequirement.MAX_PICTURE_AREA);
-        assertThat(largestSize).isNotNull();
-        final Camera.Size usedSize = parameters.getPictureSize();
-        assertThat(usedSize.width).isEqualTo(largestSize.width);
-        assertThat(usedSize.height).isEqualTo(largestSize.height);
+    @RequiresDevice
+    public void should_useBestPictureResolution() throws InterruptedException {
+        openCameraWithCameraController(camera -> {
+            final Camera.Parameters parameters = camera.getParameters();
+            final Pair<Size, Size> sizes = getBestSize(
+                    parameters.getSupportedPictureSizes()
+                            .stream()
+                            .map(size -> new Size(size.width, size.height))
+                            .collect(Collectors.toList()),
+                    parameters.getSupportedPreviewSizes()
+                            .stream()
+                            .map(size -> new Size(size.width, size.height))
+                            .collect(Collectors.toList()),
+                    CameraResolutionRequirement.MAX_PICTURE_AREA,
+                    CameraResolutionRequirement.MIN_PICTURE_AREA,
+                    CameraResolutionRequirement.MIN_ASPECT_RATIO);
+            assertThat(sizes).isNotNull();
+
+            final Camera.Size usedSize = parameters.getPictureSize();
+            assertThat(usedSize.width).isEqualTo(sizes.first.width);
+            assertThat(usedSize.height).isEqualTo(sizes.first.height);
+            return null;
+        });
     }
 
-    private NoOpActivity createNoOpActivity() {
-        return launchNoOpActivity();
-    }
+    private void openCameraWithCameraController(final Function<Camera, Void> callback) {
+        try (final ActivityScenario<NoOpActivity> scenario = ActivityScenario.launch(NoOpActivity.class)) {
+            final AtomicReference<CompletableFuture<Void>> reference = new AtomicReference<>();
+            scenario.onActivity(activity -> {
+                mCameraController = new CameraController(activity);
+                activity.getCameraPreviewContainer().addView(mCameraController.getPreviewView(getTargetContext()));
+                reference.set(mCameraController.open());
+            });
 
-    private NoOpActivity launchNoOpActivity() {
-        final Intent intent = new Intent(getTargetContext(),
-                NoOpActivity.class);
-        return mIntentsTestRule.launchActivity(intent);
-    }
+            CompletableFuture<Void> openCameraFuture;
+            do {
+                openCameraFuture = reference.get();
+            } while (openCameraFuture == null);
 
-    private Camera openAndGetCamera() throws InterruptedException {
-        mCameraController.open().join();
-        final Camera camera = mCameraController.getCamera();
-        assertThat(camera).isNotNull();
-        return camera;
+            openCameraFuture.join();
+
+            callback.apply(mCameraController.getCamera());
+        }
     }
 
     @Test
-    public void should_useLargestPreviewResolution_withSimilarAspectRatio_asPictureSize()
-            throws InterruptedException {
-        mCameraController = new CameraController(createNoOpActivity());
-        final Camera.Parameters parameters = openAndGetCamera().getParameters();
-        final Size pictureSize = new Size(parameters.getPictureSize().width,
-                parameters.getPictureSize().height);
-        final Size largestSize = SizeSelectionHelper.getLargestAllowedSizeWithSimilarAspectRatio(
-                parameters.getSupportedPreviewSizes(), pictureSize, CameraResolutionRequirement.MAX_PICTURE_AREA);
-        assertThat(largestSize).isNotNull();
-        final Camera.Size usedSize = parameters.getPreviewSize();
-        assertThat(usedSize.width).isEqualTo(largestSize.width);
-        assertThat(usedSize.height).isEqualTo(largestSize.height);
+    @RequiresDevice
+    public void should_useLargestPreviewResolution_withSimilarAspectRatio_asPictureSize() {
+        openCameraWithCameraController(camera -> {
+            final Camera.Parameters parameters = camera.getParameters();
+            final Size pictureSize = new Size(parameters.getPictureSize().width,
+                    parameters.getPictureSize().height);
+            final Size largestSize = SizeSelectionHelper.getLargestAllowedSizeWithSimilarAspectRatio(
+                    parameters.getSupportedPreviewSizes()
+                            .stream()
+                            .map(size -> new Size(size.width, size.height))
+                            .collect(Collectors.toList()),
+                    pictureSize, CameraResolutionRequirement.MAX_PICTURE_AREA);
+            assertThat(largestSize).isNotNull();
+            final Camera.Size usedSize = parameters.getPreviewSize();
+            assertThat(usedSize.width).isEqualTo(largestSize.width);
+            assertThat(usedSize.height).isEqualTo(largestSize.height);
+            return null;
+        });
     }
 
     @Test

@@ -15,7 +15,7 @@ public class CameraRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifCamera_couldNotBeOpened() {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
+        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
         doThrow(new RuntimeException()).when(cameraHolder).hasCamera();
 
         CameraRequirement cameraRequirement = new CameraRequirement(cameraHolder);
@@ -25,7 +25,7 @@ public class CameraRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifCamera_isNull() {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
+        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
         when(cameraHolder.hasCamera()).thenReturn(false);
 
         CameraRequirement cameraRequirement = new CameraRequirement(cameraHolder);
@@ -35,7 +35,7 @@ public class CameraRequirementTest {
 
     @Test
     public void should_reportFulfilled_ifCamera_couldBeOpened_andIsNotNull() {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
+        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
         when(cameraHolder.hasCamera()).thenReturn(true);
 
         CameraRequirement cameraRequirement = new CameraRequirement(cameraHolder);

@@ -1,7 +1,5 @@
 package net.gini.android.capture.internal.camera.api;
 
-import android.hardware.Camera;
-
 import net.gini.android.capture.internal.util.Size;
 
 import java.util.ArrayList;
@@ -22,15 +20,15 @@ public final class SizeSelectionHelper {
 
     @Nullable
     public static Pair<Size, Size> getBestSize(
-            @NonNull final List<Camera.Size> pictureSizes,
-            @NonNull final List<Camera.Size> previewSizes,
+            @NonNull final List<Size> pictureSizes,
+            @NonNull final List<Size> previewSizes,
             final int maxArea,
             final int minArea,
             final float minAspectRatio
     ) {
-        Camera.Size bestPicture = null;
+        Size bestPicture = null;
         Size bestPreview = null;
-        for (final Camera.Size size : pictureSizes) {
+        for (final Size size : pictureSizes) {
             final long area = getArea(size);
             final boolean isAreaInBounds = minArea < area && area < maxArea;
             final boolean isNewAreaLarger = bestPicture == null || getArea(bestPicture) < area;
@@ -48,7 +46,7 @@ public final class SizeSelectionHelper {
         if (bestPicture != null && bestPreview != null) {
             return new Pair<>(new Size(bestPicture.width, bestPicture.height), bestPreview);
         }
-        for (final Camera.Size size : pictureSizes) {
+        for (final Size size : pictureSizes) {
             final long area = getArea(size);
             if (maxArea < area && (bestPicture == null || area < getArea(bestPicture))) {
                 final Size preview = getClosestSizeWithSimilarAspectRatio(previewSizes, new Size(size.width, size.height), maxArea);
@@ -65,9 +63,9 @@ public final class SizeSelectionHelper {
     }
 
     @Nullable
-    public static Size getLargestAllowedSize(@NonNull final List<Camera.Size> sizes, final int maxArea) {
-        Camera.Size largest = null;
-        for (final Camera.Size size : sizes) {
+    public static Size getLargestAllowedSize(@NonNull final List<Size> sizes, final int maxArea) {
+        Size largest = null;
+        for (final Size size : sizes) {
             if ((largest == null || getArea(largest) < getArea(size)) && getArea(size) <= maxArea) {
                 largest = size;
             }
@@ -77,21 +75,21 @@ public final class SizeSelectionHelper {
 
     @Nullable
     public static Size getLargestAllowedSizeWithSimilarAspectRatio(
-            @NonNull final List<Camera.Size> sizes, @NonNull final Size referenceSize, final int maxArea) {
-        final List<Camera.Size> sameAspectSizes = getSameAspectRatioSizes(sizes, referenceSize);
+            @NonNull final List<Size> sizes, @NonNull final Size referenceSize, final int maxArea) {
+        final List<Size> sameAspectSizes = getSameAspectRatioSizes(sizes, referenceSize);
         return getLargestAllowedSize(sameAspectSizes, maxArea);
     }
 
     @Nullable
     public static Size getClosestSizeWithSimilarAspectRatio(
-            @NonNull final List<Camera.Size> sizes, @NonNull final Size referenceSize, final int maxArea) {
-        final List<Camera.Size> sameAspectSizes = getSameAspectRatioSizes(sizes, referenceSize);
+            @NonNull final List<Size> sizes, @NonNull final Size referenceSize, final int maxArea) {
+        final List<Size> sameAspectSizes = getSameAspectRatioSizes(sizes, referenceSize);
         return getClosestSize(sameAspectSizes, maxArea);
     }
 
-    private static Size getClosestSize(List<Camera.Size> sizes, int maxArea) {
-        Camera.Size closest = null;
-        for (final Camera.Size size : sizes) {
+    private static Size getClosestSize(List<Size> sizes, int maxArea) {
+        Size closest = null;
+        for (final Size size : sizes) {
             if (closest == null || abs(getArea(closest) - maxArea) > abs(getArea(size) - maxArea)) {
                 closest = size;
             }
@@ -100,12 +98,12 @@ public final class SizeSelectionHelper {
     }
 
     @NonNull
-    private static List<Camera.Size> getSameAspectRatioSizes(@NonNull final List<Camera.Size> sizes,
+    private static List<Size> getSameAspectRatioSizes(@NonNull final List<Size> sizes,
             @NonNull final Size referenceSize) {
         final float referenceAspectRatio =
                 (float) referenceSize.width / (float) referenceSize.height;
-        final List<Camera.Size> sameAspectSizes = new ArrayList<>();
-        for (final Camera.Size size : sizes) {
+        final List<Size> sameAspectSizes = new ArrayList<>();
+        for (final Size size : sizes) {
             final float aspectRatio = (float) size.width / (float) size.height;
             if (isSimilarAspectRatio(aspectRatio, referenceAspectRatio)) {
                 sameAspectSizes.add(size);
@@ -119,7 +117,7 @@ public final class SizeSelectionHelper {
         return abs(aspectRatio - referenceAspectRatio) < 0.1f;
     }
 
-    private static long getArea(final Camera.Size size) {
+    private static long getArea(final Size size) {
         return size.width * size.height;
     }
 

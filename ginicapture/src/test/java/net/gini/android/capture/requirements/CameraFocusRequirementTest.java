@@ -13,12 +13,14 @@ import org.junit.runners.JUnit4;
 
 import java.util.Collections;
 
+import kotlin.Pair;
+
 @RunWith(JUnit4.class)
 public class CameraFocusRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifAutoFocus_isNotSupported() {
-        CameraHolder cameraHolder = getCameraHolder(false);
+        OldCameraApiHolder cameraHolder = getCameraHolder(false);
 
         CameraFocusRequirement requirement = new CameraFocusRequirement(cameraHolder);
 
@@ -27,7 +29,7 @@ public class CameraFocusRequirementTest {
 
     @Test
     public void should_reportFulfilled_ifAutoFocus_isSupported() {
-        CameraHolder cameraHolder = getCameraHolder(true);
+        OldCameraApiHolder cameraHolder = getCameraHolder(true);
 
         CameraFocusRequirement requirement = new CameraFocusRequirement(cameraHolder);
 
@@ -36,22 +38,16 @@ public class CameraFocusRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifCamera_isNotOpen() {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
+        OldCameraApiHolder cameraHolder = new OldCameraApiHolder();
 
         CameraFocusRequirement requirement = new CameraFocusRequirement(cameraHolder);
 
         assertThat(requirement.check().isFulfilled()).isFalse();
     }
 
-    public CameraHolder getCameraHolder(boolean isAutoFocusSupported) {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
-        Camera.Parameters parameters = mock(Camera.Parameters.class);
-        when(cameraHolder.getCameraParameters()).thenReturn(parameters);
-        when(parameters.getSupportedFocusModes()).thenReturn(
-                isAutoFocusSupported ?
-                        Collections.singletonList(Camera.Parameters.FOCUS_MODE_AUTO)
-                        : Collections.singletonList(Camera.Parameters.FOCUS_MODE_FIXED));
-
+    public OldCameraApiHolder getCameraHolder(boolean isAutoFocusSupported) {
+        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
+        when(cameraHolder.hasAutoFocus()).thenReturn(new Pair<>(isAutoFocusSupported, ""));
         return cameraHolder;
     }
 }
