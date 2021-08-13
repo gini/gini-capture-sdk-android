@@ -52,7 +52,7 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.3'
 
     // For backward compatibility
-    implementation('net.gini:gini-pay-api-lib-android:1.0.0-beta05@aar') {
+    implementation('net.gini:gini-pay-api-lib-android:1.0.0@aar') {
         transitive = true
     }
 
