@@ -1,67 +1,66 @@
 package net.gini.android.capture.internal.camera.photo;
 
-import com.google.common.truth.FailureStrategy;
+import com.google.common.truth.FailureMetadata;
 import com.google.common.truth.Subject;
-import com.google.common.truth.SubjectFactory;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class JpegByteArraySubject extends Subject<JpegByteArraySubject, byte[]> {
+import static com.google.common.truth.Fact.fact;
+import static com.google.common.truth.Fact.simpleFact;
 
-    // Not true that <"subject"> "verb" <"expected">. "failure message".
-    private static final String RAW_MESSAGE_TEMPLATE = "Not true that <%s> %s <%s>. %s.";
+public class JpegByteArraySubject extends Subject {
 
-    static SubjectFactory<JpegByteArraySubject, byte[]> jpegByteArray() {
-        return new SubjectFactory<JpegByteArraySubject, byte[]>() {
+    static Factory<JpegByteArraySubject, byte[]> jpegByteArray() {
+        return new Factory<JpegByteArraySubject, byte[]>() {
 
             @Override
-            public JpegByteArraySubject getSubject(final FailureStrategy fs, final byte[] that) {
-                return new JpegByteArraySubject(fs, that);
+            public JpegByteArraySubject createSubject(FailureMetadata metadata, byte[] actual) {
+                return new JpegByteArraySubject(metadata, actual);
             }
         };
     }
 
-    public JpegByteArraySubject(@NonNull final FailureStrategy failureStrategy,
-            @Nullable final byte[] subject) {
-        super(failureStrategy, subject);
+    private final byte[] actual;
+
+    public JpegByteArraySubject(FailureMetadata metadata, @org.checkerframework.checker.nullness.qual.Nullable Object actual) {
+        super(metadata, actual);
+        isNotNull();
+        this.actual = (byte[]) actual;
     }
 
     public void hasContentIdInUserComment(@Nullable final String contentId) {
         isNotNull();
-        final String verb = "has in User Comment ContentId";
+        final String key = "User Comment ContentId";
 
         if (contentId == null) {
-            fail(verb, (Object) null);
+            failWithoutActual(fact(key, null));
             return;
         }
 
-        final String userComment = readExifUserComment(verb, contentId, getSubject());
+        final String userComment = readExifUserComment(key, contentId, actual);
         final String contentIdInUserComment = getValueForKeyfromUserComment("ContentId",
                 userComment);
 
         if (contentIdInUserComment == null) {
-            triggerFailureWithRawMessage(verb, contentId, "It had no ContentId in User Comment");
+            failWithoutActual(simpleFact(String.format("Expected ContentID %s but User Comment had no ContentID", contentId)));
             return;
         }
 
         if (!contentId.equals(contentIdInUserComment)) {
-            failWithBadResults(verb, contentId, "was", contentIdInUserComment);
+            failWithoutActual(fact(key, contentId), fact("was", contentIdInUserComment));
         }
     }
 
-    private void triggerFailureWithRawMessage(final String verb, final String expected, final String failureMessage) {
-        failWithRawMessage(RAW_MESSAGE_TEMPLATE, getSubject(), verb, expected, failureMessage);
-    }
-
     @NonNull
-    private String readExifUserComment(@NonNull final String verb, @NonNull final String expected,
+    private String readExifUserComment(@NonNull final String key, @NonNull final String expected,
             @NonNull final byte[] jpeg) {
         try {
             final ExifReader reader = ExifReader.forJpeg(jpeg);
             return reader.getUserComment();
         } catch (final ExifReaderException e) {
-            triggerFailureWithRawMessage(verb, expected, "An error occurred: " + e.getMessage());
+            failWithoutActual(simpleFact(String.format("Could not read %s '%s' from <%s> due to error: %s", key, expected, jpeg,
+                    e.getMessage())));
         }
         return "";
     }
@@ -72,8 +71,8 @@ public class JpegByteArraySubject extends Subject<JpegByteArraySubject, byte[]> 
             final ExifReader reader = ExifReader.forJpeg(jpeg);
             return reader.getUserComment();
         } catch (final ExifReaderException e) {
-            failWithRawMessage("Could not read User Comment from <%s> due to error: %s", jpeg,
-                    e.getMessage());
+            failWithoutActual(simpleFact(String.format("Could not read User Comment from <%s> due to error: %s", jpeg,
+                    e.getMessage())));
         }
         return "";
     }
@@ -93,66 +92,65 @@ public class JpegByteArraySubject extends Subject<JpegByteArraySubject, byte[]> 
 
     public void hasSameContentIdInUserCommentAs(@Nullable final byte[] jpeg) {
         isNotNull();
-        final String verb = "has in User Comment same ContentId";
+        final String key = "User Comment ContentId";
 
         if (jpeg == null) {
-            fail(verb, (Object) null);
+            failWithoutActual(fact(key, null));
             return;
         }
 
-        final String userComment = readExifUserComment(getSubject());
+        final String userComment = readExifUserComment(actual);
         final String expectedUserComment = readExifUserComment(jpeg);
         final String subjectUuid = getValueForKeyfromUserComment("ContentId", userComment);
         final String otherUuid = getValueForKeyfromUserComment("ContentId", expectedUserComment);
 
         if (subjectUuid == null && otherUuid != null) {
-            triggerFailureWithRawMessage(verb, otherUuid, "It had no ContentId in User Comment");
+            failWithoutActual(simpleFact(String.format("Expected ContentID %s but User Comment had no ContentID", otherUuid)));
             return;
         }
         if (otherUuid == null) {
-            triggerFailureWithRawMessage(verb, null, "Target had no ContentId in User Comment");
+            failWithoutActual(simpleFact("Target had no ContentId in User Comment"));
             return;
         }
 
         if (!subjectUuid.equals(otherUuid)) {
-            failWithBadResults(verb, subjectUuid, "was", otherUuid);
+            failWithoutActual(fact(key, subjectUuid), fact("was", otherUuid));
         }
     }
 
     public void hasRotationDeltaInUserComment(final int rotationDelta) {
         isNotNull();
-        final String verb = "has in User Comment rotation delta";
+        final String key = "User Comment rotation delta";
 
-        final String userComment = readExifUserComment(getSubject());
+        final String userComment = readExifUserComment(actual);
         final String subjectRotDeltaDegString = getValueForKeyfromUserComment("RotDeltaDeg",
                 userComment);
 
         if (subjectRotDeltaDegString == null) {
-            triggerFailureWithRawMessage(verb, String.valueOf(rotationDelta),
-                    "Target had no rotation delta in User Comment");
+            failWithoutActual(simpleFact(String.format("Expected rotation delta %s but User Comment had no rotation delta", rotationDelta)));
             return;
         }
 
         final int subjectRotDeltaDeg = Integer.parseInt(subjectRotDeltaDegString);
         if (subjectRotDeltaDeg != rotationDelta) {
-            failWithBadResults(verb, rotationDelta, "was", subjectRotDeltaDeg);
+            failWithoutActual(fact(key, rotationDelta), fact("was", subjectRotDeltaDeg));
         }
     }
 
     public void hasSameUserCommentAs(@Nullable final byte[] other) {
         isNotNull();
-        final String verb = "has User Comment";
+        final String key = "User Comment";
 
         if (other == null) {
-            fail(verb, (Object) null);
+            failWithoutActual(fact(key, null));
             return;
         }
 
-        final String subjectUserComment = readExifUserComment(getSubject());
+        final String subjectUserComment = readExifUserComment(actual);
         final String otherUserComment = readExifUserComment(other);
 
         if (!otherUserComment.equals(subjectUserComment)) {
-            failWithBadResults(verb, otherUserComment, "was", subjectUserComment);
+            failWithoutActual(fact(key, otherUserComment), fact("was", subjectUserComment));
         }
     }
 }

@@ -1,12 +1,12 @@
 package net.gini.android.capture.requirements;
 
-import android.hardware.Camera;
-
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
 import net.gini.android.capture.internal.camera.api.SizeSelectionHelper;
 import net.gini.android.capture.internal.util.Size;
+
+import java.util.List;
 
 /**
  * Internal use only.
@@ -41,10 +41,12 @@ public class CameraResolutionRequirement implements Requirement {
         String details = "";
 
         try {
-            final Camera.Parameters parameters = mCameraHolder.getCameraParameters();
-            if (parameters != null) {
-                final Pair<Size, Size> sizes = SizeSelectionHelper.getBestSize(parameters.getSupportedPictureSizes(),
-                        parameters.getSupportedPreviewSizes(),
+            final List<Size> supportedPictureSizes = mCameraHolder.getSupportedPictureSizes();
+            final List<Size> supportedPreviewSizes = mCameraHolder.getSupportedPreviewSizes();
+            if (supportedPictureSizes != null && supportedPreviewSizes != null) {
+                final Pair<Size, Size> sizes = SizeSelectionHelper.getBestSize(
+                        supportedPictureSizes,
+                        supportedPreviewSizes,
                         MAX_PICTURE_AREA,
                         MIN_PICTURE_AREA,
                         MIN_ASPECT_RATIO

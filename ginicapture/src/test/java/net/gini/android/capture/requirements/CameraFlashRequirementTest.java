@@ -13,12 +13,14 @@ import org.junit.runners.JUnit4;
 
 import java.util.Collections;
 
+import kotlin.Pair;
+
 @RunWith(JUnit4.class)
 public class CameraFlashRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifFlash_isNotSupported() {
-        CameraHolder cameraHolder = getCameraHolder(false);
+        OldCameraApiHolder cameraHolder = getCameraHolder(false);
 
         CameraFlashRequirement requirement = new CameraFlashRequirement(cameraHolder);
 
@@ -27,7 +29,7 @@ public class CameraFlashRequirementTest {
 
     @Test
     public void should_reportFulfilled_ifFlash_isSupported() {
-        CameraHolder cameraHolder = getCameraHolder(true);
+        OldCameraApiHolder cameraHolder = getCameraHolder(true);
 
         CameraFlashRequirement requirement = new CameraFlashRequirement(cameraHolder);
 
@@ -36,22 +38,16 @@ public class CameraFlashRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifCamera_isNotOpen() {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
+        OldCameraApiHolder cameraHolder = new OldCameraApiHolder();
 
         CameraFlashRequirement requirement = new CameraFlashRequirement(cameraHolder);
 
         assertThat(requirement.check().isFulfilled()).isFalse();
     }
 
-    private CameraHolder getCameraHolder(boolean isFlashSupported) {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
-        Camera.Parameters parameters = mock(Camera.Parameters.class);
-        when(cameraHolder.getCameraParameters()).thenReturn(parameters);
-        when(parameters.getSupportedFlashModes()).thenReturn(
-                isFlashSupported ?
-                        Collections.singletonList(Camera.Parameters.FLASH_MODE_ON)
-                        : Collections.singletonList(Camera.Parameters.FLASH_MODE_OFF));
-
+    private OldCameraApiHolder getCameraHolder(boolean isFlashSupported) {
+        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
+        when(cameraHolder.hasFlash()).thenReturn(new Pair<>(isFlashSupported, ""));
         return cameraHolder;
     }
 }

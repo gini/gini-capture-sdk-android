@@ -1,42 +1,42 @@
 package net.gini.android.capture.test;
 
-import com.google.common.truth.FailureStrategy;
+import com.google.common.truth.FailureMetadata;
 import com.google.common.truth.Subject;
-import com.google.common.truth.SubjectFactory;
 
 import net.gini.android.capture.internal.camera.photo.JpegByteArraySubject;
 import net.gini.android.capture.internal.camera.photo.Photo;
 
 import androidx.annotation.Nullable;
 
-public class PhotoSubject extends Subject<PhotoSubject, Photo> {
+public class PhotoSubject extends Subject {
 
     private final JpegByteArraySubject mJpegByteArraySubject;
 
-    public static SubjectFactory<PhotoSubject, Photo> photo() {
-        return new SubjectFactory<PhotoSubject, Photo>() {
+    public static Factory<PhotoSubject, Photo> photo() {
+        return new Factory<PhotoSubject, Photo>() {
 
             @Override
-            public PhotoSubject getSubject(final FailureStrategy fs, final Photo that) {
-                return new PhotoSubject(fs, that);
+            public PhotoSubject createSubject(FailureMetadata metadata, Photo actual) {
+                return new PhotoSubject(metadata, actual);
             }
         };
     }
 
-    private PhotoSubject(final FailureStrategy failureStrategy,
-            @Nullable final Photo subject) {
-        super(failureStrategy, subject);
+    private final Photo actual;
+
+    protected PhotoSubject(FailureMetadata metadata, @org.checkerframework.checker.nullness.qual.Nullable Object actual) {
+        super(metadata, actual);
         isNotNull();
+        this.actual = (Photo) actual;
         //noinspection ConstantConditions
-        mJpegByteArraySubject = new JpegByteArraySubject(failureStrategy, subject.getData());
+        mJpegByteArraySubject = new JpegByteArraySubject(metadata, this.actual.getData());
     }
 
     public void hasContentIdInUserComment(final String contentId) {
-        isNotNull();
-        final String verb = "has in User Comment ContentId";
+        final String key = "User Comment ContentId";
 
         if (contentId == null) {
-            fail(verb, (Object) null);
+            failWithActual(key, null);
             return;
         }
 
@@ -44,12 +44,15 @@ public class PhotoSubject extends Subject<PhotoSubject, Photo> {
     }
 
     public void hasRotationDeltaInUserComment(final int rotationDelta) {
-        isNotNull();
         mJpegByteArraySubject.hasRotationDeltaInUserComment(rotationDelta);
     }
 
     public void hasSameUserCommentAs(@Nullable final Photo photo) {
-        isNotNull();
+        final String key = "User Comment";
+        if (photo == null) {
+            failWithActual(key, null);
+            return;
+        }
         mJpegByteArraySubject.hasSameUserCommentAs(photo.getData());
     }
 }

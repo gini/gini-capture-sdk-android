@@ -1,5 +1,6 @@
 package net.gini.android.capture.internal.camera.api;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -7,14 +8,18 @@ import android.graphics.Rect;
 import android.hardware.Camera;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.gini.android.capture.document.ImageDocument;
 import net.gini.android.capture.internal.camera.photo.Photo;
 import net.gini.android.capture.internal.camera.photo.PhotoFactory;
 import net.gini.android.capture.internal.util.Size;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
 import jersey.repackaged.jsr166e.CompletableFuture;
 
 /**
@@ -27,9 +32,8 @@ public class CameraControllerFake implements CameraInterface {
 
     private static final Size DEFAULT_PREVIEW_SIZE = new Size(900, 1200);
     private Photo mPhoto;
-    private Camera.PreviewCallback mPreviewCallback;
+    private PreviewCallback mPreviewCallback;
     private Size mPreviewSize = DEFAULT_PREVIEW_SIZE;
-    private SurfaceHolder mSurfaceHolder;
     private boolean mFlashEnabled;
 
     @NonNull
@@ -41,13 +45,6 @@ public class CameraControllerFake implements CameraInterface {
     @Override
     public void close() {
 
-    }
-
-    @NonNull
-    @Override
-    public CompletableFuture<Void> startPreview(@NonNull final SurfaceHolder surfaceHolder) {
-        mSurfaceHolder = surfaceHolder;
-        return CompletableFuture.completedFuture(null);
     }
 
     @NonNull
@@ -67,13 +64,12 @@ public class CameraControllerFake implements CameraInterface {
     }
 
     @Override
-    public void enableTapToFocus(@NonNull final View tapView,
-            @Nullable final TapToFocusListener listener) {
+    public void enableTapToFocus(@Nullable final TapToFocusListener listener) {
 
     }
 
     @Override
-    public void disableTapToFocus(@NonNull final View tapView) {
+    public void disableTapToFocus() {
 
     }
 
@@ -89,37 +85,22 @@ public class CameraControllerFake implements CameraInterface {
         return CompletableFuture.completedFuture(mPhoto);
     }
 
-    @NonNull
     @Override
-    public Size getPreviewSize() {
-        return mPreviewSize;
+    public void setPreviewCallback(@Nullable PreviewCallback previewCallback) {
+        mPreviewCallback = previewCallback;
     }
 
-    @NonNull
-    @Override
-    public Size getPreviewSizeForDisplay() {
-        return mPreviewSize;
-    }
-
-    @NonNull
-    @Override
-    public Size getPictureSize() {
-        return mPreviewSize;
-    }
-
-    @Nullable
-    public Camera.PreviewCallback getPreviewCallback() {
+    public PreviewCallback getPreviewCallback() {
         return mPreviewCallback;
     }
 
     @Override
-    public void setPreviewCallback(@NonNull final Camera.PreviewCallback previewCallback) {
-        mPreviewCallback = previewCallback;
-    }
-
-    @Override
-    public int getCameraRotation() {
-        return 0;
+    public View getPreviewView(@NonNull @NotNull Context context) {
+        final View view = new View(context);
+        final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        view.setLayoutParams(layoutParams);
+        return view;
     }
 
     @Override
@@ -138,9 +119,6 @@ public class CameraControllerFake implements CameraInterface {
     }
 
     public void showImageAsPreview(@NonNull final byte[] image, @Nullable final byte[] imageNV21) {
-        if (mSurfaceHolder == null) {
-            return;
-        }
         mPhoto = PhotoFactory.newPhotoFromJpeg(image, 0, "portrait", "photo",
                 ImageDocument.Source.newCameraSource());
 
@@ -149,17 +127,8 @@ public class CameraControllerFake implements CameraInterface {
         BitmapFactory.decodeByteArray(image, 0, image.length, options);
         mPreviewSize = new Size(options.outWidth, options.outHeight);
 
-        final Canvas canvas = mSurfaceHolder.lockCanvas();
-        final Bitmap previewBitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        canvas.drawBitmap(previewBitmap, null,
-                new Rect(0, 0, mSurfaceHolder.getSurfaceFrame().right,
-                        mSurfaceHolder.getSurfaceFrame().bottom), null);
-        mSurfaceHolder.unlockCanvasAndPost(canvas);
-
         if (mPreviewCallback != null && imageNV21 != null) {
-            mPreviewCallback.onPreviewFrame(imageNV21, null);
+            mPreviewCallback.onPreviewFrame(imageNV21, mPreviewSize, 0);
         }
     }
-
-
 }

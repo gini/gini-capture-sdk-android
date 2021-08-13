@@ -2,8 +2,6 @@ package net.gini.android.capture.requirements;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static net.gini.android.capture.requirements.TestUtil.createSize;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -27,7 +25,7 @@ public class DeviceMemoryRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifCamera_isNotOpen() {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
+        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
 
         DeviceMemoryRequirement requirement = new DeviceMemoryRequirement(cameraHolder);
 
@@ -36,7 +34,7 @@ public class DeviceMemoryRequirementTest {
 
     @Test
     public void should_reportUnfulfilled_ifEnoughMemory_isNotAvailable() {
-        CameraHolder cameraHolder = getCameraHolder(null);
+        OldCameraApiHolder cameraHolder = getCameraHolder(null);
 
         DeviceMemoryRequirement requirement = spy(new DeviceMemoryRequirement(cameraHolder));
 
@@ -47,8 +45,8 @@ public class DeviceMemoryRequirementTest {
 
     @Test
     public void should_reportFulfilled_ifEnoughMemory_isAvailable() {
-        CameraHolder cameraHolder = getCameraHolder(
-                Collections.singletonList(createSize(3264, 2448)));
+        OldCameraApiHolder cameraHolder = getCameraHolder(
+                Collections.singletonList(new Size(3264, 2448)));
 
         DeviceMemoryRequirement requirement = new DeviceMemoryRequirement(cameraHolder);
 
@@ -57,7 +55,7 @@ public class DeviceMemoryRequirementTest {
 
     @Test
     public void should_checkIfPictureSize_fitsIntoUnusedMemory() {
-        CameraHolder cameraHolder = getCameraHolder(null);
+        OldCameraApiHolder cameraHolder = getCameraHolder(null);
         DeviceMemoryRequirement requirement = new DeviceMemoryRequirement(cameraHolder);
 
         // Unused memory = max - (total - free)
@@ -72,17 +70,15 @@ public class DeviceMemoryRequirementTest {
                 new Size(1024, 768))).isFalse();
     }
 
-    private CameraHolder getCameraHolder(List<Camera.Size> pictureSizes) {
-        CameraHolder cameraHolder = mock(CameraHolder.class);
-        Camera.Parameters parameters = mock(Camera.Parameters.class);
-        when(cameraHolder.getCameraParameters()).thenReturn(parameters);
+    private OldCameraApiHolder getCameraHolder(List<Size> pictureSizes) {
+        OldCameraApiHolder cameraHolder = mock(OldCameraApiHolder.class);
         if (pictureSizes == null) {
-            Camera.Size size4to3 = createSize(4128, 3096);
-            Camera.Size sizeOther = createSize(4128, 2322);
+            Size size4to3 = new Size(4128, 3096);
+            Size sizeOther = new Size(4128, 2322);
             pictureSizes = Arrays.asList(size4to3, sizeOther);
         }
-        when(parameters.getSupportedPictureSizes()).thenReturn(pictureSizes);
-        when(parameters.getSupportedPreviewSizes()).thenReturn(pictureSizes);
+        when(cameraHolder.getSupportedPictureSizes()).thenReturn(pictureSizes);
+        when(cameraHolder.getSupportedPreviewSizes()).thenReturn(pictureSizes);
         return cameraHolder;
     }
 

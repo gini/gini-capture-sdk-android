@@ -50,7 +50,7 @@ public class SizeSelectionHelper_GetLargestAllowedSizeTest {
 
     @Test
     public void should_returnLargestAllowedSize() {
-        final List<Camera.Size> sizes = toSizesList(resolutions);
+        final List<Size> sizes = toSizesList(resolutions);
         final Size largestSize = SizeSelectionHelper.getLargestAllowedSize(sizes, maxArea);
         assertSizeEqualsResolution(largestSize, expectedResolution);
     }

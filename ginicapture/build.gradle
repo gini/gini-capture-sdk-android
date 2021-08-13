@@ -1,7 +1,11 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'com.hiya.jacoco-android'
-apply plugin: 'org.jetbrains.dokka'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'com.hiya.jacoco-android'
+    id 'org.jetbrains.dokka'
+    id 'maven-publish'
+}
+
 
 jacoco {
     toolVersion = "0.8.7"
@@ -57,6 +61,14 @@ android {
             res.srcDirs += "$rootProject.projectDir/ginicapture/src/test/res"
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
@@ -77,6 +89,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation fileTree(dir: '${project.rootDir}/tools/doccheck-doclet', include: ['*.jar'])
     implementation "androidx.cardview:cardview:$versions.androidxCardView"
+
+    implementation "androidx.camera:camera-camera2:$versions.androidxCameraX"
+    implementation "androidx.camera:camera-lifecycle:$versions.androidxCameraX"
+    implementation "androidx.camera:camera-view:$versions.androidxCameraXView"
 
     testImplementation "junit:junit:$versions.junit"
     testImplementation "com.google.truth:truth:$versions.truth"
@@ -103,17 +119,15 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.androidxTestEspresso"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$versions.androidxTestEspresso"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$versions.androidxTestUiAutomator"
-    androidTestImplementation "org.mockito:mockito-core:$versions.mockito"
     androidTestImplementation "org.mockito:mockito-android:$versions.mockito"
     androidTestImplementation "androidx.multidex:multidex:$versions.androidxMultidex"
 
     androidTestUtil "androidx.test:orchestrator:$versions.androidxTest"
 
-    dokkaHtmlPlugin 'org.jetbrains.dokka:kotlin-as-java-plugin:1.4.32'
+    dokkaHtmlPlugin "org.jetbrains.dokka:kotlin-as-java-plugin:$dokkaVersion"
 }
 
 apply from: rootProject.file('gradle/codequality.gradle')
-apply from: rootProject.file('gradle/maven.gradle')
 apply from: rootProject.file('gradle/javadoc_coverage.gradle')
 apply from: rootProject.file('gradle/multidex_for_tests.gradle')
 
@@ -173,7 +187,4 @@ task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
     from dokkaJavadoc.outputDirectory
 }
 
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}
+apply from: rootProject.file('gradle/maven.gradle')
