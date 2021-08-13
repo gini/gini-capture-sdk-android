@@ -274,9 +274,7 @@ pipeline {
             }
             steps {
                 sh '''
-                    ./gradlew ginicapture:uploadArchives \
-                    ginicapture-network:uploadArchives \
-                    ginicapture-accounting-network:uploadArchives \
+                    ./gradlew publishReleasePublicationToSnapshotsRepository \
                     -PmavenSnapshotsRepoUrl=https://repo.gini.net/nexus/content/repositories/snapshots \
                     -PrepoUser=$NEXUS_MAVEN_USR \
                     -PrepoPassword=$NEXUS_MAVEN_PSW \
