@@ -59,7 +59,7 @@ pipeline {
                 }
             }
             steps {
-                sh './gradlew ginicapture:testDebugUnitTest -Dorg.gradle.java.home=$JAVA9 -Dorg.gradle.java.home=$JAVA11'
+                sh './gradlew ginicapture:testDebugUnitTest -Dorg.gradle.java.home=$JAVA11'
             }
             post {
                 always {
@@ -253,7 +253,7 @@ pipeline {
                 expression {
                     boolean publish = false
                     try {
-                        def version = sh(returnStdout: true, script: './gradlew -q printLibraryVersion').trim()
+                        def version = sh(returnStdout: true, script: './gradlew -q printLibraryVersion -Dorg.gradle.java.home=$JAVA11').trim()
                         def sha = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
                         input "Release documentation for ${version} from branch ${env.BRANCH_NAME} commit ${sha}?"
                         publish = true
@@ -291,7 +291,7 @@ pipeline {
                 expression {
                     boolean publish = false
                     try {
-                        def version = sh(returnStdout: true, script: './gradlew -q printLibraryVersion').trim()
+                        def version = sh(returnStdout: true, script: './gradlew -q printLibraryVersion -Dorg.gradle.java.home=$JAVA11').trim()
                         def sha = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
                         input "Release ${version} from branch ${env.BRANCH_NAME} commit ${sha}?"
                         publish = true
