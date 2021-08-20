@@ -81,7 +81,11 @@ internal class CameraXController(val activity: Activity) : CameraInterface {
                     return@addListener
                 }
 
-                val targetRotation = activity.display?.rotation ?: Surface.ROTATION_0
+                val targetRotation = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    activity.display?.rotation ?: Surface.ROTATION_0
+                } else {
+                    activity.windowManager.defaultDisplay.rotation
+                }
                 val isPortrait = ContextHelper.isPortraitOrientation(activity)
                 
                 // We require an image between 8MP and 12MP with at least 4:3 ratio
