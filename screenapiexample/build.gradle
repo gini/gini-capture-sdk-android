@@ -83,11 +83,6 @@ dependencies {
         exclude group: 'com.google.android', module: 'android'
     }
 
-    // For backward compatibility
-    implementation('net.gini:gini-pay-api-lib-android:1.0.0@aar') {
-        transitive = true
-    }
-
     // For testing the local version
     implementation project(path: ':ginicapture-network')
     // For testing a released version
