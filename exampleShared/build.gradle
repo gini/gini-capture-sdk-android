@@ -51,11 +51,6 @@ dependencies {
 
     implementation 'com.karumi:dexter:6.2.3'
 
-    // For backward compatibility
-    implementation('net.gini:gini-pay-api-lib-android:1.0.0@aar') {
-        transitive = true
-    }
-
     // For testing the local version
     implementation project(path: ':ginicapture-network')
     // For testing a released version

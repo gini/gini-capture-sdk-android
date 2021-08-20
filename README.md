@@ -137,7 +137,7 @@ app/build.gradle:
 
 ```
 dependencies {
-    implementation 'net.gini:gini-capture-sdk:1.3.0'
+    implementation 'net.gini:gini-capture-sdk:1.3.1'
 }
 ```
 
