@@ -60,8 +60,8 @@ Documentation
 Furhter documentation can be found in our 
 
 * [Integration Guide](http://developer.gini.net/gini-capture-sdk-android/html/) and
-* [Gini Capture Javadoc](http://developer.gini.net/gini-capture-sdk-android/javadoc/index.html)
-* [Network Library Javadoc](http://developer.gini.net/gini-capture-sdk-android/javadoc/index.html)
+* [Gini Capture Reference Docs](http://developer.gini.net/gini-capture-sdk-android/javadoc/index.html)
+* [Network Library Reference Docs](http://developer.gini.net/gini-capture-sdk-android/javadoc/index.html)
 
 Architecture
 ------------
@@ -102,8 +102,8 @@ Capture Network Library) should be used.
 Requirements
 ------------
 
-Screen API: Android 4.4+ (API Level 19+)
-Component API: Android 4.4+ (API Level 19+)
+* Screen API: Android 5.0+ (API Level 21+)
+* Component API: Android 5.0+ (API Level 21+)
 
 ### Phone Hardware
 
