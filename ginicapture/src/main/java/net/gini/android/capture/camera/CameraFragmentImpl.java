@@ -72,6 +72,8 @@ import net.gini.android.capture.internal.util.DeviceHelper;
 import net.gini.android.capture.internal.util.FileImportValidator;
 import net.gini.android.capture.internal.util.MimeType;
 import net.gini.android.capture.internal.util.Size;
+import net.gini.android.capture.logging.ErrorLog;
+import net.gini.android.capture.logging.ErrorLogger;
 import net.gini.android.capture.network.model.GiniCaptureExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
 import net.gini.android.capture.tracking.CameraScreenEvent;
@@ -1842,22 +1844,15 @@ class CameraFragmentImpl implements CameraFragmentInterface, PaymentQRCodeReader
     private void handleError(final GiniCaptureError.ErrorCode errorCode,
             @NonNull final String message,
             @Nullable final Throwable throwable) {
+        ErrorLogger.log(new ErrorLog(errorCode.toString() + ": " + message, throwable));
         String errorMessage = message;
         if (throwable != null) {
             LOG.error(message, throwable);
             // Add error info to the message to help clients, if they don't have logging enabled
             errorMessage = errorMessage + ": " + throwable.getMessage();
+        } else {
+            LOG.error(message);
         }
-        handleError(errorCode, errorMessage);
-    }
-
-    private void handleError(final GiniCaptureError.ErrorCode errorCode,
-            @NonNull final String message) {
-        handleError(new GiniCaptureError(errorCode, message));
-    }
-
-    private void handleError(@NonNull final GiniCaptureError error) {
-        LOG.error(error.getMessage());
-        mListener.onError(error);
+        mListener.onError(new GiniCaptureError(errorCode, errorMessage));
     }
 }
