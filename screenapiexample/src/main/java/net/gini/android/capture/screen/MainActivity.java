@@ -29,6 +29,8 @@ import net.gini.android.capture.example.shared.RuntimePermissionHandler;
 import net.gini.android.capture.help.FileImportActivity;
 import net.gini.android.capture.help.HelpItem;
 import net.gini.android.capture.help.PhotoTipsActivity;
+import net.gini.android.capture.logging.ErrorLog;
+import net.gini.android.capture.logging.ErrorLoggerListener;
 import net.gini.android.capture.onboarding.DefaultPagesPhone;
 import net.gini.android.capture.onboarding.OnboardingPage;
 import net.gini.android.capture.requirements.GiniCaptureRequirements;
@@ -326,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
         }
         builder.setFlashButtonEnabled(true);
         builder.setEventTracker(new GiniCaptureEventTracker());
+        builder.setCustomErrorLoggerListener(new CustomErrorLoggerListener());
 
         final List<HelpItem.Custom> customHelpItems = new ArrayList<>();
         customHelpItems.add(new HelpItem.Custom(R.string.custom_help_screen_title,
@@ -496,7 +499,7 @@ public class MainActivity extends AppCompatActivity {
         root.addAppender(logcatAppender);
     }
 
-    private class GiniCaptureEventTracker implements EventTracker {
+    private static class GiniCaptureEventTracker implements EventTracker {
 
         @Override
         public void onOnboardingScreenEvent(final Event<OnboardingScreenEvent> event) {
@@ -559,6 +562,14 @@ public class MainActivity extends AppCompatActivity {
                     LOG.info("Analysis cancelled");
                     break;
             }
+        }
+    }
+
+    private static class CustomErrorLoggerListener implements ErrorLoggerListener {
+
+        @Override
+        public void handleErrorLog(@NonNull ErrorLog errorLog) {
+            LOG.error("Custom error logger: {}", errorLog.toString());
         }
     }
 }
