@@ -311,6 +311,11 @@ public class GiniCaptureDefaultNetworkService implements GiniCaptureNetworkServi
     }
 
     @Override
+    public void handleErrorLog(@NonNull ErrorLog errorLog) {
+        LOG.error(errorLog.toString(), errorLog.getException());
+    }
+
+    @Override
     public void cleanup() {
         mAnalyzedGiniApiDocument = null; // NOPMD
         mGiniApiDocuments.clear();
