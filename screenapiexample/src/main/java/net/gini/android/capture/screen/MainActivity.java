@@ -329,6 +329,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setFlashButtonEnabled(true);
         builder.setEventTracker(new GiniCaptureEventTracker());
         builder.setCustomErrorLoggerListener(new CustomErrorLoggerListener());
+        // Uncomment to disable sending errors to Gini
+//        builder.setGiniErrorLoggerIsOn(false);
 
         final List<HelpItem.Custom> customHelpItems = new ArrayList<>();
         customHelpItems.add(new HelpItem.Custom(R.string.custom_help_screen_title,
