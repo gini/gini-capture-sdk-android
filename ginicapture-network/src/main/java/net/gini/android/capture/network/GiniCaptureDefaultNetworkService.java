@@ -1,9 +1,13 @@
 package net.gini.android.capture.network;
 
+import static net.gini.android.capture.network.logging.UtilKt.errorLogFromException;
+import static net.gini.android.capture.network.logging.UtilKt.responseDetails;
+
 import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.volley.Cache;
+import com.android.volley.VolleyError;
 
 import net.gini.android.DocumentMetadata;
 import net.gini.android.DocumentTaskManager;
@@ -12,6 +16,7 @@ import net.gini.android.GiniBuilder;
 import net.gini.android.authorization.CredentialsStore;
 import net.gini.android.authorization.SessionManager;
 import net.gini.android.authorization.SharedPreferencesCredentialsStore;
+import net.gini.android.capture.logging.ErrorLog;
 import net.gini.android.capture.network.model.CompoundExtractionsMapper;
 import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureReturnReason;
@@ -148,8 +153,14 @@ public class GiniCaptureDefaultNetworkService implements GiniCaptureNetworkServi
         if (!task.isFaulted()) {
             return "";
         }
-        final String errorMessage = task.getError().getMessage();
-        return errorMessage != null ? errorMessage : task.getError().toString();
+        String errorMessage = "unknown";
+        if (task.getError() != null) {
+            errorMessage = task.getError().getMessage();
+            if (task.getError() instanceof VolleyError) {
+                errorMessage = responseDetails((VolleyError) task.getError());
+            }
+        }
+        return errorMessage;
     }
 
 
