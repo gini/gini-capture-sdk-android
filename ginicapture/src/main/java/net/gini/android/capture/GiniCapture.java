@@ -10,6 +10,8 @@ import net.gini.android.capture.internal.cache.PhotoMemoryCache;
 import net.gini.android.capture.internal.document.ImageMultiPageDocumentMemoryStore;
 import net.gini.android.capture.internal.network.NetworkRequestsManager;
 import net.gini.android.capture.internal.storage.ImageDiskStore;
+import net.gini.android.capture.logging.ErrorLogger;
+import net.gini.android.capture.logging.ErrorLoggerListener;
 import net.gini.android.capture.network.GiniCaptureNetworkApi;
 import net.gini.android.capture.network.GiniCaptureNetworkService;
 import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
@@ -82,6 +84,7 @@ public class GiniCapture {
     private final boolean mIsFlashOnByDefault;
     private final EventTracker mEventTracker;
     private final List<HelpItem.Custom> mCustomHelpItems;
+    private final ErrorLogger mErrorLogger;
 
     /**
      * Retrieve the current instance.
@@ -179,6 +182,9 @@ public class GiniCapture {
         mIsFlashOnByDefault = builder.isFlashOnByDefault();
         mEventTracker = builder.getEventTracker();
         mCustomHelpItems = builder.getCustomHelpItems();
+        mErrorLogger = new ErrorLogger(builder.getGiniErrorLoggerIsOn(),
+                builder.getGiniCaptureNetworkService(),
+                builder.getCustomErrorLoggerListener());
     }
 
     /**
@@ -505,6 +511,9 @@ public class GiniCapture {
         return mEventTracker;
     }
 
+    @NonNull
+    ErrorLogger getErrorLogger() { return mErrorLogger; }
+
     /**
      * Builder for {@link GiniCapture}. To get an instance call {@link #newInstance()}.
      */
@@ -542,6 +551,8 @@ public class GiniCapture {
             }
         };
         private List<HelpItem.Custom> mCustomHelpItems = new ArrayList<>();
+        private boolean mGiniErrorLoggerIsOn = true;
+        private ErrorLoggerListener mCustomErrorLoggerListener;
 
         /**
          * Create a new {@link GiniCapture} instance.
@@ -857,6 +868,39 @@ public class GiniCapture {
             this.mCustomHelpItems = customHelpItems;
             return this;
         }
+
+        /**
+         * Set whether the default Gini error logging implementation is on or not.
+         *
+         * <p> On by default.
+         *
+         * @param isOn pass {@code true} to turn on the error logger or {@code false} otherwise.
+         * @return the {@link Builder} instance
+         */
+        public Builder setGiniErrorLoggerIsOn(final boolean isOn) {
+            mGiniErrorLoggerIsOn = isOn;
+            return this;
+        }
+
+        private boolean getGiniErrorLoggerIsOn() {
+            return mGiniErrorLoggerIsOn;
+        }
+
+        /**
+         * Set an {@link ErrorLoggerListener} to be notified of Gini Capture SDK errors.
+         *
+         * @param listener your {@link ErrorLoggerListener} implementation
+         * @return the {@link Builder} instance
+         */
+        public Builder setCustomErrorLoggerListener(@NonNull final ErrorLoggerListener listener) {
+            mCustomErrorLoggerListener = listener;
+            return this;
+        }
+
+        @Nullable
+        private ErrorLoggerListener getCustomErrorLoggerListener() {
+            return mCustomErrorLoggerListener;
+        }
     }
 
     /**
@@ -913,6 +957,10 @@ public class GiniCapture {
 
         public void setReviewScreenAnalysisError(@Nullable final Throwable analysisError) {
             mReviewScreenAnalysisError = analysisError;
+        }
+
+        public ErrorLogger getErrorLogger() {
+            return mGiniCapture.getErrorLogger();
         }
     }
 

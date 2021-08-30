@@ -27,6 +27,8 @@ import net.gini.android.capture.internal.storage.ImageDiskStore;
 import net.gini.android.capture.internal.ui.ErrorSnackbar;
 import net.gini.android.capture.internal.util.FileImportHelper;
 import net.gini.android.capture.internal.util.MimeType;
+import net.gini.android.capture.logging.ErrorLog;
+import net.gini.android.capture.logging.ErrorLogger;
 import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureReturnReason;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
@@ -263,8 +265,8 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
         final Uri uri = pdfDocument.getUri();
         try {
             return UriHelper.getFilenameFromUri(uri, getActivity());
-        } catch (final IllegalStateException e) { // NOPMD
-            // Ignore
+        } catch (final IllegalStateException e) {
+            ErrorLogger.log(new ErrorLog("Failed to get pdf filename", e));
         }
         return null;
     }
@@ -385,6 +387,7 @@ class AnalysisScreenPresenter extends AnalysisScreenContract.Presenter {
                         if (isStopped()) {
                             return;
                         }
+                        ErrorLogger.log(new ErrorLog("Failed to load document data", exception));
                         getAnalysisFragmentListenerOrNoOp().onError(
                                 new GiniCaptureError(GiniCaptureError.ErrorCode.ANALYSIS,
                                         "An error occurred while loading the document."));
