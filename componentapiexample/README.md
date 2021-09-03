@@ -3,13 +3,12 @@ Component API Example App
 
 This example app provides you with a sample usage of the Gini Capture SDK's Component API.
 
-The Gini Pay API lib is used for analyzing documents and sending feedback.
+The [Gini Pay API Library](https://github.com/gini/gini-pay-api-lib-android) is used for analyzing documents and sending feedback.
 
-Before analyzing documents with the Component API example app, you need to set your Gini API Client Id and Secret by creating a
+Before analyzing documents with the Component API example app, you need to set your Gini Pay API client id and secret by creating a
 `local.properties` file in this folder containing a `clientId` and a `clientSecret` property.
 
-Please note, that large heap is enabled for the example app. Your application using the Gini Capture SDK should also enable large heap to
-make sure, that there is enough memory for image handling.
+You can find more information about the Component API in our [integration guide](https://developer.gini.net/gini-capture-sdk-android/html/integration.html#component-api).
 
 Overview
 ========
@@ -96,10 +95,11 @@ SingleDocumentAnalyzer
 
 Helps with managing the document analysis using our Gini Pay API lib.
 
-Gini Pay API lib
-============
+Gini Pay API Library
+====================
 
-The Gini Pay API lib is created in and accessed using the `ComponentApiApp`. The `SingleDocumentAnalyzer` helps with managing document analysis.
+The Gini Pay API Library is not used directly. The default networking plugin, which was used when configuring and creating a `GiniCapture` instance,
+takes care of communicating with the Gini Pay API.
 
 Customization
 =============
