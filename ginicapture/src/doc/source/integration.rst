@@ -263,7 +263,7 @@ The ``CameraActivity`` can return with the following result codes:
 
 * CameraActivity.RESULT_ERROR
 
-   An error occured and the details are available in the ``EXTRA_OUT_ERROR``result extra. It contains a parcelable extra
+   An error occured and the details are available in the ``EXTRA_OUT_ERROR`` result extra. It contains a parcelable extra
    of type ``GiniCaptureError`` detailing what went wrong.
 
 The following example shows how to launch the Gini Capture SDK using the *Screen API* and how to handle the results:
