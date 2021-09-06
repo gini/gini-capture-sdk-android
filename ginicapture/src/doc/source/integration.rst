@@ -224,8 +224,7 @@ for details.
 Capturing documents
 -------------------
 
-The Gini Vision Library can be used in two ways, either by using the *Screen API* or the
-*Component API*:
+The Gini Capture SDK can be used in two ways, either by using the *Screen API* or the *Component API*:
 
 * The *Screen API* provides activities for easy integration that can be customized in a
   limited way. The screen and configuration design is based on our long-lasting experience with
