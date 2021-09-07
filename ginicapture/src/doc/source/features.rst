@@ -227,7 +227,7 @@ callback.
 
 .. code-block:: java
 
-    void startGiniVisionLibraryForImportedFile(final Intent importedFileIntent) {
+    void startGiniCaptureSDKForImportedFile(final Intent importedFileIntent) {
         // Configure the Gini Capture SDK first
         configureGiniCapture();
         if (GiniCapture.hasInstance() && GiniCapture.getInstance().isMultiPageEnabled()) {
@@ -315,7 +315,7 @@ check whether the document is reviewable or not:
 
 .. code-block:: java
 
-    void startGiniVisionLibraryForImportedFile(final Intent importedFileIntent) {
+    void startGiniCaptureSDKForImportedFile(final Intent importedFileIntent) {
         // Configure the Gini Capture SDK first
         configureGiniCapture();
         if (GiniCapture.hasInstance() && GiniCapture.getInstance().isMultiPageEnabled()) {
@@ -360,7 +360,6 @@ check whether the document is reviewable or not:
             }
         }
     }
-
 
 Help Screen Customization
 -------------------------
