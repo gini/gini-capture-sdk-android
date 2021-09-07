@@ -9,7 +9,7 @@ optimized on the device to provide the best results when used with the Gini Pay 
 
 The Gini Pay API provides an information extraction service for analyzing documents (e.g. invoices or contracts).
 Specifically it extracts information such as the document sender or the payment relevant information (amount to pay,
-IBAN, etc.) in an invoice.
+IBAN, BIC, payment reference, etc.) in an invoice.
 
 Documentation
 -------------
