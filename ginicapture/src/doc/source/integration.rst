@@ -457,7 +457,7 @@ This fragment shows the single page document review screen. This should be only 
 It displays the photographed or imported image and allows the user to review it by checking the sharpness, quality and
 orientation of the image. The user can correct the orientation by rotating the image.
 
-A ``ReviewFragmentListener`` instance must be available before the is attached to an activity.
+A ``ReviewFragmentListener`` instance must be available before the `ReviewFragmentCompat` is attached to an activity.
 Failing to do so will throw an exception. The listener instance can be provided either implicitly by making the host
 activity implement the ``ReviewFragmentListener`` interface or explicitly by setting the listener using ``setListener()``.
 
@@ -479,7 +479,7 @@ It displays the photographed or imported images and allows the user to review th
 quality and orientation of the images. The user can correct the order by dragging the thumbnails of the images and can
 also correct the orientation by rotating the images.
 
-A ``MultiPageReviewFragmentListener`` instance must be available until it is attached to
+A ``MultiPageReviewFragmentListener`` instance must be available before it is attached to
 an activity. Failing to do so will throw an exception. The listener instance can be provided either implicitly by making
 the host activity implement the ``MultiPageReviewFragmentListener`` interface or explicitly by setting the listener using
 ``setListener()``.

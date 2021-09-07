@@ -17,7 +17,7 @@ The following sections list all the features along with the related configuratio
 Document Capture
 ----------------
 
-This is the core feature of the Gini Capture SDK. Enables your app to capture documents with the camera and prepares
+This is the core feature of the Gini Capture SDK. It enables your app to capture documents with the camera and prepares
 them to be analysed by the Gini Pay API.
 
 Onboarding
@@ -447,7 +447,7 @@ In ``MyEventTracker`` you can handle the events you are interested in.
 Events
 ~~~~~~
 
-Event types are partitioned into different domains according to the screens that they appear at. Each domain has a
+Event types are partitioned into different domains according to the screens that they appear on. Each domain has a
 number of event types. Some events may supply additional details in a map.
 
 ========================  ========================  ===================================================================  =====================================================  ==========================
