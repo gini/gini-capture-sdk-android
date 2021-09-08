@@ -40,7 +40,7 @@ public class GiniCaptureExtraction implements Parcelable {
      * Value object for an extraction from the Gini API.
      *
      * @param value  normalized textual representation of the text/information provided by the
-     *               extraction value (e. g. bank number without spaces between the digits).
+     *               extraction value (e.g. bank number without spaces between the digits).
      *               Changing this value marks the extraction as dirty
      * @param entity key (primary identification) of an entity type (e.g. banknumber). See <a
      *               href="http://developer.gini.net/gini-api/html/document_extractions.html#available-extraction-entities">Extraction
