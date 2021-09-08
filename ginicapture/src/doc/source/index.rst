@@ -1,16 +1,16 @@
 Gini Capture SDK for Android
-===============================
+============================
 
 Introduction
 ------------
 
-Gini provides an information extraction system for analyzing documents (e. g. invoices or
-contracts), specifically information such as the document sender or the amount to pay in an invoice.
+The Gini Capture SDK for Android provides Activities and Fragments to capture documents and prepare them for upload to
+the Gini Pay API. It also allows documents to be imported from other apps. The captured images can be reviewed and are
+optimized on the device to provide the best results when used with the Gini Pay API. 
 
-The Gini Capture SDK for Android provides functionality to capture documents with mobile phones.
-The captured images can be reviewed and rotated to the correct orientation by the user and are optimized on the device
-to provide the best results when used with the Gini API.
-
+The Gini Pay API provides an information extraction service for analyzing documents (e.g. invoices or contracts).
+Specifically it extracts information such as the document sender or the payment relevant information (amount to pay,
+IBAN, etc.) in an invoice.
 
 Table of contents
 -----------------
@@ -18,10 +18,9 @@ Table of contents
 .. toctree::
     :maxdepth: 2
 
-    Gini Capture Javadoc <http://developer.gini.net/gini-capture-sdk-android/ginicapture/dokka/index.html>
-    Network Library Javadoc <http://developer.gini.net/gini-capture-sdk-android/network/javadoc/index.html>
-    Accounting Network Library Javadoc <http://developer.gini.net/gini-capture-sdk-android/accounting/network/javadoc/index.html>
+    getting-started
+    integration
+    features
     customization-guide
-    event-tracking
-    guide-for-open-with
+    reference
     license

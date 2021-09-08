@@ -10,7 +10,7 @@ also integrate several third party libraries.
 
 ::
 
-   Copyright (c) 2014-2018, Gini GmbH
+   Copyright (c) 2014-2021, Gini GmbH
    All rights reserved.
    
    The Gini Capture SDK is licensed through Gini GmbH ("Gini") and may not be
@@ -28,7 +28,7 @@ Licenses and Acknowledgements for Incorporated Software
 
 This library makes use of the following third party libraries:
 
-Apache Commons Sanselan
+Apache Commons Imaging
 -----------------------
 
 ::
@@ -315,29 +315,29 @@ TouchImageView
    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
    DEALINGS IN THE SOFTWARE
 
-Gini Android SDK
-----------------
+Simple Logging Facade for Java (SLF4J)
+--------------------------------------
 
 ::
 
-    The MIT License (MIT)
+   Copyright (c) 2004-2017 QOS.ch
+   All rights reserved.
 
-    Copyright (c) 2018 Gini GmbH
+   Permission is hereby granted, free  of charge, to any person obtaining
+   a  copy  of this  software  and  associated  documentation files  (the
+   "Software"), to  deal in  the Software without  restriction, including
+   without limitation  the rights to  use, copy, modify,  merge, publish,
+   distribute,  sublicense, and/or sell  copies of  the Software,  and to
+   permit persons to whom the Software  is furnished to do so, subject to
+   the following conditions:
 
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
+   The  above  copyright  notice  and  this permission  notice  shall  be
+   included in all copies or substantial portions of the Software.
 
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-    THE SOFTWARE.
+   THE  SOFTWARE IS  PROVIDED  "AS  IS", WITHOUT  WARRANTY  OF ANY  KIND,
+   EXPRESS OR  IMPLIED, INCLUDING  BUT NOT LIMITED  TO THE  WARRANTIES OF
+   MERCHANTABILITY,    FITNESS    FOR    A   PARTICULAR    PURPOSE    AND
+   NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+   LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+   OF CONTRACT, TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN CONNECTION
+   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

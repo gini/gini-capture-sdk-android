@@ -5,11 +5,10 @@ This example app provides you with a sample usage of the Gini Capture SDK's Scre
 
 The Gini Pay API lib is used for analyzing documents and sending feedback.
 
-Before analyzing documents with the Component API example app, you need to set your Gini API Client Id and Secret in the
-`src/main/res/values/gini_api_credentials.xml`.
+Before analyzing documents with the Screen API example app, you need to set your Gini Pay API client id and secret by creating a
+`local.properties` file in this folder containing a `clientId` and a `clientSecret` property.
 
-Please note, that large heap is enabled for the example app. Your application using the Gini Capture SDK should also enable large heap to
-make sure, that there is enough memory for image handling.
+You can find more information about the Screen API in our [integration guide](https://developer.gini.net/gini-capture-sdk-android/html/integration.html#screen-api).
 
 Overview
 ========
@@ -34,17 +33,11 @@ Displays tips to the user, if no Pay5 extractions were found.
 
 We recommend implementing a similar screen to aid the user in the taking better pictures and improve the quality of the extractions.
 
-SingleDocumentAnalyzer
-----------------------
+Gini Pay API Library
+====================
 
-Is not used, because when configuring and creating a `GiniCapture` instance we use the default networking plugin which takes care of
-communicating with the Gini API.
-
-Gini Pay API lib
-============
-
-The Gini Pay API lib is not used directly. The default networking plugin, which was used when configuring and creating a `GiniCapture` instance,
-takes care of communicating with the Gini API.
+The Gini Pay API Library is not used directly. The default networking plugin, which was used when configuring and creating a `GiniCapture` instance,
+takes care of communicating with the Gini Pay API.
 
 Customization
 =============
