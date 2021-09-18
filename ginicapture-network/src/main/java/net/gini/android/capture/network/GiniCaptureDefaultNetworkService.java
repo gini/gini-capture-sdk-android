@@ -1,7 +1,7 @@
 package net.gini.android.capture.network;
 
 import static net.gini.android.capture.network.logging.UtilKt.errorLogFromException;
-import static net.gini.android.capture.network.logging.UtilKt.responseDetails;
+import static net.gini.android.capture.network.logging.UtilKt.getResponseDetails;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -157,7 +157,7 @@ public class GiniCaptureDefaultNetworkService implements GiniCaptureNetworkServi
         if (task.getError() != null) {
             errorMessage = task.getError().getMessage();
             if (task.getError() instanceof VolleyError) {
-                errorMessage = responseDetails((VolleyError) task.getError());
+                errorMessage = getResponseDetails((VolleyError) task.getError());
             }
         }
         return errorMessage;
