@@ -1,7 +1,11 @@
 package net.gini.android.capture.network.logging
 
 import com.android.volley.VolleyError
+import net.gini.android.BuildConfig
 import net.gini.android.capture.logging.ErrorLog
+import net.gini.android.requests.ErrorEvent
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.nio.charset.Charset
 
 
@@ -22,3 +26,23 @@ internal val VolleyError.responseDetails: String
         val body = response.data?.let { String(it, Charset.forName("UTF-8")) } ?: ""
         return "Status code: $statusCode\nHeaders:\n$headers\nBody:\n$body"
     } ?: this.message ?: toString()
+
+internal fun ErrorLog.toErrorEvent(): ErrorEvent =
+    ErrorEvent(
+        deviceModel,
+        osName,
+        osVersion,
+        captureVersion,
+        BuildConfig.VERSION_NAME,
+        description = exception?.let {
+            "$description; Exception: ${it.stackTraceString}"
+        } ?: description
+    )
+
+internal val Throwable.stackTraceString: String
+    get() {
+        return StringWriter().let { sw ->
+            printStackTrace(PrintWriter(sw))
+            sw.toString()
+        }
+    }
