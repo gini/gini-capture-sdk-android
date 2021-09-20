@@ -1,7 +1,7 @@
 package net.gini.android.capture.network;
 
 import static net.gini.android.capture.network.logging.UtilKt.errorLogFromException;
-import static net.gini.android.capture.network.logging.UtilKt.responseDetails;
+import static net.gini.android.capture.network.logging.UtilKt.getResponseDetails;
 
 import androidx.annotation.NonNull;
 
@@ -105,7 +105,7 @@ public class GiniCaptureDefaultNetworkApi implements GiniCaptureNetworkApi {
                                         message = task.getError().getMessage();
                                         if (task.getError() instanceof VolleyError) {
                                             final VolleyError volleyError = (VolleyError) task.getError();
-                                            message = responseDetails(volleyError);
+                                            message = getResponseDetails(volleyError);
                                             mDefaultNetworkService.handleErrorLog(
                                                     errorLogFromException("Failed to send feedback for document " +
                                                             document.getId(), task.getError()));

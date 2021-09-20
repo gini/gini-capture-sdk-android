@@ -473,3 +473,19 @@ Screen + Component        Analysis Screen           ``AnalysisScreenEvent.RETRY`
 The supported events are listed for each screen in a dedicated enum. You can view these enums in our `reference documentation
 <http://developer.gini.net/gini-capture-sdk-android/ginicapture/dokka/ginicapture/net.gini.android.capture.tracking/index.html>`_.
 
+Error Logging
+-------------
+
+The SDK logs errors to the Gini Pay API when the default networking implementation is used (see the `Default networking
+implementation <integration.html#default-implementation>`_ section).
+
+You can disable the default error logging by passing ``false`` to ``GiniCapture.Builder.setGiniErrorLoggerIsOn()``.
+
+If you would like to get informed of error logging events you can pass your implementation of the
+``ErrorLoggerListener`` interface to ``GiniCapture.Builder``:
+
+.. code-block:: java
+
+    GiniCapture.newInstance()
+        .setCustomErrorLoggerListener(new MyErrorLoggerListener())
+        .build();
