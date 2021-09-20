@@ -4,7 +4,7 @@
         <item name="colorPrimary">@color/gc_action_bar</item>
         <item name="colorPrimaryDark">@color/gc_status_bar</item>
         <item name="colorAccent">@color/gc_accent</item>
-        <item name="actionBarStyle">@style/GiniCaptureTheme.ActionBar</item>
+        <item name="actionBarTheme">@style/GiniCaptureTheme.ThemeOverlay.ActionBar</item>
     </style>
 
     <style name="GiniCaptureTheme.Transparent">
@@ -14,13 +14,10 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
     </style>
 
-    <style name="GiniCaptureTheme.ActionBar" parent="Widget.MaterialComponents.ActionBar.Solid">
-        <item name="titleTextStyle">@style/GiniCaptureTheme.ActionBar.TextStyle</item>
+    <style name="GiniCaptureTheme.ThemeOverlay.ActionBar" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:textColorPrimary">@color/gc_action_bar_title</item>
+        <item name="colorOnPrimary">@color/gc_action_bar_title</item>
         <item name="homeAsUpIndicator">@drawable/gc_action_bar_back</item>
-    </style>
-
-    <style name="GiniCaptureTheme.ActionBar.TextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/gc_action_bar_title</item>
     </style>
 
     <style name="GiniCaptureTheme.Chooser">
