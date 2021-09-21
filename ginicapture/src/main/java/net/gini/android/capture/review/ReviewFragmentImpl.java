@@ -1,5 +1,11 @@
 package net.gini.android.capture.review;
 
+import static net.gini.android.capture.GiniCaptureError.ErrorCode.MISSING_GINI_CAPTURE_INSTANCE;
+import static net.gini.android.capture.internal.network.NetworkRequestsManager.isCancellation;
+import static net.gini.android.capture.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
+import static net.gini.android.capture.internal.util.FileImportHelper.showAlertIfOpenWithDocumentAndAppIsDefault;
+import static net.gini.android.capture.tracking.EventTrackingHelper.trackReviewScreenEvent;
+
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
@@ -37,18 +43,14 @@ import net.gini.android.capture.internal.network.NetworkRequestResult;
 import net.gini.android.capture.internal.network.NetworkRequestsManager;
 import net.gini.android.capture.internal.ui.FragmentImplCallback;
 import net.gini.android.capture.internal.util.FileImportHelper;
+import net.gini.android.capture.logging.ErrorLog;
+import net.gini.android.capture.logging.ErrorLogger;
 import net.gini.android.capture.tracking.ReviewScreenEvent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jersey.repackaged.jsr166e.CompletableFuture;
-
-import static net.gini.android.capture.GiniCaptureError.ErrorCode.MISSING_GINI_CAPTURE_INSTANCE;
-import static net.gini.android.capture.internal.network.NetworkRequestsManager.isCancellation;
-import static net.gini.android.capture.internal.util.ActivityHelper.forcePortraitOrientationOnPhones;
-import static net.gini.android.capture.internal.util.FileImportHelper.showAlertIfOpenWithDocumentAndAppIsDefault;
-import static net.gini.android.capture.tracking.EventTrackingHelper.trackReviewScreenEvent;
 
 /**
  * Internal use only.
@@ -199,6 +201,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                         return;
                     }
                     hideActivityIndicatorAndEnableButtons();
+                    ErrorLogger.log(new ErrorLog("Failed to load document data", exception));
                     mListener.onError(new GiniCaptureError(GiniCaptureError.ErrorCode.REVIEW,
                             "An error occurred while loading the document."));
                 }
@@ -276,6 +279,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                 @Override
                 public void onError(final Exception exception) {
                     LOG.error("Failed to load a Photo for the ImageDocument");
+                    ErrorLogger.log(new ErrorLog("Failed to load Photo for ImageDocument", exception));
                     photoCreationFailed();
                 }
 
@@ -297,6 +301,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                         @Override
                         public void onError(final Exception exception) {
                             LOG.error("Failed to instantiate a Photo from the ImageDocument");
+                            ErrorLogger.log(new ErrorLog("Failed to instantiate a Photo from the ImageDocument", exception));
                             photoCreationFailed();
                         }
 
@@ -328,6 +333,7 @@ class ReviewFragmentImpl implements ReviewFragmentInterface {
                 @Override
                 public void onFailed() {
                     LOG.error("Failed to compress the Photo");
+                    ErrorLogger.log(new ErrorLog("Image compression failed", null));
                     if (mNextClicked || mStopped) {
                         return;
                     }

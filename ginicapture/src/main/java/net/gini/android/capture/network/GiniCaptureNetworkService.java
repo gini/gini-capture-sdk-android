@@ -2,16 +2,18 @@ package net.gini.android.capture.network;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.analysis.AnalysisFragmentListener;
 import net.gini.android.capture.camera.CameraFragmentListener;
+import net.gini.android.capture.logging.ErrorLog;
+import net.gini.android.capture.logging.ErrorLoggerListener;
 import net.gini.android.capture.review.ReviewFragmentListener;
 import net.gini.android.capture.util.CancellationToken;
 
 import java.util.LinkedHashMap;
-
-import androidx.annotation.NonNull;
 
 /**
  * Created by Alpar Szotyori on 29.01.2018.
@@ -39,7 +41,7 @@ import androidx.annotation.NonNull;
  * AnalysisFragmentListener} won't be invoked. Otherwise the Gini Capture SDK falls back to
  * invoking those methods.
  */
-public interface GiniCaptureNetworkService {
+public interface GiniCaptureNetworkService extends ErrorLoggerListener {
 
     /**
      * Called when a document needs to be uploaded to the Gini API.
@@ -91,4 +93,7 @@ public interface GiniCaptureNetworkService {
      */
     void cleanup();
 
+    @Override
+    default void handleErrorLog(@NonNull ErrorLog errorLog) {
+    }
 }

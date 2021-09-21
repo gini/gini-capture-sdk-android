@@ -1,10 +1,19 @@
 package net.gini.android.capture.network;
 
+import static net.gini.android.capture.network.logging.UtilKt.getResponseDetails;
+import static net.gini.android.capture.network.logging.UtilKt.toErrorEvent;
+
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.android.volley.Cache;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.XmlRes;
 
+import com.android.volley.Cache;
+import com.android.volley.VolleyError;
+
+import net.gini.android.BuildConfig;
 import net.gini.android.DocumentMetadata;
 import net.gini.android.DocumentTaskManager;
 import net.gini.android.Gini;
@@ -12,18 +21,19 @@ import net.gini.android.GiniBuilder;
 import net.gini.android.authorization.CredentialsStore;
 import net.gini.android.authorization.SessionManager;
 import net.gini.android.authorization.SharedPreferencesCredentialsStore;
-import net.gini.android.capture.network.model.CompoundExtractionsMapper;
-import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
-import net.gini.android.capture.network.model.GiniCaptureReturnReason;
-import net.gini.android.capture.network.model.ReturnReasonsMapper;
-import net.gini.android.models.ExtractionsContainer;
 import net.gini.android.capture.Document;
 import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
+import net.gini.android.capture.logging.ErrorLog;
+import net.gini.android.capture.network.model.CompoundExtractionsMapper;
+import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
+import net.gini.android.capture.network.model.GiniCaptureReturnReason;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
+import net.gini.android.capture.network.model.ReturnReasonsMapper;
 import net.gini.android.capture.network.model.SpecificExtractionMapper;
 import net.gini.android.capture.util.CancellationToken;
 import net.gini.android.capture.util.NoOpCancellationToken;
+import net.gini.android.models.ExtractionsContainer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +46,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.XmlRes;
 import bolts.Continuation;
 import bolts.Task;
 
@@ -148,8 +155,14 @@ public class GiniCaptureDefaultNetworkService implements GiniCaptureNetworkServi
         if (!task.isFaulted()) {
             return "";
         }
-        final String errorMessage = task.getError().getMessage();
-        return errorMessage != null ? errorMessage : task.getError().toString();
+        String errorMessage = "unknown";
+        if (task.getError() != null) {
+            errorMessage = task.getError().getMessage();
+            if (task.getError() instanceof VolleyError) {
+                errorMessage = getResponseDetails((VolleyError) task.getError());
+            }
+        }
+        return errorMessage;
     }
 
 
@@ -297,6 +310,12 @@ public class GiniCaptureDefaultNetworkService implements GiniCaptureNetworkServi
             }
         };
 
+    }
+
+    @Override
+    public void handleErrorLog(@NonNull ErrorLog errorLog) {
+        LOG.error(errorLog.toString(), errorLog.getException());
+        mGiniApi.getDocumentTaskManager().logErrorEvent(toErrorEvent(errorLog));
     }
 
     @Override

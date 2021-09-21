@@ -14,6 +14,8 @@ import net.gini.android.capture.document.GiniCaptureDocument;
 import net.gini.android.capture.document.GiniCaptureMultiPageDocument;
 import net.gini.android.capture.document.ImageDocument;
 import net.gini.android.capture.internal.cache.DocumentDataMemoryCache;
+import net.gini.android.capture.logging.ErrorLog;
+import net.gini.android.capture.logging.ErrorLogger;
 import net.gini.android.capture.network.AnalysisResult;
 import net.gini.android.capture.network.Error;
 import net.gini.android.capture.network.GiniCaptureNetworkCallback;
@@ -128,6 +130,8 @@ public class NetworkRequestsManager {
                                 if (throwable != null) {
                                     if (isCancellation(throwable)) {
                                         cancellationToken.cancel();
+                                    } else {
+                                        ErrorLogger.log(new ErrorLog("Document upload failed", throwable));
                                     }
                                     mDocumentUploadFutures.remove(document.getId());
                                 }
@@ -297,6 +301,8 @@ public class NetworkRequestsManager {
                         if (throwable != null) {
                             if (isCancellation(throwable)) {
                                 cancellationToken.cancel();
+                            } else {
+                                ErrorLogger.log(new ErrorLog("Document deletion failed", throwable));
                             }
                         } else if (requestResult != null) {
                             mDocumentUploadFutures.remove(document.getId());
@@ -411,6 +417,8 @@ public class NetworkRequestsManager {
                         if (throwable != null) {
                             if (isCancellation(throwable)) {
                                 cancellationToken.cancel();
+                            } else {
+                                ErrorLogger.log(new ErrorLog("Document analysis failed", throwable));
                             }
                             mDocumentAnalyzeFutures.remove(
                                     multiPageDocument.getId());

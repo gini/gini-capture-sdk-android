@@ -1,10 +1,16 @@
 package net.gini.android.capture.network;
 
+import static net.gini.android.capture.network.logging.UtilKt.errorLogFromException;
+import static net.gini.android.capture.network.logging.UtilKt.getResponseDetails;
+
 import androidx.annotation.NonNull;
+
+import com.android.volley.VolleyError;
 
 import net.gini.android.DocumentTaskManager;
 import net.gini.android.capture.GiniCapture;
 import net.gini.android.capture.internal.camera.api.UIExecutor;
+import net.gini.android.capture.logging.ErrorLog;
 import net.gini.android.capture.network.model.CompoundExtractionsMapper;
 import net.gini.android.capture.network.model.GiniCaptureCompoundExtraction;
 import net.gini.android.capture.network.model.GiniCaptureSpecificExtraction;
@@ -92,11 +98,21 @@ public class GiniCaptureDefaultNetworkApi implements GiniCaptureNetworkApi {
                             public void run() {
                                 if (task.isFaulted()) {
                                     LOG.error(
-                                            "Send feedback failed for api document {}: {}",
+                                            "Send feedback failed for api document {}",
                                             document.getId(), task.getError());
                                     String message = "unknown";
                                     if (task.getError() != null) {
                                         message = task.getError().getMessage();
+                                        if (task.getError() instanceof VolleyError) {
+                                            final VolleyError volleyError = (VolleyError) task.getError();
+                                            message = getResponseDetails(volleyError);
+                                            mDefaultNetworkService.handleErrorLog(
+                                                    errorLogFromException("Failed to send feedback for document " +
+                                                            document.getId(), task.getError()));
+                                        }
+                                    } else {
+                                        mDefaultNetworkService.handleErrorLog(new ErrorLog(
+                                                "Failed to send feedback for document " + document.getId(), null));
                                     }
                                     callback.failure(new Error(message));
                                 } else {
@@ -111,11 +127,15 @@ public class GiniCaptureDefaultNetworkApi implements GiniCaptureNetworkApi {
                 });
             } catch (final JSONException e) {
                 LOG.error("Send feedback failed for api document {}: {}", document.getId(), e);
+                mDefaultNetworkService.handleErrorLog(new ErrorLog(
+                        "Failed to send feedback for document " + document.getId(), e));
                 callback.failure(new Error(e.getMessage()));
             }
         } else {
-            LOG.error("Send feedback failed: no Gini Api Document available");
-            callback.failure(new Error("Feedback not set: no Gini Api Document available"));
+            LOG.error("Send feedback failed: no api document available");
+            mDefaultNetworkService.handleErrorLog(new ErrorLog(
+                    "Failed to send feedback: no api document available", null));
+            callback.failure(new Error("Feedback not set: no api document available"));
         }
     }
 
