@@ -120,7 +120,7 @@ To use it add the ``gini-capture-network-lib`` dependency to your app's ``build.
 
     dependencies {
         ...
-        implementation 'net.gini:gini-capture-network-lib:1.3.1'
+        implementation 'net.gini:gini-capture-network-lib:1.4.0'
     }
 
 For the Gini Capture SDK to be aware of the default implementations create the instances and pass
