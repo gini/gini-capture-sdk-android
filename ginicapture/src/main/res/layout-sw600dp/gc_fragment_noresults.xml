@@ -165,15 +165,14 @@
 
     <Button
         android:id="@+id/gc_button_no_results_back"
+        style="@style/GiniCaptureTheme.Button"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/gc_noresults_bottom_button_height"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/gc_noresults_bottom_button_margin"
-        android:background="@color/gc_noresults_button"
         android:text="@string/gc_noresults_back_button"
-        android:width="@dimen/gc_noresults_bottom_button_max_width"
-        android:textColor="@color/gc_noresults_button_text" />
+        android:width="@dimen/gc_noresults_bottom_button_max_width" />
 
 
 </RelativeLayout>
