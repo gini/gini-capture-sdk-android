@@ -321,5 +321,17 @@
 
     <style name="GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle" parent="Root.GiniCaptureTheme.Review.MultiPage.PageIndicator.TextStyle" />
 
+    <!-- Root widget styles -->
+
+    <style name="Root.GiniCaptureTheme.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/gc_photo_tips_button_text</item>
+        <item name="backgroundTint">@color/gc_photo_tips_button</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <!-- Widget styles used in the layouts which are overridable for customization -->
+
+    <style name="GiniCaptureTheme.Button" parent="Root.GiniCaptureTheme.Button" />
 
 </resources>

@@ -173,14 +173,13 @@
 
     <Button
         android:id="@+id/gc_button_photo_tips_camera"
+        style="@style/GiniCaptureTheme.Button"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/gc_photo_tips_bottom_button_height"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/gc_photo_tips_bottom_button_margin"
-        android:background="@color/gc_accent"
         android:text="@string/gc_photo_tips_camera_button"
-        android:width="@dimen/gc_photo_tips_bottom_button_max_width"
-        android:textColor="@color/gc_photo_tips_button_text" />
+        android:width="@dimen/gc_photo_tips_bottom_button_max_width" />
 
 </RelativeLayout>
