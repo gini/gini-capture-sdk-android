@@ -67,7 +67,9 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="index.html" id="gini-logo">gini API</a>
+        <a href="index.html" id="gini-logo">
+          <img src="_static/logo.svg" />
+        </a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -128,6 +130,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#error-logging">Error Logging</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="customization-guide.html">Customization Guide</a><ul>
@@ -765,6 +768,19 @@ number of event types. Some events may supply additional details in a map.</p>
 </tbody>
 </table>
 <p>The supported events are listed for each screen in a dedicated enum. You can view these enums in our <a class="reference external" href="http://developer.gini.net/gini-capture-sdk-android/ginicapture/dokka/ginicapture/net.gini.android.capture.tracking/index.html">reference documentation</a>.</p>
+</div>
+</div>
+<div class="section" id="error-logging">
+<h2>Error Logging<a class="headerlink" href="#error-logging" title="Permalink to this headline">¶</a></h2>
+<p>The SDK logs errors to the Gini Pay API when the default networking implementation is used (see the <a class="reference external" href="integration.html#default-implementation">Default networking
+implementation</a> section).</p>
+<p>You can disable the default error logging by passing <tt class="docutils literal"><span class="pre">false</span></tt> to <tt class="docutils literal"><span class="pre">GiniCapture.Builder.setGiniErrorLoggerIsOn()</span></tt>.</p>
+<p>If you would like to get informed of error logging events you can pass your implementation of the
+<tt class="docutils literal"><span class="pre">ErrorLoggerListener</span></tt> interface to <tt class="docutils literal"><span class="pre">GiniCapture.Builder</span></tt>:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">GiniCapture</span><span class="o">.</span><span class="na">newInstance</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">setCustomErrorLoggerListener</span><span class="o">(</span><span class="k">new</span> <span class="n">MyErrorLoggerListener</span><span class="o">())</span>
+    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</pre></div>
 </div>
 </div>
 </div>
