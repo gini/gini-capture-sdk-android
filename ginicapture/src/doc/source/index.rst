@@ -1,6 +1,17 @@
 Gini Capture SDK for Android
 ============================
 
+.. note:: **Deprecation Notice**
+
+    Development of the Gini Capture SDK for Android will be continued in a `new repository
+    <https://github.com/gini/gini-mobile-android/tree/main/capture-sdk>`_.
+
+    No new versions will be released from this repository and we kindly ask you to update to the `version
+    <https://github.com/gini/gini-mobile-android/releases/tag/capture-sdk%3B1.5.0>`_ released from the new repository.
+
+    A few breaking changes were necessary, but these are easy to fix. You can find the steps in this `migration guide
+    <https://github.com/gini/gini-mobile-android/blob/bank-sdk%3B1.4.0/capture-sdk/migrate-from-other-capture-sdk.md>`_.
+
 Introduction
 ------------
 
