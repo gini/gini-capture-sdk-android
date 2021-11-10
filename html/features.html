@@ -31,6 +31,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
 
     
 
@@ -52,6 +53,7 @@
   
 
   
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Gini Capture SDK for Android 2.0 documentation" href="index.html"/>
         <link rel="next" title="Customization Guide" href="customization-guide.html"/>
         <link rel="prev" title="Integration" href="integration.html"/> 
@@ -106,7 +108,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Features</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Features</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#document-capture">Document Capture</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#onboarding">Onboarding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#single-page">Single Page</a></li>
@@ -269,8 +271,8 @@
   <div class="section" id="features">
 <h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
 <p>The Gini Capture SDK provides various features you can enable and configure. All of the features are configured during
-creation of a new <tt class="docutils literal"><span class="pre">GiniCapture</span></tt> instance. Specifically the <tt class="docutils literal"><span class="pre">GiniCapture.Builder</span></tt> is used to configure the Gini
-Capture SDK. It&#8217;s <a class="reference external" href="http://developer.gini.net/gini-capture-sdk-android/ginicapture/dokka/ginicapture/net.gini.android.capture/-gini-capture/-builder/index.html?query=public%20class%20Builder">reference documentation</a>
+creation of a new <code class="docutils literal notranslate"><span class="pre">GiniCapture</span></code> instance. Specifically the <code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder</span></code> is used to configure the Gini
+Capture SDK. It’s <a class="reference external" href="http://developer.gini.net/gini-capture-sdk-android/ginicapture/dokka/ginicapture/net.gini.android.capture/-gini-capture/-builder/index.html?query=public%20class%20Builder">reference documentation</a>
 lists all the options.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -286,26 +288,23 @@ them to be analysed by the Gini Pay API.</p>
 <h3>Onboarding<a class="headerlink" href="#onboarding" title="Permalink to this headline">¶</a></h3>
 <p>The onboarding feature presents essential information to the user on how to best capture documents.</p>
 <p>You can customize the onboarding in the following ways:</p>
-<ul>
+<ul class="simple">
 <li><dl class="first docutils">
 <dt>Disable showing the onboarding at first run:</dt>
-<dd><p class="first last">By default the onboarding is shown at first run. To disable this pass <tt class="docutils literal"><span class="pre">false</span></tt> to
-<tt class="docutils literal"><span class="pre">GiniCapture.Builder.setShouldShowOnboardingAtFirstRun()</span></tt>.</p>
-</dd>
+<dd>By default the onboarding is shown at first run. To disable this pass <code class="docutils literal notranslate"><span class="pre">false</span></code> to
+<code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder.setShouldShowOnboardingAtFirstRun()</span></code>.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>Customize the onboarding pages:</dt>
-<dd><p class="first last">If you wish to show different onboarding pages then pass a list of <tt class="docutils literal"><span class="pre">OnboardingPage</span></tt> objects to
-<tt class="docutils literal"><span class="pre">GiniCapture.Builder.setCustomOnboardingPages()</span></tt>.</p>
-</dd>
+<dd>If you wish to show different onboarding pages then pass a list of <code class="docutils literal notranslate"><span class="pre">OnboardingPage</span></code> objects to
+<code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder.setCustomOnboardingPages()</span></code>.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>Force show the onboarding:</dt>
-<dd><p class="first last">If you wish to show the onboarding after the first run then pass <tt class="docutils literal"><span class="pre">true</span></tt> to
-<tt class="docutils literal"><span class="pre">GiniCapture.Builder.setShouldShowOnboarding()</span></tt>.</p>
-</dd>
+<dd>If you wish to show the onboarding after the first run then pass <code class="docutils literal notranslate"><span class="pre">true</span></code> to
+<code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder.setShouldShowOnboarding()</span></code>.</dd>
 </dl>
 </li>
 </ul>
@@ -316,33 +315,31 @@ them to be analysed by the Gini Pay API.</p>
 this.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">If you integrate using the <em>Component API</em> you will need to launch the <tt class="docutils literal"><span class="pre">ReviewFragmentCompat</span></tt> when the
-<tt class="docutils literal"><span class="pre">CameraFragmentListener.onDocumentAvailable()</span></tt> is invoked. See the <a class="reference external" href="integration.html#component-api">Component API</a> section for further details.</p>
+<p class="last">If you integrate using the <em>Component API</em> you will need to launch the <code class="docutils literal notranslate"><span class="pre">ReviewFragmentCompat</span></code> when the
+<code class="docutils literal notranslate"><span class="pre">CameraFragmentListener.onDocumentAvailable()</span></code> is invoked. See the <a class="reference external" href="integration.html#component-api">Component API</a> section for further details.</p>
 </div>
 </div>
 <div class="section" id="multi-page">
 <h3>Multi-Page<a class="headerlink" href="#multi-page" title="Permalink to this headline">¶</a></h3>
 <p>The multi-page feature allows the SDK to capture documents with multiple pages.</p>
-<p>To enable this simply pass <tt class="docutils literal"><span class="pre">true</span></tt> to <tt class="docutils literal"><span class="pre">GiniCapture.Builder.setMultiPageEnabled()</span></tt>.</p>
+<p>To enable this simply pass <code class="docutils literal notranslate"><span class="pre">true</span></code> to <code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder.setMultiPageEnabled()</span></code>.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">If you integrate using the <em>Component API</em> you will need to launch the <tt class="docutils literal"><span class="pre">MultiPageReviewFragment</span></tt> when the
-<tt class="docutils literal"><span class="pre">CameraFragmentListener.onProceedToMultiPageReviewScreen()</span></tt> is invoked. See the <a class="reference external" href="integration.html#component-api">Component API</a> section for further details.</p>
+<p class="last">If you integrate using the <em>Component API</em> you will need to launch the <code class="docutils literal notranslate"><span class="pre">MultiPageReviewFragment</span></code> when the
+<code class="docutils literal notranslate"><span class="pre">CameraFragmentListener.onProceedToMultiPageReviewScreen()</span></code> is invoked. See the <a class="reference external" href="integration.html#component-api">Component API</a> section for further details.</p>
 </div>
 </div>
 <div class="section" id="camera">
 <h3>Camera<a class="headerlink" href="#camera" title="Permalink to this headline">¶</a></h3>
-<ul>
+<ul class="simple">
 <li><dl class="first docutils">
 <dt>Enable the flash toggle button:</dt>
-<dd><p class="first last">To allow users toggle the camera flash pass <tt class="docutils literal"><span class="pre">true</span></tt> to <tt class="docutils literal"><span class="pre">GiniCapture.Builder.setFlashButtonEnabled()</span></tt>.</p>
-</dd>
+<dd>To allow users toggle the camera flash pass <code class="docutils literal notranslate"><span class="pre">true</span></code> to <code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder.setFlashButtonEnabled()</span></code>.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>Turn off flash by default:</dt>
-<dd><p class="first last">Flash is on by default and you can turn it off by passing <tt class="docutils literal"><span class="pre">false</span></tt> to <tt class="docutils literal"><span class="pre">GiniCapture.Builder.setFlashOnByDefault()</span></tt>.</p>
-</dd>
+<dd>Flash is on by default and you can turn it off by passing <code class="docutils literal notranslate"><span class="pre">false</span></code> to <code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder.setFlashOnByDefault()</span></code>.</dd>
 </dl>
 </li>
 </ul>
@@ -357,14 +354,14 @@ popup to use the payment data directly without the need to analyse the document.
 <p>If the QR code does not have a supported payment format then a popup informs the user that a QR code was detected but it
 cannot be used.</p>
 <p>After the user tapped on the QR code detected popup the payment information is extracted form the QR code. The result is
-returned either in the result of the <tt class="docutils literal"><span class="pre">CameraActivity</span></tt> (<em>Screen API</em>) or in the
-<tt class="docutils literal"><span class="pre">CameraFragmentListener.onExtractionsAvailable()</span></tt> method (<em>Component API</em>).</p>
+returned either in the result of the <code class="docutils literal notranslate"><span class="pre">CameraActivity</span></code> (<em>Screen API</em>) or in the
+<code class="docutils literal notranslate"><span class="pre">CameraFragmentListener.onExtractionsAvailable()</span></code> method (<em>Component API</em>).</p>
 <p>QR Code Scanning is available on devices running Android with Google Play Services installed.</p>
-<p>To enable this feature simply pass <tt class="docutils literal"><span class="pre">true</span></tt> to <tt class="docutils literal"><span class="pre">GiniCapture.Builder.setQRCodeScanningEnabled</span></tt>.</p>
+<p>To enable this feature simply pass <code class="docutils literal notranslate"><span class="pre">true</span></code> to <code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder.setQRCodeScanningEnabled</span></code>.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p class="last">When your application is installed Google Mobile Services will download libraries to the device in order to do QR
-code detection. If another app already uses QR code detection on the device the library won&#8217;t be downloaded again.
+code detection. If another app already uses QR code detection on the device the library won’t be downloaded again.
 Under certain circumstances (user not online, slow connection or lack of sufficient storage space) the libraries
 will not be ready at the time your app starts the camera screen and QR code detection will be silently disabled
 until the next time the camera screen starts.</p>
@@ -372,17 +369,17 @@ until the next time the camera screen starts.</p>
 </div>
 <div class="section" id="document-import">
 <h2>Document Import<a class="headerlink" href="#document-import" title="Permalink to this headline">¶</a></h2>
-<p>This feature enables the Gini Capture SDK to import documents from the camera screen. When it&#8217;s enabled an additional
+<p>This feature enables the Gini Capture SDK to import documents from the camera screen. When it’s enabled an additional
 button is shown next to the camera trigger. Using this button allows the user to pick either an image or a pdf from the
 device.</p>
 <p>You can specify the document types the user will be able to select when enabling this feature. You can enable only
 images, only pdfs or both images and pdfs.</p>
-<p>To enable it simply pass a <tt class="docutils literal"><span class="pre">DocumentImportEnabledFileTypes</span></tt> enum value to
-<tt class="docutils literal"><span class="pre">GiniCapture.Builder.setDocumentImportEnabledFileTypes()</span></tt>.</p>
+<p>To enable it simply pass a <code class="docutils literal notranslate"><span class="pre">DocumentImportEnabledFileTypes</span></code> enum value to
+<code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder.setDocumentImportEnabledFileTypes()</span></code>.</p>
 <div class="section" id="android-manifest">
 <h3>Android Manifest<a class="headerlink" href="#android-manifest" title="Permalink to this headline">¶</a></h3>
-<p>You will also need to declare the <tt class="docutils literal"><span class="pre">READ_EXTERNAL_STORAGE</span></tt> permission in your app&#8217;s <tt class="docutils literal"><span class="pre">AndroidManifest.xml</span></tt>:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+<p>You will also need to declare the <code class="docutils literal notranslate"><span class="pre">READ_EXTERNAL_STORAGE</span></code> permission in your app’s <code class="docutils literal notranslate"><span class="pre">AndroidManifest.xml</span></code>:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
     <span class="na">package=</span><span class="s">&quot;...&quot;</span><span class="nt">&gt;</span>
 
     <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span> <span class="nt">/&gt;</span>
@@ -396,32 +393,32 @@ the document import feature.</p>
 <div class="section" id="intercepting-the-imported-document">
 <h3>Intercepting the imported document<a class="headerlink" href="#intercepting-the-imported-document" title="Permalink to this headline">¶</a></h3>
 <p>You can intercept the imported document and deny the Gini Capture SDK from using it.</p>
-<p>If you use the <em>Screen API</em> then you need to subclass the <tt class="docutils literal"><span class="pre">CameraActivity</span></tt> and override the
-<tt class="docutils literal"><span class="pre">onCheckImportedDocument</span></tt> method. See it&#8217;s <a class="reference external" href="http://developer.gini.net/gini-capture-sdk-android/ginicapture/dokka/ginicapture/net.gini.android.capture.camera/-camera-activity/on-check-imported-document.html">reference documentation</a>
+<p>If you use the <em>Screen API</em> then you need to subclass the <code class="docutils literal notranslate"><span class="pre">CameraActivity</span></code> and override the
+<code class="docutils literal notranslate"><span class="pre">onCheckImportedDocument</span></code> method. See it’s <a class="reference external" href="http://developer.gini.net/gini-capture-sdk-android/ginicapture/dokka/ginicapture/net.gini.android.capture.camera/-camera-activity/on-check-imported-document.html">reference documentation</a>
 for details.</p>
-<p>With the <em>Component API</em> you can intercept the document in the <tt class="docutils literal"><span class="pre">CameraFragmentListener.onCheckImportedDocument()</span></tt>
+<p>With the <em>Component API</em> you can intercept the document in the <code class="docutils literal notranslate"><span class="pre">CameraFragmentListener.onCheckImportedDocument()</span></code>
 method. The method signature and usage is the same as above.</p>
 </div>
 </div>
 <div class="section" id="file-import-open-with">
 <h2>File Import (Open With)<a class="headerlink" href="#file-import-open-with" title="Permalink to this headline">¶</a></h2>
-<p>The file import (or &#8220;open with&#8221;) feature allows importing of files from other apps via Android&#8217;s &#8220;open with&#8221; or &#8220;share&#8221;
+<p>The file import (or “open with”) feature allows importing of files from other apps via Android’s “open with” or “share”
 functionality.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">We are using the term <tt class="docutils literal"><span class="pre">file</span> <span class="pre">import</span></tt> to refer to the &#8220;open with&#8221; feature within the Gini Capture SDK. From the
+<p class="last">We are using the term <code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">import</span></code> to refer to the “open with” feature within the Gini Capture SDK. From the
 point of view of the SDK files are imported into the SDK from an outside source. It is not aware and cannot set
-configuration related to enabling the client app to receive files via Android&#8217;s &#8220;open with&#8221; or &#8220;share&#8221;
+configuration related to enabling the client app to receive files via Android’s “open with” or “share”
 functionality.</p>
 </div>
-<p>To enable it pass <tt class="docutils literal"><span class="pre">true</span></tt> to <tt class="docutils literal"><span class="pre">GiniCapture.Builder.setFileImportEnabled()</span></tt>.</p>
+<p>To enable it pass <code class="docutils literal notranslate"><span class="pre">true</span></code> to <code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder.setFileImportEnabled()</span></code>.</p>
 <p>In addition to enabling it your app needs to declare intent filters for receiving pdfs and/or images from other apps and
 then forward the incoming intent to the Gini Capture SDK.</p>
 <div class="section" id="registering-pdf-and-image-file-types">
 <h3>Registering pdf and image file types<a class="headerlink" href="#registering-pdf-and-image-file-types" title="Permalink to this headline">¶</a></h3>
-<p>Add the following intent filter to the activity in your <tt class="docutils literal"><span class="pre">AndroidManifest.xml</span></tt> you wish to receive incoming pdfs and
+<p>Add the following intent filter to the activity in your <code class="docutils literal notranslate"><span class="pre">AndroidManifest.xml</span></code> you wish to receive incoming pdfs and
 images:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;activity</span> <span class="na">android:name=</span><span class="s">&quot;.ui.MyActivity&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;activity</span> <span class="na">android:name=</span><span class="s">&quot;.ui.MyActivity&quot;</span><span class="nt">&gt;</span>
     <span class="c">&lt;!-- Receiving images: --&gt;</span>
     <span class="nt">&lt;intent-filter</span>
         <span class="na">android:label=</span><span class="s">&quot;@string/label_for_image_open_with&quot;</span><span class="nt">&gt;</span>
@@ -454,88 +451,88 @@ viewing the pdf or file with other apps.</p>
 <div class="section" id="handling-imported-files">
 <h3>Handling Imported Files<a class="headerlink" href="#handling-imported-files" title="Permalink to this headline">¶</a></h3>
 <p>When your app is requested to handle a pdf or an image your activity (declaring the intent filter shown above) is
-launched or resumed (<tt class="docutils literal"><span class="pre">onNewIntent()</span></tt>) with an Intent having <tt class="docutils literal"><span class="pre">ACTION_VIEW</span></tt> or <tt class="docutils literal"><span class="pre">ACTION_SEND</span></tt>.</p>
+launched or resumed (<code class="docutils literal notranslate"><span class="pre">onNewIntent()</span></code>) with an Intent having <code class="docutils literal notranslate"><span class="pre">ACTION_VIEW</span></code> or <code class="docutils literal notranslate"><span class="pre">ACTION_SEND</span></code>.</p>
 <p>We recommend checking whether the Intent has the required action before proceeding with it:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">String</span> <span class="n">action</span> <span class="o">=</span> <span class="n">intent</span><span class="o">.</span><span class="na">getAction</span><span class="o">();</span>
-<span class="k">if</span> <span class="o">(</span><span class="n">Intent</span><span class="o">.</span><span class="na">ACTION_VIEW</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">action</span><span class="o">)</span> <span class="o">||</span> <span class="n">Intent</span><span class="o">.</span><span class="na">ACTION_SEND</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">action</span><span class="o">))</span> <span class="o">{</span>
-    <span class="o">...</span>
-<span class="o">}</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">action</span> <span class="o">=</span> <span class="n">intent</span><span class="p">.</span><span class="na">getAction</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">Intent</span><span class="p">.</span><span class="na">ACTION_VIEW</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">action</span><span class="p">)</span> <span class="o">||</span> <span class="n">Intent</span><span class="p">.</span><span class="na">ACTION_SEND</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">action</span><span class="p">))</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <div class="section" id="screen-api">
 <h4>Screen API<a class="headerlink" href="#screen-api" title="Permalink to this headline">¶</a></h4>
 <p>Using the Screen API, create an Intent for launching the Gini Capture SDK with
-<tt class="docutils literal"><span class="pre">GiniCapture.getInstance().createIntentForImportedFile()</span></tt> or if you enabled scanning of multi-page documents
-<tt class="docutils literal"><span class="pre">GiniCapture.getInstance().createIntentForImportedFiles()</span></tt>. The first method will throw an
-<tt class="docutils literal"><span class="pre">ImportedFileValidationException</span></tt>, if the file was invalid and the latter will return the same exception in the
+<code class="docutils literal notranslate"><span class="pre">GiniCapture.getInstance().createIntentForImportedFile()</span></code> or if you enabled scanning of multi-page documents
+<code class="docutils literal notranslate"><span class="pre">GiniCapture.getInstance().createIntentForImportedFiles()</span></code>. The first method will throw an
+<code class="docutils literal notranslate"><span class="pre">ImportedFileValidationException</span></code>, if the file was invalid and the latter will return the same exception in the
 callback.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">startGiniCaptureSDKForImportedFile</span><span class="o">(</span><span class="kd">final</span> <span class="n">Intent</span> <span class="n">importedFileIntent</span><span class="o">)</span> <span class="o">{</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">startGiniCaptureSDKForImportedFile</span><span class="p">(</span><span class="kd">final</span> <span class="n">Intent</span> <span class="n">importedFileIntent</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Configure the Gini Capture SDK first</span>
-    <span class="n">configureGiniCapture</span><span class="o">();</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">GiniCapture</span><span class="o">.</span><span class="na">hasInstance</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">GiniCapture</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">isMultiPageEnabled</span><span class="o">())</span> <span class="o">{</span>
-        <span class="n">mFileImportCancellationToken</span> <span class="o">=</span> <span class="n">GiniCapture</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">createIntentForImportedFiles</span><span class="o">(</span>
-                <span class="n">importedFileIntent</span><span class="o">,</span> <span class="o">(</span><span class="n">Context</span><span class="o">)</span> <span class="k">this</span><span class="o">,</span>
-                <span class="k">new</span> <span class="n">AsyncCallback</span><span class="o">&lt;</span><span class="n">Intent</span><span class="o">,</span> <span class="n">ImportedFileValidationException</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="n">configureGiniCapture</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">GiniCapture</span><span class="p">.</span><span class="na">hasInstance</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">GiniCapture</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">isMultiPageEnabled</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">mFileImportCancellationToken</span> <span class="o">=</span> <span class="n">GiniCapture</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">createIntentForImportedFiles</span><span class="p">(</span>
+                <span class="n">importedFileIntent</span><span class="p">,</span> <span class="p">(</span><span class="n">Context</span><span class="p">)</span> <span class="k">this</span><span class="p">,</span>
+                <span class="k">new</span> <span class="n">AsyncCallback</span><span class="o">&lt;</span><span class="n">Intent</span><span class="p">,</span> <span class="n">ImportedFileValidationException</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
                     <span class="nd">@Override</span>
-                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="kd">final</span> <span class="n">Intent</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="n">mFileImportCancellationToken</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-                        <span class="n">startActivityForResult</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">REQUEST_SCAN</span><span class="o">);</span>
-                    <span class="o">}</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="p">(</span><span class="kd">final</span> <span class="n">Intent</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">mFileImportCancellationToken</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+                        <span class="n">startActivityForResult</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">REQUEST_SCAN</span><span class="p">);</span>
+                    <span class="p">}</span>
 
                     <span class="nd">@Override</span>
-                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="kd">final</span> <span class="n">ImportedFileValidationException</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="n">mFileImportCancellationToken</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-                        <span class="n">handleFileImportError</span><span class="o">(</span><span class="n">exception</span><span class="o">);</span>
-                    <span class="o">}</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="p">(</span><span class="kd">final</span> <span class="n">ImportedFileValidationException</span> <span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">mFileImportCancellationToken</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+                        <span class="n">handleFileImportError</span><span class="p">(</span><span class="n">exception</span><span class="p">);</span>
+                    <span class="p">}</span>
 
                     <span class="nd">@Override</span>
-                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancelled</span><span class="o">()</span> <span class="o">{</span>
-                        <span class="n">mFileImportCancellationToken</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-                    <span class="o">}</span>
-                <span class="o">});</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="k">try</span> <span class="o">{</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
+                        <span class="n">mFileImportCancellationToken</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
             <span class="kd">final</span> <span class="n">Intent</span> <span class="n">giniCaptureIntent</span> <span class="o">=</span>
-                    <span class="n">GiniCapture</span><span class="o">.</span><span class="na">createIntentForImportedFile</span><span class="o">(</span>
-                            <span class="n">importedFileIntent</span><span class="o">,</span>
-                            <span class="o">(</span><span class="n">Context</span><span class="o">)</span> <span class="k">this</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-            <span class="n">startActivityForResult</span><span class="o">(</span><span class="n">giniCaptureIntent</span><span class="o">,</span> <span class="n">REQUEST_SCAN</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="kd">final</span> <span class="n">ImportedFileValidationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-            <span class="n">handleFileImportError</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+                    <span class="n">GiniCapture</span><span class="p">.</span><span class="na">createIntentForImportedFile</span><span class="p">(</span>
+                            <span class="n">importedFileIntent</span><span class="p">,</span>
+                            <span class="p">(</span><span class="n">Context</span><span class="p">)</span> <span class="k">this</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+            <span class="n">startActivityForResult</span><span class="p">(</span><span class="n">giniCaptureIntent</span><span class="p">,</span> <span class="n">REQUEST_SCAN</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="kd">final</span> <span class="n">ImportedFileValidationException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="n">handleFileImportError</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kt">void</span> <span class="nf">handleFileImportError</span><span class="o">(</span><span class="kd">final</span> <span class="n">ImportedFileValidationException</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">message</span> <span class="o">=</span> <span class="o">...</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">exception</span><span class="o">.</span><span class="na">getValidationError</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="kt">void</span> <span class="nf">handleFileImportError</span><span class="p">(</span><span class="kd">final</span> <span class="n">ImportedFileValidationException</span> <span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">String</span> <span class="n">message</span> <span class="o">=</span> <span class="p">...</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">exception</span><span class="p">.</span><span class="na">getValidationError</span><span class="p">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// Get the default message</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="n">getString</span><span class="o">(</span><span class="n">exception</span><span class="o">.</span><span class="na">getValidationError</span><span class="o">().</span><span class="na">getTextResource</span><span class="o">());</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">getString</span><span class="p">(</span><span class="n">exception</span><span class="p">.</span><span class="na">getValidationError</span><span class="p">().</span><span class="na">getTextResource</span><span class="p">());</span>
         <span class="c1">// Or use custom messages</span>
-        <span class="k">switch</span> <span class="o">(</span><span class="n">exception</span><span class="o">.</span><span class="na">getValidationError</span><span class="o">())</span> <span class="o">{</span>
-            <span class="k">case</span> <span class="n">TYPE_NOT_SUPPORTED</span><span class="o">:</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="o">...</span>
-                <span class="k">break</span><span class="o">;</span>
-            <span class="k">case</span> <span class="n">SIZE_TOO_LARGE</span><span class="o">:</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="o">...</span>
-                <span class="k">break</span><span class="o">;</span>
-            <span class="k">case</span> <span class="n">TOO_MANY_PDF_PAGES</span><span class="o">:</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="o">...</span>
-                <span class="k">break</span><span class="o">;</span>
-            <span class="k">case</span> <span class="n">PASSWORD_PROTECTED_PDF</span><span class="o">:</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="o">...</span>
-                <span class="k">break</span><span class="o">;</span>
-            <span class="k">case</span> <span class="n">TOO_MANY_DOCUMENT_PAGES</span><span class="o">:</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="o">...</span>
-                <span class="k">break</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="k">new</span> <span class="n">AlertDialog</span><span class="o">.</span><span class="na">Builder</span><span class="o">((</span><span class="n">Context</span><span class="o">)</span> <span class="k">this</span><span class="o">)</span>
-            <span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="n">message</span><span class="o">)</span>
-            <span class="o">.</span><span class="na">setPositiveButton</span><span class="o">(</span><span class="s">&quot;OK&quot;</span><span class="o">,</span> <span class="o">(</span><span class="n">dialogInterface</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">finish</span><span class="o">())</span>
-            <span class="o">.</span><span class="na">show</span><span class="o">();</span>
-<span class="o">}</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="n">exception</span><span class="p">.</span><span class="na">getValidationError</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="n">TYPE_NOT_SUPPORTED</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="p">...</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">SIZE_TOO_LARGE</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="p">...</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">TOO_MANY_PDF_PAGES</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="p">...</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">PASSWORD_PROTECTED_PDF</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="p">...</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">TOO_MANY_DOCUMENT_PAGES</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="p">...</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">new</span> <span class="n">AlertDialog</span><span class="p">.</span><span class="na">Builder</span><span class="p">((</span><span class="n">Context</span><span class="p">)</span> <span class="k">this</span><span class="p">)</span>
+            <span class="p">.</span><span class="na">setMessage</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="p">.</span><span class="na">setPositiveButton</span><span class="p">(</span><span class="s">&quot;OK&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">dialogInterface</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">finish</span><span class="p">())</span>
+            <span class="p">.</span><span class="na">show</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>If scanning of multi-page documents is enabled then either the multi-page review screen or the analysis screen will be
@@ -545,58 +542,58 @@ expect the review screen to be launched every time.</p>
 </div>
 <div class="section" id="id3">
 <h4>Component API<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
-<p>For the Component API, create a <tt class="docutils literal"><span class="pre">Document</span></tt> with with
-<tt class="docutils literal"><span class="pre">GiniCapture.getInstance().createDocumentForImportedFile()</span></tt> or if you enabled scanning of multi-page documents
-<tt class="docutils literal"><span class="pre">GiniCapture.getInstance().createDocumentForImportedFiles()</span></tt>. The first method will throw an
-<tt class="docutils literal"><span class="pre">ImportedFileValidationException</span></tt>, if the file was invalid and the latter will return the same exception in the
+<p>For the Component API, create a <code class="docutils literal notranslate"><span class="pre">Document</span></code> with with
+<code class="docutils literal notranslate"><span class="pre">GiniCapture.getInstance().createDocumentForImportedFile()</span></code> or if you enabled scanning of multi-page documents
+<code class="docutils literal notranslate"><span class="pre">GiniCapture.getInstance().createDocumentForImportedFiles()</span></code>. The first method will throw an
+<code class="docutils literal notranslate"><span class="pre">ImportedFileValidationException</span></code>, if the file was invalid and the latter will return the same exception in the
 callback.</p>
-<p>The <tt class="docutils literal"><span class="pre">ReviewFragment</span></tt> or <tt class="docutils literal"><span class="pre">MultiPageReviewFragment</span></tt> may only be used with reviewable documents. Therefore, it is important to
+<p>The <code class="docutils literal notranslate"><span class="pre">ReviewFragment</span></code> or <code class="docutils literal notranslate"><span class="pre">MultiPageReviewFragment</span></code> may only be used with reviewable documents. Therefore, it is important to
 check whether the document is reviewable or not:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">startGiniCaptureSDKForImportedFile</span><span class="o">(</span><span class="kd">final</span> <span class="n">Intent</span> <span class="n">importedFileIntent</span><span class="o">)</span> <span class="o">{</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">startGiniCaptureSDKForImportedFile</span><span class="p">(</span><span class="kd">final</span> <span class="n">Intent</span> <span class="n">importedFileIntent</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Configure the Gini Capture SDK first</span>
-    <span class="n">configureGiniCapture</span><span class="o">();</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">GiniCapture</span><span class="o">.</span><span class="na">hasInstance</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">GiniCapture</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">isMultiPageEnabled</span><span class="o">())</span> <span class="o">{</span>
-        <span class="n">mFileImportCancellationToken</span> <span class="o">=</span> <span class="n">GiniCapture</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">createDocumentForImportedFiles</span><span class="o">(</span>
-                <span class="n">importedFileIntent</span><span class="o">,</span> <span class="o">(</span><span class="n">Context</span><span class="o">)</span> <span class="k">this</span><span class="o">,</span>
-                <span class="k">new</span> <span class="n">AsyncCallback</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">,</span> <span class="n">ImportedFileValidationException</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="n">configureGiniCapture</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">GiniCapture</span><span class="p">.</span><span class="na">hasInstance</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">GiniCapture</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">isMultiPageEnabled</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">mFileImportCancellationToken</span> <span class="o">=</span> <span class="n">GiniCapture</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">createDocumentForImportedFiles</span><span class="p">(</span>
+                <span class="n">importedFileIntent</span><span class="p">,</span> <span class="p">(</span><span class="n">Context</span><span class="p">)</span> <span class="k">this</span><span class="p">,</span>
+                <span class="k">new</span> <span class="n">AsyncCallback</span><span class="o">&lt;</span><span class="n">Document</span><span class="p">,</span> <span class="n">ImportedFileValidationException</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
                     <span class="nd">@Override</span>
-                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="kd">final</span> <span class="n">Document</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="k">if</span> <span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">isReviewable</span><span class="o">())</span> <span class="o">{</span>
-                            <span class="n">launchMultiPageReviewScreen</span><span class="o">();</span>
-                        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                            <span class="n">launchAnalysisScreen</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
-                        <span class="o">}</span>
-                        <span class="n">finish</span><span class="o">();</span>
-                    <span class="o">}</span>
-
-                    <span class="nd">@Override</span>
-                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span>
-                            <span class="nd">@NonNull</span> <span class="kd">final</span> <span class="n">ImportedFileValidationException</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="n">handleFileImportError</span><span class="o">(</span><span class="n">exception</span><span class="o">);</span> <span class="c1">// same method as in the Screen API example</span>
-                    <span class="o">}</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="p">(</span><span class="nd">@NonNull</span> <span class="kd">final</span> <span class="n">Document</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">isReviewable</span><span class="p">())</span> <span class="p">{</span>
+                            <span class="n">launchMultiPageReviewScreen</span><span class="p">();</span>
+                        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                            <span class="n">launchAnalysisScreen</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+                        <span class="p">}</span>
+                        <span class="n">finish</span><span class="p">();</span>
+                    <span class="p">}</span>
 
                     <span class="nd">@Override</span>
-                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancelled</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="p">(</span>
+                            <span class="nd">@NonNull</span> <span class="kd">final</span> <span class="n">ImportedFileValidationException</span> <span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">handleFileImportError</span><span class="p">(</span><span class="n">exception</span><span class="p">);</span> <span class="c1">// same method as in the Screen API example</span>
+                    <span class="p">}</span>
 
-                    <span class="o">}</span>
-                <span class="o">});</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="kd">final</span> <span class="n">Document</span> <span class="n">document</span> <span class="o">=</span> <span class="n">GiniCapture</span><span class="o">.</span><span class="na">createDocumentForImportedFile</span><span class="o">(</span>
-                    <span class="n">importedFileIntent</span><span class="o">,</span> <span class="o">(</span><span class="n">Context</span><span class="o">)</span> <span class="k">this</span><span class="o">);</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">document</span><span class="o">.</span><span class="na">isReviewable</span><span class="o">())</span> <span class="o">{</span>
-                <span class="n">launchReviewScreen</span><span class="o">(</span><span class="n">document</span><span class="o">);</span>
-            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                <span class="n">launchAnalysisScreen</span><span class="o">(</span><span class="n">document</span><span class="o">);</span>
-            <span class="o">}</span>
-            <span class="n">finish</span><span class="o">();</span>
+                    <span class="nd">@Override</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
 
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="kd">final</span> <span class="n">ImportedFileValidationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-            <span class="n">handleFileImportError</span><span class="o">(</span><span class="n">e</span><span class="o">);</span> <span class="c1">// same method as in the Screen API example</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+                    <span class="p">}</span>
+                <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="kd">final</span> <span class="n">Document</span> <span class="n">document</span> <span class="o">=</span> <span class="n">GiniCapture</span><span class="p">.</span><span class="na">createDocumentForImportedFile</span><span class="p">(</span>
+                    <span class="n">importedFileIntent</span><span class="p">,</span> <span class="p">(</span><span class="n">Context</span><span class="p">)</span> <span class="k">this</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">document</span><span class="p">.</span><span class="na">isReviewable</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">launchReviewScreen</span><span class="p">(</span><span class="n">document</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">launchAnalysisScreen</span><span class="p">(</span><span class="n">document</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">finish</span><span class="p">();</span>
+
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="kd">final</span> <span class="n">ImportedFileValidationException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="n">handleFileImportError</span><span class="p">(</span><span class="n">e</span><span class="p">);</span> <span class="c1">// same method as in the Screen API example</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -605,73 +602,73 @@ check whether the document is reviewable or not:</p>
 <div class="section" id="help-screen-customization">
 <h2>Help Screen Customization<a class="headerlink" href="#help-screen-customization" title="Permalink to this headline">¶</a></h2>
 <p>You can show your own help screens in the Gini Capture SDK. You can pass the title and activity for each screen to the
-<tt class="docutils literal"><span class="pre">GiniCapture.Builder</span></tt> using a list of <tt class="docutils literal"><span class="pre">HelpItem.Custom</span></tt> objects:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">List</span><span class="o">&lt;</span><span class="n">HelpItem</span><span class="o">.</span><span class="na">Custom</span><span class="o">&gt;</span> <span class="n">customHelpItems</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder</span></code> using a list of <code class="docutils literal notranslate"><span class="pre">HelpItem.Custom</span></code> objects:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">HelpItem</span><span class="p">.</span><span class="na">Custom</span><span class="o">&gt;</span> <span class="n">customHelpItems</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 
-<span class="n">customHelpItems</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">HelpItem</span><span class="o">.</span><span class="na">Custom</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">custom_help_screen_title</span><span class="o">,</span>
-        <span class="k">new</span> <span class="n">Intent</span><span class="o">((</span><span class="n">Context</span><span class="o">)</span> <span class="k">this</span><span class="o">,</span> <span class="n">CustomHelpActivity</span><span class="o">.</span><span class="na">class</span><span class="o">)));</span>
+<span class="n">customHelpItems</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">HelpItem</span><span class="p">.</span><span class="na">Custom</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">custom_help_screen_title</span><span class="p">,</span>
+        <span class="k">new</span> <span class="n">Intent</span><span class="p">((</span><span class="n">Context</span><span class="p">)</span> <span class="k">this</span><span class="p">,</span> <span class="n">CustomHelpActivity</span><span class="p">.</span><span class="na">class</span><span class="p">)));</span>
 
-<span class="n">GiniCapture</span><span class="o">.</span><span class="na">newInstance</span><span class="o">()</span>
-        <span class="o">.</span><span class="na">setCustomHelpItems</span><span class="o">(</span><span class="n">customHelpItems</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="n">GiniCapture</span><span class="p">.</span><span class="na">newInstance</span><span class="p">()</span>
+        <span class="p">.</span><span class="na">setCustomHelpItems</span><span class="p">(</span><span class="n">customHelpItems</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">build</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>You can also disable the supported formats help screen by passing <tt class="docutils literal"><span class="pre">false</span></tt> to
-<tt class="docutils literal"><span class="pre">GiniCapture.Builder.setSupportedFormatsHelpScreenEnabled()</span></tt>.</p>
+<p>You can also disable the supported formats help screen by passing <code class="docutils literal notranslate"><span class="pre">false</span></code> to
+<code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder.setSupportedFormatsHelpScreenEnabled()</span></code>.</p>
 </div>
 <div class="section" id="event-tracking">
 <h2>Event Tracking<a class="headerlink" href="#event-tracking" title="Permalink to this headline">¶</a></h2>
 <p>You have the possibility to track various events which occur during the usage of the Gini Capture SDK.</p>
-<p>To subscribe to the events you need to implement the <tt class="docutils literal"><span class="pre">EventTracker</span></tt> interface and pass it to the builder when creating
-a new <tt class="docutils literal"><span class="pre">GiniCapture</span></tt> instance:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">GiniCapture</span><span class="o">.</span><span class="na">newInstance</span><span class="o">()</span>
-    <span class="o">.</span><span class="na">setEventTracker</span><span class="o">(</span><span class="k">new</span> <span class="n">MyEventTracker</span><span class="o">());</span>
-    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<p>To subscribe to the events you need to implement the <code class="docutils literal notranslate"><span class="pre">EventTracker</span></code> interface and pass it to the builder when creating
+a new <code class="docutils literal notranslate"><span class="pre">GiniCapture</span></code> instance:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">GiniCapture</span><span class="p">.</span><span class="na">newInstance</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">setEventTracker</span><span class="p">(</span><span class="k">new</span> <span class="n">MyEventTracker</span><span class="p">());</span>
+    <span class="p">.</span><span class="na">build</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>In <tt class="docutils literal"><span class="pre">MyEventTracker</span></tt> you can handle the events you are interested in.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">MyEventTracker</span> <span class="kd">implements</span> <span class="n">EventTracker</span> <span class="o">{</span>
+<p>In <code class="docutils literal notranslate"><span class="pre">MyEventTracker</span></code> you can handle the events you are interested in.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">MyEventTracker</span> <span class="kd">implements</span> <span class="n">EventTracker</span> <span class="p">{</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCameraScreenEvent</span><span class="o">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">CameraScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">switch</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getType</span><span class="o">())</span> <span class="o">{</span>
-            <span class="k">case</span> <span class="n">TAKE_PICTURE</span><span class="o">:</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCameraScreenEvent</span><span class="p">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">CameraScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="na">getType</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="n">TAKE_PICTURE</span><span class="p">:</span>
                 <span class="c1">// handle the picture taken event</span>
-                <span class="k">break</span><span class="o">;</span>
-            <span class="k">case</span> <span class="n">HELP</span><span class="o">:</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">HELP</span><span class="p">:</span>
                 <span class="c1">// handle the show help event</span>
-                <span class="k">break</span><span class="o">;</span>
-            <span class="k">case</span> <span class="n">EXIT</span><span class="o">:</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">EXIT</span><span class="p">:</span>
                 <span class="c1">// handle the exit event</span>
-                <span class="k">break</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onOnboardingScreenEvent</span><span class="o">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">OnboardingScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
-        <span class="o">(...)</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onOnboardingScreenEvent</span><span class="p">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">OnboardingScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">(...)</span>
+    <span class="p">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAnalysisScreenEvent</span><span class="o">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">AnalysisScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
-        <span class="o">(...)</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAnalysisScreenEvent</span><span class="p">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">AnalysisScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">(...)</span>
+    <span class="p">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onReviewScreenEvent</span><span class="o">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">ReviewScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
-        <span class="o">(...)</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onReviewScreenEvent</span><span class="p">(</span><span class="kd">final</span> <span class="n">Event</span><span class="o">&lt;</span><span class="n">ReviewScreenEvent</span><span class="o">&gt;</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">(...)</span>
+    <span class="p">}</span>
 
-<span class="o">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>If you use the Screen API all events will be triggered automatically.</p>
 <p>If you use the Component API some events will not be triggered (for ex. events which rely on
-<tt class="docutils literal"><span class="pre">Activity#onBackPressed()</span></tt>). You can check in the table below whether all the events you are interested in are
+<code class="docutils literal notranslate"><span class="pre">Activity#onBackPressed()</span></code>). You can check in the table below whether all the events you are interested in are
 triggered.</p>
-<p class="last">To manually trigger events just call the relevant method of your <tt class="docutils literal"><span class="pre">EventTracker</span></tt> implementation with the required
+<p class="last">To manually trigger events just call the relevant method of your <code class="docutils literal notranslate"><span class="pre">EventTracker</span></code> implementation with the required
 event.</p>
 </div>
 <div class="section" id="events">
@@ -697,71 +694,71 @@ number of event types. Some events may supply additional details in a map.</p>
 <tbody valign="top">
 <tr class="row-even"><td>Screen + Component</td>
 <td>Onboarding</td>
-<td><tt class="docutils literal"><span class="pre">OnboardingScreenEvent.START</span></tt></td>
+<td><code class="docutils literal notranslate"><span class="pre">OnboardingScreenEvent.START</span></code></td>
 <td>Onboarding started</td>
 <td>1.0.0</td>
 </tr>
 <tr class="row-odd"><td>Screen + Component</td>
 <td>Onboarding</td>
-<td><tt class="docutils literal"><span class="pre">OnboardingScreenEvent.FINISH</span></tt></td>
+<td><code class="docutils literal notranslate"><span class="pre">OnboardingScreenEvent.FINISH</span></code></td>
 <td>User completes onboarding</td>
 <td>1.0.0</td>
 </tr>
 <tr class="row-even"><td>Screen</td>
 <td>Camera Screen</td>
-<td><tt class="docutils literal"><span class="pre">CameraScreenEvent.EXIT</span></tt></td>
+<td><code class="docutils literal notranslate"><span class="pre">CameraScreenEvent.EXIT</span></code></td>
 <td>User closes the camera screen</td>
 <td>1.0.0</td>
 </tr>
 <tr class="row-odd"><td>Screen</td>
 <td>Camera Screen</td>
-<td><tt class="docutils literal"><span class="pre">CameraScreenEvent.HELP</span></tt></td>
-<td>User taps &#8220;Help&#8221; on the camera screen</td>
+<td><code class="docutils literal notranslate"><span class="pre">CameraScreenEvent.HELP</span></code></td>
+<td>User taps “Help” on the camera screen</td>
 <td>1.0.0</td>
 </tr>
 <tr class="row-even"><td>Screen + Component</td>
 <td>Camera Screen</td>
-<td><tt class="docutils literal"><span class="pre">CameraScreenEvent.TAKE_PICTURE</span></tt></td>
+<td><code class="docutils literal notranslate"><span class="pre">CameraScreenEvent.TAKE_PICTURE</span></code></td>
 <td>User takes a picture</td>
 <td>1.0.0</td>
 </tr>
 <tr class="row-odd"><td>Screen</td>
 <td>Review Screen</td>
-<td><tt class="docutils literal"><span class="pre">ReviewScreenEvent.BACK</span></tt></td>
+<td><code class="docutils literal notranslate"><span class="pre">ReviewScreenEvent.BACK</span></code></td>
 <td>User goes back from the review screen</td>
 <td>1.0.0</td>
 </tr>
 <tr class="row-even"><td>Screen + Component</td>
 <td>Review Screen</td>
-<td><tt class="docutils literal"><span class="pre">ReviewScreenEvent.NEXT</span></tt></td>
+<td><code class="docutils literal notranslate"><span class="pre">ReviewScreenEvent.NEXT</span></code></td>
 <td>User advances from the review screen</td>
 <td>1.0.0</td>
 </tr>
 <tr class="row-odd"><td>Screen + Component</td>
 <td>Review Screen</td>
-<td><tt class="docutils literal"><span class="pre">ReviewScreenEvent.UPLOAD_ERROR</span></tt>
-<tt class="docutils literal"><span class="pre">ReviewScreenEvent.UPLOAD_ERROR_DETAILS_MAP_KEY.MESSAGE</span></tt>
-<tt class="docutils literal"><span class="pre">ReviewScreenEvent.UPLOAD_ERROR_DETAILS_MAP_KEY.ERROR_OBJECT</span></tt></td>
+<td><code class="docutils literal notranslate"><span class="pre">ReviewScreenEvent.UPLOAD_ERROR</span></code>
+<code class="docutils literal notranslate"><span class="pre">ReviewScreenEvent.UPLOAD_ERROR_DETAILS_MAP_KEY.MESSAGE</span></code>
+<code class="docutils literal notranslate"><span class="pre">ReviewScreenEvent.UPLOAD_ERROR_DETAILS_MAP_KEY.ERROR_OBJECT</span></code></td>
 <td>Upload error in the review screen</td>
 <td>1.0.0</td>
 </tr>
 <tr class="row-even"><td>Screen</td>
 <td>Analysis Screen</td>
-<td><tt class="docutils literal"><span class="pre">AnalysisScreenEvent.CANCEL</span></tt></td>
+<td><code class="docutils literal notranslate"><span class="pre">AnalysisScreenEvent.CANCEL</span></code></td>
 <td>User cancels the process during analysis</td>
 <td>1.0.0</td>
 </tr>
 <tr class="row-odd"><td>Screen + Component</td>
 <td>Analysis Screen</td>
-<td><tt class="docutils literal"><span class="pre">AnalysisScreenEvent.ERROR</span></tt>
-<tt class="docutils literal"><span class="pre">AnalysisScreenEvent.ERROR_DETAILS_MAP_KEY.MESSAGE</span></tt>
-<tt class="docutils literal"><span class="pre">AnalysisScreenEvent.ERROR_DETAILS_MAP_KEY.ERROR_OBJECT</span></tt></td>
+<td><code class="docutils literal notranslate"><span class="pre">AnalysisScreenEvent.ERROR</span></code>
+<code class="docutils literal notranslate"><span class="pre">AnalysisScreenEvent.ERROR_DETAILS_MAP_KEY.MESSAGE</span></code>
+<code class="docutils literal notranslate"><span class="pre">AnalysisScreenEvent.ERROR_DETAILS_MAP_KEY.ERROR_OBJECT</span></code></td>
 <td>The analysis ended with an error.</td>
 <td>1.0.0</td>
 </tr>
 <tr class="row-even"><td>Screen + Component</td>
 <td>Analysis Screen</td>
-<td><tt class="docutils literal"><span class="pre">AnalysisScreenEvent.RETRY</span></tt></td>
+<td><code class="docutils literal notranslate"><span class="pre">AnalysisScreenEvent.RETRY</span></code></td>
 <td>The user decides to retry after an analysis error.</td>
 <td>1.0.0</td>
 </tr>
@@ -774,12 +771,12 @@ number of event types. Some events may supply additional details in a map.</p>
 <h2>Error Logging<a class="headerlink" href="#error-logging" title="Permalink to this headline">¶</a></h2>
 <p>The SDK logs errors to the Gini Pay API when the default networking implementation is used (see the <a class="reference external" href="integration.html#default-implementation">Default networking
 implementation</a> section).</p>
-<p>You can disable the default error logging by passing <tt class="docutils literal"><span class="pre">false</span></tt> to <tt class="docutils literal"><span class="pre">GiniCapture.Builder.setGiniErrorLoggerIsOn()</span></tt>.</p>
+<p>You can disable the default error logging by passing <code class="docutils literal notranslate"><span class="pre">false</span></code> to <code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder.setGiniErrorLoggerIsOn()</span></code>.</p>
 <p>If you would like to get informed of error logging events you can pass your implementation of the
-<tt class="docutils literal"><span class="pre">ErrorLoggerListener</span></tt> interface to <tt class="docutils literal"><span class="pre">GiniCapture.Builder</span></tt>:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">GiniCapture</span><span class="o">.</span><span class="na">newInstance</span><span class="o">()</span>
-    <span class="o">.</span><span class="na">setCustomErrorLoggerListener</span><span class="o">(</span><span class="k">new</span> <span class="n">MyErrorLoggerListener</span><span class="o">())</span>
-    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<code class="docutils literal notranslate"><span class="pre">ErrorLoggerListener</span></code> interface to <code class="docutils literal notranslate"><span class="pre">GiniCapture.Builder</span></code>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">GiniCapture</span><span class="p">.</span><span class="na">newInstance</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">setCustomErrorLoggerListener</span><span class="p">(</span><span class="k">new</span> <span class="n">MyErrorLoggerListener</span><span class="p">())</span>
+    <span class="p">.</span><span class="na">build</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
